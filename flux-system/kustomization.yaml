@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
 - flux-v2-components.yaml
 - helmrepository-jetstack.yaml
+- helmrepository-ingress-nginx.yaml
