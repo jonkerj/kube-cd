@@ -1,0 +1,21 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: talos-controller-app
+  namespace: flux-system
+spec:
+  interval: 10m
+  path: "./talos-system/app/"
+  prune: true
+  timeout: 1m
+  sourceRef:
+    kind: GitRepository
+    name: kube-cd
+    namespace: flux-system
+  dependsOn:
+  - name: talos-controller-secret
+  healthChecks:
+  - kind: DaemonSet
+    name: talos-controller-manager
+    namespace: talos-system
+    apiVersion: apps/v1
