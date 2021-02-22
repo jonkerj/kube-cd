@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: node-processes
+  namespace: monitoring
+spec:
+  groups:
+  - name: node-processes
+    rules:
+    - alert: HostSystemdServiceCrashed
+      expr: node_systemd_unit_state{state="failed"} == 1
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Host SystemD service crashed (instance {{ $labels.node_name }})"
+        description: "SystemD service crashed\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"

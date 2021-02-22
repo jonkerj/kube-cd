@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alertmanager-templates
+  namespace: monitoring
+data:
+  custom.tmpl: |
+    {{ define "pushover.custom.title" }}[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ range .Alerts }}{{ .Annotations.summary }}{{ end }}{{ end }}
+    {{ define "pushover.custom.message" }}
+    {{ if gt (len .Alerts.Firing) 0 }}
+    Alerts Firing:
+    {{ template "__text_alert_list" .Alerts.Firing }}
+    {{ end }}
+    {{ if gt (len .Alerts.Resolved) 0 }}
+    Alerts Resolved:
+    {{ template "__text_alert_list" .Alerts.Resolved }}
+    {{ end }}
+    {{ end }}

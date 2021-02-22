@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- kubernetes-apps.yaml
+- kubernetes-infra.yaml
+- node-cpu.yaml
+- node-disk.yaml
+- node-filesystem.yaml
+- node-generic.yaml
+- node-memory.yaml
+- node-physical.yaml
+- node-processes.yaml
+- node-smart.yaml
+- prometheus-generic.yaml
+- zfs.yaml

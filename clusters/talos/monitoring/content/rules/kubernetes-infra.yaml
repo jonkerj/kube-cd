@@ -1,0 +1,49 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: kubernetes-infra
+  namespace: monitoring
+spec:
+  groups:
+  - name: kubernetes-infra
+    rules:
+    - alert: KubernetesNodeNotReady
+      expr: kube_node_status_condition{condition="Ready",status="true"} == 0
+      for: 10m
+      labels:
+        severity: critical
+      annotations:
+        summary: Kubernetes node $labels.node not ready
+        description: Node {{ $labels.node }} has been unready for a long time
+    - alert: KubernetesMemoryPressure
+      expr: kube_node_status_condition{condition="MemoryPressure",status="true"} == 1
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: Kubernetes memory pressure on {{ $labels.node }}
+        description: '{{ $labels.node }} has MemoryPressure condition'
+    - alert: KubernetesDiskPressure
+      expr: kube_node_status_condition{condition="DiskPressure",status="true"} == 1
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: Kubernetes disk pressure on {{ $labels.node }}
+        description: '{{ $labels.node }} has DiskPressure condition'
+    - alert: KubernetesOutOfDisk
+      expr: kube_node_status_condition{condition="OutOfDisk",status="true"} == 1
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: Kubernetes out of disk on {{ $labels.node }}
+        description: '{{ $labels.node }} has OutOfDisk condition'
+    - alert: KubernetesOutOfCapacity
+      expr: sum(kube_pod_info) by (node) / sum(kube_node_status_allocatable_pods) by (node) > 0.9
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: Kubernetes running out of pods (instance {{ $labels.node }})
+        description: '{{ $labels.node }} is out of capacity for pods'

@@ -1,0 +1,41 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: node-physical
+  namespace: monitoring
+spec:
+  groups:
+  - name: node-physical
+    rules:
+    - alert: HostPhysicalComponentTooHot
+      expr: node_hwmon_temp_celsius > 75
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Host physical component too hot (instance {{ $labels.node_name }})"
+        description: "Physical hardware component too hot\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+    - alert: HostNodeOvertemperatureAlarm
+      expr: node_hwmon_temp_alarm == 1
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Host node overtemperature alarm (instance {{ $labels.node_name }})"
+        description: "Physical node temperature alarm triggered\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+    - alert: HostEdacCorrectableErrorsDetected
+      expr: increase(node_edac_correctable_errors_total[5m]) > 0
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Host EDAC Correctable Errors detected (instance {{ $labels.node_name }})"
+        description: '{{ $labels.node_name }} has had {{ printf "%.0f" $value }} correctable memory errors reported by EDAC in the last 5 minutes.\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}'
+    - alert: HostEdacUncorrectableErrorsDetected
+      expr: node_edac_uncorrectable_errors_total > 0
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Host EDAC Uncorrectable Errors detected (instance {{ $labels.node_name }})"
+        description: '{{ $labels.node_name }} has had {{ printf "%.0f" $value }} uncorrectable memory errors reported by EDAC in the last 5 minutes.\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}'

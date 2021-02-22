@@ -1,0 +1,41 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: node-disk
+  namespace: monitoring
+spec:
+  groups:
+  - name: node-disk
+    rules:
+    - alert: HostUnusualDiskReadRate
+      expr: sum by (node_name) (irate(node_disk_read_bytes_total[2m])) / 1024 / 1024 > 50
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Host unusual disk read rate (instance {{ $labels.node_name }})"
+        description: "Disk is probably reading too much data (> 50 MB/s)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+    - alert: HostUnusualDiskWriteRate
+      expr: sum by (node_name) (irate(node_disk_written_bytes_total[2m])) / 1024 / 1024 > 50
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Host unusual disk write rate (instance {{ $labels.node_name }})"
+        description: "Disk is probably writing too much data (> 50 MB/s)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+    - alert: HostUnusualDiskReadLatency
+      expr: rate(node_disk_read_time_seconds_total[1m]) / rate(node_disk_reads_completed_total[1m]) > 100
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Host unusual disk read latency (instance {{ $labels.node_name }})"
+        description: "Disk latency is growing (read operations > 100ms)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+    - alert: HostUnusualDiskWriteLatency
+      expr: rate(node_disk_write_time_seconds_total[1m]) / rate(node_disk_writes_completed_total[1m]) > 100
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Host unusual disk write latency (instance {{ $labels.node_name }})"
+        description: "Disk latency is growing (write operations > 100ms)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"

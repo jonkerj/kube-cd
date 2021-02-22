@@ -1,0 +1,49 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: hydrogen-pdns
+  namespace: monitoring
+  labels:
+    app: hydrogen-pdns
+spec:
+  jobLabel: hydrogen-pdns
+  endpoints:
+  - port: metrics
+    interval: 300s
+    relabelings:
+    - sourceLabels:
+      - "__meta_kubernetes_endpoint_node_name"
+      targetLabel: node_name
+  selector:
+    matchLabels:
+      app: hydrogen-pdns
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hydrogen-pdns
+  namespace: monitoring
+  labels:
+    app: hydrogen-pdns
+spec:
+  type: ClusterIP
+  ports:
+  - name: metrics
+    port: 9000
+    targetPort: metrics
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: hydrogen-pdns
+  namespace: monitoring
+  labels:
+    app: hydrogen-pdns
+subsets:
+- addresses:
+  - ip: 172.21.42.1
+    nodeName: hydrogen
+  ports:
+  - name: metrics
+    port: 8082
+    protocol: TCP

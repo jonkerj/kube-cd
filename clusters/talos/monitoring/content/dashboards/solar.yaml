@@ -1,0 +1,508 @@
+apiVersion: v1
+data:
+  solar.json: "{\n  \"annotations\": {\n    \"list\": [\n      {\n        \"builtIn\"\
+    : 1,\n        \"datasource\": \"-- Grafana --\",\n        \"enable\": true,\n\
+    \        \"hide\": true,\n        \"iconColor\": \"rgba(0, 211, 255, 1)\",\n \
+    \       \"name\": \"Annotations & Alerts\",\n        \"type\": \"dashboard\"\n\
+    \      }\n    ]\n  },\n  \"editable\": true,\n  \"gnetId\": null,\n  \"graphTooltip\"\
+    : 0,\n  \"id\": 9,\n  \"links\": [],\n  \"panels\": [\n    {\n      \"collapsed\"\
+    : false,\n      \"datasource\": null,\n      \"gridPos\": {\n        \"h\": 1,\n\
+    \        \"w\": 24,\n        \"x\": 0,\n        \"y\": 0\n      },\n      \"id\"\
+    : 24,\n      \"panels\": [],\n      \"title\": \"General\",\n      \"type\": \"\
+    row\"\n    },\n    {\n      \"datasource\": \"solar\",\n      \"description\"\
+    : \"\",\n      \"fieldConfig\": {\n        \"defaults\": {\n          \"custom\"\
+    : {},\n          \"decimals\": 2,\n          \"mappings\": [],\n          \"max\"\
+    : 1,\n          \"min\": 0,\n          \"thresholds\": {\n            \"mode\"\
+    : \"absolute\",\n            \"steps\": [\n              {\n                \"\
+    color\": \"dark-orange\",\n                \"value\": null\n              },\n\
+    \              {\n                \"color\": \"dark-blue\",\n                \"\
+    value\": 0.5\n              },\n              {\n                \"color\": \"\
+    green\",\n                \"value\": 0.85\n              }\n            ]\n  \
+    \        },\n          \"unit\": \"none\"\n        },\n        \"overrides\":\
+    \ []\n      },\n      \"gridPos\": {\n        \"h\": 8,\n        \"w\": 6,\n \
+    \       \"x\": 0,\n        \"y\": 1\n      },\n      \"id\": 22,\n      \"interval\"\
+    : \"30s\",\n      \"options\": {\n        \"colorMode\": \"value\",\n        \"\
+    graphMode\": \"area\",\n        \"justifyMode\": \"auto\",\n        \"orientation\"\
+    : \"auto\",\n        \"reduceOptions\": {\n          \"calcs\": [\n          \
+    \  \"lastNotNull\"\n          ],\n          \"fields\": \"\",\n          \"values\"\
+    : false\n        }\n      },\n      \"pluginVersion\": \"7.0.3\",\n      \"targets\"\
+    : [\n        {\n          \"groupBy\": [\n            {\n              \"params\"\
+    : [\n                \"$__interval\"\n              ],\n              \"type\"\
+    : \"time\"\n            },\n            {\n              \"params\": [\n     \
+    \           \"null\"\n              ],\n              \"type\": \"fill\"\n   \
+    \         }\n          ],\n          \"measurement\": \"sma\",\n          \"orderByTime\"\
+    : \"ASC\",\n          \"policy\": \"default\",\n          \"refId\": \"A\",\n\
+    \          \"resultFormat\": \"time_series\",\n          \"select\": [\n     \
+    \       [\n              {\n                \"params\": [\n                  \"\
+    ac_pv_generated_power\"\n                ],\n                \"type\": \"field\"\
+    \n              },\n              {\n                \"params\": [],\n       \
+    \         \"type\": \"mean\"\n              },\n              {\n            \
+    \    \"params\": [\n                  \" / 2960\"\n                ],\n      \
+    \          \"type\": \"math\"\n              }\n            ]\n          ],\n\
+    \          \"tags\": []\n        }\n      ],\n      \"timeFrom\": null,\n    \
+    \  \"timeShift\": null,\n      \"title\": \"Watt per Watt-Peak\",\n      \"type\"\
+    : \"stat\"\n    },\n    {\n      \"datasource\": \"solar\",\n      \"fieldConfig\"\
+    : {\n        \"defaults\": {\n          \"custom\": {},\n          \"mappings\"\
+    : [],\n          \"max\": 3000,\n          \"min\": 0,\n          \"thresholds\"\
+    : {\n            \"mode\": \"absolute\",\n            \"steps\": [\n         \
+    \     {\n                \"color\": \"blue\",\n                \"value\": null\n\
+    \              },\n              {\n                \"color\": \"super-light-blue\"\
+    ,\n                \"value\": 750\n              },\n              {\n       \
+    \         \"color\": \"yellow\",\n                \"value\": 1500\n          \
+    \    },\n              {\n                \"color\": \"green\",\n            \
+    \    \"value\": 2250\n              }\n            ]\n          },\n         \
+    \ \"unit\": \"watt\"\n        },\n        \"overrides\": []\n      },\n      \"\
+    gridPos\": {\n        \"h\": 8,\n        \"w\": 6,\n        \"x\": 6,\n      \
+    \  \"y\": 1\n      },\n      \"id\": 26,\n      \"interval\": \"30s\",\n     \
+    \ \"options\": {\n        \"orientation\": \"auto\",\n        \"reduceOptions\"\
+    : {\n          \"calcs\": [\n            \"lastNotNull\"\n          ],\n     \
+    \     \"fields\": \"\",\n          \"values\": false\n        },\n        \"showThresholdLabels\"\
+    : false,\n        \"showThresholdMarkers\": true\n      },\n      \"pluginVersion\"\
+    : \"7.0.3\",\n      \"targets\": [\n        {\n          \"groupBy\": [\n    \
+    \        {\n              \"params\": [\n                \"$__interval\"\n   \
+    \           ],\n              \"type\": \"time\"\n            },\n           \
+    \ {\n              \"params\": [\n                \"null\"\n              ],\n\
+    \              \"type\": \"fill\"\n            }\n          ],\n          \"measurement\"\
+    : \"sma\",\n          \"orderByTime\": \"ASC\",\n          \"policy\": \"default\"\
+    ,\n          \"refId\": \"A\",\n          \"resultFormat\": \"time_series\",\n\
+    \          \"select\": [\n            [\n              {\n                \"params\"\
+    : [\n                  \"ac_power\"\n                ],\n                \"type\"\
+    : \"field\"\n              },\n              {\n                \"params\": [],\n\
+    \                \"type\": \"mean\"\n              }\n            ]\n        \
+    \  ],\n          \"tags\": []\n        }\n      ],\n      \"timeFrom\": null,\n\
+    \      \"timeShift\": null,\n      \"title\": \"Solar Power\",\n      \"type\"\
+    : \"gauge\"\n    },\n    {\n      \"datasource\": \"Sun and Moon\",\n      \"\
+    description\": \"\",\n      \"fieldConfig\": {\n        \"defaults\": {\n    \
+    \      \"custom\": {},\n          \"mappings\": [],\n          \"max\": 180,\n\
+    \          \"min\": -180,\n          \"thresholds\": {\n            \"mode\":\
+    \ \"absolute\",\n            \"steps\": [\n              {\n                \"\
+    color\": \"dark-blue\",\n                \"value\": null\n              },\n \
+    \             {\n                \"color\": \"orange\",\n                \"value\"\
+    : -60\n              },\n              {\n                \"color\": \"green\"\
+    ,\n                \"value\": -35\n              },\n              {\n       \
+    \         \"color\": \"orange\",\n                \"value\": 143\n           \
+    \   },\n              {\n                \"color\": \"dark-blue\",\n         \
+    \       \"value\": 168\n              }\n            ]\n          }\n        },\n\
+    \        \"overrides\": []\n      },\n      \"gridPos\": {\n        \"h\": 8,\n\
+    \        \"w\": 6,\n        \"x\": 12,\n        \"y\": 1\n      },\n      \"id\"\
+    : 28,\n      \"options\": {\n        \"orientation\": \"auto\",\n        \"reduceOptions\"\
+    : {\n          \"calcs\": [\n            \"last\"\n          ],\n          \"\
+    fields\": \"\",\n          \"values\": false\n        },\n        \"showThresholdLabels\"\
+    : false,\n        \"showThresholdMarkers\": true\n      },\n      \"pluginVersion\"\
+    : \"7.0.3\",\n      \"targets\": [\n        {\n          \"refId\": \"A\",\n \
+    \         \"target\": \"sun_azimuth\"\n        }\n      ],\n      \"timeFrom\"\
+    : null,\n      \"timeShift\": null,\n      \"title\": \"Sun Azimuth\",\n     \
+    \ \"type\": \"gauge\"\n    },\n    {\n      \"datasource\": \"Sun and Moon\",\n\
+    \      \"description\": \"\",\n      \"fieldConfig\": {\n        \"defaults\"\
+    : {\n          \"custom\": {},\n          \"mappings\": [],\n          \"max\"\
+    : 90,\n          \"min\": 0,\n          \"thresholds\": {\n            \"mode\"\
+    : \"absolute\",\n            \"steps\": [\n              {\n                \"\
+    color\": \"rgb(4, 51, 120)\",\n                \"value\": null\n             \
+    \ },\n              {\n                \"color\": \"light-blue\",\n          \
+    \      \"value\": 8.5\n              },\n              {\n                \"color\"\
+    : \"orange\",\n                \"value\": 20\n              },\n             \
+    \ {\n                \"color\": \"dark-yellow\",\n                \"value\": 35\n\
+    \              },\n              {\n                \"color\": \"super-light-yellow\"\
+    ,\n                \"value\": 50\n              },\n              {\n        \
+    \        \"color\": \"rgb(255, 255, 236)\",\n                \"value\": 55\n \
+    \             }\n            ]\n          }\n        },\n        \"overrides\"\
+    : []\n      },\n      \"gridPos\": {\n        \"h\": 8,\n        \"w\": 6,\n \
+    \       \"x\": 18,\n        \"y\": 1\n      },\n      \"id\": 29,\n      \"options\"\
+    : {\n        \"orientation\": \"auto\",\n        \"reduceOptions\": {\n      \
+    \    \"calcs\": [\n            \"last\"\n          ],\n          \"fields\": \"\
+    \",\n          \"values\": false\n        },\n        \"showThresholdLabels\"\
+    : false,\n        \"showThresholdMarkers\": true\n      },\n      \"pluginVersion\"\
+    : \"7.0.3\",\n      \"targets\": [\n        {\n          \"refId\": \"A\",\n \
+    \         \"target\": \"sun_altitude\"\n        }\n      ],\n      \"timeFrom\"\
+    : null,\n      \"timeShift\": null,\n      \"title\": \"Sun Altitude\",\n    \
+    \  \"type\": \"gauge\"\n    },\n    {\n      \"collapsed\": false,\n      \"datasource\"\
+    : null,\n      \"gridPos\": {\n        \"h\": 1,\n        \"w\": 24,\n       \
+    \ \"x\": 0,\n        \"y\": 9\n      },\n      \"id\": 16,\n      \"panels\":\
+    \ [],\n      \"title\": \"AC Side\",\n      \"type\": \"row\"\n    },\n    {\n\
+    \      \"cacheTimeout\": null,\n      \"datasource\": \"solar\",\n      \"fieldConfig\"\
+    : {\n        \"defaults\": {\n          \"custom\": {},\n          \"decimals\"\
+    : 2,\n          \"mappings\": [\n            {\n              \"id\": 0,\n   \
+    \           \"op\": \"=\",\n              \"text\": \"N/A\",\n              \"\
+    type\": 1,\n              \"value\": \"null\"\n            }\n          ],\n \
+    \         \"nullValueMode\": \"connected\",\n          \"thresholds\": {\n   \
+    \         \"mode\": \"absolute\",\n            \"steps\": [\n              {\n\
+    \                \"color\": \"#C4162A\",\n                \"value\": null\n  \
+    \            },\n              {\n                \"color\": \"#73BF69\",\n  \
+    \              \"value\": 49\n              },\n              {\n            \
+    \    \"color\": \"#C4162A\",\n                \"value\": 51\n              }\n\
+    \            ]\n          },\n          \"unit\": \"hertz\"\n        },\n    \
+    \    \"overrides\": []\n      },\n      \"gridPos\": {\n        \"h\": 7,\n  \
+    \      \"w\": 6,\n        \"x\": 0,\n        \"y\": 10\n      },\n      \"id\"\
+    : 4,\n      \"interval\": \"30s\",\n      \"links\": [],\n      \"maxDataPoints\"\
+    : 100,\n      \"options\": {\n        \"colorMode\": \"value\",\n        \"fieldOptions\"\
+    : {\n          \"calcs\": [\n            \"lastNotNull\"\n          ]\n      \
+    \  },\n        \"graphMode\": \"area\",\n        \"justifyMode\": \"auto\",\n\
+    \        \"orientation\": \"horizontal\",\n        \"reduceOptions\": {\n    \
+    \      \"calcs\": [\n            \"mean\"\n          ],\n          \"fields\"\
+    : \"\",\n          \"values\": false\n        }\n      },\n      \"pluginVersion\"\
+    : \"7.0.3\",\n      \"targets\": [\n        {\n          \"groupBy\": [\n    \
+    \        {\n              \"params\": [\n                \"$__interval\"\n   \
+    \           ],\n              \"type\": \"time\"\n            },\n           \
+    \ {\n              \"params\": [\n                \"null\"\n              ],\n\
+    \              \"type\": \"fill\"\n            }\n          ],\n          \"measurement\"\
+    : \"sma\",\n          \"orderByTime\": \"ASC\",\n          \"policy\": \"default\"\
+    ,\n          \"refId\": \"A\",\n          \"resultFormat\": \"time_series\",\n\
+    \          \"select\": [\n            [\n              {\n                \"params\"\
+    : [\n                  \"ac_grid_frequency\"\n                ],\n           \
+    \     \"type\": \"field\"\n              },\n              {\n               \
+    \ \"params\": [],\n                \"type\": \"mean\"\n              }\n     \
+    \       ]\n          ],\n          \"tags\": []\n        }\n      ],\n      \"\
+    timeFrom\": null,\n      \"timeShift\": null,\n      \"title\": \"Grid Frequency\"\
+    ,\n      \"type\": \"stat\"\n    },\n    {\n      \"cacheTimeout\": null,\n  \
+    \    \"datasource\": \"solar\",\n      \"fieldConfig\": {\n        \"defaults\"\
+    : {\n          \"custom\": {},\n          \"decimals\": 1,\n          \"mappings\"\
+    : [\n            {\n              \"id\": 0,\n              \"op\": \"=\",\n \
+    \             \"text\": \"N/A\",\n              \"type\": 1,\n              \"\
+    value\": \"null\"\n            }\n          ],\n          \"nullValueMode\": \"\
+    connected\",\n          \"thresholds\": {\n            \"mode\": \"absolute\"\
+    ,\n            \"steps\": [\n              {\n                \"color\": \"#C4162A\"\
+    ,\n                \"value\": null\n              },\n              {\n      \
+    \          \"color\": \"#73BF69\",\n                \"value\": 207\n         \
+    \     },\n              {\n                \"color\": \"#C4162A\",\n         \
+    \       \"value\": 253\n              }\n            ]\n          },\n       \
+    \   \"unit\": \"volt\"\n        },\n        \"overrides\": []\n      },\n    \
+    \  \"gridPos\": {\n        \"h\": 7,\n        \"w\": 6,\n        \"x\": 6,\n \
+    \       \"y\": 10\n      },\n      \"id\": 6,\n      \"interval\": \"30s\",\n\
+    \      \"links\": [],\n      \"maxDataPoints\": 100,\n      \"options\": {\n \
+    \       \"colorMode\": \"value\",\n        \"fieldOptions\": {\n          \"calcs\"\
+    : [\n            \"lastNotNull\"\n          ]\n        },\n        \"graphMode\"\
+    : \"area\",\n        \"justifyMode\": \"auto\",\n        \"orientation\": \"horizontal\"\
+    ,\n        \"reduceOptions\": {\n          \"calcs\": [\n            \"mean\"\n\
+    \          ],\n          \"fields\": \"\",\n          \"values\": false\n    \
+    \    }\n      },\n      \"pluginVersion\": \"7.0.3\",\n      \"targets\": [\n\
+    \        {\n          \"alias\": \"L1\",\n          \"groupBy\": [\n         \
+    \   {\n              \"params\": [\n                \"$__interval\"\n        \
+    \      ],\n              \"type\": \"time\"\n            },\n            {\n \
+    \             \"params\": [\n                \"null\"\n              ],\n    \
+    \          \"type\": \"fill\"\n            }\n          ],\n          \"measurement\"\
+    : \"sma\",\n          \"orderByTime\": \"ASC\",\n          \"policy\": \"default\"\
+    ,\n          \"refId\": \"A\",\n          \"resultFormat\": \"time_series\",\n\
+    \          \"select\": [\n            [\n              {\n                \"params\"\
+    : [\n                  \"ac_phase_voltage_l1\"\n                ],\n         \
+    \       \"type\": \"field\"\n              },\n              {\n             \
+    \   \"params\": [],\n                \"type\": \"mean\"\n              }\n   \
+    \         ]\n          ],\n          \"tags\": []\n        }\n      ],\n     \
+    \ \"timeFrom\": null,\n      \"timeShift\": null,\n      \"title\": \"Grid voltage\"\
+    ,\n      \"type\": \"stat\"\n    },\n    {\n      \"datasource\": \"solar\",\n\
+    \      \"fieldConfig\": {\n        \"defaults\": {\n          \"custom\": {},\n\
+    \          \"mappings\": [],\n          \"thresholds\": {\n            \"mode\"\
+    : \"absolute\",\n            \"steps\": [\n              {\n                \"\
+    color\": \"green\",\n                \"value\": null\n              },\n     \
+    \         {\n                \"color\": \"red\",\n                \"value\": 80\n\
+    \              }\n            ]\n          }\n        },\n        \"overrides\"\
+    : []\n      },\n      \"gridPos\": {\n        \"h\": 7,\n        \"w\": 6,\n \
+    \       \"x\": 12,\n        \"y\": 10\n      },\n      \"id\": 8,\n      \"interval\"\
+    : \"30s\",\n      \"options\": {\n        \"colorMode\": \"value\",\n        \"\
+    graphMode\": \"area\",\n        \"justifyMode\": \"auto\",\n        \"orientation\"\
+    : \"auto\",\n        \"reduceOptions\": {\n          \"calcs\": [\n          \
+    \  \"mean\"\n          ],\n          \"fields\": \"\",\n          \"values\":\
+    \ false\n        }\n      },\n      \"pluginVersion\": \"7.0.3\",\n      \"targets\"\
+    : [\n        {\n          \"alias\": \"PF\",\n          \"groupBy\": [\n     \
+    \       {\n              \"params\": [\n                \"$__interval\"\n    \
+    \          ],\n              \"type\": \"time\"\n            },\n            {\n\
+    \              \"params\": [\n                \"null\"\n              ],\n   \
+    \           \"type\": \"fill\"\n            }\n          ],\n          \"measurement\"\
+    : \"sma\",\n          \"orderByTime\": \"ASC\",\n          \"policy\": \"default\"\
+    ,\n          \"refId\": \"A\",\n          \"resultFormat\": \"time_series\",\n\
+    \          \"select\": [\n            [\n              {\n                \"params\"\
+    : [\n                  \"ac_displacement_power_factor\"\n                ],\n\
+    \                \"type\": \"field\"\n              },\n              {\n    \
+    \            \"params\": [],\n                \"type\": \"mean\"\n           \
+    \   }\n            ]\n          ],\n          \"tags\": []\n        }\n      ],\n\
+    \      \"timeFrom\": null,\n      \"timeShift\": null,\n      \"title\": \"Power\
+    \ factor\",\n      \"type\": \"stat\"\n    },\n    {\n      \"datasource\": \"\
+    solar\",\n      \"description\": \"\",\n      \"fieldConfig\": {\n        \"defaults\"\
+    : {\n          \"custom\": {},\n          \"mappings\": [],\n          \"thresholds\"\
+    : {\n            \"mode\": \"absolute\",\n            \"steps\": [\n         \
+    \     {\n                \"color\": \"green\",\n                \"value\": null\n\
+    \              }\n            ]\n          },\n          \"unit\": \"watth\"\n\
+    \        },\n        \"overrides\": []\n      },\n      \"gridPos\": {\n     \
+    \   \"h\": 7,\n        \"w\": 6,\n        \"x\": 18,\n        \"y\": 10\n    \
+    \  },\n      \"id\": 31,\n      \"interval\": \"30s\",\n      \"options\": {\n\
+    \        \"colorMode\": \"value\",\n        \"graphMode\": \"area\",\n       \
+    \ \"justifyMode\": \"auto\",\n        \"orientation\": \"auto\",\n        \"reduceOptions\"\
+    : {\n          \"calcs\": [\n            \"last\"\n          ],\n          \"\
+    fields\": \"\",\n          \"values\": false\n        }\n      },\n      \"pluginVersion\"\
+    : \"7.0.3\",\n      \"targets\": [\n        {\n          \"alias\": \"yield\"\
+    ,\n          \"groupBy\": [\n            {\n              \"params\": [\n    \
+    \            \"$__interval\"\n              ],\n              \"type\": \"time\"\
+    \n            },\n            {\n              \"params\": [\n               \
+    \ \"previous\"\n              ],\n              \"type\": \"fill\"\n         \
+    \   }\n          ],\n          \"measurement\": \"sma\",\n          \"orderByTime\"\
+    : \"ASC\",\n          \"policy\": \"default\",\n          \"refId\": \"A\",\n\
+    \          \"resultFormat\": \"time_series\",\n          \"select\": [\n     \
+    \       [\n              {\n                \"params\": [\n                  \"\
+    ac_daily_yield\"\n                ],\n                \"type\": \"field\"\n  \
+    \            },\n              {\n                \"params\": [],\n          \
+    \      \"type\": \"last\"\n              },\n              {\n               \
+    \ \"params\": [\n                  \" / 3600\"\n                ],\n         \
+    \       \"type\": \"math\"\n              }\n            ]\n          ],\n   \
+    \       \"tags\": []\n        }\n      ],\n      \"timeFrom\": null,\n      \"\
+    timeShift\": null,\n      \"title\": \"Daily yield\",\n      \"type\": \"stat\"\
+    \n    },\n    {\n      \"aliasColors\": {},\n      \"bars\": false,\n      \"\
+    dashLength\": 10,\n      \"dashes\": false,\n      \"datasource\": \"solar\",\n\
+    \      \"fieldConfig\": {\n        \"defaults\": {\n          \"custom\": {}\n\
+    \        },\n        \"overrides\": []\n      },\n      \"fill\": 1,\n      \"\
+    fillGradient\": 0,\n      \"gridPos\": {\n        \"h\": 8,\n        \"w\": 24,\n\
+    \        \"x\": 0,\n        \"y\": 17\n      },\n      \"hiddenSeries\": false,\n\
+    \      \"id\": 20,\n      \"interval\": \"30s\",\n      \"legend\": {\n      \
+    \  \"avg\": true,\n        \"current\": true,\n        \"max\": true,\n      \
+    \  \"min\": false,\n        \"show\": true,\n        \"total\": false,\n     \
+    \   \"values\": true\n      },\n      \"lines\": true,\n      \"linewidth\": 1,\n\
+    \      \"nullPointMode\": \"null\",\n      \"options\": {\n        \"dataLinks\"\
+    : []\n      },\n      \"percentage\": false,\n      \"pointradius\": 2,\n    \
+    \  \"points\": false,\n      \"renderer\": \"flot\",\n      \"seriesOverrides\"\
+    : [],\n      \"spaceLength\": 10,\n      \"stack\": false,\n      \"steppedLine\"\
+    : false,\n      \"targets\": [\n        {\n          \"alias\": \"Power\",\n \
+    \         \"groupBy\": [\n            {\n              \"params\": [\n       \
+    \         \"$__interval\"\n              ],\n              \"type\": \"time\"\n\
+    \            },\n            {\n              \"params\": [\n                \"\
+    null\"\n              ],\n              \"type\": \"fill\"\n            }\n  \
+    \        ],\n          \"measurement\": \"sma\",\n          \"orderByTime\": \"\
+    ASC\",\n          \"policy\": \"default\",\n          \"refId\": \"A\",\n    \
+    \      \"resultFormat\": \"time_series\",\n          \"select\": [\n         \
+    \   [\n              {\n                \"params\": [\n                  \"ac_power\"\
+    \n                ],\n                \"type\": \"field\"\n              },\n\
+    \              {\n                \"params\": [],\n                \"type\": \"\
+    mean\"\n              }\n            ]\n          ],\n          \"tags\": []\n\
+    \        }\n      ],\n      \"thresholds\": [],\n      \"timeFrom\": null,\n \
+    \     \"timeRegions\": [],\n      \"timeShift\": null,\n      \"title\": \"AC\
+    \ Power\",\n      \"tooltip\": {\n        \"shared\": true,\n        \"sort\"\
+    : 0,\n        \"value_type\": \"individual\"\n      },\n      \"type\": \"graph\"\
+    ,\n      \"xaxis\": {\n        \"buckets\": null,\n        \"mode\": \"time\"\
+    ,\n        \"name\": null,\n        \"show\": true,\n        \"values\": []\n\
+    \      },\n      \"yaxes\": [\n        {\n          \"format\": \"watt\",\n  \
+    \        \"label\": null,\n          \"logBase\": 1,\n          \"max\": null,\n\
+    \          \"min\": null,\n          \"show\": true\n        },\n        {\n \
+    \         \"format\": \"short\",\n          \"label\": null,\n          \"logBase\"\
+    : 1,\n          \"max\": null,\n          \"min\": null,\n          \"show\":\
+    \ true\n        }\n      ],\n      \"yaxis\": {\n        \"align\": false,\n \
+    \       \"alignLevel\": null\n      }\n    },\n    {\n      \"aliasColors\": {},\n\
+    \      \"bars\": false,\n      \"dashLength\": 10,\n      \"dashes\": false,\n\
+    \      \"datasource\": \"solar\",\n      \"fieldConfig\": {\n        \"defaults\"\
+    : {\n          \"custom\": {}\n        },\n        \"overrides\": []\n      },\n\
+    \      \"fill\": 1,\n      \"fillGradient\": 0,\n      \"gridPos\": {\n      \
+    \  \"h\": 8,\n        \"w\": 24,\n        \"x\": 0,\n        \"y\": 25\n     \
+    \ },\n      \"hiddenSeries\": false,\n      \"id\": 14,\n      \"interval\": \"\
+    30s\",\n      \"legend\": {\n        \"avg\": false,\n        \"current\": true,\n\
+    \        \"max\": true,\n        \"min\": false,\n        \"show\": true,\n  \
+    \      \"total\": false,\n        \"values\": true\n      },\n      \"lines\"\
+    : true,\n      \"linewidth\": 1,\n      \"nullPointMode\": \"null\",\n      \"\
+    options\": {\n        \"dataLinks\": []\n      },\n      \"percentage\": false,\n\
+    \      \"pointradius\": 2,\n      \"points\": false,\n      \"renderer\": \"flot\"\
+    ,\n      \"seriesOverrides\": [],\n      \"spaceLength\": 10,\n      \"stack\"\
+    : false,\n      \"steppedLine\": false,\n      \"targets\": [\n        {\n   \
+    \       \"alias\": \"L1\",\n          \"groupBy\": [\n            {\n        \
+    \      \"params\": [\n                \"$__interval\"\n              ],\n    \
+    \          \"type\": \"time\"\n            },\n            {\n              \"\
+    params\": [\n                \"null\"\n              ],\n              \"type\"\
+    : \"fill\"\n            }\n          ],\n          \"measurement\": \"sma\",\n\
+    \          \"orderByTime\": \"ASC\",\n          \"policy\": \"default\",\n   \
+    \       \"refId\": \"A\",\n          \"resultFormat\": \"time_series\",\n    \
+    \      \"select\": [\n            [\n              {\n                \"params\"\
+    : [\n                  \"ac_phase_current_l1\"\n                ],\n         \
+    \       \"type\": \"field\"\n              },\n              {\n             \
+    \   \"params\": [],\n                \"type\": \"mean\"\n              }\n   \
+    \         ]\n          ],\n          \"tags\": []\n        }\n      ],\n     \
+    \ \"thresholds\": [],\n      \"timeFrom\": null,\n      \"timeRegions\": [],\n\
+    \      \"timeShift\": null,\n      \"title\": \"AC Current\",\n      \"tooltip\"\
+    : {\n        \"shared\": true,\n        \"sort\": 0,\n        \"value_type\":\
+    \ \"individual\"\n      },\n      \"type\": \"graph\",\n      \"xaxis\": {\n \
+    \       \"buckets\": null,\n        \"mode\": \"time\",\n        \"name\": null,\n\
+    \        \"show\": true,\n        \"values\": []\n      },\n      \"yaxes\": [\n\
+    \        {\n          \"format\": \"short\",\n          \"label\": null,\n   \
+    \       \"logBase\": 1,\n          \"max\": null,\n          \"min\": null,\n\
+    \          \"show\": true\n        },\n        {\n          \"format\": \"short\"\
+    ,\n          \"label\": null,\n          \"logBase\": 1,\n          \"max\": null,\n\
+    \          \"min\": null,\n          \"show\": true\n        }\n      ],\n   \
+    \   \"yaxis\": {\n        \"align\": false,\n        \"alignLevel\": null\n  \
+    \    }\n    },\n    {\n      \"collapsed\": false,\n      \"datasource\": null,\n\
+    \      \"gridPos\": {\n        \"h\": 1,\n        \"w\": 24,\n        \"x\": 0,\n\
+    \        \"y\": 33\n      },\n      \"id\": 18,\n      \"panels\": [],\n     \
+    \ \"title\": \"DC Side\",\n      \"type\": \"row\"\n    },\n    {\n      \"aliasColors\"\
+    : {},\n      \"bars\": false,\n      \"dashLength\": 10,\n      \"dashes\": false,\n\
+    \      \"datasource\": \"solar\",\n      \"fieldConfig\": {\n        \"defaults\"\
+    : {\n          \"custom\": {}\n        },\n        \"overrides\": []\n      },\n\
+    \      \"fill\": 1,\n      \"fillGradient\": 0,\n      \"gridPos\": {\n      \
+    \  \"h\": 7,\n        \"w\": 24,\n        \"x\": 0,\n        \"y\": 34\n     \
+    \ },\n      \"hiddenSeries\": false,\n      \"id\": 2,\n      \"interval\": \"\
+    30s\",\n      \"legend\": {\n        \"alignAsTable\": false,\n        \"avg\"\
+    : true,\n        \"current\": true,\n        \"max\": true,\n        \"min\":\
+    \ false,\n        \"rightSide\": false,\n        \"show\": true,\n        \"total\"\
+    : false,\n        \"values\": true\n      },\n      \"lines\": true,\n      \"\
+    linewidth\": 1,\n      \"nullPointMode\": \"null\",\n      \"options\": {\n  \
+    \      \"dataLinks\": []\n      },\n      \"percentage\": false,\n      \"pointradius\"\
+    : 2,\n      \"points\": false,\n      \"renderer\": \"flot\",\n      \"seriesOverrides\"\
+    : [],\n      \"spaceLength\": 10,\n      \"stack\": false,\n      \"steppedLine\"\
+    : false,\n      \"targets\": [\n        {\n          \"alias\": \"A\",\n     \
+    \     \"groupBy\": [\n            {\n              \"params\": [\n           \
+    \     \"$__interval\"\n              ],\n              \"type\": \"time\"\n  \
+    \          },\n            {\n              \"params\": [\n                \"\
+    null\"\n              ],\n              \"type\": \"fill\"\n            }\n  \
+    \        ],\n          \"measurement\": \"sma\",\n          \"orderByTime\": \"\
+    ASC\",\n          \"policy\": \"default\",\n          \"refId\": \"A\",\n    \
+    \      \"resultFormat\": \"time_series\",\n          \"select\": [\n         \
+    \   [\n              {\n                \"params\": [\n                  \"dc_power_a\"\
+    \n                ],\n                \"type\": \"field\"\n              },\n\
+    \              {\n                \"params\": [],\n                \"type\": \"\
+    mean\"\n              }\n            ]\n          ],\n          \"tags\": []\n\
+    \        },\n        {\n          \"alias\": \"B\",\n          \"groupBy\": [\n\
+    \            {\n              \"params\": [\n                \"$__interval\"\n\
+    \              ],\n              \"type\": \"time\"\n            },\n        \
+    \    {\n              \"params\": [\n                \"null\"\n              ],\n\
+    \              \"type\": \"fill\"\n            }\n          ],\n          \"measurement\"\
+    : \"sma\",\n          \"orderByTime\": \"ASC\",\n          \"policy\": \"default\"\
+    ,\n          \"refId\": \"B\",\n          \"resultFormat\": \"time_series\",\n\
+    \          \"select\": [\n            [\n              {\n                \"params\"\
+    : [\n                  \"dc_power_b\"\n                ],\n                \"\
+    type\": \"field\"\n              },\n              {\n                \"params\"\
+    : [],\n                \"type\": \"mean\"\n              }\n            ]\n  \
+    \        ],\n          \"tags\": []\n        },\n        {\n          \"alias\"\
+    : \"total\",\n          \"groupBy\": [\n            {\n              \"params\"\
+    : [\n                \"$__interval\"\n              ],\n              \"type\"\
+    : \"time\"\n            },\n            {\n              \"params\": [\n     \
+    \           \"linear\"\n              ],\n              \"type\": \"fill\"\n \
+    \           }\n          ],\n          \"measurement\": \"sma\",\n          \"\
+    orderByTime\": \"ASC\",\n          \"policy\": \"default\",\n          \"query\"\
+    : \"SELECT mean(\\\"dc_power_b\\\") + mean(\\\"dc_power_a\\\") FROM \\\"sma\\\"\
+    \ WHERE $timeFilter GROUP BY time($__interval) fill(null)\",\n          \"rawQuery\"\
+    : true,\n          \"refId\": \"C\",\n          \"resultFormat\": \"time_series\"\
+    ,\n          \"select\": [\n            [\n              {\n                \"\
+    params\": [\n                  \"dc_power_b\"\n                ],\n          \
+    \      \"type\": \"field\"\n              },\n              {\n              \
+    \  \"params\": [],\n                \"type\": \"mean\"\n              }\n    \
+    \        ],\n            [\n              {\n                \"params\": [\n \
+    \                 \"dc_power_a\"\n                ],\n                \"type\"\
+    : \"field\"\n              },\n              {\n                \"params\": [],\n\
+    \                \"type\": \"mean\"\n              }\n            ]\n        \
+    \  ],\n          \"tags\": []\n        }\n      ],\n      \"thresholds\": [],\n\
+    \      \"timeFrom\": null,\n      \"timeRegions\": [],\n      \"timeShift\": null,\n\
+    \      \"title\": \"DC Power\",\n      \"tooltip\": {\n        \"shared\": true,\n\
+    \        \"sort\": 0,\n        \"value_type\": \"individual\"\n      },\n    \
+    \  \"type\": \"graph\",\n      \"xaxis\": {\n        \"buckets\": null,\n    \
+    \    \"mode\": \"time\",\n        \"name\": null,\n        \"show\": true,\n \
+    \       \"values\": []\n      },\n      \"yaxes\": [\n        {\n          \"\
+    format\": \"watt\",\n          \"label\": null,\n          \"logBase\": 1,\n \
+    \         \"max\": null,\n          \"min\": null,\n          \"show\": true\n\
+    \        },\n        {\n          \"format\": \"short\",\n          \"label\"\
+    : null,\n          \"logBase\": 1,\n          \"max\": null,\n          \"min\"\
+    : null,\n          \"show\": true\n        }\n      ],\n      \"yaxis\": {\n \
+    \       \"align\": false,\n        \"alignLevel\": null\n      }\n    },\n   \
+    \ {\n      \"aliasColors\": {},\n      \"bars\": false,\n      \"dashLength\"\
+    : 10,\n      \"dashes\": false,\n      \"datasource\": \"solar\",\n      \"fieldConfig\"\
+    : {\n        \"defaults\": {\n          \"custom\": {}\n        },\n        \"\
+    overrides\": []\n      },\n      \"fill\": 1,\n      \"fillGradient\": 0,\n  \
+    \    \"gridPos\": {\n        \"h\": 7,\n        \"w\": 24,\n        \"x\": 0,\n\
+    \        \"y\": 41\n      },\n      \"hiddenSeries\": false,\n      \"id\": 10,\n\
+    \      \"interval\": \"30s\",\n      \"legend\": {\n        \"avg\": false,\n\
+    \        \"current\": true,\n        \"max\": true,\n        \"min\": false,\n\
+    \        \"show\": true,\n        \"total\": false,\n        \"values\": true\n\
+    \      },\n      \"lines\": true,\n      \"linewidth\": 1,\n      \"nullPointMode\"\
+    : \"null\",\n      \"options\": {\n        \"dataLinks\": []\n      },\n     \
+    \ \"percentage\": false,\n      \"pointradius\": 2,\n      \"points\": false,\n\
+    \      \"renderer\": \"flot\",\n      \"seriesOverrides\": [],\n      \"spaceLength\"\
+    : 10,\n      \"stack\": false,\n      \"steppedLine\": false,\n      \"targets\"\
+    : [\n        {\n          \"alias\": \"A\",\n          \"groupBy\": [\n      \
+    \      {\n              \"params\": [\n                \"$__interval\"\n     \
+    \         ],\n              \"type\": \"time\"\n            },\n            {\n\
+    \              \"params\": [\n                \"null\"\n              ],\n   \
+    \           \"type\": \"fill\"\n            }\n          ],\n          \"measurement\"\
+    : \"sma\",\n          \"orderByTime\": \"ASC\",\n          \"policy\": \"default\"\
+    ,\n          \"refId\": \"A\",\n          \"resultFormat\": \"time_series\",\n\
+    \          \"select\": [\n            [\n              {\n                \"params\"\
+    : [\n                  \"dc_voltage_a\"\n                ],\n                \"\
+    type\": \"field\"\n              },\n              {\n                \"params\"\
+    : [],\n                \"type\": \"mean\"\n              }\n            ]\n  \
+    \        ],\n          \"tags\": []\n        },\n        {\n          \"alias\"\
+    : \"B\",\n          \"groupBy\": [\n            {\n              \"params\": [\n\
+    \                \"$__interval\"\n              ],\n              \"type\": \"\
+    time\"\n            },\n            {\n              \"params\": [\n         \
+    \       \"null\"\n              ],\n              \"type\": \"fill\"\n       \
+    \     }\n          ],\n          \"measurement\": \"sma\",\n          \"orderByTime\"\
+    : \"ASC\",\n          \"policy\": \"default\",\n          \"refId\": \"B\",\n\
+    \          \"resultFormat\": \"time_series\",\n          \"select\": [\n     \
+    \       [\n              {\n                \"params\": [\n                  \"\
+    dc_voltage_b\"\n                ],\n                \"type\": \"field\"\n    \
+    \          },\n              {\n                \"params\": [],\n            \
+    \    \"type\": \"mean\"\n              }\n            ]\n          ],\n      \
+    \    \"tags\": []\n        }\n      ],\n      \"thresholds\": [],\n      \"timeFrom\"\
+    : null,\n      \"timeRegions\": [],\n      \"timeShift\": null,\n      \"title\"\
+    : \"DC Voltage\",\n      \"tooltip\": {\n        \"shared\": true,\n        \"\
+    sort\": 0,\n        \"value_type\": \"individual\"\n      },\n      \"type\":\
+    \ \"graph\",\n      \"xaxis\": {\n        \"buckets\": null,\n        \"mode\"\
+    : \"time\",\n        \"name\": null,\n        \"show\": true,\n        \"values\"\
+    : []\n      },\n      \"yaxes\": [\n        {\n          \"format\": \"volt\"\
+    ,\n          \"label\": null,\n          \"logBase\": 1,\n          \"max\": null,\n\
+    \          \"min\": null,\n          \"show\": true\n        },\n        {\n \
+    \         \"format\": \"amp\",\n          \"label\": null,\n          \"logBase\"\
+    : 1,\n          \"max\": null,\n          \"min\": null,\n          \"show\":\
+    \ true\n        }\n      ],\n      \"yaxis\": {\n        \"align\": false,\n \
+    \       \"alignLevel\": null\n      }\n    },\n    {\n      \"aliasColors\": {},\n\
+    \      \"bars\": false,\n      \"dashLength\": 10,\n      \"dashes\": false,\n\
+    \      \"datasource\": \"solar\",\n      \"fieldConfig\": {\n        \"defaults\"\
+    : {\n          \"custom\": {}\n        },\n        \"overrides\": []\n      },\n\
+    \      \"fill\": 1,\n      \"fillGradient\": 0,\n      \"gridPos\": {\n      \
+    \  \"h\": 6,\n        \"w\": 24,\n        \"x\": 0,\n        \"y\": 48\n     \
+    \ },\n      \"hiddenSeries\": false,\n      \"id\": 12,\n      \"interval\": \"\
+    30s\",\n      \"legend\": {\n        \"avg\": false,\n        \"current\": true,\n\
+    \        \"max\": true,\n        \"min\": false,\n        \"show\": true,\n  \
+    \      \"total\": false,\n        \"values\": true\n      },\n      \"lines\"\
+    : true,\n      \"linewidth\": 1,\n      \"nullPointMode\": \"null\",\n      \"\
+    options\": {\n        \"dataLinks\": []\n      },\n      \"percentage\": false,\n\
+    \      \"pointradius\": 2,\n      \"points\": false,\n      \"renderer\": \"flot\"\
+    ,\n      \"seriesOverrides\": [],\n      \"spaceLength\": 10,\n      \"stack\"\
+    : false,\n      \"steppedLine\": false,\n      \"targets\": [\n        {\n   \
+    \       \"alias\": \"A\",\n          \"groupBy\": [\n            {\n         \
+    \     \"params\": [\n                \"$__interval\"\n              ],\n     \
+    \         \"type\": \"time\"\n            },\n            {\n              \"\
+    params\": [\n                \"null\"\n              ],\n              \"type\"\
+    : \"fill\"\n            }\n          ],\n          \"measurement\": \"sma\",\n\
+    \          \"orderByTime\": \"ASC\",\n          \"policy\": \"default\",\n   \
+    \       \"refId\": \"A\",\n          \"resultFormat\": \"time_series\",\n    \
+    \      \"select\": [\n            [\n              {\n                \"params\"\
+    : [\n                  \"dc_current_b\"\n                ],\n                \"\
+    type\": \"field\"\n              },\n              {\n                \"params\"\
+    : [],\n                \"type\": \"mean\"\n              }\n            ]\n  \
+    \        ],\n          \"tags\": []\n        },\n        {\n          \"alias\"\
+    : \"B\",\n          \"groupBy\": [\n            {\n              \"params\": [\n\
+    \                \"$__interval\"\n              ],\n              \"type\": \"\
+    time\"\n            },\n            {\n              \"params\": [\n         \
+    \       \"null\"\n              ],\n              \"type\": \"fill\"\n       \
+    \     }\n          ],\n          \"measurement\": \"sma\",\n          \"orderByTime\"\
+    : \"ASC\",\n          \"policy\": \"default\",\n          \"refId\": \"B\",\n\
+    \          \"resultFormat\": \"time_series\",\n          \"select\": [\n     \
+    \       [\n              {\n                \"params\": [\n                  \"\
+    dc_current_a\"\n                ],\n                \"type\": \"field\"\n    \
+    \          },\n              {\n                \"params\": [],\n            \
+    \    \"type\": \"mean\"\n              }\n            ]\n          ],\n      \
+    \    \"tags\": []\n        }\n      ],\n      \"thresholds\": [],\n      \"timeFrom\"\
+    : null,\n      \"timeRegions\": [],\n      \"timeShift\": null,\n      \"title\"\
+    : \"DC Current\",\n      \"tooltip\": {\n        \"shared\": true,\n        \"\
+    sort\": 0,\n        \"value_type\": \"individual\"\n      },\n      \"type\":\
+    \ \"graph\",\n      \"xaxis\": {\n        \"buckets\": null,\n        \"mode\"\
+    : \"time\",\n        \"name\": null,\n        \"show\": true,\n        \"values\"\
+    : []\n      },\n      \"yaxes\": [\n        {\n          \"format\": \"short\"\
+    ,\n          \"label\": null,\n          \"logBase\": 1,\n          \"max\": null,\n\
+    \          \"min\": null,\n          \"show\": true\n        },\n        {\n \
+    \         \"format\": \"short\",\n          \"label\": null,\n          \"logBase\"\
+    : 1,\n          \"max\": null,\n          \"min\": null,\n          \"show\":\
+    \ true\n        }\n      ],\n      \"yaxis\": {\n        \"align\": false,\n \
+    \       \"alignLevel\": null\n      }\n    }\n  ],\n  \"refresh\": \"30s\",\n\
+    \  \"schemaVersion\": 25,\n  \"style\": \"dark\",\n  \"tags\": [],\n  \"templating\"\
+    : {\n    \"list\": []\n  },\n  \"time\": {\n    \"from\": \"now-24h\",\n    \"\
+    to\": \"now\"\n  },\n  \"timepicker\": {\n    \"refresh_intervals\": [\n     \
+    \ \"10s\",\n      \"30s\",\n      \"1m\",\n      \"5m\",\n      \"15m\",\n   \
+    \   \"30m\",\n      \"1h\",\n      \"2h\",\n      \"1d\"\n    ]\n  },\n  \"timezone\"\
+    : \"\",\n  \"title\": \"Solar\",\n  \"uid\": \"scZPE0ZGk\",\n  \"version\": 1\n\
+    }\n"
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: '1'
+  name: solar-dashboard
+  namespace: monitoring
