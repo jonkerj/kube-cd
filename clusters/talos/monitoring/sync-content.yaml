@@ -18,3 +18,4 @@ spec:
   dependsOn:
   - name: monitoring-crd
   - name: nfs
+  - name: cert-manager-issuer

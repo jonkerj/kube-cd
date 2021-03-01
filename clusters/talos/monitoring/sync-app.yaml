@@ -18,6 +18,7 @@ spec:
   dependsOn:
   - name: monitoring-crd
   - name: nfs
+  - name: cert-manager-issuer
   healthChecks:
   - kind: Deployment
     name: kps-operator
