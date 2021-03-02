@@ -1,0 +1,12 @@
+apiVersion: upgrade.talos.dev/v1alpha1
+kind: Pool
+metadata:
+  name: workers
+spec:
+  name: workers
+  channel: alpha
+  registry: https://ghcr.io
+  repository: talos-systems/installer
+  concurrency: 1
+  onFailure: Pause
+  checkInterval: 1m

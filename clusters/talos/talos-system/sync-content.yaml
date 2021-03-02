@@ -1,0 +1,22 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: talos-system-content
+  namespace: flux-system
+spec:
+  interval: 10m
+  path: "./clusters/talos/talos-system/content/"
+  prune: true
+  timeout: 1m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  dependsOn:
+  - name: talos-system-crd
+  healthChecks:
+  - kind: Pool
+    name: controlplane
+    apiVersion: upgrade.talos.dev/v1alpha1
+  - kind: Pool
+    name: workers
+    apiVersion: upgrade.talos.dev/v1alpha1
