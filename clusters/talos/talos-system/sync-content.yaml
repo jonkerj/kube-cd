@@ -13,10 +13,3 @@ spec:
     name: flux-system
   dependsOn:
   - name: talos-system-crd
-  healthChecks:
-  - kind: Pool
-    name: controlplane
-    apiVersion: upgrade.talos.dev/v1alpha1
-  - kind: Pool
-    name: workers
-    apiVersion: upgrade.talos.dev/v1alpha1
