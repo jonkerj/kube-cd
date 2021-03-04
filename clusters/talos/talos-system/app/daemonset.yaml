@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: talos-controller-manager
-        image: docker.io/autonomy/talos-controller-manager:v0.1.0-alpha.3
+        image: jonkerj/talos-controller-manager:fix-ghcr
         env:
         - name: TALOS_TOKEN
           valueFrom:
