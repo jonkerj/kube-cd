@@ -113,6 +113,10 @@ spec:
   interval: 10m0s
   path: ./clusters/talos/system
   prune: true
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
   sourceRef:
     kind: GitRepository
     name: flux-system
