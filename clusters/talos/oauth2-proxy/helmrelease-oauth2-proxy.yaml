@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: oauth2-proxy
-  namespace: dashboard
+  namespace: oauth2-proxy
 spec:
   interval: 5m
   chart:
@@ -17,27 +17,23 @@ spec:
     config:
       existingSecret: oauth2-secret
     extraArgs:
-      provider: "oidc"
-      oidc-issuer-url: "https://sso.9ka.nl/auth/realms/9ka"
       email-domain: "kippendief.biz"
-      pass-authorization-header: "true"
-      skip-provider-button: "true"
-      ssl-upstream-insecure-skip-verify: "true"
+      oidc-issuer-url: "https://sso.9ka.nl/auth/realms/9ka"
+      provider: "oidc"
+      set-authorization-header: "true"
       show-debug-on-error: "true"
-      upstream: "https://kubernetes-dashboard"
-      ssl-upstream-insecure-skip-verify: "true"
+      skip-provider-button: "true"
+      whitelist-domain: ".t.efgh.nl"
     image:
-#      repository: "quay.io/oauth2-proxy/oauth2-proxy"
-#      tag: "v7.0.1"
       repository: jonkerj/oauth2-proxy
       tag: master
     ingress:
       enabled: true
+      path: /oauth2
+      hosts:
+      - prometheus.t.efgh.nl
+      - alertmanager.t.efgh.nl
+      - dashboard.t.efgh.nl
+      - hubble.t.efgh.nl
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
         nginx.ingress.kubernetes.io/proxy-buffer-size: 64k
-      path: /
-      hosts: ['dashboard.t.efgh.nl']
-      tls:
-      - hosts: ['dashboard.t.efgh.nl']
-        secretName: dashboard-tls

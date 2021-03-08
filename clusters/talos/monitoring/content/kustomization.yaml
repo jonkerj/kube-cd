@@ -6,10 +6,8 @@ resources:
 - alertmanager.yaml
 - secret-alertmanager-config.yaml
 - configmap-alertmanager-templates.yaml
-- helmrepository.yaml
-- secret-oauth2-proxy.yaml
-- helmrelease-oauth2-prometheus.yaml
-- helmrelease-oauth2-alertmanager.yaml
+- ingress-prometheus.yaml
+- ingress-alertmanager.yaml
 - rules
 - datasources
 - dashboards
