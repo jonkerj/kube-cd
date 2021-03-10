@@ -4,7 +4,7 @@ metadata:
   name: controlplane
 spec:
   name: controlplane
-  channel: alpha
+  channel: beta
   registry: https://ghcr.io
   repository: talos-systems/installer
   concurrency: 1

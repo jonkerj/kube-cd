@@ -4,7 +4,7 @@ metadata:
   name: workers
 spec:
   name: workers
-  channel: alpha
+  channel: beta
   registry: https://ghcr.io
   repository: talos-systems/installer
   concurrency: 1
