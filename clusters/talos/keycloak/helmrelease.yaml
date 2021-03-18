@@ -7,11 +7,10 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: keycloak
-      version: 10.1.0
+      chart: "./charts/keycloak"
       sourceRef:
-        kind: HelmRepository
-        name: codecentric
+        kind: GitRepository
+        name: codecentric-charts
         namespace: flux-system
   values:
     ingress:
@@ -36,8 +35,9 @@ spec:
           memory: "32Mi"
     postgresql:
       enabled: true
-      livenessProbe:
-        failureThreshold: 24
+      startupProbe:
+        enabled: true
+        failureThreshold: 20
     resources:
       requests:
         cpu: 100m
