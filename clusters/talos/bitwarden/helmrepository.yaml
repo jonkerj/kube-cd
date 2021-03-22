@@ -1,0 +1,8 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: bitwarden-rs
+  namespace: flux-system
+spec:
+  url: https://skeen.github.io/helm-bitwarden_rs
+  interval: 1h
