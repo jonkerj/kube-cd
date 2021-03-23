@@ -18,7 +18,8 @@ spec:
       path: /rpool/kuub
       server: 172.21.46.2
       mountOptions:
-      - nfsvers=4.0
+      - noatime
+      - async
     storageClass:
       archiveOnDelete: false
       defaultClass: true
