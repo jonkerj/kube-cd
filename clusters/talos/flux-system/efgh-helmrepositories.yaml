@@ -67,15 +67,6 @@ spec:
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: kubernetes-dashboard
-  namespace: flux-system
-spec:
-  url: https://kubernetes.github.io/dashboard/
-  interval: 1h
----
-apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: HelmRepository
-metadata:
   name: nextcloud
   namespace: flux-system
 spec:
