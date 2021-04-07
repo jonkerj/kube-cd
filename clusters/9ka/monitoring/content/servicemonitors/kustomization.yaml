@@ -3,5 +3,5 @@ kind: Kustomization
 resources:
 - alertmanager.yaml
 - external-node-exporters.yaml
-- hydrogen-pdns.yaml
+- powerdns.yaml
 - prometheus.yaml

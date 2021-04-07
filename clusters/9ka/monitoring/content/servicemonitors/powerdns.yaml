@@ -1,12 +1,12 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: hydrogen-pdns
+  name: powerdns-recursor
   namespace: monitoring
   labels:
-    app: hydrogen-pdns
+    app: powerdns-recursor
 spec:
-  jobLabel: hydrogen-pdns
+  jobLabel: powerdns-recursor
   endpoints:
   - port: metrics
     interval: 300s
@@ -16,15 +16,15 @@ spec:
       targetLabel: node_name
   selector:
     matchLabels:
-      app: hydrogen-pdns
+      app: powerdns-recursor
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: hydrogen-pdns
+  name: powerdns-recursor
   namespace: monitoring
   labels:
-    app: hydrogen-pdns
+    app: powerdns-recursor
 spec:
   type: ClusterIP
   ports:
@@ -35,14 +35,21 @@ spec:
 apiVersion: v1
 kind: Endpoints
 metadata:
-  name: hydrogen-pdns
+  name: powerdns-recursor
   namespace: monitoring
   labels:
-    app: hydrogen-pdns
+    app: powerdns-recursor
 subsets:
 - addresses:
   - ip: 172.21.42.1
     nodeName: hydrogen
+  ports:
+  - name: metrics
+    port: 8082
+    protocol: TCP
+- addresses:
+  - ip: 172.21.46.1
+    nodeName: iron
   ports:
   - name: metrics
     port: 8082
