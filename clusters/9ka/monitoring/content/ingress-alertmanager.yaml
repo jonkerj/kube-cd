@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+  name: alertmanager
+  namespace: monitoring
+spec:
+  rules:
+  - host: alertmanager.9ka.nl
+    http:
+      paths:
+      - backend:
+          service:
+            name: alertmanager-operated
+            port:
+              name: web
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - alertmanager.9ka.nl
+    secretName: alertmanager-tls

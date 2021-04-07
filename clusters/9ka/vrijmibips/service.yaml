@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vrijmibips
+  labels:
+    app: vrijmibips
+  namespace: vrijmibips
+spec:
+  selector:
+    app: vrijmibips
+  ports:
+    - name: metrics
+      protocol: TCP
+      port: 8000
+      targetPort: metrics

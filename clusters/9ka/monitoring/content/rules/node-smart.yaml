@@ -1,0 +1,49 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: node-smartmon
+  namespace: monitoring
+spec:
+  groups:
+  - name: node-smartmon
+    rules:
+    - alert: DiskTooHot
+      expr: smartmon_temperature_celsius_raw_value > 45
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: 'Disk {{ $labels.disk }} too hot on {{ $labels.node_name }}'
+        description: 'Disk {{ $labels.disk }} on {{ $labels.node_name }} is {{ $value }}'
+    - alert: DiskTooHot
+      expr: smartmon_temperature_celsius_raw_value > 55
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: 'Disk {{ $labels.disk }} too hot on {{ $labels.node_name }}'
+        description: 'Disk {{ $labels.disk }} on {{ $labels.node_name }} is {{ $value }}'
+    - alert: DiskReallocating
+      expr: rate(smartmon_reallocated_sector_ct_raw_value[1m]) > 0
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: 'Disk {{ $labels.disk }} on {{ $labels.node_name }} is reallocating sectors'
+        description: 'Disk {{ $labels.disk }} on {{ $labels.node_name }} is reallocating sectors'
+    - alert: DiskOfflineUncorrectable
+      expr: rate(smartmon_offline_uncorrectable_raw_value[1m]) > 0
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: 'Disk {{ $labels.disk }} on {{ $labels.node_name }} is putting sectors offline'
+        description: 'Disk {{ $labels.disk }} on {{ $labels.node_name }} is putting sectors offline'
+    - alert: DiskPendingSectors
+      expr: smartmon_current_pending_sector_raw_value > 0
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: 'Disk {{ $labels.disk }} on {{ $labels.node_name }} is having pending sectors'
+        description: 'Disk {{ $labels.disk }} on {{ $labels.node_name }} is having pending sectors'

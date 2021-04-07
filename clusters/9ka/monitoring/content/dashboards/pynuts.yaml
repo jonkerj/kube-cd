@@ -1,0 +1,471 @@
+apiVersion: v1
+data:
+  pynuts.json: "{\n  \"annotations\": {\n    \"list\": [\n      {\n        \"builtIn\"\
+    : 1,\n        \"datasource\": \"-- Grafana --\",\n        \"enable\": true,\n\
+    \        \"hide\": true,\n        \"iconColor\": \"rgba(0, 211, 255, 1)\",\n \
+    \       \"name\": \"Annotations & Alerts\",\n        \"type\": \"dashboard\"\n\
+    \      }\n    ]\n  },\n  \"editable\": true,\n  \"gnetId\": null,\n  \"graphTooltip\"\
+    : 0,\n  \"links\": [],\n  \"panels\": [\n    {\n      \"aliasColors\": {\n   \
+    \     \"energy\": \"yellow\",\n        \"in\": \"red\",\n        \"out\": \"dark-blue\"\
+    \n      },\n      \"bars\": false,\n      \"dashLength\": 10,\n      \"dashes\"\
+    : false,\n      \"datasource\": \"nuts\",\n      \"editable\": true,\n      \"\
+    error\": false,\n      \"fieldConfig\": {\n        \"defaults\": {\n         \
+    \ \"custom\": {}\n        },\n        \"overrides\": []\n      },\n      \"fill\"\
+    : 3,\n      \"fillGradient\": 0,\n      \"grid\": {},\n      \"gridPos\": {\n\
+    \        \"h\": 7,\n        \"w\": 24,\n        \"x\": 0,\n        \"y\": 0\n\
+    \      },\n      \"hiddenSeries\": false,\n      \"id\": 1,\n      \"interval\"\
+    : \"1h\",\n      \"isNew\": true,\n      \"legend\": {\n        \"alignAsTable\"\
+    : true,\n        \"avg\": true,\n        \"current\": true,\n        \"max\":\
+    \ false,\n        \"min\": false,\n        \"rightSide\": true,\n        \"show\"\
+    : true,\n        \"sideWidth\": null,\n        \"total\": false,\n        \"values\"\
+    : true\n      },\n      \"lines\": true,\n      \"linewidth\": 1,\n      \"links\"\
+    : [],\n      \"nullPointMode\": \"null as zero\",\n      \"options\": {\n    \
+    \    \"dataLinks\": []\n      },\n      \"percentage\": false,\n      \"pointradius\"\
+    : 5,\n      \"points\": false,\n      \"renderer\": \"flot\",\n      \"seriesOverrides\"\
+    : [\n        {\n          \"alias\": \"energy\",\n          \"yaxis\": 2\n   \
+    \     }\n      ],\n      \"spaceLength\": 10,\n      \"stack\": false,\n     \
+    \ \"steppedLine\": true,\n      \"targets\": [\n        {\n          \"alias\"\
+    : \"in\",\n          \"groupBy\": [\n            {\n              \"params\":\
+    \ [\n                \"$__interval\"\n              ],\n              \"type\"\
+    : \"time\"\n            },\n            {\n              \"params\": [\n     \
+    \           \"none\"\n              ],\n              \"type\": \"fill\"\n   \
+    \         }\n          ],\n          \"measurement\": \"heat\",\n          \"\
+    orderByTime\": \"ASC\",\n          \"policy\": \"default\",\n          \"refId\"\
+    : \"B\",\n          \"resultFormat\": \"time_series\",\n          \"select\":\
+    \ [\n            [\n              {\n                \"params\": [\n         \
+    \         \"t_in\"\n                ],\n                \"type\": \"field\"\n\
+    \              },\n              {\n                \"params\": [],\n        \
+    \        \"type\": \"mean\"\n              }\n            ]\n          ],\n  \
+    \        \"tags\": []\n        },\n        {\n          \"alias\": \"out\",\n\
+    \          \"groupBy\": [\n            {\n              \"params\": [\n      \
+    \          \"$__interval\"\n              ],\n              \"type\": \"time\"\
+    \n            },\n            {\n              \"params\": [\n               \
+    \ \"none\"\n              ],\n              \"type\": \"fill\"\n            }\n\
+    \          ],\n          \"measurement\": \"heat\",\n          \"orderByTime\"\
+    : \"ASC\",\n          \"policy\": \"default\",\n          \"refId\": \"C\",\n\
+    \          \"resultFormat\": \"time_series\",\n          \"select\": [\n     \
+    \       [\n              {\n                \"params\": [\n                  \"\
+    t_out\"\n                ],\n                \"type\": \"field\"\n           \
+    \   },\n              {\n                \"params\": [],\n                \"type\"\
+    : \"mean\"\n              }\n            ]\n          ],\n          \"tags\":\
+    \ []\n        },\n        {\n          \"alias\": \"energy\",\n          \"groupBy\"\
+    : [\n            {\n              \"params\": [\n                \"$__interval\"\
+    \n              ],\n              \"type\": \"time\"\n            },\n       \
+    \     {\n              \"params\": [\n                \"none\"\n             \
+    \ ],\n              \"type\": \"fill\"\n            }\n          ],\n        \
+    \  \"orderByTime\": \"ASC\",\n          \"policy\": \"default\",\n          \"\
+    query\": \"SELECT non_negative_derivative(max(\\\"energy\\\"), 1s) FROM \\\"heat\\\
+    \" WHERE $timeFilter GROUP BY time($__interval) fill(previous)\",\n          \"\
+    rawQuery\": true,\n          \"refId\": \"A\",\n          \"resultFormat\": \"\
+    time_series\",\n          \"select\": [\n            [\n              {\n    \
+    \            \"params\": [\n                  \"value\"\n                ],\n\
+    \                \"type\": \"field\"\n              },\n              {\n    \
+    \            \"params\": [],\n                \"type\": \"mean\"\n           \
+    \   }\n            ]\n          ],\n          \"tags\": []\n        }\n      ],\n\
+    \      \"thresholds\": [],\n      \"timeFrom\": null,\n      \"timeRegions\":\
+    \ [],\n      \"timeShift\": null,\n      \"title\": \"District Heat\",\n     \
+    \ \"tooltip\": {\n        \"msResolution\": false,\n        \"shared\": true,\n\
+    \        \"sort\": 0,\n        \"value_type\": \"cumulative\"\n      },\n    \
+    \  \"transparent\": true,\n      \"type\": \"graph\",\n      \"xaxis\": {\n  \
+    \      \"buckets\": null,\n        \"mode\": \"time\",\n        \"name\": null,\n\
+    \        \"show\": true,\n        \"values\": []\n      },\n      \"yaxes\": [\n\
+    \        {\n          \"format\": \"celsius\",\n          \"label\": \"\",\n \
+    \         \"logBase\": 1,\n          \"max\": null,\n          \"min\": 0,\n \
+    \         \"show\": true\n        },\n        {\n          \"format\": \"watt\"\
+    ,\n          \"label\": \"\",\n          \"logBase\": 1,\n          \"max\": null,\n\
+    \          \"min\": 0,\n          \"show\": true\n        }\n      ],\n      \"\
+    yaxis\": {\n        \"align\": false,\n        \"alignLevel\": null\n      }\n\
+    \    },\n    {\n      \"aliasColors\": {\n        \"day\": \"#BF1B00\",\n    \
+    \    \"night\": \"#629E51\",\n        \"total\": \"#2F575E\"\n      },\n     \
+    \ \"bars\": false,\n      \"dashLength\": 10,\n      \"dashes\": false,\n    \
+    \  \"datasource\": \"nuts\",\n      \"editable\": true,\n      \"error\": false,\n\
+    \      \"fieldConfig\": {\n        \"defaults\": {\n          \"custom\": {}\n\
+    \        },\n        \"overrides\": []\n      },\n      \"fill\": 5,\n      \"\
+    fillGradient\": 0,\n      \"grid\": {},\n      \"gridPos\": {\n        \"h\":\
+    \ 7,\n        \"w\": 24,\n        \"x\": 0,\n        \"y\": 7\n      },\n    \
+    \  \"hiddenSeries\": false,\n      \"id\": 2,\n      \"interval\": \"30s\",\n\
+    \      \"isNew\": true,\n      \"legend\": {\n        \"alignAsTable\": true,\n\
+    \        \"avg\": true,\n        \"current\": true,\n        \"hideEmpty\": false,\n\
+    \        \"hideZero\": false,\n        \"max\": true,\n        \"min\": false,\n\
+    \        \"rightSide\": true,\n        \"show\": true,\n        \"total\": false,\n\
+    \        \"values\": true\n      },\n      \"lines\": true,\n      \"linewidth\"\
+    : 1,\n      \"links\": [],\n      \"nullPointMode\": \"null\",\n      \"options\"\
+    : {\n        \"dataLinks\": []\n      },\n      \"percentage\": false,\n     \
+    \ \"pointradius\": 5,\n      \"points\": false,\n      \"renderer\": \"flot\"\
+    ,\n      \"seriesOverrides\": [],\n      \"spaceLength\": 10,\n      \"stack\"\
+    : false,\n      \"steppedLine\": true,\n      \"targets\": [\n        {\n    \
+    \      \"alias\": \"low\",\n          \"groupBy\": [\n            {\n        \
+    \      \"params\": [\n                \"\"\n              ],\n              \"\
+    type\": \"time\"\n            },\n            {\n              \"params\": [\n\
+    \                \"null\"\n              ],\n              \"type\": \"fill\"\n\
+    \            }\n          ],\n          \"orderByTime\": \"ASC\",\n          \"\
+    policy\": \"default\",\n          \"query\": \"SELECT non_negative_derivative(max(\\\
+    \"electricity_used_tariff_1\\\"), 1s) FROM \\\"power\\\" WHERE $timeFilter GROUP\
+    \ BY time($__interval) fill(linear)\",\n          \"rawQuery\": true,\n      \
+    \    \"refId\": \"A\",\n          \"resultFormat\": \"time_series\",\n       \
+    \   \"select\": [\n            [\n              {\n                \"params\"\
+    : [\n                  \"value\"\n                ],\n                \"type\"\
+    : \"field\"\n              },\n              {\n                \"params\": [],\n\
+    \                \"type\": \"mean\"\n              }\n            ]\n        \
+    \  ],\n          \"tags\": []\n        },\n        {\n          \"alias\": \"\
+    high\",\n          \"groupBy\": [\n            {\n              \"params\": [\n\
+    \                \"\"\n              ],\n              \"type\": \"time\"\n  \
+    \          },\n            {\n              \"params\": [\n                \"\
+    null\"\n              ],\n              \"type\": \"fill\"\n            }\n  \
+    \        ],\n          \"orderByTime\": \"ASC\",\n          \"policy\": \"default\"\
+    ,\n          \"query\": \"SELECT non_negative_derivative(max(\\\"electricity_used_tariff_2\\\
+    \"), 1s) FROM \\\"power\\\" WHERE $timeFilter GROUP BY time($__interval) fill(linear)\"\
+    ,\n          \"rawQuery\": true,\n          \"refId\": \"B\",\n          \"resultFormat\"\
+    : \"time_series\",\n          \"select\": [\n            [\n              {\n\
+    \                \"params\": [\n                  \"value\"\n                ],\n\
+    \                \"type\": \"field\"\n              },\n              {\n    \
+    \            \"params\": [],\n                \"type\": \"mean\"\n           \
+    \   }\n            ]\n          ],\n          \"tags\": []\n        }\n      ],\n\
+    \      \"thresholds\": [],\n      \"timeFrom\": null,\n      \"timeRegions\":\
+    \ [],\n      \"timeShift\": null,\n      \"title\": \"Electricity consumed\",\n\
+    \      \"tooltip\": {\n        \"msResolution\": false,\n        \"shared\": true,\n\
+    \        \"sort\": 0,\n        \"value_type\": \"cumulative\"\n      },\n    \
+    \  \"transparent\": true,\n      \"type\": \"graph\",\n      \"xaxis\": {\n  \
+    \      \"buckets\": null,\n        \"mode\": \"time\",\n        \"name\": null,\n\
+    \        \"show\": true,\n        \"values\": []\n      },\n      \"yaxes\": [\n\
+    \        {\n          \"format\": \"watt\",\n          \"label\": \"power\",\n\
+    \          \"logBase\": 1,\n          \"max\": null,\n          \"min\": null,\n\
+    \          \"show\": true\n        },\n        {\n          \"format\": \"short\"\
+    ,\n          \"label\": null,\n          \"logBase\": 1,\n          \"max\": null,\n\
+    \          \"min\": null,\n          \"show\": false\n        }\n      ],\n  \
+    \    \"yaxis\": {\n        \"align\": false,\n        \"alignLevel\": null\n \
+    \     }\n    },\n    {\n      \"aliasColors\": {\n        \"day\": \"#BF1B00\"\
+    ,\n        \"night\": \"#629E51\",\n        \"total\": \"#2F575E\"\n      },\n\
+    \      \"bars\": false,\n      \"dashLength\": 10,\n      \"dashes\": false,\n\
+    \      \"datasource\": \"nuts\",\n      \"description\": \"\",\n      \"editable\"\
+    : true,\n      \"error\": false,\n      \"fieldConfig\": {\n        \"defaults\"\
+    : {\n          \"custom\": {}\n        },\n        \"overrides\": []\n      },\n\
+    \      \"fill\": 5,\n      \"fillGradient\": 0,\n      \"grid\": {},\n      \"\
+    gridPos\": {\n        \"h\": 7,\n        \"w\": 24,\n        \"x\": 0,\n     \
+    \   \"y\": 14\n      },\n      \"hiddenSeries\": false,\n      \"id\": 6,\n  \
+    \    \"interval\": \"30s\",\n      \"isNew\": true,\n      \"legend\": {\n   \
+    \     \"alignAsTable\": true,\n        \"avg\": true,\n        \"current\": true,\n\
+    \        \"hideEmpty\": false,\n        \"hideZero\": false,\n        \"max\"\
+    : true,\n        \"min\": false,\n        \"rightSide\": true,\n        \"show\"\
+    : true,\n        \"total\": false,\n        \"values\": true\n      },\n     \
+    \ \"lines\": true,\n      \"linewidth\": 1,\n      \"links\": [],\n      \"nullPointMode\"\
+    : \"null\",\n      \"options\": {\n        \"dataLinks\": []\n      },\n     \
+    \ \"percentage\": false,\n      \"pointradius\": 5,\n      \"points\": false,\n\
+    \      \"renderer\": \"flot\",\n      \"seriesOverrides\": [],\n      \"spaceLength\"\
+    : 10,\n      \"stack\": false,\n      \"steppedLine\": true,\n      \"targets\"\
+    : [\n        {\n          \"alias\": \"low\",\n          \"groupBy\": [\n    \
+    \        {\n              \"params\": [\n                \"\"\n              ],\n\
+    \              \"type\": \"time\"\n            },\n            {\n           \
+    \   \"params\": [\n                \"null\"\n              ],\n              \"\
+    type\": \"fill\"\n            }\n          ],\n          \"orderByTime\": \"ASC\"\
+    ,\n          \"policy\": \"default\",\n          \"query\": \"SELECT non_negative_derivative(max(\\\
+    \"electricity_delivered_tariff_1\\\"), 1s) FROM \\\"power\\\" WHERE $timeFilter\
+    \ GROUP BY time($__interval) fill(linear)\",\n          \"rawQuery\": true,\n\
+    \          \"refId\": \"A\",\n          \"resultFormat\": \"time_series\",\n \
+    \         \"select\": [\n            [\n              {\n                \"params\"\
+    : [\n                  \"value\"\n                ],\n                \"type\"\
+    : \"field\"\n              },\n              {\n                \"params\": [],\n\
+    \                \"type\": \"mean\"\n              }\n            ]\n        \
+    \  ],\n          \"tags\": []\n        },\n        {\n          \"alias\": \"\
+    high\",\n          \"groupBy\": [\n            {\n              \"params\": [\n\
+    \                \"\"\n              ],\n              \"type\": \"time\"\n  \
+    \          },\n            {\n              \"params\": [\n                \"\
+    null\"\n              ],\n              \"type\": \"fill\"\n            }\n  \
+    \        ],\n          \"orderByTime\": \"ASC\",\n          \"policy\": \"default\"\
+    ,\n          \"query\": \"SELECT non_negative_derivative(max(\\\"electricity_delivered_tariff_2\\\
+    \"), 1s) FROM \\\"power\\\" WHERE $timeFilter GROUP BY time($__interval) fill(linear)\"\
+    ,\n          \"rawQuery\": true,\n          \"refId\": \"B\",\n          \"resultFormat\"\
+    : \"time_series\",\n          \"select\": [\n            [\n              {\n\
+    \                \"params\": [\n                  \"value\"\n                ],\n\
+    \                \"type\": \"field\"\n              },\n              {\n    \
+    \            \"params\": [],\n                \"type\": \"mean\"\n           \
+    \   }\n            ]\n          ],\n          \"tags\": []\n        }\n      ],\n\
+    \      \"thresholds\": [],\n      \"timeFrom\": null,\n      \"timeRegions\":\
+    \ [],\n      \"timeShift\": null,\n      \"title\": \"Electricity delivered\"\
+    ,\n      \"tooltip\": {\n        \"msResolution\": false,\n        \"shared\"\
+    : true,\n        \"sort\": 0,\n        \"value_type\": \"cumulative\"\n      },\n\
+    \      \"transparent\": true,\n      \"type\": \"graph\",\n      \"xaxis\": {\n\
+    \        \"buckets\": null,\n        \"mode\": \"time\",\n        \"name\": null,\n\
+    \        \"show\": true,\n        \"values\": []\n      },\n      \"yaxes\": [\n\
+    \        {\n          \"format\": \"watt\",\n          \"label\": \"power\",\n\
+    \          \"logBase\": 1,\n          \"max\": null,\n          \"min\": null,\n\
+    \          \"show\": true\n        },\n        {\n          \"format\": \"short\"\
+    ,\n          \"label\": null,\n          \"logBase\": 1,\n          \"max\": null,\n\
+    \          \"min\": null,\n          \"show\": false\n        }\n      ],\n  \
+    \    \"yaxis\": {\n        \"align\": false,\n        \"alignLevel\": null\n \
+    \     }\n    },\n    {\n      \"aliasColors\": {\n        \"water\": \"#447EBC\"\
+    \n      },\n      \"bars\": false,\n      \"dashLength\": 10,\n      \"dashes\"\
+    : false,\n      \"datasource\": \"nuts\",\n      \"editable\": true,\n      \"\
+    error\": false,\n      \"fieldConfig\": {\n        \"defaults\": {\n         \
+    \ \"custom\": {}\n        },\n        \"overrides\": []\n      },\n      \"fill\"\
+    : 1,\n      \"fillGradient\": 0,\n      \"grid\": {},\n      \"gridPos\": {\n\
+    \        \"h\": 7,\n        \"w\": 24,\n        \"x\": 0,\n        \"y\": 21\n\
+    \      },\n      \"hiddenSeries\": false,\n      \"id\": 3,\n      \"interval\"\
+    : \"\",\n      \"isNew\": true,\n      \"legend\": {\n        \"alignAsTable\"\
+    : true,\n        \"avg\": true,\n        \"current\": true,\n        \"max\":\
+    \ true,\n        \"min\": false,\n        \"rightSide\": true,\n        \"show\"\
+    : true,\n        \"total\": false,\n        \"values\": true\n      },\n     \
+    \ \"lines\": true,\n      \"linewidth\": 1,\n      \"links\": [],\n      \"nullPointMode\"\
+    : \"null as zero\",\n      \"options\": {\n        \"dataLinks\": []\n      },\n\
+    \      \"percentage\": false,\n      \"pointradius\": 5,\n      \"points\": false,\n\
+    \      \"renderer\": \"flot\",\n      \"seriesOverrides\": [],\n      \"spaceLength\"\
+    : 10,\n      \"stack\": false,\n      \"steppedLine\": true,\n      \"targets\"\
+    : [\n        {\n          \"alias\": \"water\",\n          \"groupBy\": [\n  \
+    \          {\n              \"params\": [\n                \"\"\n            \
+    \  ],\n              \"type\": \"time\"\n            },\n            {\n     \
+    \         \"params\": [\n                \"null\"\n              ],\n        \
+    \      \"type\": \"fill\"\n            }\n          ],\n          \"orderByTime\"\
+    : \"ASC\",\n          \"policy\": \"default\",\n          \"query\": \"SELECT\
+    \ 3600 * non_negative_derivative(mean(\\\"volume\\\"), 1s) * COUNT(\\\"volume\\\
+    \") / COUNT(\\\"volume\\\") FROM \\\"water\\\" WHERE $timeFilter GROUP BY time($__interval)\
+    \ fill(none)\",\n          \"rawQuery\": true,\n          \"refId\": \"A\",\n\
+    \          \"resultFormat\": \"time_series\",\n          \"select\": [\n     \
+    \       [\n              {\n                \"params\": [\n                  \"\
+    value\"\n                ],\n                \"type\": \"field\"\n           \
+    \   },\n              {\n                \"params\": [],\n                \"type\"\
+    : \"mean\"\n              }\n            ]\n          ],\n          \"tags\":\
+    \ []\n        }\n      ],\n      \"thresholds\": [],\n      \"timeFrom\": null,\n\
+    \      \"timeRegions\": [],\n      \"timeShift\": null,\n      \"title\": \"Water\"\
+    ,\n      \"tooltip\": {\n        \"msResolution\": false,\n        \"shared\"\
+    : true,\n        \"sort\": 0,\n        \"value_type\": \"cumulative\"\n      },\n\
+    \      \"transparent\": true,\n      \"type\": \"graph\",\n      \"xaxis\": {\n\
+    \        \"buckets\": null,\n        \"mode\": \"time\",\n        \"name\": null,\n\
+    \        \"show\": true,\n        \"values\": []\n      },\n      \"yaxes\": [\n\
+    \        {\n          \"format\": \"litreh\",\n          \"label\": null,\n  \
+    \        \"logBase\": 1,\n          \"max\": null,\n          \"min\": 0,\n  \
+    \        \"show\": true\n        },\n        {\n          \"format\": \"short\"\
+    ,\n          \"label\": null,\n          \"logBase\": 1,\n          \"max\": null,\n\
+    \          \"min\": null,\n          \"show\": true\n        }\n      ],\n   \
+    \   \"yaxis\": {\n        \"align\": false,\n        \"alignLevel\": null\n  \
+    \    }\n    },\n    {\n      \"aliasColors\": {\n        \"used_t1\": \"light-green\"\
+    ,\n        \"used_t2\": \"light-red\",\n        \"used_total\": \"dark-purple\"\
+    \n      },\n      \"bars\": true,\n      \"dashLength\": 10,\n      \"dashes\"\
+    : false,\n      \"datasource\": \"nuts\",\n      \"description\": \"\",\n    \
+    \  \"fieldConfig\": {\n        \"defaults\": {\n          \"custom\": {}\n   \
+    \     },\n        \"overrides\": []\n      },\n      \"fill\": 1,\n      \"fillGradient\"\
+    : 0,\n      \"gridPos\": {\n        \"h\": 6,\n        \"w\": 24,\n        \"\
+    x\": 0,\n        \"y\": 28\n      },\n      \"hiddenSeries\": false,\n      \"\
+    id\": 5,\n      \"interval\": \"\",\n      \"legend\": {\n        \"alignAsTable\"\
+    : true,\n        \"avg\": true,\n        \"current\": false,\n        \"max\"\
+    : false,\n        \"min\": false,\n        \"rightSide\": true,\n        \"show\"\
+    : true,\n        \"total\": false,\n        \"values\": true\n      },\n     \
+    \ \"lines\": false,\n      \"linewidth\": 1,\n      \"nullPointMode\": \"null\"\
+    ,\n      \"options\": {\n        \"dataLinks\": []\n      },\n      \"percentage\"\
+    : false,\n      \"pluginVersion\": \"6.6.2\",\n      \"pointradius\": 2,\n   \
+    \   \"points\": false,\n      \"renderer\": \"flot\",\n      \"seriesOverrides\"\
+    : [\n        {\n          \"$$hashKey\": \"object:277\",\n          \"alias\"\
+    : \"total\",\n          \"hiddenSeries\": true,\n          \"stack\": false\n\
+    \        }\n      ],\n      \"spaceLength\": 10,\n      \"stack\": true,\n   \
+    \   \"steppedLine\": false,\n      \"targets\": [\n        {\n          \"alias\"\
+    : \"low\",\n          \"groupBy\": [\n            {\n              \"params\"\
+    : [\n                \"1d\"\n              ],\n              \"type\": \"time\"\
+    \n            }\n          ],\n          \"measurement\": \"power\",\n       \
+    \   \"orderByTime\": \"ASC\",\n          \"policy\": \"default\",\n          \"\
+    query\": \"SELECT difference(mean(\\\"electricity_used_tariff_1\\\"))  / 3600000\
+    \ FROM \\\"power\\\" WHERE $timeFilter GROUP BY time(1d) fill(linear)\",\n   \
+    \       \"rawQuery\": false,\n          \"refId\": \"A\",\n          \"resultFormat\"\
+    : \"time_series\",\n          \"select\": [\n            [\n              {\n\
+    \                \"params\": [\n                  \"electricity_used_tariff_1\"\
+    \n                ],\n                \"type\": \"field\"\n              },\n\
+    \              {\n                \"params\": [],\n                \"type\": \"\
+    mean\"\n              },\n              {\n                \"params\": [],\n \
+    \               \"type\": \"difference\"\n              },\n              {\n\
+    \                \"params\": [\n                  \" / 3600000\"\n           \
+    \     ],\n                \"type\": \"math\"\n              }\n            ]\n\
+    \          ],\n          \"tags\": [],\n          \"tz\": \"Europe/Amsterdam\"\
+    \n        },\n        {\n          \"alias\": \"high\",\n          \"groupBy\"\
+    : [\n            {\n              \"params\": [\n                \"1d\"\n    \
+    \          ],\n              \"type\": \"time\"\n            }\n          ],\n\
+    \          \"measurement\": \"power\",\n          \"orderByTime\": \"ASC\",\n\
+    \          \"policy\": \"default\",\n          \"query\": \"SELECT difference(mean(\\\
+    \"electricity_used_tariff_1\\\"))  / 3600000 FROM \\\"power\\\" WHERE $timeFilter\
+    \ GROUP BY time(1d) fill(linear)\",\n          \"rawQuery\": false,\n        \
+    \  \"refId\": \"B\",\n          \"resultFormat\": \"time_series\",\n         \
+    \ \"select\": [\n            [\n              {\n                \"params\": [\n\
+    \                  \"electricity_used_tariff_2\"\n                ],\n       \
+    \         \"type\": \"field\"\n              },\n              {\n           \
+    \     \"params\": [],\n                \"type\": \"mean\"\n              },\n\
+    \              {\n                \"params\": [],\n                \"type\": \"\
+    difference\"\n              },\n              {\n                \"params\": [\n\
+    \                  \" / 3600000\"\n                ],\n                \"type\"\
+    : \"math\"\n              }\n            ]\n          ],\n          \"tags\":\
+    \ [],\n          \"tz\": \"Europe/Amsterdam\"\n        },\n        {\n       \
+    \   \"alias\": \"total\",\n          \"groupBy\": [\n            {\n         \
+    \     \"params\": [\n                \"1d\"\n              ],\n              \"\
+    type\": \"time\"\n            }\n          ],\n          \"measurement\": \"power\"\
+    ,\n          \"orderByTime\": \"ASC\",\n          \"policy\": \"default\",\n \
+    \         \"query\": \"SELECT (difference(mean(\\\"electricity_used_tariff_1\\\
+    \")) + difference(mean(\\\"electricity_used_tariff_2\\\")))  / 3600000 FROM \\\
+    \"power\\\" WHERE $timeFilter GROUP BY time(1d) tz('Europe/Amsterdam')\",\n  \
+    \        \"rawQuery\": false,\n          \"refId\": \"C\",\n          \"resultFormat\"\
+    : \"time_series\",\n          \"select\": [\n            [\n              {\n\
+    \                \"params\": [\n                  \"electricity_used_tariff_2\"\
+    \n                ],\n                \"type\": \"field\"\n              },\n\
+    \              {\n                \"params\": [],\n                \"type\": \"\
+    mean\"\n              },\n              {\n                \"params\": [],\n \
+    \               \"type\": \"difference\"\n              },\n              {\n\
+    \                \"params\": [\n                  \" / 3600000\"\n           \
+    \     ],\n                \"type\": \"math\"\n              }\n            ]\n\
+    \          ],\n          \"tags\": [],\n          \"tz\": \"Europe/Amsterdam\"\
+    \n        }\n      ],\n      \"thresholds\": [],\n      \"timeFrom\": null,\n\
+    \      \"timeRegions\": [],\n      \"timeShift\": null,\n      \"title\": \"Daily\
+    \ electricity consumption\",\n      \"tooltip\": {\n        \"shared\": true,\n\
+    \        \"sort\": 0,\n        \"value_type\": \"individual\"\n      },\n    \
+    \  \"type\": \"graph\",\n      \"xaxis\": {\n        \"buckets\": null,\n    \
+    \    \"mode\": \"time\",\n        \"name\": null,\n        \"show\": true,\n \
+    \       \"values\": []\n      },\n      \"yaxes\": [\n        {\n          \"\
+    $$hashKey\": \"object:286\",\n          \"format\": \"kwatth\",\n          \"\
+    label\": null,\n          \"logBase\": 1,\n          \"max\": null,\n        \
+    \  \"min\": \"0\",\n          \"show\": true\n        },\n        {\n        \
+    \  \"$$hashKey\": \"object:287\",\n          \"format\": \"short\",\n        \
+    \  \"label\": null,\n          \"logBase\": 1,\n          \"max\": null,\n   \
+    \       \"min\": null,\n          \"show\": true\n        }\n      ],\n      \"\
+    yaxis\": {\n        \"align\": false,\n        \"alignLevel\": null\n      }\n\
+    \    },\n    {\n      \"aliasColors\": {\n        \"used_t1\": \"light-green\"\
+    ,\n        \"used_t2\": \"light-red\",\n        \"used_total\": \"dark-purple\"\
+    \n      },\n      \"bars\": true,\n      \"dashLength\": 10,\n      \"dashes\"\
+    : false,\n      \"datasource\": \"nuts\",\n      \"fieldConfig\": {\n        \"\
+    defaults\": {\n          \"custom\": {}\n        },\n        \"overrides\": []\n\
+    \      },\n      \"fill\": 1,\n      \"fillGradient\": 0,\n      \"gridPos\":\
+    \ {\n        \"h\": 6,\n        \"w\": 24,\n        \"x\": 0,\n        \"y\":\
+    \ 34\n      },\n      \"hiddenSeries\": false,\n      \"id\": 7,\n      \"interval\"\
+    : \"\",\n      \"legend\": {\n        \"alignAsTable\": true,\n        \"avg\"\
+    : true,\n        \"current\": false,\n        \"max\": false,\n        \"min\"\
+    : false,\n        \"rightSide\": true,\n        \"show\": true,\n        \"total\"\
+    : false,\n        \"values\": true\n      },\n      \"lines\": false,\n      \"\
+    linewidth\": 1,\n      \"nullPointMode\": \"null\",\n      \"options\": {\n  \
+    \      \"dataLinks\": []\n      },\n      \"percentage\": false,\n      \"pluginVersion\"\
+    : \"6.6.2\",\n      \"pointradius\": 2,\n      \"points\": false,\n      \"renderer\"\
+    : \"flot\",\n      \"seriesOverrides\": [\n        {\n          \"$$hashKey\"\
+    : \"object:534\",\n          \"alias\": \"total\",\n          \"hiddenSeries\"\
+    : true,\n          \"stack\": false\n        }\n      ],\n      \"spaceLength\"\
+    : 10,\n      \"stack\": true,\n      \"steppedLine\": false,\n      \"targets\"\
+    : [\n        {\n          \"alias\": \"low\",\n          \"groupBy\": [\n    \
+    \        {\n              \"params\": [\n                \"1d\"\n            \
+    \  ],\n              \"type\": \"time\"\n            }\n          ],\n       \
+    \   \"measurement\": \"power\",\n          \"orderByTime\": \"ASC\",\n       \
+    \   \"policy\": \"default\",\n          \"query\": \"SELECT difference(mean(\\\
+    \"electricity_used_tariff_1\\\"))  / 3600000 FROM \\\"power\\\" WHERE $timeFilter\
+    \ GROUP BY time(1d) fill(linear)\",\n          \"rawQuery\": false,\n        \
+    \  \"refId\": \"A\",\n          \"resultFormat\": \"time_series\",\n         \
+    \ \"select\": [\n            [\n              {\n                \"params\": [\n\
+    \                  \"electricity_delivered_tariff_1\"\n                ],\n  \
+    \              \"type\": \"field\"\n              },\n              {\n      \
+    \          \"params\": [],\n                \"type\": \"mean\"\n             \
+    \ },\n              {\n                \"params\": [],\n                \"type\"\
+    : \"difference\"\n              },\n              {\n                \"params\"\
+    : [\n                  \" / 3600000\"\n                ],\n                \"\
+    type\": \"math\"\n              }\n            ]\n          ],\n          \"tags\"\
+    : [],\n          \"tz\": \"Europe/Amsterdam\"\n        },\n        {\n       \
+    \   \"alias\": \"high\",\n          \"groupBy\": [\n            {\n          \
+    \    \"params\": [\n                \"1d\"\n              ],\n              \"\
+    type\": \"time\"\n            }\n          ],\n          \"measurement\": \"power\"\
+    ,\n          \"orderByTime\": \"ASC\",\n          \"policy\": \"default\",\n \
+    \         \"query\": \"SELECT difference(mean(\\\"electricity_used_tariff_1\\\"\
+    ))  / 3600000 FROM \\\"power\\\" WHERE $timeFilter GROUP BY time(1d) fill(linear)\"\
+    ,\n          \"rawQuery\": false,\n          \"refId\": \"B\",\n          \"resultFormat\"\
+    : \"time_series\",\n          \"select\": [\n            [\n              {\n\
+    \                \"params\": [\n                  \"electricity_delivered_tariff_2\"\
+    \n                ],\n                \"type\": \"field\"\n              },\n\
+    \              {\n                \"params\": [],\n                \"type\": \"\
+    mean\"\n              },\n              {\n                \"params\": [],\n \
+    \               \"type\": \"difference\"\n              },\n              {\n\
+    \                \"params\": [\n                  \" / 3600000\"\n           \
+    \     ],\n                \"type\": \"math\"\n              }\n            ]\n\
+    \          ],\n          \"tags\": [],\n          \"tz\": \"Europe/Amsterdam\"\
+    \n        },\n        {\n          \"alias\": \"total\",\n          \"groupBy\"\
+    : [\n            {\n              \"params\": [\n                \"1d\"\n    \
+    \          ],\n              \"type\": \"time\"\n            }\n          ],\n\
+    \          \"measurement\": \"power\",\n          \"orderByTime\": \"ASC\",\n\
+    \          \"policy\": \"default\",\n          \"query\": \"SELECT (difference(mean(\\\
+    \"electricity_delivered_tariff_1\\\")) + difference(mean(\\\"electricity_delivered_tariff_2\\\
+    \")))  / 3600000 FROM \\\"power\\\" WHERE $timeFilter GROUP BY time(1d) fill(linear)\"\
+    ,\n          \"rawQuery\": false,\n          \"refId\": \"C\",\n          \"resultFormat\"\
+    : \"time_series\",\n          \"select\": [\n            [\n              {\n\
+    \                \"params\": [\n                  \"electricity_used_tariff_2\"\
+    \n                ],\n                \"type\": \"field\"\n              },\n\
+    \              {\n                \"params\": [],\n                \"type\": \"\
+    mean\"\n              },\n              {\n                \"params\": [],\n \
+    \               \"type\": \"difference\"\n              },\n              {\n\
+    \                \"params\": [\n                  \" / 3600000\"\n           \
+    \     ],\n                \"type\": \"math\"\n              }\n            ]\n\
+    \          ],\n          \"tags\": [],\n          \"tz\": \"Europe/Amsterdam\"\
+    \n        }\n      ],\n      \"thresholds\": [],\n      \"timeFrom\": null,\n\
+    \      \"timeRegions\": [],\n      \"timeShift\": null,\n      \"title\": \"Daily\
+    \ electricity delivery\",\n      \"tooltip\": {\n        \"shared\": true,\n \
+    \       \"sort\": 0,\n        \"value_type\": \"individual\"\n      },\n     \
+    \ \"type\": \"graph\",\n      \"xaxis\": {\n        \"buckets\": null,\n     \
+    \   \"mode\": \"time\",\n        \"name\": null,\n        \"show\": true,\n  \
+    \      \"values\": []\n      },\n      \"yaxes\": [\n        {\n          \"$$hashKey\"\
+    : \"object:543\",\n          \"format\": \"kwatth\",\n          \"label\": null,\n\
+    \          \"logBase\": 1,\n          \"max\": null,\n          \"min\": \"0\"\
+    ,\n          \"show\": true\n        },\n        {\n          \"$$hashKey\": \"\
+    object:544\",\n          \"format\": \"short\",\n          \"label\": null,\n\
+    \          \"logBase\": 1,\n          \"max\": null,\n          \"min\": null,\n\
+    \          \"show\": true\n        }\n      ],\n      \"yaxis\": {\n        \"\
+    align\": false,\n        \"alignLevel\": null\n      }\n    },\n    {\n      \"\
+    aliasColors\": {\n        \"used_t1\": \"light-green\",\n        \"used_t2\":\
+    \ \"light-red\",\n        \"used_total\": \"dark-purple\"\n      },\n      \"\
+    bars\": true,\n      \"dashLength\": 10,\n      \"dashes\": false,\n      \"datasource\"\
+    : \"solar\",\n      \"fieldConfig\": {\n        \"defaults\": {\n          \"\
+    custom\": {}\n        },\n        \"overrides\": []\n      },\n      \"fill\"\
+    : 1,\n      \"fillGradient\": 0,\n      \"gridPos\": {\n        \"h\": 6,\n  \
+    \      \"w\": 24,\n        \"x\": 0,\n        \"y\": 40\n      },\n      \"hiddenSeries\"\
+    : false,\n      \"id\": 8,\n      \"interval\": \"\",\n      \"legend\": {\n \
+    \       \"alignAsTable\": true,\n        \"avg\": true,\n        \"current\":\
+    \ false,\n        \"max\": false,\n        \"min\": false,\n        \"rightSide\"\
+    : true,\n        \"show\": true,\n        \"total\": false,\n        \"values\"\
+    : true\n      },\n      \"lines\": false,\n      \"linewidth\": 1,\n      \"nullPointMode\"\
+    : \"null\",\n      \"options\": {\n        \"dataLinks\": []\n      },\n     \
+    \ \"percentage\": false,\n      \"pluginVersion\": \"6.6.2\",\n      \"pointradius\"\
+    : 2,\n      \"points\": false,\n      \"renderer\": \"flot\",\n      \"seriesOverrides\"\
+    : [\n        {\n          \"$$hashKey\": \"object:749\",\n          \"alias\"\
+    : \"total\",\n          \"hiddenSeries\": true,\n          \"stack\": false\n\
+    \        }\n      ],\n      \"spaceLength\": 10,\n      \"stack\": true,\n   \
+    \   \"steppedLine\": false,\n      \"targets\": [\n        {\n          \"alias\"\
+    : \"solar\",\n          \"groupBy\": [\n            {\n              \"params\"\
+    : [\n                \"1d\"\n              ],\n              \"type\": \"time\"\
+    \n            }\n          ],\n          \"measurement\": \"sma\",\n         \
+    \ \"orderByTime\": \"ASC\",\n          \"policy\": \"default\",\n          \"\
+    query\": \"SELECT difference(mean(\\\"electricity_used_tariff_1\\\"))  / 3600000\
+    \ FROM \\\"power\\\" WHERE $timeFilter GROUP BY time(1d) fill(linear)\",\n   \
+    \       \"rawQuery\": false,\n          \"refId\": \"A\",\n          \"resultFormat\"\
+    : \"time_series\",\n          \"select\": [\n            [\n              {\n\
+    \                \"params\": [\n                  \"ac_total_yield\"\n       \
+    \         ],\n                \"type\": \"field\"\n              },\n        \
+    \      {\n                \"params\": [],\n                \"type\": \"mean\"\n\
+    \              },\n              {\n                \"params\": [],\n        \
+    \        \"type\": \"difference\"\n              },\n              {\n       \
+    \         \"params\": [\n                  \"/3600000\"\n                ],\n\
+    \                \"type\": \"math\"\n              }\n            ]\n        \
+    \  ],\n          \"tags\": [],\n          \"tz\": \"Europe/Amsterdam\"\n     \
+    \   }\n      ],\n      \"thresholds\": [],\n      \"timeFrom\": null,\n      \"\
+    timeRegions\": [],\n      \"timeShift\": null,\n      \"title\": \"Daily electricity\
+    \ produced\",\n      \"tooltip\": {\n        \"shared\": true,\n        \"sort\"\
+    : 0,\n        \"value_type\": \"individual\"\n      },\n      \"type\": \"graph\"\
+    ,\n      \"xaxis\": {\n        \"buckets\": null,\n        \"mode\": \"time\"\
+    ,\n        \"name\": null,\n        \"show\": true,\n        \"values\": []\n\
+    \      },\n      \"yaxes\": [\n        {\n          \"$$hashKey\": \"object:758\"\
+    ,\n          \"format\": \"kwatth\",\n          \"label\": null,\n          \"\
+    logBase\": 1,\n          \"max\": null,\n          \"min\": \"0\",\n         \
+    \ \"show\": true\n        },\n        {\n          \"$$hashKey\": \"object:759\"\
+    ,\n          \"format\": \"short\",\n          \"label\": null,\n          \"\
+    logBase\": 1,\n          \"max\": null,\n          \"min\": null,\n          \"\
+    show\": true\n        }\n      ],\n      \"yaxis\": {\n        \"align\": false,\n\
+    \        \"alignLevel\": null\n      }\n    }\n  ],\n  \"refresh\": \"1m\",\n\
+    \  \"schemaVersion\": 25,\n  \"style\": \"dark\",\n  \"tags\": [],\n  \"templating\"\
+    : {\n    \"list\": []\n  },\n  \"time\": {\n    \"from\": \"now-30d\",\n    \"\
+    to\": \"now\"\n  },\n  \"timepicker\": {\n    \"refresh_intervals\": [\n     \
+    \ \"5s\",\n      \"10s\",\n      \"30s\",\n      \"1m\",\n      \"5m\",\n    \
+    \  \"15m\",\n      \"30m\",\n      \"1h\",\n      \"2h\",\n      \"1d\"\n    ],\n\
+    \    \"time_options\": [\n      \"5m\",\n      \"15m\",\n      \"1h\",\n     \
+    \ \"6h\",\n      \"12h\",\n      \"24h\",\n      \"2d\",\n      \"7d\",\n    \
+    \  \"30d\"\n    ]\n  },\n  \"timezone\": \"browser\",\n  \"title\": \"PyNuts\"\
+    ,\n  \"uid\": \"000000001\",\n  \"version\": 1\n}\n"
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: '1'
+  name: nuts-dashboard
+  namespace: monitoring
+

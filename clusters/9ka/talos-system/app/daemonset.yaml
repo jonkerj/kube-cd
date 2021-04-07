@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: talos-controller-manager
+  namespace: talos-system
+  labels:
+    app: talos-controller-manager
+spec:
+  selector:
+    matchLabels:
+      app: talos-controller-manager
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+      labels:
+        app: talos-controller-manager
+    spec:
+      containers:
+      - name: talos-controller-manager
+        image: jonkerj/talos-controller-manager:fix-ghcr
+        env:
+        - name: TALOS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: talos-token
+              key: token
+      serviceAccount: talos-controller-manager
+      serviceAccountName: talos-controller-manager
+      nodeSelector:
+        node-role.kubernetes.io/master: ""
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master
+        operator: Exists
