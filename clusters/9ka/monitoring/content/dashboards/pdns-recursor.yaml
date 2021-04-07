@@ -24,8 +24,7 @@ data:
       "editable": true,
       "gnetId": null,
       "graphTooltip": 0,
-      "id": 23,
-      "iteration": 1606828829381,
+      "iteration": 1617818969322,
       "links": [],
       "panels": [
         {
@@ -66,7 +65,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.1",
+          "pluginVersion": "7.4.1",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -76,13 +75,13 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(pdns_recursor_dnssec_result_secure{job=\"$job\"}[10m])",
+              "expr": "irate(pdns_recursor_dnssec_result_secure{node_name=\"$node\"}[10m])",
               "interval": "300s",
               "legendFormat": "secure",
               "refId": "A"
             },
             {
-              "expr": "irate(pdns_recursor_dnssec_result_insecure{job=\"$job\"}[10m])",
+              "expr": "irate(pdns_recursor_dnssec_result_insecure{node_name=\"$node\"}[10m])",
               "interval": "300s",
               "legendFormat": "insecure",
               "refId": "B"
@@ -126,6 +125,7 @@ data:
           },
           "yaxes": [
             {
+              "$$hashKey": "object:255",
               "format": "reqps",
               "label": null,
               "logBase": 1,
@@ -134,6 +134,7 @@ data:
               "show": true
             },
             {
+              "$$hashKey": "object:256",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -185,7 +186,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.1",
+          "pluginVersion": "7.4.1",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -195,31 +196,31 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(pdns_recursor_all_outqueries{job=\"$job\"}[10m])",
+              "expr": "irate(pdns_recursor_all_outqueries{node_name=\"$node\"}[10m])",
               "interval": "300s",
               "legendFormat": "All",
               "refId": "D"
             },
             {
-              "expr": "irate(pdns_recursor_tcp_outqueries{job=\"$job\"}[10m])",
+              "expr": "irate(pdns_recursor_tcp_outqueries{node_name=\"$node\"}[10m])",
               "interval": "300s",
               "legendFormat": "TCP",
               "refId": "A"
             },
             {
-              "expr": "irate(pdns_recursor_outgoing4_timeouts{job=\"$job\"}[10m])",
+              "expr": "irate(pdns_recursor_outgoing4_timeouts{node_name=\"$node\"}[10m])",
               "interval": "",
               "legendFormat": "IPv4 timeout",
               "refId": "B"
             },
             {
-              "expr": "irate(pdns_recursor_outgoing6_timeouts{job=\"$job\"}[10m])",
+              "expr": "irate(pdns_recursor_outgoing6_timeouts{node_name=\"$node\"}[10m])",
               "interval": "",
               "legendFormat": "IPv6 timeout",
               "refId": "C"
             },
             {
-              "expr": "irate(pdns_recursor_throttled_out{job=\"$job\"}[10m])",
+              "expr": "irate(pdns_recursor_throttled_out{node_name=\"$node\"}[10m])",
               "interval": "",
               "legendFormat": "Throttled",
               "refId": "E"
@@ -245,6 +246,7 @@ data:
           },
           "yaxes": [
             {
+              "$$hashKey": "object:336",
               "format": "reqps",
               "label": null,
               "logBase": 1,
@@ -253,6 +255,7 @@ data:
               "show": true
             },
             {
+              "$$hashKey": "object:337",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -305,12 +308,13 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.1",
+          "pluginVersion": "7.4.1",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [
             {
+              "$$hashKey": "object:417",
               "alias": "entries",
               "yaxis": 2
             }
@@ -320,19 +324,19 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(pdns_recursor_cache_hits{job=\"$job\"}[10m])",
+              "expr": "irate(pdns_recursor_cache_hits{node_name=\"$node\"}[10m])",
               "interval": "300s",
               "legendFormat": "hits",
               "refId": "A"
             },
             {
-              "expr": "irate(pdns_recursor_cache_misses{job=\"$job\"}[10m])",
+              "expr": "irate(pdns_recursor_cache_misses{node_name=\"$node\"}[10m])",
               "interval": "300s",
               "legendFormat": "misses",
               "refId": "B"
             },
             {
-              "expr": "pdns_recursor_cache_entries{job=\"$job\"}",
+              "expr": "pdns_recursor_cache_entries{node_name=\"$node\"}",
               "interval": "300s",
               "legendFormat": "entries",
               "refId": "C"
@@ -358,6 +362,7 @@ data:
           },
           "yaxes": [
             {
+              "$$hashKey": "object:424",
               "format": "reqps",
               "label": null,
               "logBase": 1,
@@ -366,6 +371,7 @@ data:
               "show": true
             },
             {
+              "$$hashKey": "object:425",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -417,7 +423,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.1",
+          "pluginVersion": "7.4.1",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -427,49 +433,49 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(pdns_recursor_over_capacity_drops{job=\"$job\"}[10m])",
+              "expr": "irate(pdns_recursor_over_capacity_drops{node_name=\"$node\"}[10m])",
               "interval": "300s",
               "legendFormat": "capacity drops",
               "refId": "H"
             },
             {
-              "expr": "irate(pdns_recursor_policy_drops{job=\"$job\"}[10m])",
+              "expr": "irate(pdns_recursor_policy_drops{node_name=\"$node\"}[10m])",
               "interval": "300s",
               "legendFormat": "policy drops",
               "refId": "G"
             },
             {
-              "expr": "irate(pdns_recursor_packetcache_hits{job=\"$job\"}[10m])",
+              "expr": "irate(pdns_recursor_packetcache_hits{node_name=\"$node\"}[10m])",
               "interval": "300s",
               "legendFormat": "packet cache",
               "refId": "F"
             },
             {
-              "expr": "irate(pdns_recursor_answers0_1{job=\"$job\"}[10m])",
+              "expr": "irate(pdns_recursor_answers0_1{node_name=\"$node\"}[10m])",
               "interval": "300s",
               "legendFormat": "< 1ms",
               "refId": "D"
             },
             {
-              "expr": "irate(pdns_recursor_answers1_10{job=\"$job\"}[10m])",
+              "expr": "irate(pdns_recursor_answers1_10{node_name=\"$node\"}[10m])",
               "interval": "300s",
               "legendFormat": "1 - 10ms",
               "refId": "A"
             },
             {
-              "expr": "irate(pdns_recursor_answers10_100{job=\"$job\"}[10m])",
+              "expr": "irate(pdns_recursor_answers10_100{node_name=\"$node\"}[10m])",
               "interval": "300s",
               "legendFormat": "10 - 100ms",
               "refId": "B"
             },
             {
-              "expr": "irate(pdns_recursor_answers100_1000{job=\"$job\"}[10m])",
+              "expr": "irate(pdns_recursor_answers100_1000{node_name=\"$node\"}[10m])",
               "interval": "300s",
               "legendFormat": "100 - 1000ms",
               "refId": "C"
             },
             {
-              "expr": "irate(pdns_recursor_answers_slow{job=\"$job\"}[10m])",
+              "expr": "irate(pdns_recursor_answers_slow{node_name=\"$node\"}[10m])",
               "interval": "300s",
               "legendFormat": "> 1000ms",
               "refId": "E"
@@ -495,6 +501,7 @@ data:
           },
           "yaxes": [
             {
+              "$$hashKey": "object:505",
               "format": "reqps",
               "label": null,
               "logBase": 1,
@@ -503,6 +510,7 @@ data:
               "show": true
             },
             {
+              "$$hashKey": "object:506",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -517,7 +525,7 @@ data:
           }
         }
       ],
-      "schemaVersion": 26,
+      "schemaVersion": 27,
       "style": "dark",
       "tags": [],
       "templating": {
@@ -526,25 +534,24 @@ data:
             "allValue": null,
             "current": {
               "selected": true,
-              "text": "lithium-pdns",
-              "value": "lithium-pdns"
+              "text": "hydrogen",
+              "value": "hydrogen"
             },
             "datasource": "Prometheus",
-            "definition": "label_values(pdns_recursor_cache_entries, job)",
+            "definition": "label_values(pdns_recursor_uptime, node_name)",
+            "description": null,
+            "error": null,
             "hide": 0,
             "includeAll": false,
             "label": null,
             "multi": false,
-            "name": "job",
-            "options": [
-              {
-                "selected": true,
-                "text": "lithium-pdns",
-                "value": "lithium-pdns"
-              }
-            ],
-            "query": "label_values(pdns_recursor_cache_entries, job)",
-            "refresh": 0,
+            "name": "node",
+            "options": [],
+            "query": {
+              "query": "label_values(pdns_recursor_uptime, node_name)",
+              "refId": "StandardVariableQuery"
+            },
+            "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
             "sort": 0,
