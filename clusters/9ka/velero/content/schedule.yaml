@@ -6,6 +6,6 @@ metadata:
 spec:
   schedule: '@every 24h'
   template:
-    storageLocation: minio-neon
+    storageLocation: default
     includeClusterResources: true
     ttl: 732h
