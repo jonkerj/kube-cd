@@ -5,3 +5,4 @@ resources:
 - external-node-exporters.yaml
 - powerdns.yaml
 - prometheus.yaml
+- ipmi.yaml

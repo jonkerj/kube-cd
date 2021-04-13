@@ -1,0 +1,49 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: ipmi
+  namespace: monitoring
+  labels:
+    app: ipmi
+spec:
+  jobLabel: ipmi
+  endpoints:
+  - port: metrics
+    interval: 300s
+    relabelings:
+    - sourceLabels:
+      - "__meta_kubernetes_endpoint_node_name"
+      targetLabel: node_name
+  selector:
+    matchLabels:
+      app: ipmi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ipmi
+  namespace: monitoring
+  labels:
+    app: ipmi
+spec:
+  type: ClusterIP
+  ports:
+  - name: metrics
+    port: 9000
+    targetPort: metrics
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: ipmi
+  namespace: monitoring
+  labels:
+    app: ipmi
+subsets:
+- addresses:
+  - ip: 172.21.46.2
+    nodeName: pve
+  ports:
+  - name: metrics
+    port: 9290
+    protocol: TCP
