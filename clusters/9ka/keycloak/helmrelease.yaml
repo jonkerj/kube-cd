@@ -35,9 +35,11 @@ spec:
           memory: "32Mi"
     postgresql:
       enabled: true
+      existingSecret: keycloak-postgresql
       startupProbe:
         enabled: true
         failureThreshold: 20
+      postgresqlPassword: '' # generate a random one
     resources:
       requests:
         cpu: 100m
