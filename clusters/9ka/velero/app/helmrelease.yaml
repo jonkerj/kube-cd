@@ -14,6 +14,8 @@ spec:
         name: vmware-tanzu
         namespace: flux-system
   values:
+    image:
+      tag: v1.5.4
     deployRestic: false
     snapshotsEnabled: false
     configuration:
