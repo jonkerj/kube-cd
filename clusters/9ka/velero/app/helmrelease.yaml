@@ -29,8 +29,8 @@ spec:
           s3ForcePathStyle: "true"
           s3Url: http://neon.thuis.efgh.nl:9000
     credentials:
-      useSecret: true
-      existingSecret: minio-credentials
+      useSecret: false
+      extraSecretRef: velero-env-vars
     schedules:
       backup:
         schedule: '@every 24h'

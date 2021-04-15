@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: velero-env-vars
+    namespace: velero
+data:
+    AWS_ACCESS_KEY_ID: ENC[AES256_GCM,data:QV4FvTyfnMg=,iv:Pw+XUXGtoe1lweXOdle8SipEuOlL7POz5uG+LE5U2o0=,tag:SrkeqU9GAcmAya2/XQwUow==,type:str]
+    AWS_SECRET_ACCESS_KEY: ENC[AES256_GCM,data:Xz4avRrN9jWnn4ZzofOQBRZhWguqPG/OGmbP7DCoCfTjyfK2RLdnWRG26fY=,iv:/LqsReqNTiLzQkINTRPYcz8XpdnIJWH/e7QaWlMt4GA=,tag:yehOnnlkb5tkO1gkjGYs/Q==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    lastmodified: '2021-04-15T17:53:02Z'
+    mac: ENC[AES256_GCM,data:e2C+NY3b/P8bRA17u5zDY4y+sRFjfoq0yJlQUT3ofZjVlmKKo5oPwGyKuipKmedO2umpjLs5kt+5lhLIPXrZvjNzNTjGKBbhkfwdzQBjda9I5x11eRaUZJbLwQkkoQ6GRwS6cGlgyJN2EXjQXF/quuSoj0/YBhOPl9VKLevkwNU=,iv:psIBUTvHrxp3izKRsHkJ8hOilPpKqInKBN5QlGrtmbw=,tag:W2syuuDdpN87Hw9xN1j3Mg==,type:str]
+    pgp:
+    -   created_at: '2021-04-15T17:33:38Z'
+        enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMA59YQxrIsWI6AQ/9GIQlCAwnrz6vUJobknk3Ticd65P5qPILjeWCtSw2H/XZ
+            I45RL9Q5ACoHwBy4CctxjOJ+4pHMZ7qMS25Mpu+JiY2YcHnGHY4hkpSkbdaVM3jV
+            A8qLdmMCYh519gSN75qbxMYZEwDcugY74OeD23VUkBlp4sm4m9JkOr/dx8ep696F
+            LEEmJlkbbTMzMQ+dCsmpVnR9VY4+Vxta3YVZuHVYJ2vy68Cacik/1qeYznX/Uoko
+            XtgHByMo+/FwH+SmyQycN9/60vWaJ3eKttqFy0DA4joMJdV9n2nP+TwI247xoJl7
+            ii8ufdh0P6cnSO5s8WoZaZ3ZOLNjfZz/zM9HmznRYRVTp2mySHE8AHCNdErtfeV/
+            Tl9NcKyXgZLmrPH0tUaKKQh4qbaH5j+9kSdT8X3ygBUJnVxr8fI4JIfwkvIqrsbN
+            jpXfaOAlzvXmuB5u4u+IfcQ3vw2zXNFbPSotOYl9KGE/eZktsL+hqwm3EN3aIxkg
+            seIqEzv2YdKyZo4oq4ac8SvEFHOZF3X5HgqEETqof+askAfDbMy44X2vzxyTr3nM
+            6qiBT/Fyc2iJNBy/3ZP0nUbamc8ngfUQPBX17bJ9gr9KWs79yEJYKARx7l87Sajk
+            JKTh5UJXzmBNUHpySWDRJyyqmC9QFtJ/QUIbcYVGoGX7pwOYKwNmdoKtZXcqgq7S
+            XgGfYh0QrV+deJrhUXyNObyKFlpQXy82PNgTWD2T7mKvyfhWCMDdYTxxyNMEK8G4
+            KLcsYQ+Jv2Ycn7vF2ZIPLNRHZ+AI4E8pYuEpnolpLqGkIzXjO5e5O8cXllaZxeg=
+            =uB+I
+            -----END PGP MESSAGE-----
+        fp: 4D72B62BB844B05E12DEC3A9A3AEC49250A67E2A
+    encrypted_regex: ^(data|stringData)$
+    version: 3.6.1
