@@ -47,3 +47,11 @@ spec:
       annotations:
         summary: 'Disk {{ $labels.disk }} on {{ $labels.node_name }} is having pending sectors'
         description: 'Disk {{ $labels.disk }} on {{ $labels.node_name }} is having pending sectors'
+    - alert: DiskUnhealthy
+      expr: smartmon_device_smart_healthy != 1
+      for: 1m
+      labels:
+        severity: critical
+      annotations:
+        summary: 'Disk {{ $labels.disk }} on {{ $labels.node_name }} is reported as unhealthy'
+        description: 'Disk {{ $labels.disk }} on {{ $labels.node_name }} is reported as unhealthy'
