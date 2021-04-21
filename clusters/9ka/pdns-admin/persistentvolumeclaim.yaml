@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pda-data
+  namespace: pdns-admin
+  labels:
+    app.kubernetes.io/name: pdns-admin
+    app.kubernetes.io/instance: pdns-admin-efgh
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 256Mi
