@@ -26,6 +26,13 @@ spec:
             secretKeyRef:
               name: talos-token
               key: token
+        resources:
+          requests:
+            cpu: 10m
+            memory: 32Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
       serviceAccount: talos-controller-manager
       serviceAccountName: talos-controller-manager
       nodeSelector:
