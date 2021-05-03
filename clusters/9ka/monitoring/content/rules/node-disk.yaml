@@ -39,3 +39,11 @@ spec:
       annotations:
         summary: "Host unusual disk write latency (instance {{ $labels.node_name }})"
         description: "Disk latency is growing (write operations > 100ms)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+    - alert: HostHighIOTime
+      expr: rate(node_disk_io_time_seconds_total[5m]) > 0.8
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Host unusual high IO time ({{ $labels.device }} on {{ $labels.node_name }})"
+        description: "Disk {{ $labels.device }} is taking $value CPU IO wait time {{ $labels.node_name }}"
