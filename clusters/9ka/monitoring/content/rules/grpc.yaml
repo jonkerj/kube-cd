@@ -1,0 +1,33 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: grpc
+  namespace: monitoring
+spec:
+  groups:
+  - name: grpc
+    rules:
+    - alert: GRPCHighNumberOfFailedRequests
+      expr: sum(rate(grpc_server_handled_total{grpc_code!="OK"}[1m])) BY (grpc_service, grpc_method) / sum(rate(grpc_server_handled_total[1m])) BY (grpc_service, grpc_method) > 0.01
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: Etcd high number of failed GRPC requests on {{ $labels.node_name }}/{{ $labels.service }}
+        message: More than 1% GRPC request are failing on {{ $labels.node_name }}/{{ $labels.service }}
+    - alert: GRPCHighNumberOfFailedRequests
+      expr: sum(rate(grpc_server_handled_total{grpc_code!="OK"}[1m])) BY (grpc_service, grpc_method) / sum(rate(grpc_server_handled_total[1m])) BY (grpc_service, grpc_method) > 0.05
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: Etcd high number of failed GRPC requests on {{ $labels.node_name }}/{{ $labels.service }}
+        message: More than 5% GRPC request are failing on {{ $labels.node_name }}/{{ $labels.service }}
+    - alert: GRPCRequestsSlow
+      expr: histogram_quantile(0.99, sum(rate(grpc_server_handling_seconds_bucket{grpc_type="unary"}[1m])) by (grpc_service, grpc_method, le)) > 0.15
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: GRPC requests are slow on {{ $labels.node_name }}/{{ $labels.service }}
+        message: GRPC requests slowing down, 99th percentil is over 0.15s on {{ $labels.node_name }}/{{ $labels.service }}
