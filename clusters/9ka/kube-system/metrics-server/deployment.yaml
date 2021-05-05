@@ -6,13 +6,12 @@ metadata:
   namespace: kube-system
   labels:
     app.kubernetes.io/name: metrics-server
-    app.kubernetes.io/version: v0.4.3
+    app.kubernetes.io/version: v0.4.4
 spec:
   replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: metrics-server
-      app.kubernetes.io/version: v0.4.3
   strategy:
     rollingUpdate:
       maxUnavailable: 0
@@ -20,7 +19,6 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: metrics-server
-        app.kubernetes.io/version: v0.4.3
       name: metrics-server
     spec:
       serviceAccountName: metrics-server
@@ -31,7 +29,7 @@ spec:
       priorityClassName: system-cluster-critical
       containers:
       - name: metrics-server
-        image: k8s.gcr.io/metrics-server/metrics-server:v0.4.3
+        image: k8s.gcr.io/metrics-server/metrics-server:v0.4.4
         imagePullPolicy: IfNotPresent
         args:
           - --cert-dir=/tmp
