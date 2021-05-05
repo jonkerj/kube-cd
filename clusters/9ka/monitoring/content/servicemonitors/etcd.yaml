@@ -1,0 +1,63 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: etcd
+  namespace: monitoring
+  labels:
+    app.kubernetes.io/name: etcd
+spec:
+  jobLabel: etcd
+  endpoints:
+  - port: metrics
+    interval: 300s
+    relabelings:
+    - sourceLabels:
+      - "__meta_kubernetes_endpoint_node_name"
+      targetLabel: node_name
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: etcd
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: etcd
+  namespace: monitoring
+  labels:
+    app.kubernetes.io/name: etcd
+spec:
+  type: ClusterIP
+  ports:
+  - name: metrics
+    port: 2381
+    targetPort: metrics
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: etcd
+  namespace: monitoring
+  labels:
+    app.kubernetes.io/name: etcd
+subsets:
+- addresses:
+  - ip: 172.21.46.51
+    nodeName: 9ka-cp-1
+  ports:
+  - name: metrics
+    port: 2381
+    protocol: TCP
+- addresses:
+  - ip: 172.21.46.52
+    nodeName: 9ka-cp-2
+  ports:
+  - name: metrics
+    port: 2381
+    protocol: TCP
+- addresses:
+  - ip: 172.21.46.53
+    nodeName: 9ka-cp-3
+  ports:
+  - name: metrics
+    port: 2381
+    protocol: TCP
