@@ -87,3 +87,11 @@ spec:
       annotations:
         summary: Etcd high commit durations on {{ $labels.node_name }}
         message: Etcd commit duration increasing, 99th percentil is over 0.25s
+    - alert: EtcdFailedSendingHeartbeats
+      expr: increase(etcd_server_heartbeat_send_failures_total[5m]) > 1
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: Etcd has failed to send heartbeats on {{ $labels.node_name }}
+        message: Etcd has failed to send {{ $value }} heartbeats in past 5 minutes
