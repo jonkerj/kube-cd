@@ -42,3 +42,8 @@ spec:
       volumeMounts:
       - mountPath: /target
         name: plugins
+    metrics:
+      enabled: true
+      scrapeInterval: 1m
+      serviceMonitor:
+        enabled: true
