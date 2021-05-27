@@ -55,6 +55,13 @@ spec:
             scheme: HTTPS
           periodSeconds: 10
           failureThreshold: 3
+        startupProbe:
+          httpGet:
+            path: /livez
+            port: https
+            scheme: HTTPS
+          periodSeconds: 10
+          failureThreshold: 3
         securityContext:
           readOnlyRootFilesystem: true
           runAsNonRoot: true
