@@ -27,6 +27,21 @@ spec:
       image:
         repository: vaultwarden/server
         tag: 1.21.0
+      resources:
+        requests:
+          cpu: 50m
+          memory: 25Mi
+        limits:
+          cpu: 250m
+          memory: 100Mi
+    backup:
+      resources:
+        requests:
+          cpu: 50m
+          memory: 25Mi
+        limits:
+          cpu: 250m
+          memory: 256Mi
     ingress:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
@@ -38,10 +53,3 @@ spec:
       - secretName: bitwarden-tls
         hosts:
         - brs.9ka.nl
-    resources:
-      requests:
-        cpu: 50m
-        memory: 25Mi
-      limits:
-        cpu: 250m
-        memory: 100Mi

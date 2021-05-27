@@ -40,6 +40,14 @@ spec:
         - sourceLabels:
           - "__meta_kubernetes_pod_node_name"
           targetLabel: node_name
+    kube-state-metrics:
+      resources:
+        requests:
+          cpu: 50m
+          memory: 16Mi
+        limits:
+          cpu: 250m
+          memory: 64Mi
     nodeExporter:
       serviceMonitor:
         relabelings:
@@ -107,6 +115,13 @@ spec:
           searchNamespace: ALL
         dashboards:
           searchNamespace: ALL
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 96Mi
       resources:
         requests: 
           cpu: 150m
@@ -120,6 +135,14 @@ spec:
       enabled: false
     prometheus:
       enabled: false
+    prometheusOperator:
+      resources:
+        limits:
+          cpu: 500m
+          memory: 256Mi
+        requests:
+          cpu: 100m
+          memory: 128Mi
     prometheus-node-exporter:
       extraArgs:
       - --collector.filesystem.ignored-mount-points=^/(dev|proc|sys|var/lib/docker/.+|/run/containerd/.+)($|/)

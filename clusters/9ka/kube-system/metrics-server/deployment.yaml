@@ -62,6 +62,13 @@ spec:
         volumeMounts:
         - name: tmp-dir
           mountPath: /tmp
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 32Mi
       - name: metrics-server-nanny
         image: k8s.gcr.io/addon-resizer:1.8.11
         imagePullPolicy: IfNotPresent

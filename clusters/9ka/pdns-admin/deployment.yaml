@@ -42,6 +42,13 @@ spec:
           httpGet:
             path: /
             port: http
+        resources:
+          limits:
+            cpu: 200m
+            memory: 512Mi
+          requests:
+            cpu: 50m
+            memory: 256Mi
       volumes:
       - name: pda-data
         persistentVolumeClaim:

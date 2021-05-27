@@ -30,6 +30,9 @@ spec:
         value: "true"
     pgchecker:
       resources:
+        requests:
+          cpu: "10m"
+          memory: "32Mi"
         limits:
           cpu: "10m"
           memory: "32Mi"
@@ -40,6 +43,13 @@ spec:
         enabled: true
         failureThreshold: 20
       postgresqlPassword: '' # generate a random one
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+        limits:
+          cpu: 250m
+          memory: 256Mi
     resources:
       requests:
         cpu: 100m
