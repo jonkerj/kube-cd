@@ -42,6 +42,7 @@ spec:
           httpGet:
             path: /
             port: http
+          failureThreshold: 12
         resources:
           limits:
             cpu: 200m
