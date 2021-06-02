@@ -1,8 +1,12 @@
+---
+# Flux version: v0.14.1
+# Components: source-controller,kustomize-controller,helm-controller,notification-controller
 apiVersion: v1
 kind: Namespace
 metadata:
   labels:
     app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.14.1
   name: flux-system
 ---
@@ -2286,6 +2290,7 @@ kind: ServiceAccount
 metadata:
   labels:
     app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.14.1
   name: helm-controller
   namespace: flux-system
@@ -2295,6 +2300,7 @@ kind: ServiceAccount
 metadata:
   labels:
     app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.14.1
   name: kustomize-controller
   namespace: flux-system
@@ -2304,6 +2310,7 @@ kind: ServiceAccount
 metadata:
   labels:
     app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.14.1
   name: notification-controller
   namespace: flux-system
@@ -2313,6 +2320,7 @@ kind: ServiceAccount
 metadata:
   labels:
     app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.14.1
   name: source-controller
   namespace: flux-system
@@ -2322,6 +2330,7 @@ kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.14.1
   name: crd-controller-flux-system
 rules:
@@ -2401,6 +2410,7 @@ kind: ClusterRoleBinding
 metadata:
   labels:
     app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.14.1
   name: cluster-reconciler-flux-system
 roleRef:
@@ -2420,6 +2430,7 @@ kind: ClusterRoleBinding
 metadata:
   labels:
     app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.14.1
   name: crd-controller-flux-system
 roleRef:
@@ -2451,6 +2462,7 @@ kind: Service
 metadata:
   labels:
     app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.14.1
     control-plane: controller
   name: notification-controller
@@ -2470,6 +2482,7 @@ kind: Service
 metadata:
   labels:
     app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.14.1
     control-plane: controller
   name: source-controller
@@ -2489,6 +2502,7 @@ kind: Service
 metadata:
   labels:
     app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.14.1
     control-plane: controller
   name: webhook-receiver
@@ -2508,6 +2522,7 @@ kind: Deployment
 metadata:
   labels:
     app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.14.1
     control-plane: controller
   name: helm-controller
@@ -2580,6 +2595,7 @@ kind: Deployment
 metadata:
   labels:
     app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.14.1
     control-plane: controller
   name: kustomize-controller
@@ -2654,6 +2670,7 @@ kind: Deployment
 metadata:
   labels:
     app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.14.1
     control-plane: controller
   name: notification-controller
@@ -2729,6 +2746,7 @@ kind: Deployment
 metadata:
   labels:
     app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.14.1
     control-plane: controller
   name: source-controller
@@ -2812,6 +2830,27 @@ kind: NetworkPolicy
 metadata:
   labels:
     app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/part-of: flux
+    app.kubernetes.io/version: v0.14.1
+  name: allow-egress
+  namespace: flux-system
+spec:
+  egress:
+  - {}
+  ingress:
+  - from:
+    - podSelector: {}
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  labels:
+    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.14.1
   name: allow-scraping
   namespace: flux-system
@@ -2831,6 +2870,7 @@ kind: NetworkPolicy
 metadata:
   labels:
     app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v0.14.1
   name: allow-webhooks
   namespace: flux-system
@@ -2844,21 +2884,3 @@ spec:
   policyTypes:
   - Ingress
 ---
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  labels:
-    app.kubernetes.io/instance: flux-system
-    app.kubernetes.io/version: v0.14.1
-  name: deny-ingress
-  namespace: flux-system
-spec:
-  egress:
-  - {}
-  ingress:
-  - from:
-    - podSelector: {}
-  podSelector: {}
-  policyTypes:
-  - Ingress
-  - Egress
