@@ -1,0 +1,49 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: haproxy
+  namespace: monitoring
+  labels:
+    app: haproxy
+spec:
+  jobLabel: haproxy
+  endpoints:
+  - port: metrics
+    interval: 300s
+    relabelings:
+    - sourceLabels:
+      - "__meta_kubernetes_endpoint_node_name"
+      targetLabel: node_name
+  selector:
+    matchLabels:
+      app: haproxy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: haproxy
+  namespace: monitoring
+  labels:
+    app: haproxy
+spec:
+  type: ClusterIP
+  ports:
+  - name: metrics
+    port: 9000
+    targetPort: metrics
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: haproxy
+  namespace: monitoring
+  labels:
+    app: haproxy
+subsets:
+- addresses:
+  - ip: 172.21.46.1
+    nodeName: iron
+  ports:
+  - name: metrics
+    port: 8404
+    protocol: TCP

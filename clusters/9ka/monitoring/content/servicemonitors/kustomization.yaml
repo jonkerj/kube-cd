@@ -4,6 +4,7 @@ resources:
 - alertmanager.yaml
 - etcd.yaml
 - external-node-exporters.yaml
+- haproxy.yaml
 - powerdns.yaml
 - prometheus.yaml
 - ipmi.yaml
