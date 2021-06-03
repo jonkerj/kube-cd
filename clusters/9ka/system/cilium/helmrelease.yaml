@@ -13,3 +13,7 @@ spec:
         kind: HelmRepository
         name: cilium
         namespace: flux-system
+  values:
+    kubeProxyReplacement: strict
+    k8sServiceHost: 9ka.nl
+    k8sServicePort: 6443
