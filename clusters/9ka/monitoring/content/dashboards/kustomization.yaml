@@ -1,6 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+- cilium-agent.yaml
+- cilium-operator.yaml
 - iio.yaml
 - nfsd.yaml
 - pdns-recursor.yaml
