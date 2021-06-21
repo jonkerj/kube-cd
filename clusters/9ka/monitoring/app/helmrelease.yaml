@@ -27,6 +27,8 @@ spec:
       enabled: true
     kubeControllerManager:
       enabled: false
+    kubeDns:
+      enabled: false
     kubeEtcd:
       enabled: false
     kubeScheduler:
@@ -129,10 +131,6 @@ spec:
         limits:
           cpu: 1
           memory: 200Mi
-    kubeDns:
-      enabled: false
-    kubeEtcd:
-      enabled: false
     prometheus:
       enabled: false
     prometheusOperator:

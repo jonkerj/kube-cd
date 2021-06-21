@@ -14,6 +14,8 @@ spec:
         name: cilium
         namespace: flux-system
   values:
+    image:
+      tag: v1.10.1
     kubeProxyReplacement: strict
     k8sServiceHost: 9ka.nl
     k8sServicePort: 6443
