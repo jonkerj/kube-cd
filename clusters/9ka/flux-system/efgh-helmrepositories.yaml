@@ -18,12 +18,14 @@ spec:
   interval: 1h
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: HelmRepository
+kind: GitRepository
 metadata:
   name: cilium
   namespace: flux-system
 spec:
-  url: https://helm.cilium.io
+  url: https://github.com/jonkerj/cilium
+  ref:
+    branch: configurable-probe-parameters
   interval: 1h
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta1
