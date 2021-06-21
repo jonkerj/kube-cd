@@ -14,6 +14,11 @@ spec:
         name: cilium
         namespace: flux-system
   values:
+    hubble:
+      relay:
+        enabled: true
+        image:
+          tag: v1.10.1
     image:
       tag: v1.10.1
     kubeProxyReplacement: strict
