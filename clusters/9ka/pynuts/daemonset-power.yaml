@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app.kubernetes.io/component: power
+    app.kubernetes.io/instance: pynuts-power
+    app.kubernetes.io/name: pynuts
+  name: pynuts-power
+  namespace: pynuts
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: power
+      app.kubernetes.io/instance: pynuts-power
+      app.kubernetes.io/name: pynuts
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: power
+        app.kubernetes.io/instance: pynuts-power
+        app.kubernetes.io/name: pynuts
+    spec:
+      containers:
+      - env:
+        - name: PYNUTS_LOGLEVEL
+          value: DEBUG
+        - name: PYNUTS_INFLUXDB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: pynuts-influxdb
+        - name: PYNUTS_INFLUXDB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: pynuts-influxdb
+        - name: PYNUTS_INFLUXDB_DATABASE
+          value: nuts
+        - name: PYNUTS_INFLUXDB_TAGS
+          value: location=gareelhoek
+        - name: PYNUTS_INPUT_CLS
+          value: serialiec62056
+        - name: PYNUTS_INPUT_NAME
+          value: power
+        - name: PYNUTS_SERIAL_VID
+          value: "0403"
+        - name: PYNUTS_SERIAL_PID
+          value: "6001"
+        - name: PYNUTS_SERIAL_SERIAL
+          value: A9IT5F7J
+        - name: PYNUTS_SERIAL_PARITY
+          value: "N"
+        - name: PYNUTS_SERIAL_STOPBITS
+          value: "1"
+        - name: PYNUTS_SERIAL_BYTESIZE
+          value: "7"
+        - name: PYNUTS_SERIAL_BAUDRATE
+          value: "115200"
+        image: ghcr.io/jonkerj/pynuts:v0.1.7
+        name: pynuts
+        resources:
+          limits:
+            cpu: 250m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 32Mi
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /dev
+          name: hostdev
+      nodeSelector:
+        feature.node.kubernetes.io/usb-0403_6001_A9IT5F7J.present: "true"
+      tolerations:
+      - effect: NoSchedule
+        key: efgh.nl/location
+        value: gangkast
+      volumes:
+      - hostPath:
+          path: /dev
+          type: Directory
+        name: hostdev
