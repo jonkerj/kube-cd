@@ -24,7 +24,7 @@ data:
       "editable": true,
       "gnetId": null,
       "graphTooltip": 0,
-      "iteration": 1624957416083,
+      "iteration": 1624959672015,
       "links": [],
       "panels": [
         {
@@ -132,7 +132,7 @@ data:
             "y": 0
           },
           "hiddenSeries": false,
-          "id": 3,
+          "id": 6,
           "legend": {
             "avg": false,
             "current": false,
@@ -153,24 +153,35 @@ data:
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+            {
+              "$$hashKey": "object:256",
+              "alias": "/^RX/",
+              "transform": "negative-Y"
+            }
+          ],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "exemplar": true,
-              "expr": "sum by (device) (irate(node_disk_io_time_seconds_total{node_name=\"$node_name\", device=~\"^([vsx]d[a-z]|mmcblk[0-9])\"}[2m]))",
+              "expr": "sum by (device) (irate(node_network_receive_bytes_total{node_name=\"$node_name\", device=~\"^(eno|enp|ens|eth|lan|wan|wlan).*$\"}[2m]))",
               "interval": "1m",
-              "legendFormat": "{{ mode }}",
+              "legendFormat": "RX {{ device }}",
               "refId": "A"
+            },
+            {
+              "expr": "sum by (device) (irate(node_network_transmit_bytes_total{node_name=\"$node_name\", device=~\"^(eno|enp|ens|eth|lan|wan|wlan).*$\"}[2m]))",
+              "interval": "1m",
+              "legendFormat": "TX {{ device }}",
+              "refId": "B"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "I/O time",
+          "title": "Network traffic",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -186,16 +197,16 @@ data:
           },
           "yaxes": [
             {
-              "$$hashKey": "object:370",
-              "format": "short",
+              "$$hashKey": "object:228",
+              "format": "binbps",
               "label": null,
               "logBase": 1,
               "max": null,
-              "min": "0",
+              "min": null,
               "show": true
             },
             {
-              "$$hashKey": "object:371",
+              "$$hashKey": "object:229",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -331,7 +342,7 @@ data:
             "y": 9
           },
           "hiddenSeries": false,
-          "id": 6,
+          "id": 3,
           "legend": {
             "avg": false,
             "current": false,
@@ -352,35 +363,24 @@ data:
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "$$hashKey": "object:256",
-              "alias": "/^RX/",
-              "transform": "negative-Y"
-            }
-          ],
+          "seriesOverrides": [],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (device) (irate(node_network_receive_bytes_total{node_name=\"$node_name\", device=~\"^(eno|enp|ens|eth|lan|wan|wlan).*$\"}[2m]))",
+              "exemplar": true,
+              "expr": "sum by (device) (irate(node_disk_io_time_seconds_total{node_name=\"$node_name\", device=~\"^([vsx]d[a-z]|mmcblk[0-9])\"}[2m]))",
               "interval": "1m",
-              "legendFormat": "RX {{ device }}",
+              "legendFormat": "{{ mode }}",
               "refId": "A"
-            },
-            {
-              "expr": "sum by (device) (irate(node_network_transmit_bytes_total{node_name=\"$node_name\", device=~\"^(eno|enp|ens|eth|lan|wan|wlan).*$\"}[2m]))",
-              "interval": "1m",
-              "legendFormat": "TX {{ device }}",
-              "refId": "B"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Network traffic",
+          "title": "I/O time",
           "tooltip": {
             "shared": true,
             "sort": 2,
@@ -396,21 +396,284 @@ data:
           },
           "yaxes": [
             {
-              "$$hashKey": "object:228",
-              "format": "binbps",
+              "$$hashKey": "object:370",
+              "format": "short",
               "label": null,
               "logBase": 1,
               "max": null,
-              "min": null,
+              "min": "0",
               "show": true
             },
             {
-              "$$hashKey": "object:229",
+              "$$hashKey": "object:371",
               "format": "short",
               "label": null,
               "logBase": 1,
               "max": null,
               "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {
+            "Anonymous": "#447EBC",
+            "Buffers": "#FCEACA",
+            "Cached": "#3F2B5B",
+            "Free": "#3F6833",
+            "Hugepages Free": "#B7DBAB",
+            "Hugepages Reserved": "#F2C96D",
+            "Hugepages Used": "#BF1B00",
+            "Kernel Stack": "#70DBED",
+            "Mapped and Cached": "#e24d42",
+            "Mapped or Cached": "#BF1B00",
+            "Page Tables": "#E5A8E2",
+            "Shared memory smallpages": "#962D82",
+            "Slab": "#EAB839",
+            "Unaccounted For": "#F29191"
+          },
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "decimals": 0,
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 18
+          },
+          "hiddenSeries": false,
+          "id": 8,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": false,
+            "sideWidth": 250,
+            "sort": null,
+            "sortDesc": null,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.0.1",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "node_memory_MemTotal_bytes{node_name=\"$node_name\"} - node_memory_MemFree_bytes{node_name=\"$node_name\"} - node_memory_KernelStack_bytes{node_name=\"$node_name\"} - node_memory_AnonPages_bytes{node_name=\"$node_name\"} - node_memory_PageTables_bytes{node_name=\"$node_name\"} - node_memory_Slab_bytes{node_name=\"$node_name\"} - node_memory_Cached_bytes{node_name=\"$node_name\"} - node_memory_SwapCached_bytes{node_name=\"$node_name\"} - node_memory_Buffers_bytes{node_name=\"$node_name\"} - (node_memory_HugePages_Total{node_name=\"$node_name\"} * 2097152)",
+              "format": "time_series",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Unaccounted For",
+              "metric": "node_memory_MemTotal",
+              "refId": "N",
+              "step": 2
+            },
+            {
+              "exemplar": true,
+              "expr": "node_memory_Buffers_bytes{node_name=\"$node_name\"}",
+              "format": "time_series",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Buffers",
+              "metric": "node_memory_Buffers",
+              "refId": "A",
+              "step": 2
+            },
+            {
+              "exemplar": true,
+              "expr": "node_memory_SwapCached_bytes{node_name=\"$node_name\"}",
+              "format": "time_series",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Swap Cached",
+              "metric": "node_memory_SwapCached",
+              "refId": "K",
+              "step": 2
+            },
+            {
+              "exemplar": true,
+              "expr": "node_memory_KernelStack_bytes{node_name=\"$node_name\"}",
+              "format": "time_series",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Kernel Stack",
+              "metric": "node_memory_KernelStack",
+              "refId": "D",
+              "step": 2
+            },
+            {
+              "exemplar": true,
+              "expr": "node_memory_Slab_bytes{node_name=\"$node_name\"}",
+              "format": "time_series",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Slab",
+              "metric": "node_memory_Slab",
+              "refId": "I",
+              "step": 2
+            },
+            {
+              "exemplar": true,
+              "expr": "node_memory_PageTables_bytes{node_name=\"$node_name\"}",
+              "format": "time_series",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Page Tables",
+              "metric": "node_memory_PageTables",
+              "refId": "F",
+              "step": 2
+            },
+            {
+              "exemplar": true,
+              "expr": "node_memory_AnonPages_bytes{node_name=\"$node_name\"}",
+              "format": "time_series",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Anonymous",
+              "metric": "node_memory_AnonPages",
+              "refId": "E",
+              "step": 2
+            },
+            {
+              "exemplar": true,
+              "expr": "node_memory_Shmem_bytes{node_name=\"$node_name\"}",
+              "format": "time_series",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Shared memory smallpages",
+              "metric": "node_memory_Shmem",
+              "refId": "L",
+              "step": 2
+            },
+            {
+              "exemplar": true,
+              "expr": "node_memory_Cached_bytes-node_memory_Shmem_bytes{node_name=\"$node_name\"}",
+              "format": "time_series",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Mapped and Cached",
+              "metric": "node_memory_Cached",
+              "refId": "C",
+              "step": 2
+            },
+            {
+              "exemplar": true,
+              "expr": "node_memory_MemFree_bytes{node_name=\"$node_name\"}",
+              "format": "time_series",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Free",
+              "metric": "node_memory_MemFree",
+              "refId": "B",
+              "step": 2
+            },
+            {
+              "exemplar": true,
+              "expr": "(node_memory_HugePages_Free{node_name=\"$node_name\"}-node_memory_HugePages_Rsvd{node_name=\"$node_name\"})*2097152",
+              "format": "time_series",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Hugepages Free",
+              "metric": "node_memory_HugePages_Free",
+              "refId": "H",
+              "step": 2
+            },
+            {
+              "exemplar": true,
+              "expr": "node_memory_HugePages_Rsvd{node_name=\"$node_name\"}*2097152",
+              "format": "time_series",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Hugepages Reserved",
+              "metric": "node_memory_HugePages_Rsvd",
+              "refId": "G",
+              "step": 2
+            },
+            {
+              "exemplar": true,
+              "expr": "(node_memory_HugePages_Total{node_name=\"$node_name\"}-node_memory_HugePages_Free{node_name=\"$node_name\"})*2097152",
+              "format": "time_series",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Hugepages Used",
+              "metric": "node_memory_HugePages_Total",
+              "refId": "M",
+              "step": 2
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Memory",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:463",
+              "format": "bytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:464",
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
               "show": true
             }
           ],
@@ -429,7 +692,7 @@ data:
           {
             "allValue": null,
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "chromium",
               "value": "chromium"
             },
@@ -466,5 +729,5 @@ data:
       "timezone": "",
       "title": "System stats",
       "uid": "ts21QN1Mk",
-      "version": 1
+      "version": 2
     }
