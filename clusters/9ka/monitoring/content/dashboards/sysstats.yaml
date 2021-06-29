@@ -24,7 +24,7 @@ data:
       "editable": true,
       "gnetId": null,
       "graphTooltip": 0,
-      "iteration": 1607594285657,
+      "iteration": 1624957416083,
       "links": [],
       "panels": [
         {
@@ -33,12 +33,6 @@ data:
           "dashLength": 10,
           "dashes": false,
           "datasource": "Prometheus",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -65,7 +59,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.1",
+          "pluginVersion": "8.0.1",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -129,12 +123,6 @@ data:
           "dashes": false,
           "datasource": "Prometheus",
           "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -161,7 +149,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.1",
+          "pluginVersion": "8.0.1",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -171,7 +159,8 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (device) (irate(node_disk_io_time_seconds_total{node_name=\"$node_name\", device=~\"^[vsx]d[a-z]\"}[2m]))",
+              "exemplar": true,
+              "expr": "sum by (device) (irate(node_disk_io_time_seconds_total{node_name=\"$node_name\", device=~\"^([vsx]d[a-z]|mmcblk[0-9])\"}[2m]))",
               "interval": "1m",
               "legendFormat": "{{ mode }}",
               "refId": "A"
@@ -197,6 +186,7 @@ data:
           },
           "yaxes": [
             {
+              "$$hashKey": "object:370",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -205,6 +195,7 @@ data:
               "show": true
             },
             {
+              "$$hashKey": "object:371",
               "format": "short",
               "label": null,
               "logBase": 1,
@@ -225,12 +216,6 @@ data:
           "dashes": false,
           "datasource": "Prometheus",
           "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -257,7 +242,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.1",
+          "pluginVersion": "8.0.1",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -273,13 +258,15 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (device) (irate(node_disk_read_bytes_total{node_name=\"$node_name\", device=~\"^[vsx]d[a-z]\"}[2m]))",
+              "exemplar": true,
+              "expr": "sum by (device) (irate(node_disk_read_bytes_total{node_name=\"$node_name\", device=~\"^([vsx]d[a-z]|mmcblk[0-9])\"}[2m]))",
               "interval": "1m",
               "legendFormat": "R {{ device }}",
               "refId": "A"
             },
             {
-              "expr": "sum by (device) (irate(node_disk_written_bytes_total{node_name=\"$node_name\", device=~\"^[vsx]d[a-z]\"}[2m]))",
+              "exemplar": true,
+              "expr": "sum by (device) (irate(node_disk_written_bytes_total{node_name=\"$node_name\", device=~\"^([vsx]d[a-z]|mmcblk[0-9])\"}[2m]))",
               "interval": "1m",
               "legendFormat": "W {{ device }}",
               "refId": "B"
@@ -335,12 +322,6 @@ data:
           "dashes": false,
           "datasource": "Prometheus",
           "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -367,7 +348,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.1",
+          "pluginVersion": "8.0.1",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -440,7 +421,7 @@ data:
         }
       ],
       "refresh": false,
-      "schemaVersion": 26,
+      "schemaVersion": 30,
       "style": "dark",
       "tags": [],
       "templating": {
@@ -448,25 +429,29 @@ data:
           {
             "allValue": null,
             "current": {
-              "selected": false,
-              "text": "pve",
-              "value": "pve"
+              "selected": true,
+              "text": "chromium",
+              "value": "chromium"
             },
             "datasource": "Prometheus",
             "definition": "label_values(node_boot_time_seconds, node_name)",
+            "description": null,
+            "error": null,
             "hide": 0,
             "includeAll": false,
             "label": "node",
             "multi": false,
             "name": "node_name",
             "options": [],
-            "query": "label_values(node_boot_time_seconds, node_name)",
+            "query": {
+              "query": "label_values(node_boot_time_seconds, node_name)",
+              "refId": "Prometheus-node_name-Variable-Query"
+            },
             "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
             "sort": 0,
             "tagValuesQuery": "",
-            "tags": [],
             "tagsQuery": "",
             "type": "query",
             "useTags": false
