@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - cilium-agent.yaml
 - cilium-operator.yaml
+- container-resources.yaml
 - iio.yaml
 - nfsd.yaml
 - pdns-recursor.yaml
