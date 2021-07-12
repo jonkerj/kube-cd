@@ -8,22 +8,16 @@ spec:
   chart:
     spec:
       chart: smapy
-      version: 0.2.0
+      version: 0.3.4
       sourceRef:
         kind: HelmRepository
         name: jonkerj
         namespace: flux-system
   values:
-    image:
-      tag: v0.2.1
-    config:
-      influxdb:
-        host: influxdb.influxdb
-        port: 8086
-      interval: 30
-      tags:
-        location: gareelhoek
-    existingSecret: smapy-secret
+    env:
+      INFLUXDB_V2_BUCKET: 'solar/autogen'
+      INFLUXDB_V2_TAG_LOCATION: 'gareelhoek'
+    envSecret: smapy-secret
     resources:
       requests:
         cpu: 50m
