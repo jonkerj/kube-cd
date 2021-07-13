@@ -30,8 +30,6 @@ spec:
       hosts:
       - prometheus.9ka.nl
       - alertmanager.9ka.nl
-      - dashboard.9ka.nl
-      - hubble.9ka.nl
       annotations:
         nginx.ingress.kubernetes.io/proxy-buffer-size: 64k
     resources:
