@@ -18,7 +18,7 @@ spec:
       existingSecret: oauth2-secret
     extraArgs:
       email-domain: "kippendief.biz"
-      oidc-issuer-url: "https://sso.9ka.nl/auth/realms/9ka"
+      oidc-issuer-url: "https://dex.9ka.nl"
       provider: "oidc"
       set-authorization-header: "true"
       show-debug-on-error: "true"
