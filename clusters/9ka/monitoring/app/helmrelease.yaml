@@ -90,10 +90,9 @@ spec:
           client_id: $__file{/etc/secrets/auth_generic_oauth/client_id}
           client_secret: $__file{/etc/secrets/auth_generic_oauth/client_secret}
           scopes: openid profile email
-          auth_url: https://sso.9ka.nl/auth/realms/9ka/protocol/openid-connect/auth
-          token_url: https://sso.9ka.nl/auth/realms/9ka/protocol/openid-connect/token
-          api_url: https://sso.9ka.nl/auth/realms/9ka/protocol/openid-connect/userinfo
-          allowed_domains: kippendief.biz
+          auth_url: https://dex.9ka.nl/auth
+          token_url: https://dex.9ka.nl/token
+          api_url: https://dex.9ka.nl/userinfo
         users:
           allow_org_create: false
           auto_assign_org: true
