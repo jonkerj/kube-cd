@@ -35,7 +35,7 @@ spec:
         secretEnv: CLIENT_OAUTH2_PROXY_SECRET
       - idEnv: CLIENT_GRAFANA_ID
         redirectURIs:
-        - https://g.9ka.nl/login/generic_oauth
+        - https://grafana.9ka.nl/login/generic_oauth
         name: Grafana
         secretEnv: CLIENT_GRAFANA_SECRET
       storage:
