@@ -7,10 +7,10 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: ./charts/bitwarden
+      chart: bitwarden
       version: 0.3.0
       sourceRef:
-        kind: GitRepository
+        kind: HelmRepository
         name: bitwarden-rs
         namespace: flux-system
   values:
