@@ -7,10 +7,10 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: ./install/kubernetes/cilium
-      version: 1.10.90
+      chart: cilium
+      version: 1.10.3
       sourceRef:
-        kind: GitRepository
+        kind: HelmRepository
         name: cilium
         namespace: flux-system
   values:
@@ -25,10 +25,6 @@ spec:
     hubble:
       relay:
         enabled: true
-        image:
-          tag: v1.10.1
-    image:
-      tag: v1.10.1
     kubeProxyReplacement: strict
     k8sServiceHost: 9ka.nl
     k8sServicePort: 6443
@@ -37,11 +33,7 @@ spec:
       serviceMonitor:
         enabled: true
     operator:
-      image:
-        tag: v1.10.1
       prometheus:
         enabled: true
         serviceMonitor:
           enabled: true
-    startupProbe:
-      failureThreshold: 150
