@@ -8,6 +8,7 @@ metadata:
   name: alertmanager
   namespace: monitoring
 spec:
+  ingressClassName: nginx
   rules:
   - host: alertmanager.9ka.nl
     http:

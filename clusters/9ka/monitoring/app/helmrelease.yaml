@@ -103,6 +103,7 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
         enabled: true
+        ingressClassName: nginx
         hosts:
         - grafana.9ka.nl
         tls:
