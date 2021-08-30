@@ -42,14 +42,14 @@ spec:
         limits:
           cpu: 250m
           memory: 256Mi
-    ingress:
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
-      hosts:
-      - brs.9ka.nl
-      paths:
-      - /
-      tls:
-      - secretName: bitwarden-tls
-        hosts:
-        - brs.9ka.nl
+#    ingress:
+#      annotations:
+#        cert-manager.io/cluster-issuer: letsencrypt
+#      hosts:
+#      - brs.9ka.nl
+#      paths:
+#      - /
+#      tls:
+#      - secretName: bitwarden-tls
+#        hosts:
+#        - brs.9ka.nl

@@ -24,14 +24,14 @@ spec:
       show-debug-on-error: "true"
       skip-provider-button: "true"
       whitelist-domain: ".9ka.nl"
-    ingress:
-      enabled: true
-      path: /oauth2
-      hosts:
-      - prometheus.9ka.nl
-      - alertmanager.9ka.nl
-      annotations:
-        nginx.ingress.kubernetes.io/proxy-buffer-size: 64k
+#    ingress:
+#      enabled: false
+#      path: /oauth2
+#      hosts:
+#      - prometheus.9ka.nl
+#      - alertmanager.9ka.nl
+#      annotations:
+#        nginx.ingress.kubernetes.io/proxy-buffer-size: 64k
     resources:
       requests:
         cpu: 50m

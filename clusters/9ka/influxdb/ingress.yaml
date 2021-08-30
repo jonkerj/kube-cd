@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  labels:
+    app.kubernetes.io/instance: influxdb
+    app.kubernetes.io/name: influxdb
+    app.kubernetes.io/version: 1.8.6
+  name: influxdb
+  namespace: influxdb
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: influxdb.9ka.nl
+    http:
+      paths:
+      - backend:
+          service:
+            name: influxdb
+            port:
+              number: 8086
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - influxdb.9ka.nl
+    secretName: influxdb-tls
