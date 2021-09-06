@@ -15,4 +15,5 @@ resources:
 - node-processes.yaml
 - node-smart.yaml
 - prometheus-generic.yaml
+- velero.yaml
 - zfs.yaml
