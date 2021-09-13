@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - flux-components.yaml
 - flux-sync.yaml
+- flux-monitoring.yaml
 - efgh-sync.yaml
 - efgh-helmrepositories.yaml
 patchesStrategicMerge:
