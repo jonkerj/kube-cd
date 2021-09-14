@@ -2,15 +2,6 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: bitwarden-rs
-  namespace: flux-system
-spec:
-  url: https://skeen.github.io/helm-bitwarden_rs
-  interval: 1h
----
-apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: HelmRepository
-metadata:
   name: cilium
   namespace: flux-system
 spec:
@@ -33,6 +24,15 @@ metadata:
   namespace: flux-system
 spec:
   url: https://charts.dexidp.io
+  interval: 1h
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: gissilabs
+  namespace: flux-system
+spec:
+  url: https://gissilabs.github.io/charts/
   interval: 1h
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta1
