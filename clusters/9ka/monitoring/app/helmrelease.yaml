@@ -62,6 +62,7 @@ spec:
         size: 1Gi
       admin:
         existingSecret: grafana-admin-user
+      defaultDashboardsEnabled: false
       envFromSecret: grafana-env-vars
       extraSecretMounts:
       - name: auth-generic-oauth-secret-mount
