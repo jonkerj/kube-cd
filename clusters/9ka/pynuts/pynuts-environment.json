@@ -1,0 +1,11 @@
+[{
+	"op": "add",
+	"path": "/spec/template/spec/containers/0/env/-",
+	"value": [
+		{"name": "PYNUTS_LOGLEVEL", "value": "DEBUG"},
+		{"name": "PYNUTS_INFLUXDB_USERNAME", "valueFrom": {"secretKeyRef": {"key": "username", "name": "pynuts-influxdb"}}},
+		{"name": "PYNUTS_INFLUXDB_PASSWORD", "valueFrom": {"secretKeyRef": {"key": "password", "name": "pynuts-influxdb"}}},
+		{"name": "PYNUTS_INFLUXDB_DATABASE", "value": "nuts"},
+		{"name": "PYNUTS_INFLUXDB_TAGS", "value": "location=gareelhoek"}
+	]
+}]

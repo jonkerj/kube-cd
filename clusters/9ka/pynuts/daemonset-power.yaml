@@ -22,22 +22,6 @@ spec:
     spec:
       containers:
       - env:
-        - name: PYNUTS_LOGLEVEL
-          value: DEBUG
-        - name: PYNUTS_INFLUXDB_USERNAME
-          valueFrom:
-            secretKeyRef:
-              key: username
-              name: pynuts-influxdb
-        - name: PYNUTS_INFLUXDB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: password
-              name: pynuts-influxdb
-        - name: PYNUTS_INFLUXDB_DATABASE
-          value: nuts
-        - name: PYNUTS_INFLUXDB_TAGS
-          value: location=gareelhoek
         - name: PYNUTS_INPUT_CLS
           value: serialiec62056
         - name: PYNUTS_INPUT_NAME
@@ -56,7 +40,7 @@ spec:
           value: "7"
         - name: PYNUTS_SERIAL_BAUDRATE
           value: "115200"
-        image: ghcr.io/jonkerj/pynuts:v0.1.7
+        image: ghcr.io/jonkerj/pynuts
         name: pynuts
         resources:
           limits:
