@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app.kubernetes.io/component: water
+    app.kubernetes.io/instance: pynuts-water
+    app.kubernetes.io/name: pynuts
+  name: pynuts-water
+  namespace: pynuts
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: water
+      app.kubernetes.io/instance: pynuts-water
+      app.kubernetes.io/name: pynuts
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: water
+        app.kubernetes.io/instance: pynuts-water
+        app.kubernetes.io/name: pynuts
+    spec:
+      initContainers:
+      - name: setup-gpio
+        securityContext:
+          privileged: true
+        image: busybox:stable
+        command: ["/bin/sh", "-c"]
+        args:
+        - "[ ! -e /sys/class/gpio/gpio71 ] && echo 71 > /sys/class/gpio/export ; echo in > /sys/class/gpio/gpio71/direction"
+        volumeMounts:
+        - mountPath: /sys
+          name: hostsysfs
+      containers:
+      - env:
+        - name: PYNUTS_INPUT_CLS
+          value: counter
+        - name: PYNUTS_INPUT_NAME
+          value: water
+        - name: PYNUTS_COUNTER_FILENAME
+          value: /sys/class/gpio/gpio71/value
+        image: ghcr.io/jonkerj/pynuts
+        name: pynuts
+        resources:
+          limits:
+            cpu: 250m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 32Mi
+      nodeSelector:
+        efgh.nl/watermeter: 'true'
+      tolerations:
+      - effect: NoSchedule
+        key: efgh.nl/location
+        value: gangkast
+      volumes:
+      - hostPath:
+          path: /sys
+          type: Directory
+        name: hostsysfs
