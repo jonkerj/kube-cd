@@ -143,6 +143,7 @@ spec:
           cpu: 100m
           memory: 128Mi
     prometheus-node-exporter:
+      hostNetwork: false
       extraArgs:
       - --collector.filesystem.ignored-mount-points=^/(dev|proc|sys|var/lib/docker/.+|/run/containerd/.+)($|/)
       - --collector.filesystem.ignored-fs-types=^(autofs|binfmt_misc|cgroup|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|mqueue|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|sysfs|tracefs|tmpfs)$
