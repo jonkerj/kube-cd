@@ -19,6 +19,7 @@ spec:
         app.kubernetes.io/component: power
         app.kubernetes.io/instance: pynuts-power
         app.kubernetes.io/name: pynuts
+        container.audit.kubernetes.io/pynuts.allow-privileged: ""
     spec:
       containers:
       - env:

@@ -19,6 +19,7 @@ spec:
         app.kubernetes.io/component: water
         app.kubernetes.io/instance: pynuts-water
         app.kubernetes.io/name: pynuts
+        container.audit.kubernetes.io/pynuts.allow-privileged: ""
     spec:
       initContainers:
       - name: setup-gpio
