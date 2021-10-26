@@ -6,6 +6,7 @@ resources:
 - daemonset-power.yaml
 - daemonset-heat.yaml
 - daemonset-water.yaml
+- networkpolicy.yaml
 images:
 - name: ghcr.io/jonkerj/pynuts
   newTag: v0.2.0
