@@ -64,3 +64,10 @@ spec:
       - secretName: dex-tls
         hosts:
         - dex.9ka.nl
+    resources:
+      requests:
+        cpu: 100m
+        memory: 32Mi
+      limits:
+        cpu: 100m
+        memory: 64Mi
