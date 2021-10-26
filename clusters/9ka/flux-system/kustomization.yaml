@@ -6,5 +6,6 @@ resources:
 - flux-monitoring.yaml
 - efgh-sync.yaml
 - efgh-helmrepositories.yaml
+- webhooks.yaml
 patchesStrategicMerge:
 - flux-resources.yaml
