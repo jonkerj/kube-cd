@@ -11,11 +11,15 @@ spec:
   ingress:
   - fromEntities:
     - host
-    - remote-node
     toPorts:
       - ports:
         - port: "6080"
           protocol: TCP
+  - fromEntities:
+    - host
+    - remote-node
+    toPorts:
+      - ports:
         - port: https
           protocol: TCP
   egress:
