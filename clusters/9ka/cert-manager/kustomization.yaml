@@ -5,3 +5,8 @@ resources:
 - sync-crd.yaml
 - sync-app.yaml
 - sync-issuer.yaml
+- np-controller.yaml
+- np-webhook.yaml
+- cnp-cainjector.yaml
+- cnp-controller.yaml
+- cnp-webhook.yaml
