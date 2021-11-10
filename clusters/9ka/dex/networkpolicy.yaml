@@ -6,6 +6,7 @@ metadata:
 spec:
   policyTypes:
   - Egress
+  - Ingress
   podSelector:
     matchLabels:
       app.kubernetes.io/name: dex
@@ -21,3 +22,16 @@ spec:
     ports:
     - protocol: UDP
       port: dns
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: ingress
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/component: controller
+          app.kubernetes.io/instance: ingress-nginx
+          app.kubernetes.io/name: ingress-nginx
+    ports:
+    - protocol: TCP
+      port: http
