@@ -44,3 +44,16 @@ spec:
     ports:
     - protocol: UDP
       port: dns
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: oauth2-proxy
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/component: authentication-proxy
+          app.kubernetes.io/instance: oauth2-proxy
+          app.kubernetes.io/name: oauth2-proxy
+          app.kubernetes.io/part-of: oauth2-proxy
+    ports:
+    - protocol: TCP
+      port: http
