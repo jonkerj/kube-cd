@@ -22,6 +22,6 @@ spec:
           app.kubernetes.io/name: vaultwarden
     ports:
     - protocol: TCP
-      port: websocket
+      port: 3012
     - protocol: TCP
-      port: http
+      port: 8080

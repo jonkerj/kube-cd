@@ -22,4 +22,4 @@ spec:
           app.kubernetes.io/name: influxdb
     ports:
     - protocol: TCP
-      port: api
+      port: 8086

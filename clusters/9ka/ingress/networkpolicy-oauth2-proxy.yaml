@@ -22,4 +22,4 @@ spec:
           app.kubernetes.io/name: oauth2-proxy
     ports:
     - protocol: TCP
-      port: http
+      port: 4180
