@@ -1,0 +1,47 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: influxdb
+  namespace: influxdb
+spec:
+  policyTypes:
+  - Ingress
+  - Egress
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: influxdb
+      app.kubernetes.io/name: influxdb
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: pynuts
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/name: pynuts
+    ports:
+    - protocol: TCP
+      port: api
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: smapy
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/instance: smapy
+          app.kubernetes.io/name: smapy
+    ports:
+    - protocol: TCP
+      port: api
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: iioflux
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/instance: iioflux
+          app.kubernetes.io/name: iioflux
+    ports:
+    - protocol: TCP
+      port: api
+  egress: []
