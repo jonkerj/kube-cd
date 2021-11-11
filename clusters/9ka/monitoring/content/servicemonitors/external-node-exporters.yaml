@@ -52,7 +52,7 @@ subsets:
     nodeName: lithium
   ports:
   - name: metrics
-    port: 9200
+    port: 9100
     protocol: TCP
 - addresses:
   - ip: 172.21.42.10
@@ -66,14 +66,14 @@ subsets:
     nodeName: nitrogen
   ports:
   - name: metrics
-    port: 9200
+    port: 9100
     protocol: TCP
 - addresses:
   - ip: 172.21.42.15
     nodeName: potassium
   ports:
   - name: metrics
-    port: 9200
+    port: 9100
     protocol: TCP
 - addresses:
   - ip: 172.21.46.2
@@ -87,7 +87,7 @@ subsets:
     nodeName: silicon
   ports:
   - name: metrics
-    port: 9200
+    port: 9100
     protocol: TCP
 - addresses:
   - ip: 172.21.46.1
