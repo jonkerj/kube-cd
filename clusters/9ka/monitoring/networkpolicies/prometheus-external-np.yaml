@@ -1,0 +1,53 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: prometheus-external
+  namespace: monitoring
+spec:
+  policyTypes:
+  - Egress
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: prometheus
+      app.kubernetes.io/name: prometheus
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 172.21.42.1/32
+    - ipBlock:
+        cidr: 172.21.42.3/32
+    - ipBlock:
+        cidr: 172.21.42.7/32
+    - ipBlock:
+        cidr: 172.21.42.10/32
+    - ipBlock:
+        cidr: 172.21.42.14/32
+    - ipBlock:
+        cidr: 172.21.42.15/32
+    - ipBlock:
+        cidr: 172.21.46.1/32
+    - ipBlock:
+        cidr: 172.21.46.2/32
+    ports:
+    - protocol: TCP
+      port: 9200
+  - to:
+    - ipBlock:
+        cidr: 172.21.42.1/32
+    - ipBlock:
+        cidr: 172.21.46.1/32
+    ports:
+    - protocol: TCP
+      port: 8082
+  - to:
+    - ipBlock:
+        cidr: 172.21.46.1/32
+    ports:
+    - protocol: TCP
+      port: 8404
+  - to:
+    - ipBlock:
+        cidr: 172.21.46.2/32
+    ports:
+    - protocol: TCP
+      port: 9290

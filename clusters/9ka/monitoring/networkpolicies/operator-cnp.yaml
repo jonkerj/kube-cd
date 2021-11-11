@@ -1,0 +1,26 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: operator
+  namespace: monitoring
+spec:
+  endpointSelector:
+    matchLabels:
+      app: kube-prometheus-stack-operator
+      app.kubernetes.io/instance: kube-prometheus-stack
+  ingress:
+  - fromEntities:
+    - host
+    - remote-node
+    toPorts:
+    - ports:
+      - port: https
+        protocol: TCP
+  egress:
+  - toEntities:
+    - host
+    - remote-node
+    toPorts:
+    - ports:
+      - port: "6443"
+        protocol: TCP

@@ -5,3 +5,4 @@ resources:
 - sync-crd.yaml
 - sync-app.yaml
 - sync-content.yaml
+- networkpolicies

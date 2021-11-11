@@ -1,0 +1,17 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: node-exporters
+  namespace: monitoring
+spec:
+  endpointSelector:
+    matchLabels:
+      app: prometheus-node-exporter
+  ingress:
+  - fromEntities:
+    - host
+    - remote-node
+    toPorts:
+    - ports:
+      - port: metrics
+        protocol: TCP
