@@ -1,0 +1,20 @@
+apiVersion: cilium.io/v2
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: ingress-nginx
+  namespace: ingress
+spec:
+  endpointSelector:
+    matchLabels:
+      "k8s:io.kubernetes.pod.namespace": ingress
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: ingress-nginx
+      app.kubernetes.io/name: ingress-nginx
+  egress:
+  - toEndpoints:
+    - matchLabels:
+        acme.cert-manager.io/http01-solver: "true"
+    toPorts:
+    - ports:
+      - port: http
+        protocol: TCP
