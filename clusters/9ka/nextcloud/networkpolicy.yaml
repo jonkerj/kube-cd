@@ -10,8 +10,8 @@ spec:
   podSelector:
     matchLabels:
       app.kubernetes.io/component: app
-      app.kubernetes.io/instance: nextcloud
       app.kubernetes.io/name: nextcloud
+      app.kubernetes.io/instance: nextcloud
   ingress:
   - from:
     - namespaceSelector:
@@ -24,4 +24,5 @@ spec:
           app.kubernetes.io/name: ingress-nginx
     ports:
     - protocol: TCP
-      port: http
+      port: 80
+  egress: []
