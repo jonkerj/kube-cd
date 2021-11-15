@@ -16,3 +16,20 @@ spec:
     - ports:
       - port: "6443"
         protocol: TCP
+  - toFQDNs:
+    - matchName: acme-v02.api.letsencrypt.org
+    toPorts:
+    - ports:
+      - port: "443"
+        protocol: TCP
+  - toEndpoints:
+    - matchLabels:
+        "k8s:io.kubernetes.pod.namespace": kube-system
+        "k8s:k8s-app": kube-dns
+    toPorts:
+    - ports:
+      - port: "53"
+        protocol: ANY
+      rules:
+        dns:
+        - matchPattern: "*"
