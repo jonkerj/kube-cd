@@ -35,3 +35,9 @@ spec:
     ports:
     - protocol: UDP
       port: dns
+  - to:
+    - ipBlock:
+        cidr: 185.76.17.56/29
+    ports:
+    - protocol: TCP
+      port: 80
