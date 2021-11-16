@@ -22,4 +22,4 @@ spec:
           app.kubernetes.io/name: dex
     ports:
     - protocol: TCP
-      port: 5556
+      port: http

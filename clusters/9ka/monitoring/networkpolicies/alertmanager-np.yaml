@@ -23,14 +23,14 @@ spec:
           app.kubernetes.io/name: ingress-nginx
     ports:
     - protocol: TCP
-      port: 9093
+      port: web
   - from:
     - podSelector:
         matchLabels:
           app.kubernetes.io/name: prometheus
     ports:
     - protocol: TCP
-      port: 9093
+      port: web
   egress:
   - to:
     - namespaceSelector:
@@ -41,4 +41,4 @@ spec:
           k8s-app: kube-dns
     ports:
     - protocol: UDP
-      port: 53
+      port: dns

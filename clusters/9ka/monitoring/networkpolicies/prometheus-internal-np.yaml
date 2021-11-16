@@ -23,7 +23,7 @@ spec:
           app.kubernetes.io/name: ingress-nginx
     ports:
     - protocol: TCP
-      port: 9090
+      port: web
   - from:
     - podSelector:
         matchLabels:
@@ -31,7 +31,7 @@ spec:
           app.kubernetes.io/name: grafana
     ports:
     - protocol: TCP
-      port: 9090
+      port: web
   egress:
   - to:
     - namespaceSelector:
@@ -42,7 +42,7 @@ spec:
           k8s-app: kube-dns
     ports:
     - protocol: UDP
-      port: 53
+      port: dns
   - to:
     - namespaceSelector:
         matchLabels:
@@ -65,7 +65,7 @@ spec:
           app.kubernetes.io/name: ingress-nginx
     ports:
     - protocol: TCP
-      port: 10254
+      port: metrics
   - to:
     - podSelector:
         matchLabels:
@@ -74,7 +74,7 @@ spec:
           app.kubernetes.io/name: alertmanager
     ports:
     - protocol: TCP
-      port: 9093
+      port: web
   - to:
     - podSelector:
         matchLabels:
@@ -82,7 +82,7 @@ spec:
           app.kubernetes.io/name: grafana
     ports:
     - protocol: TCP
-      port: 3000
+      port: grafana
   - to:
     - podSelector:
         matchLabels:
@@ -97,7 +97,7 @@ spec:
           app: prometheus-node-exporter
     ports:
     - protocol: TCP
-      port: 9100
+      port: metrics
   - to:
     - podSelector:
         matchLabels:
@@ -106,7 +106,7 @@ spec:
           app.kubernetes.io/part-of: kube-prometheus-stack
     ports:
     - protocol: TCP
-      port: 10250
+      port: https
   - to:
     - namespaceSelector:
         matchLabels:
@@ -118,4 +118,4 @@ spec:
           name: velero
     ports:
     - protocol: TCP
-      port: 8085
+      port: http-monitoring

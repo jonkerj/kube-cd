@@ -21,4 +21,4 @@ spec:
           app: notification-controller
     ports:
     - protocol: TCP
-      port: 9292
+      port: http-webhook
