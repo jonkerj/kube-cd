@@ -14,14 +14,6 @@ spec:
         name: cilium
         namespace: flux-system
   values:
-    bpf:
-      ctTcpMax: 262144
-      ctAnyMax: 131072
-      lbMapMax: 32768
-      policyMapMax: 8192
-      natMax: 262144
-      neighMax: 262144
-      mapDynamicSizeRatio: 0.001
     hubble:
       relay:
         enabled: true
