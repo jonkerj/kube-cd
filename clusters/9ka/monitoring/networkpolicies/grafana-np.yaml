@@ -50,4 +50,4 @@ spec:
           app.kubernetes.io/name: prometheus
     ports:
     - protocol: TCP
-      port: web
+      port: 9090

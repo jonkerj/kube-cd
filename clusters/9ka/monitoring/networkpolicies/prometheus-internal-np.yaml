@@ -31,7 +31,7 @@ spec:
           app.kubernetes.io/name: grafana
     ports:
     - protocol: TCP
-      port: web
+      port: 9090
   egress:
   - to:
     - namespaceSelector:
@@ -65,7 +65,7 @@ spec:
           app.kubernetes.io/name: ingress-nginx
     ports:
     - protocol: TCP
-      port: metrics
+      port: 10254
   - to:
     - podSelector:
         matchLabels:
@@ -74,7 +74,7 @@ spec:
           app.kubernetes.io/name: alertmanager
     ports:
     - protocol: TCP
-      port: web
+      port: 9093
   - to:
     - podSelector:
         matchLabels:
@@ -97,7 +97,7 @@ spec:
           app: prometheus-node-exporter
     ports:
     - protocol: TCP
-      port: metrics
+      port: 9100
   - to:
     - podSelector:
         matchLabels:
@@ -106,7 +106,7 @@ spec:
           app.kubernetes.io/part-of: kube-prometheus-stack
     ports:
     - protocol: TCP
-      port: https
+      port: 10250
   - to:
     - namespaceSelector:
         matchLabels:
