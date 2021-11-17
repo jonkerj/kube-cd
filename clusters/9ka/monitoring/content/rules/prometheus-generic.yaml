@@ -9,7 +9,7 @@ spec:
     rules:
     - alert: TargetDown
       annotations:
-        summary: 'Target {{ $labels.node_name }} is down'
+        summary: 'Target {{ $labels.job }} on {{ $labels.node_name }} is down'
         description: '{{ $labels.job }}/{{ $labels.service }} in {{ $labels.namespace }} with name {{ $labels.node_name }} is down'
       expr: up == 0
       for: 5m
