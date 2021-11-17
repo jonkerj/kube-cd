@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: cni
+  namespace: monitoring
+spec:
+  groups:
+  - name: cilium
+    rules:
+    - alert: PolicyDrops
+      expr: sum by (node) (increase(hubble_drop_total{reason="Policy denied"}[5m])) > 0
+      for: 0s
+      labels:
+        severity: warning
+      annotations:
+        summary: "Node {{ $labels.node }} is dropping packets due to policy"
+        description: "Node {{ $labels.node }} is dropping {{ $value }} packets due to policy"
