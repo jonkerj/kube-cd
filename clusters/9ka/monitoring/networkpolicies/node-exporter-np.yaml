@@ -16,4 +16,4 @@ spec:
           app.kubernetes.io/name: prometheus
     ports:
     - protocol: TCP
-      port: metrics
+      port: 9100

@@ -22,4 +22,4 @@ spec:
           app.kubernetes.io/name: nextcloud
     ports:
     - protocol: TCP
-      port: http
+      port: 80
