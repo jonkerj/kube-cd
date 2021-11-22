@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/instance: iioflux
+    app.kubernetes.io/name: iioflux
+  name: iioflux
+  namespace: iioflux
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: iioflux
+      app.kubernetes.io/name: iioflux
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: iioflux
+        app.kubernetes.io/name: iioflux
+    spec:
+      containers:
+      - image: ghcr.io/jonkerj/iioflux:v0.0.2
+        name: iioflux
+        env:
+        - name: IIO_SENSORCONFIG
+          value: /config/sensors.yaml
+        - name: INFLUXDB_V2_BUCKET
+          value: iioflux/autogen
+        - name: INFLUXDB_V2_URL
+          value: http://influxdb.influxdb:8086
+        envFrom:
+        - secretRef:
+            name: influxdb-creds
+        resources:
+          limits:
+            cpu: 250m
+            memory: 256Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+        volumeMounts:
+        - mountPath: /config
+          name: config
+      serviceAccount: iioflux
+      serviceAccountName: iioflux
+      volumes:
+      - configMap:
+          name: iioflux
+        name: config

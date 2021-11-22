@@ -3,5 +3,7 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - secret.yaml
-- helmrelease.yaml
+- configmap.yaml
+- serviceaccount.yaml
+- deployment.yaml
 - networkpolicy.yaml

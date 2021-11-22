@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: iioflux
+  namespace: iioflux
+data:
+  sensors.yaml: |-
+    hosts:
+    - name: neon
+      uri: ip:172.21.42.10
+      devices:
+      - name: bme280
+        match:
+          name: bme280
