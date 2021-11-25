@@ -19,7 +19,7 @@ spec:
         app.kubernetes.io/name: iioflux
     spec:
       containers:
-      - image: ghcr.io/jonkerj/iioflux:v1.0.0
+      - image: ghcr.io/jonkerj/iioflux:v1.0.1
         name: iioflux
         env:
         - name: IIOFLUX_SENSORS
