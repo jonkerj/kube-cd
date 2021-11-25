@@ -19,14 +19,16 @@ spec:
         app.kubernetes.io/name: iioflux
     spec:
       containers:
-      - image: ghcr.io/jonkerj/iioflux:v0.0.2
+      - image: ghcr.io/jonkerj/iioflux:v1.0.0
         name: iioflux
         env:
-        - name: IIO_SENSORCONFIG
+        - name: IIOFLUX_SENSORS
           value: /config/sensors.yaml
-        - name: INFLUXDB_V2_BUCKET
+        - name: IIOFLUX_INFLUXDB_BUCKET
           value: iioflux/autogen
-        - name: INFLUXDB_V2_URL
+        - name: IIOFLUX_INFLUXDB_ORG
+          value: ""
+        - name: IIOFLUX_INFLUXDB_URL
           value: http://influxdb.influxdb:8086
         envFrom:
         - secretRef:
