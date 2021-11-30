@@ -26,6 +26,7 @@ spec:
   - toFQDNs:
     - matchName: accounts.google.com
     - matchName: oauth2.googleapis.com
+    - matchName: www.googleapis.com
     toPorts:
     - ports:
       - port: "443"
