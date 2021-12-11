@@ -18,6 +18,7 @@ spec:
   egress:
   - toFQDNs:
     - matchName: grafana.com
+    - matchName: storage.googleapis.com
     toPorts:
     - ports:
       - port: "443"
