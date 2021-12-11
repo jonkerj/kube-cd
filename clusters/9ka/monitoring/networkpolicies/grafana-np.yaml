@@ -51,3 +51,20 @@ spec:
     ports:
     - protocol: TCP
       port: 9090
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: dex
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/instance: dex
+          app.kubernetes.io/name: dex
+    ports:
+    - protocol: TCP
+      port: http
+  - to:
+    - ipBlock:
+        cidr: 185.76.17.60/32
+    ports:
+    - protocol: TCP
+      port: 443
