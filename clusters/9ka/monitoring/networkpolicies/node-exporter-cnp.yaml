@@ -13,5 +13,5 @@ spec:
     - remote-node
     toPorts:
     - ports:
-      - port: metrics
+      - port: http-metrics
         protocol: TCP

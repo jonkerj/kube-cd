@@ -23,7 +23,7 @@ spec:
           app.kubernetes.io/name: ingress-nginx
     ports:
     - protocol: TCP
-      port: web
+      port: http-web
   - from:
     - podSelector:
         matchLabels:

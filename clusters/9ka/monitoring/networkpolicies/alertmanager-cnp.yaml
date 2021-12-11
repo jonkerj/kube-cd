@@ -14,7 +14,7 @@ spec:
     - remote-node
     toPorts:
     - ports:
-      - port: web
+      - port: http-web
         protocol: TCP
   egress:
   - toFQDNs:
