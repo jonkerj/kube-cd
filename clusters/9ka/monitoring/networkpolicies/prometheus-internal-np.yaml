@@ -57,6 +57,46 @@ spec:
   - to:
     - namespaceSelector:
         matchLabels:
+          kubernetes.io/metadata.name: flux-system
+      podSelector:
+        matchLabels:
+          app: helm-controller
+    ports:
+    - protocol: TCP
+      port: http-prom
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: flux-system
+      podSelector:
+        matchLabels:
+          app: kustomize-controller
+    ports:
+    - protocol: TCP
+      port: http-prom
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: flux-system
+      podSelector:
+        matchLabels:
+          app: notification-controller
+    ports:
+    - protocol: TCP
+      port: http-prom
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: flux-system
+      podSelector:
+        matchLabels:
+          app: source-controller
+    ports:
+    - protocol: TCP
+      port: http-prom
+  - to:
+    - namespaceSelector:
+        matchLabels:
           kubernetes.io/metadata.name: ingress
       podSelector:
         matchLabels:
