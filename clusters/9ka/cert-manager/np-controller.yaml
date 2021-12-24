@@ -6,7 +6,6 @@ metadata:
 spec:
   policyTypes:
   - Ingress
-  - Egress
   podSelector:
     matchLabels:
       app.kubernetes.io/component: controller
@@ -24,20 +23,3 @@ spec:
     ports:
     - protocol: TCP
       port: 9402
-  egress:
-  - to:
-    - namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: kube-system
-      podSelector:
-        matchLabels:
-          k8s-app: kube-dns
-    ports:
-    - protocol: UDP
-      port: dns
-  - to:
-    - ipBlock:
-        cidr: 185.76.17.56/29
-    ports:
-    - protocol: TCP
-      port: 80

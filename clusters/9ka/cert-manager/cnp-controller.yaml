@@ -33,3 +33,9 @@ spec:
       rules:
         dns:
         - matchPattern: "*"
+  - toCIDR:
+    - 185.76.17.56/29
+    toPorts:
+    - ports:
+      - port: "80"
+        protocol: TCP

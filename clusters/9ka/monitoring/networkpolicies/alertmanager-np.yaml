@@ -5,7 +5,6 @@ metadata:
   namespace: monitoring
 spec:
   policyTypes:
-  - Egress
   - Ingress
   podSelector:
     matchLabels:
@@ -31,14 +30,3 @@ spec:
     ports:
     - protocol: TCP
       port: 9093
-  egress:
-  - to:
-    - namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: kube-system
-      podSelector:
-        matchLabels:
-          k8s-app: kube-dns
-    ports:
-    - protocol: UDP
-      port: dns
