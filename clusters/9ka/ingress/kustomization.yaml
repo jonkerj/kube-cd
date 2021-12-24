@@ -3,14 +3,3 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - helmrelease.yaml
-- ciliumnetworkpolicy.yaml
-- networkpolicy.yaml
-- networkpolicy-dex.yaml
-- networkpolicy-flux.yaml
-- networkpolicy-hubble.yaml
-- networkpolicy-influxdb.yaml
-- networkpolicy-monitoring.yaml
-- networkpolicy-nextcloud.yaml
-- networkpolicy-oauth2-proxy.yaml
-- networkpolicy-pdns-admin.yaml
-- networkpolicy-vaultwarden.yaml

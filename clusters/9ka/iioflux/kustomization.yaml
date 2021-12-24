@@ -6,4 +6,3 @@ resources:
 - configmap.yaml
 - serviceaccount.yaml
 - deployment.yaml
-- networkpolicy.yaml
