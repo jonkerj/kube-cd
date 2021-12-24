@@ -16,5 +16,5 @@ spec:
         app.kubernetes.io/name: ingress-nginx
     toPorts:
     - ports:
-      - port: http
+      - port: "8089"
         protocol: TCP

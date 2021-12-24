@@ -13,8 +13,8 @@ spec:
   egress:
   - toEndpoints:
     - matchLabels:
-        acme.cert-manager.io/http01-solver: "true"
+        "k8s:acme.cert-manager.io/http01-solver": "true"
     toPorts:
     - ports:
-      - port: http
+      - port: "8089"
         protocol: TCP
