@@ -38,7 +38,9 @@ spec:
         - name: PYNUTS_SERIAL_STOPBITS
           value: "1"
         - name: PYNUTS_SERIAL_BYTESIZE
-          value: "7"
+          value: "8"
+        - name: PYNUTS_SERIAL_TIMEOUT
+          value: "0.5"
         - name: PYNUTS_SERIAL_BAUDRATE
           value: "115200"
         image: ghcr.io/jonkerj/pynuts
