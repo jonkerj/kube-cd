@@ -32,7 +32,7 @@ spec:
         - name: PYNUTS_SERIAL_PID
           value: "6001"
         - name: PYNUTS_SERIAL_SERIAL
-          value: A9IT5F7J
+          value: AB6C51Q3
         - name: PYNUTS_SERIAL_PARITY
           value: "N"
         - name: PYNUTS_SERIAL_STOPBITS
@@ -56,7 +56,7 @@ spec:
         - mountPath: /dev
           name: hostdev
       nodeSelector:
-        feature.node.kubernetes.io/usb-0403_6001_A9IT5F7J.present: "true"
+        feature.node.kubernetes.io/usb-0403_6001_AB6C51Q3.present: "true"
       tolerations:
       - effect: NoSchedule
         key: efgh.nl/location
