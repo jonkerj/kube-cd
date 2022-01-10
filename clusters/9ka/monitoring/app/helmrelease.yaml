@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: kube-prometheus-stack
-      version: 23.2.0
+      version: 30.0.0
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
@@ -35,13 +35,6 @@ spec:
       enabled: false
     kubeProxy:
       enabled: false
-    kubeStateMetrics:
-      enabled: true
-      serviceMonitor:
-        relabelings:
-        - sourceLabels:
-          - "__meta_kubernetes_pod_node_name"
-          targetLabel: node_name
     kube-state-metrics:
       resources:
         requests:
@@ -50,12 +43,12 @@ spec:
         limits:
           cpu: 250m
           memory: 128Mi
-    nodeExporter:
-      serviceMonitor:
-        relabelings:
-        - sourceLabels:
-          - "__meta_kubernetes_pod_node_name"
-          targetLabel: node_name
+      prometheus:
+        monitor:
+          relabelings:
+          - sourceLabels:
+            - "__meta_kubernetes_pod_node_name"
+            targetLabel: node_name
     grafana:
       persistence:
         enabled: true
@@ -148,6 +141,12 @@ spec:
       - --collector.filesystem.ignored-mount-points=^/(dev|proc|sys|var/lib/docker/.+|/run/containerd/.+)($|/)
       - --collector.filesystem.ignored-fs-types=^(autofs|binfmt_misc|cgroup|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|mqueue|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|sysfs|tracefs|tmpfs)$
       - --collector.mountstats
+      prometheus:
+        monitor:
+          relabelings:
+          - sourceLabels:
+            - "__meta_kubernetes_pod_node_name"
+            targetLabel: node_name
       resources:
         requests:
           cpu: 50m
