@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smapy
+  namespace: smapy
+  labels:
+    app.kubernetes.io/instance: smapy
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: smapy
+    app.kubernetes.io/version: v0.5.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: smapy
+      app.kubernetes.io/name: smapy
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: smapy
+        app.kubernetes.io/name: smapy
+    spec:
+      serviceAccountName: smapy
+      containers:
+      - name: smapy
+        image: ghcr.io/jonkerj/smapy:v0.5.0
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 250m
+            memory: 256Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+        env:
+        - name: INFLUXDB_V2_BUCKET
+          value: solar/autogen
+        - name: INFLUXDB_V2_TAG_LOCATION
+          value: gareelhoek
+        - name: INFLUXDB_V2_URL
+          value: http://influxdb.influxdb:8086/
+        - name: SMAPY_INTERVAL
+          value: "30"
+        envFrom:
+        - secretRef:
+            name: smapy-secret
