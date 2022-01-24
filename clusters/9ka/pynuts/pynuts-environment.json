@@ -6,18 +6,22 @@
 	},{
 		"op": "add",
 		"path": "/spec/template/spec/containers/0/env/-",
-		"value": {"name": "PYNUTS_INFLUXDB_USERNAME", "valueFrom": {"secretKeyRef": {"key": "username", "name": "pynuts-influxdb"}}}
+		"value": {"name": "INFLUXDB_V2_TOKEN", "valueFrom": {"secretKeyRef": {"key": "token", "name": "pynuts-influxdb"}}}
 	},{
 		"op": "add",
 		"path": "/spec/template/spec/containers/0/env/-",
-		"value": {"name": "PYNUTS_INFLUXDB_PASSWORD", "valueFrom": {"secretKeyRef": {"key": "password", "name": "pynuts-influxdb"}}}
+		"value": {"name": "INFLUXDB_V2_URL", "value": "http://influxdb.influxdb:8086"}
 	},{
 		"op": "add",
 		"path": "/spec/template/spec/containers/0/env/-",
-		"value": {"name": "PYNUTS_INFLUXDB_DATABASE", "value": "nuts"}
+		"value": {"name": "INFLUXDB_V2_ORG", "value": "-"}
 	},{
 		"op": "add",
 		"path": "/spec/template/spec/containers/0/env/-",
-		"value": {"name": "PYNUTS_INFLUXDB_TAGS", "value": "location=gareelhoek"}
+		"value": {"name": "INFLUXDB_V2_BUCKET", "value": "nuts/autogen"}
+	},{
+		"op": "add",
+		"path": "/spec/template/spec/containers/0/env/-",
+		"value": {"name": "INFLUXDB_V2_TAG_LOCATION", "value": "location=gareelhoek"}
 	}
 ]
