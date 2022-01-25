@@ -17,22 +17,24 @@ data:
             "hide": true,
             "iconColor": "rgba(0, 211, 255, 1)",
             "name": "Annotations & Alerts",
+            "target": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
             "type": "dashboard"
           }
         ]
       },
       "editable": true,
-      "gnetId": null,
+      "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
       "links": [],
+      "liveNow": false,
       "panels": [
         {
           "collapsed": false,
-          "datasource": null,
-          "fieldConfig": {
-            "defaults": {},
-            "overrides": []
-          },
           "gridPos": {
             "h": 1,
             "w": 24,
@@ -45,7 +47,10 @@ data:
           "type": "row"
         },
         {
-          "datasource": "solar",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P2BFBC118ABCAFE8C"
+          },
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -97,7 +102,7 @@ data:
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.0.3",
+          "pluginVersion": "8.3.3",
           "targets": [
             {
               "groupBy": [
@@ -142,17 +147,18 @@ data:
               "tags": []
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Watt per Watt-Peak",
           "type": "stat"
         },
         {
-          "datasource": "solar",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P2BFBC118ABCAFE8C"
+          },
           "fieldConfig": {
             "defaults": {
               "mappings": [],
-              "max": 3000,
+              "max": 5500,
               "min": 0,
               "thresholds": {
                 "mode": "absolute",
@@ -200,7 +206,7 @@ data:
             "showThresholdMarkers": true,
             "text": {}
           },
-          "pluginVersion": "8.0.3",
+          "pluginVersion": "8.3.3",
           "targets": [
             {
               "groupBy": [
@@ -239,13 +245,14 @@ data:
               "tags": []
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Solar Power",
           "type": "gauge"
         },
         {
-          "datasource": "Sun and Moon",
+          "datasource": {
+            "type": "fetzerch-sunandmoon-datasource",
+            "uid": "P64382691D9610877"
+          },
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -300,20 +307,21 @@ data:
             "showThresholdMarkers": true,
             "text": {}
           },
-          "pluginVersion": "8.0.3",
+          "pluginVersion": "8.3.3",
           "targets": [
             {
               "refId": "A",
               "target": "sun_azimuth"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Sun Azimuth",
           "type": "gauge"
         },
         {
-          "datasource": "Sun and Moon",
+          "datasource": {
+            "type": "fetzerch-sunandmoon-datasource",
+            "uid": "P64382691D9610877"
+          },
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -372,25 +380,18 @@ data:
             "showThresholdMarkers": true,
             "text": {}
           },
-          "pluginVersion": "8.0.3",
+          "pluginVersion": "8.3.3",
           "targets": [
             {
               "refId": "A",
               "target": "sun_altitude"
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Sun Altitude",
           "type": "gauge"
         },
         {
           "collapsed": false,
-          "datasource": null,
-          "fieldConfig": {
-            "defaults": {},
-            "overrides": []
-          },
           "gridPos": {
             "h": 1,
             "w": 24,
@@ -403,8 +404,10 @@ data:
           "type": "row"
         },
         {
-          "cacheTimeout": null,
-          "datasource": "solar",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P2BFBC118ABCAFE8C"
+          },
           "fieldConfig": {
             "defaults": {
               "decimals": 2,
@@ -470,7 +473,7 @@ data:
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.0.3",
+          "pluginVersion": "8.3.3",
           "targets": [
             {
               "groupBy": [
@@ -509,14 +512,14 @@ data:
               "tags": []
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Grid Frequency",
           "type": "stat"
         },
         {
-          "cacheTimeout": null,
-          "datasource": "solar",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P2BFBC118ABCAFE8C"
+          },
           "fieldConfig": {
             "defaults": {
               "decimals": 1,
@@ -582,7 +585,7 @@ data:
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.0.3",
+          "pluginVersion": "8.3.3",
           "targets": [
             {
               "alias": "L1",
@@ -622,13 +625,14 @@ data:
               "tags": []
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Grid voltage",
           "type": "stat"
         },
         {
-          "datasource": "solar",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P2BFBC118ABCAFE8C"
+          },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -661,6 +665,7 @@ data:
           },
           "id": 33,
           "options": {
+            "orientation": "auto",
             "reduceOptions": {
               "calcs": [
                 "lastNotNull"
@@ -672,20 +677,28 @@ data:
             "showThresholdMarkers": true,
             "text": {}
           },
-          "pluginVersion": "8.0.3",
+          "pluginVersion": "8.3.3",
           "targets": [
             {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P2BFBC118ABCAFE8C"
+              },
               "query": "SELECT spread(\"ac_total_yield\")/3600 FROM \"sma\" WHERE $timeFilter",
               "queryType": "randomWalk",
               "rawQuery": true,
-              "refId": "A"
+              "refId": "A",
+              "resultFormat": "time_series"
             }
           ],
           "title": "Yield",
           "type": "gauge"
         },
         {
-          "datasource": "solar",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P2BFBC118ABCAFE8C"
+          },
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -726,7 +739,7 @@ data:
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.0.3",
+          "pluginVersion": "8.3.3",
           "targets": [
             {
               "alias": "yield",
@@ -772,61 +785,96 @@ data:
               "tags": []
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
           "title": "Daily yield",
           "type": "stat"
         },
         {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "solar",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P2BFBC118ABCAFE8C"
+          },
           "fieldConfig": {
             "defaults": {
-              "links": []
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "links": [],
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "watt"
             },
             "overrides": []
           },
-          "fill": 1,
-          "fillGradient": 0,
           "gridPos": {
             "h": 8,
             "w": 24,
             "x": 0,
             "y": 17
           },
-          "hiddenSeries": false,
           "id": 20,
-          "interval": "30s",
-          "legend": {
-            "avg": true,
-            "current": true,
-            "max": true,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
+          "interval": "60s",
           "options": {
-            "alertThreshold": true
+            "legend": {
+              "calcs": [
+                "mean",
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "multi"
+            }
           },
-          "percentage": false,
-          "pluginVersion": "8.0.3",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
+          "pluginVersion": "8.3.3",
           "targets": [
             {
-              "alias": "Power",
+              "alias": "L1",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P2BFBC118ABCAFE8C"
+              },
               "groupBy": [
                 {
                   "params": [
@@ -836,7 +884,7 @@ data:
                 },
                 {
                   "params": [
-                    "null"
+                    "previous"
                   ],
                   "type": "fill"
                 }
@@ -850,7 +898,91 @@ data:
                 [
                   {
                     "params": [
-                      "ac_power"
+                      "ac_active_power_l1"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "L2",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P2BFBC118ABCAFE8C"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "previous"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "measurement": "sma",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "ac_active_power_l2"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "L3",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P2BFBC118ABCAFE8C"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "previous"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "measurement": "sma",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "C",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "ac_active_power_l3"
                     ],
                     "type": "field"
                   },
@@ -863,97 +995,95 @@ data:
               "tags": []
             }
           ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
           "title": "AC Power",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "watt",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
+          "type": "timeseries"
         },
         {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "solar",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P2BFBC118ABCAFE8C"
+          },
           "fieldConfig": {
             "defaults": {
-              "links": []
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "links": [],
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
             },
             "overrides": []
           },
-          "fill": 1,
-          "fillGradient": 0,
           "gridPos": {
             "h": 8,
             "w": 24,
             "x": 0,
             "y": 25
           },
-          "hiddenSeries": false,
           "id": 14,
-          "interval": "30s",
-          "legend": {
-            "avg": false,
-            "current": true,
-            "max": true,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
+          "interval": "60s",
           "options": {
-            "alertThreshold": true
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "multi"
+            }
           },
-          "percentage": false,
-          "pluginVersion": "8.0.3",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
+          "pluginVersion": "8.3.3",
           "targets": [
             {
               "alias": "L1",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P2BFBC118ABCAFE8C"
+              },
               "groupBy": [
                 {
                   "params": [
@@ -963,7 +1093,7 @@ data:
                 },
                 {
                   "params": [
-                    "null"
+                    "previous"
                   ],
                   "type": "fill"
                 }
@@ -988,119 +1118,13 @@ data:
                 ]
               ],
               "tags": []
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "AC Current",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
             },
             {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "collapsed": false,
-          "datasource": null,
-          "fieldConfig": {
-            "defaults": {},
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 1,
-            "w": 24,
-            "x": 0,
-            "y": 33
-          },
-          "id": 18,
-          "panels": [],
-          "title": "DC Side",
-          "type": "row"
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "solar",
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 7,
-            "w": 24,
-            "x": 0,
-            "y": 34
-          },
-          "hiddenSeries": false,
-          "id": 2,
-          "interval": "30s",
-          "legend": {
-            "alignAsTable": false,
-            "avg": true,
-            "current": true,
-            "max": true,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "8.0.3",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "A",
+              "alias": "L1",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P2BFBC118ABCAFE8C"
+              },
               "groupBy": [
                 {
                   "params": [
@@ -1110,7 +1134,608 @@ data:
                 },
                 {
                   "params": [
-                    "null"
+                    "previous"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "measurement": "sma",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "ac_phase_current_l2"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "L3",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P2BFBC118ABCAFE8C"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "previous"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "measurement": "sma",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "C",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "ac_phase_current_l3"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "title": "AC Current",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P2BFBC118ABCAFE8C"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "links": [],
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "volt"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 33
+          },
+          "id": 36,
+          "interval": "60s",
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "multi"
+            }
+          },
+          "pluginVersion": "8.3.3",
+          "targets": [
+            {
+              "alias": "L1",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P2BFBC118ABCAFE8C"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "previous"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "sma",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "ac_phase_voltage_l1"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "L1",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P2BFBC118ABCAFE8C"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "previous"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "measurement": "sma",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "ac_phase_voltage_l2"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "L3",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P2BFBC118ABCAFE8C"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "previous"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "measurement": "sma",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "C",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "ac_phase_voltage_l3"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "title": "AC Phase voltages",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P2BFBC118ABCAFE8C"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "links": [],
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "volt"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 41
+          },
+          "id": 37,
+          "interval": "60s",
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "multi"
+            }
+          },
+          "pluginVersion": "8.3.3",
+          "targets": [
+            {
+              "alias": "L1-L2",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P2BFBC118ABCAFE8C"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "previous"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "sma",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "ac_phase_voltage_l1_l2"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "L2-L3",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P2BFBC118ABCAFE8C"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "previous"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "measurement": "sma",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "ac_phase_voltage_l2_l3"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "L3-L1",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P2BFBC118ABCAFE8C"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "previous"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "measurement": "sma",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "C",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "ac_phase_voltage_l3_l1"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "title": "AC Inter phase voltages",
+          "type": "timeseries"
+        },
+        {
+          "collapsed": false,
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 49
+          },
+          "id": 18,
+          "panels": [],
+          "title": "DC Side",
+          "type": "row"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P2BFBC118ABCAFE8C"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "links": [],
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "watt"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 50
+          },
+          "id": 2,
+          "interval": "60s",
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "multi"
+            }
+          },
+          "pluginVersion": "8.3.3",
+          "targets": [
+            {
+              "alias": "A",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P2BFBC118ABCAFE8C"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "previous"
                   ],
                   "type": "fill"
                 }
@@ -1138,6 +1763,10 @@ data:
             },
             {
               "alias": "B",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P2BFBC118ABCAFE8C"
+              },
               "groupBy": [
                 {
                   "params": [
@@ -1147,7 +1776,7 @@ data:
                 },
                 {
                   "params": [
-                    "null"
+                    "previous"
                   ],
                   "type": "fill"
                 }
@@ -1172,9 +1801,99 @@ data:
                 ]
               ],
               "tags": []
+            }
+          ],
+          "title": "DC Power",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P2BFBC118ABCAFE8C"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "links": [],
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "watt"
             },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 57
+          },
+          "id": 38,
+          "interval": "60s",
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "multi"
+            }
+          },
+          "pluginVersion": "8.3.3",
+          "targets": [
             {
-              "alias": "total",
+              "alias": "A (400Wp)",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P2BFBC118ABCAFE8C"
+              },
               "groupBy": [
                 {
                   "params": [
@@ -1184,7 +1903,7 @@ data:
                 },
                 {
                   "params": [
-                    "linear"
+                    "previous"
                   ],
                   "type": "fill"
                 }
@@ -1192,9 +1911,54 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "SELECT mean(\"dc_power_b\") + mean(\"dc_power_a\") FROM \"sma\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
-              "rawQuery": true,
-              "refId": "C",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "dc_power_a"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  },
+                  {
+                    "params": [
+                      " / 6"
+                    ],
+                    "type": "math"
+                  }
+                ]
+              ],
+              "tags": []
+            },
+            {
+              "alias": "B (370Wp)",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P2BFBC118ABCAFE8C"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "previous"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "measurement": "sma",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "B",
               "resultFormat": "time_series",
               "select": [
                 [
@@ -1207,112 +1971,101 @@ data:
                   {
                     "params": [],
                     "type": "mean"
-                  }
-                ],
-                [
-                  {
-                    "params": [
-                      "dc_power_a"
-                    ],
-                    "type": "field"
                   },
                   {
-                    "params": [],
-                    "type": "mean"
+                    "params": [
+                      " / 8"
+                    ],
+                    "type": "math"
                   }
                 ]
               ],
               "tags": []
             }
           ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "DC Power",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "watt",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
+          "title": "DC Power per panel",
+          "type": "timeseries"
         },
         {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "solar",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P2BFBC118ABCAFE8C"
+          },
           "fieldConfig": {
             "defaults": {
-              "links": []
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "links": [],
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "volt"
             },
             "overrides": []
           },
-          "fill": 1,
-          "fillGradient": 0,
           "gridPos": {
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 41
+            "y": 64
           },
-          "hiddenSeries": false,
           "id": 10,
-          "interval": "30s",
-          "legend": {
-            "avg": false,
-            "current": true,
-            "max": true,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
+          "interval": "60s",
           "options": {
-            "alertThreshold": true
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "multi"
+            }
           },
-          "percentage": false,
-          "pluginVersion": "8.0.3",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
+          "pluginVersion": "8.3.3",
           "targets": [
             {
               "alias": "A",
@@ -1389,97 +2142,91 @@ data:
               "tags": []
             }
           ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
           "title": "DC Voltage",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "volt",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "amp",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
+          "type": "timeseries"
         },
         {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "solar",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P2BFBC118ABCAFE8C"
+          },
           "fieldConfig": {
             "defaults": {
-              "links": []
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 5,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "amp"
             },
             "overrides": []
           },
-          "fill": 1,
-          "fillGradient": 0,
           "gridPos": {
-            "h": 6,
+            "h": 7,
             "w": 24,
             "x": 0,
-            "y": 48
+            "y": 71
           },
-          "hiddenSeries": false,
-          "id": 12,
-          "interval": "30s",
-          "legend": {
-            "avg": false,
-            "current": true,
-            "max": true,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
+          "id": 35,
+          "interval": "60s",
           "options": {
-            "alertThreshold": true
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "multi"
+            }
           },
-          "percentage": false,
-          "pluginVersion": "8.0.3",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
           "targets": [
             {
               "alias": "A",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P2BFBC118ABCAFE8C"
+              },
               "groupBy": [
                 {
                   "params": [
@@ -1489,7 +2236,7 @@ data:
                 },
                 {
                   "params": [
-                    "null"
+                    "previous"
                   ],
                   "type": "fill"
                 }
@@ -1498,43 +2245,6 @@ data:
               "orderByTime": "ASC",
               "policy": "default",
               "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "dc_current_b"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "B",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "sma",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "B",
               "resultFormat": "time_series",
               "select": [
                 [
@@ -1551,59 +2261,63 @@ data:
                 ]
               ],
               "tags": []
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "DC Current",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
             },
             {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
+              "alias": "B",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P2BFBC118ABCAFE8C"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "$__interval"
+                  ],
+                  "type": "time"
+                },
+                {
+                  "params": [
+                    "previous"
+                  ],
+                  "type": "fill"
+                }
+              ],
+              "hide": false,
+              "measurement": "sma",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "refId": "B",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "dc_current_b"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "mean"
+                  }
+                ]
+              ],
+              "tags": []
             }
           ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
+          "title": "DC Current",
+          "type": "timeseries"
         }
       ],
       "refresh": "30s",
-      "schemaVersion": 30,
+      "schemaVersion": 34,
       "style": "dark",
       "tags": [],
       "templating": {
         "list": []
       },
       "time": {
-        "from": "now-24h",
+        "from": "now-12h",
         "to": "now"
       },
       "timepicker": {
@@ -1622,5 +2336,6 @@ data:
       "timezone": "",
       "title": "Solar",
       "uid": "scZPE0ZGk",
-      "version": 1
+      "version": 2,
+      "weekStart": ""
     }
