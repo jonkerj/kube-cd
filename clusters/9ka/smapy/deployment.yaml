@@ -33,12 +33,14 @@ spec:
             cpu: 50m
             memory: 128Mi
         env:
+        - name: INFLUXDB_V2_ORG
+          value: influxdata
         - name: INFLUXDB_V2_BUCKET
-          value: solar/autogen
+          value: solar
         - name: INFLUXDB_V2_TAG_LOCATION
           value: gareelhoek
         - name: INFLUXDB_V2_URL
-          value: http://influxdb.influxdb:8086/
+          value: http://influxdb2.influxdb
         - name: SMAPY_INTERVAL
           value: "30"
         envFrom:
