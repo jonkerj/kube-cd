@@ -25,11 +25,11 @@ spec:
         - name: IIOFLUX_SENSORS
           value: /config/sensors.yaml
         - name: IIOFLUX_INFLUXDB_BUCKET
-          value: iioflux/autogen
+          value: iio
         - name: IIOFLUX_INFLUXDB_ORG
-          value: ""
+          value: influxdata
         - name: IIOFLUX_INFLUXDB_URL
-          value: http://influxdb.influxdb:8086
+          value: http://influxdb2.influxdb
         envFrom:
         - secretRef:
             name: influxdb-creds
