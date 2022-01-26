@@ -15,8 +15,7 @@ spec:
         namespace: flux-system
   values:
     image:
-      repository: docker.io/jonkerj/node-feature-discovery
-      tag: v0.10.0-minimal
+      tag: v0.10.1-minimal
     worker:
       config:
         sources:
