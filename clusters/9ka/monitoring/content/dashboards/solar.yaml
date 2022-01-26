@@ -817,7 +817,7 @@ data:
                   "type": "linear"
                 },
                 "showPoints": "never",
-                "spanNulls": true,
+                "spanNulls": 300000,
                 "stacking": {
                   "group": "A",
                   "mode": "normal"
@@ -884,7 +884,7 @@ data:
                 },
                 {
                   "params": [
-                    "previous"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -925,7 +925,7 @@ data:
                 },
                 {
                   "params": [
-                    "previous"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -967,7 +967,7 @@ data:
                 },
                 {
                   "params": [
-                    "previous"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -1027,7 +1027,7 @@ data:
                   "type": "linear"
                 },
                 "showPoints": "never",
-                "spanNulls": true,
+                "spanNulls": 300000,
                 "stacking": {
                   "group": "A",
                   "mode": "normal"
@@ -1093,7 +1093,7 @@ data:
                 },
                 {
                   "params": [
-                    "previous"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -1134,7 +1134,7 @@ data:
                 },
                 {
                   "params": [
-                    "previous"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -1176,7 +1176,7 @@ data:
                 },
                 {
                   "params": [
-                    "previous"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -1236,7 +1236,7 @@ data:
                   "type": "linear"
                 },
                 "showPoints": "never",
-                "spanNulls": true,
+                "spanNulls": 300000,
                 "stacking": {
                   "group": "A",
                   "mode": "none"
@@ -1302,7 +1302,7 @@ data:
                 },
                 {
                   "params": [
-                    "previous"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -1343,7 +1343,7 @@ data:
                 },
                 {
                   "params": [
-                    "previous"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -1385,7 +1385,7 @@ data:
                 },
                 {
                   "params": [
-                    "previous"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -1445,7 +1445,7 @@ data:
                   "type": "linear"
                 },
                 "showPoints": "never",
-                "spanNulls": true,
+                "spanNulls": 300000,
                 "stacking": {
                   "group": "A",
                   "mode": "none"
@@ -1511,7 +1511,7 @@ data:
                 },
                 {
                   "params": [
-                    "previous"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -1552,7 +1552,7 @@ data:
                 },
                 {
                   "params": [
-                    "previous"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -1594,7 +1594,7 @@ data:
                 },
                 {
                   "params": [
-                    "previous"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -1667,7 +1667,7 @@ data:
                   "type": "linear"
                 },
                 "showPoints": "never",
-                "spanNulls": true,
+                "spanNulls": 300000,
                 "stacking": {
                   "group": "A",
                   "mode": "normal"
@@ -1735,7 +1735,7 @@ data:
                 },
                 {
                   "params": [
-                    "previous"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -1776,7 +1776,7 @@ data:
                 },
                 {
                   "params": [
-                    "previous"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -1835,7 +1835,7 @@ data:
                   "type": "linear"
                 },
                 "showPoints": "never",
-                "spanNulls": true,
+                "spanNulls": 300000,
                 "stacking": {
                   "group": "A",
                   "mode": "none"
@@ -1903,7 +1903,7 @@ data:
                 },
                 {
                   "params": [
-                    "previous"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -1950,7 +1950,7 @@ data:
                 },
                 {
                   "params": [
-                    "previous"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -2015,7 +2015,7 @@ data:
                   "type": "linear"
                 },
                 "showPoints": "never",
-                "spanNulls": true,
+                "spanNulls": 300000,
                 "stacking": {
                   "group": "A",
                   "mode": "none"
@@ -2174,7 +2174,7 @@ data:
                   "type": "linear"
                 },
                 "showPoints": "auto",
-                "spanNulls": false,
+                "spanNulls": 300000,
                 "stacking": {
                   "group": "A",
                   "mode": "none"
@@ -2236,7 +2236,7 @@ data:
                 },
                 {
                   "params": [
-                    "previous"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -2277,7 +2277,7 @@ data:
                 },
                 {
                   "params": [
-                    "previous"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -2317,7 +2317,7 @@ data:
         "list": []
       },
       "time": {
-        "from": "now-12h",
+        "from": "now-24h",
         "to": "now"
       },
       "timepicker": {
@@ -2336,6 +2336,6 @@ data:
       "timezone": "",
       "title": "Solar",
       "uid": "scZPE0ZGk",
-      "version": 2,
+      "version": 3,
       "weekStart": ""
     }
