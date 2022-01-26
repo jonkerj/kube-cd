@@ -3,5 +3,4 @@ kind: Kustomization
 resources:
 - cilium
 - metrics-server
-- node-feature-discovery
 - oidc-admin-group.yaml
