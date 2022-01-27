@@ -18,83 +18,122 @@ data:
             "hide": true,
             "iconColor": "rgba(0, 211, 255, 1)",
             "name": "Annotations & Alerts",
+            "target": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
             "type": "dashboard"
           }
         ]
       },
       "editable": true,
-      "gnetId": null,
+      "fiscalYearStartMonth": 0,
       "graphTooltip": 1,
-      "id": 13,
       "links": [],
+      "liveNow": false,
       "panels": [
         {
-          "aliasColors": {
-            "bme280": "yellow",
-            "si7020": "blue",
-            "thermal": "green"
+          "datasource": {
+            "type": "influxdb",
+            "uid": "DS_INFLUXDB"
           },
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "iioflux",
-          "editable": true,
-          "error": false,
+          "description": "IIO stats voor de zolder",
           "fieldConfig": {
             "defaults": {
-              "custom": {}
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "links": [],
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "celsius"
             },
-            "overrides": []
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "humidityrelative"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "humidity"
+                  }
+                ]
+              }
+            ]
           },
-          "fill": 1,
-          "fillGradient": 0,
-          "grid": {},
           "gridPos": {
             "h": 7,
             "w": 24,
             "x": 0,
             "y": 0
           },
-          "hiddenSeries": false,
           "id": 1,
-          "legend": {
-            "alignAsTable": false,
-            "avg": true,
-            "current": true,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
           "links": [],
-          "nullPointMode": "connected",
           "options": {
-            "dataLinks": []
-          },
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "seriesOverrides": [
-            {
-              "alias": "temperature"
+            "legend": {
+              "calcs": [
+                "mean",
+                "lastNotNull"
+              ],
+              "displayMode": "list",
+              "placement": "bottom"
             },
-            {
-              "alias": "humidity",
-              "yaxis": 2
+            "tooltip": {
+              "mode": "single"
             }
-          ],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
+          },
+          "pluginVersion": "8.3.4",
           "targets": [
             {
               "alias": "temperature",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "DS_INFLUXDB"
+              },
               "groupBy": [
                 {
                   "params": [
@@ -112,6 +151,7 @@ data:
               "measurement": "bme280",
               "orderByTime": "ASC",
               "policy": "default",
+              "query": "from(bucket: \"iio\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"bme280\" and r._field == \"temp\" and r[\"host\"] == \"neon\")\n  |> drop(columns: [\"host\"])\n  |> map(fn: (r) => ({r with _value: r._value / 1000.0}))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"temp\")\n",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -144,6 +184,10 @@ data:
             },
             {
               "alias": "humidity",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "DS_INFLUXDB"
+              },
               "groupBy": [
                 {
                   "params": [
@@ -161,6 +205,7 @@ data:
               "measurement": "bme280",
               "orderByTime": "ASC",
               "policy": "default",
+              "query": "from(bucket: \"iio\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"bme280\" and r._field == \"humidityrelative\" and r[\"host\"] == \"neon\")\n  |> drop(columns: [\"host\"])\n  |> map(fn: (r) => ({r with _value: r._value / 1000.0}))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"humidityrelative\")\n",
               "refId": "B",
               "resultFormat": "time_series",
               "select": [
@@ -192,51 +237,12 @@ data:
               ]
             }
           ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
           "title": "zolder",
-          "tooltip": {
-            "msResolution": false,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "celsius",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "humidity",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
+          "type": "timeseries"
         }
       ],
       "refresh": "30s",
-      "schemaVersion": 25,
+      "schemaVersion": 34,
       "style": "dark",
       "tags": [],
       "templating": {
@@ -274,5 +280,6 @@ data:
       "timezone": "browser",
       "title": "IIO",
       "uid": "000000003",
-      "version": 3
+      "version": 1,
+      "weekStart": ""
     }
