@@ -4,5 +4,4 @@ resources:
 - influxdb.yaml
 - nuts.yaml
 - prometheus.yaml
-- solar.yaml
 - sunmoon.yaml

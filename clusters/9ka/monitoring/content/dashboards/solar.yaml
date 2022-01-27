@@ -30,6 +30,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
+      "iteration": 1643309542941,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -49,7 +50,7 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P2BFBC118ABCAFE8C"
+            "uid": "DS_INFLUXDB"
           },
           "description": "",
           "fieldConfig": {
@@ -102,9 +103,13 @@ data:
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "8.3.4",
           "targets": [
             {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "DS_INFLUXDB"
+              },
               "groupBy": [
                 {
                   "params": [
@@ -122,6 +127,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
+              "query": "from(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field == \"ac_pv_generated_power\" and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _value: r._value /5360.0 }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -153,8 +159,9 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P2BFBC118ABCAFE8C"
+            "uid": "DS_INFLUXDB"
           },
+          "description": "",
           "fieldConfig": {
             "defaults": {
               "mappings": [],
@@ -206,9 +213,13 @@ data:
             "showThresholdMarkers": true,
             "text": {}
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "8.3.4",
           "targets": [
             {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "DS_INFLUXDB"
+              },
               "groupBy": [
                 {
                   "params": [
@@ -226,6 +237,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
+              "query": "from(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field == \"ac_power\" and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -307,7 +319,7 @@ data:
             "showThresholdMarkers": true,
             "text": {}
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "8.3.4",
           "targets": [
             {
               "refId": "A",
@@ -380,7 +392,7 @@ data:
             "showThresholdMarkers": true,
             "text": {}
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "8.3.4",
           "targets": [
             {
               "refId": "A",
@@ -406,8 +418,9 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P2BFBC118ABCAFE8C"
+            "uid": "DS_INFLUXDB"
           },
+          "description": "",
           "fieldConfig": {
             "defaults": {
               "decimals": 2,
@@ -473,9 +486,13 @@ data:
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "8.3.4",
           "targets": [
             {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "DS_INFLUXDB"
+              },
               "groupBy": [
                 {
                   "params": [
@@ -493,6 +510,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
+              "query": "from(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field == \"ac_grid_frequency\" and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -518,8 +536,9 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P2BFBC118ABCAFE8C"
+            "uid": "DS_INFLUXDB"
           },
+          "description": "",
           "fieldConfig": {
             "defaults": {
               "decimals": 1,
@@ -585,10 +604,14 @@ data:
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "8.3.4",
           "targets": [
             {
               "alias": "L1",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "DS_INFLUXDB"
+              },
               "groupBy": [
                 {
                   "params": [
@@ -606,6 +629,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
+              "query": "from(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field == \"ac_phase_voltage_l1\" and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -631,8 +655,9 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P2BFBC118ABCAFE8C"
+            "uid": "DS_INFLUXDB"
           },
+          "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -677,14 +702,14 @@ data:
             "showThresholdMarkers": true,
             "text": {}
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "8.3.4",
           "targets": [
             {
               "datasource": {
                 "type": "influxdb",
-                "uid": "P2BFBC118ABCAFE8C"
+                "uid": "DS_INFLUXDB"
               },
-              "query": "SELECT spread(\"ac_total_yield\")/3600 FROM \"sma\" WHERE $timeFilter",
+              "query": "from(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field == \"ac_total_yield\" and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> spread()\n  |> map(fn: (r) => ({ r with _value: r._value /3600.0 }))\n  |> yield(name: \"power\")",
               "queryType": "randomWalk",
               "rawQuery": true,
               "refId": "A",
@@ -697,7 +722,7 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P2BFBC118ABCAFE8C"
+            "uid": "DS_INFLUXDB"
           },
           "description": "",
           "fieldConfig": {
@@ -739,10 +764,14 @@ data:
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "8.3.4",
           "targets": [
             {
               "alias": "yield",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "DS_INFLUXDB"
+              },
               "groupBy": [
                 {
                   "params": [
@@ -760,6 +789,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
+              "query": "from(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field == \"ac_daily_yield\" and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _value: r._value /3600.0 }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -791,8 +821,9 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P2BFBC118ABCAFE8C"
+            "uid": "DS_INFLUXDB"
           },
+          "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -873,7 +904,7 @@ data:
               "alias": "L1",
               "datasource": {
                 "type": "influxdb",
-                "uid": "P2BFBC118ABCAFE8C"
+                "uid": "DS_INFLUXDB"
               },
               "groupBy": [
                 {
@@ -892,6 +923,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
+              "query": "import \"strings\"\n\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /ac_active_power_l./ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.replaceAll(v: r._field, t: \"ac_active_power_\", u: \"\"), _value: r._value }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -899,90 +931,6 @@ data:
                   {
                     "params": [
                       "ac_active_power_l1"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "L2",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "P2BFBC118ABCAFE8C"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "sma",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "ac_active_power_l2"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "L3",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "P2BFBC118ABCAFE8C"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "sma",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "C",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "ac_active_power_l3"
                     ],
                     "type": "field"
                   },
@@ -1001,8 +949,9 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P2BFBC118ABCAFE8C"
+            "uid": "DS_INFLUXDB"
           },
+          "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1082,7 +1031,7 @@ data:
               "alias": "L1",
               "datasource": {
                 "type": "influxdb",
-                "uid": "P2BFBC118ABCAFE8C"
+                "uid": "DS_INFLUXDB"
               },
               "groupBy": [
                 {
@@ -1101,6 +1050,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
+              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /ac_phase_current_l./ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.replaceAll(v: r._field, t: \"ac_active_power_\", u: \"\"), _value: r._value }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1108,90 +1058,6 @@ data:
                   {
                     "params": [
                       "ac_phase_current_l1"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "L1",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "P2BFBC118ABCAFE8C"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "sma",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "ac_phase_current_l2"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "L3",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "P2BFBC118ABCAFE8C"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "sma",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "C",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "ac_phase_current_l3"
                     ],
                     "type": "field"
                   },
@@ -1210,8 +1076,9 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P2BFBC118ABCAFE8C"
+            "uid": "DS_INFLUXDB"
           },
+          "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1291,7 +1158,7 @@ data:
               "alias": "L1",
               "datasource": {
                 "type": "influxdb",
-                "uid": "P2BFBC118ABCAFE8C"
+                "uid": "DS_INFLUXDB"
               },
               "groupBy": [
                 {
@@ -1310,6 +1177,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
+              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /^ac_phase_voltage_l.$/ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.replaceAll(v: r._field, t: \"ac_phase_voltage_\", u: \"\"), _value: r._value }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1317,90 +1185,6 @@ data:
                   {
                     "params": [
                       "ac_phase_voltage_l1"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "L1",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "P2BFBC118ABCAFE8C"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "sma",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "ac_phase_voltage_l2"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "L3",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "P2BFBC118ABCAFE8C"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "sma",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "C",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "ac_phase_voltage_l3"
                     ],
                     "type": "field"
                   },
@@ -1419,8 +1203,9 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P2BFBC118ABCAFE8C"
+            "uid": "DS_INFLUXDB"
           },
+          "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1500,7 +1285,7 @@ data:
               "alias": "L1-L2",
               "datasource": {
                 "type": "influxdb",
-                "uid": "P2BFBC118ABCAFE8C"
+                "uid": "DS_INFLUXDB"
               },
               "groupBy": [
                 {
@@ -1519,6 +1304,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
+              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /^ac_phase_voltage_l._l.$/ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.replaceAll(v: r._field, t: \"ac_phase_voltage_\", u: \"\"), _value: r._value }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1526,90 +1312,6 @@ data:
                   {
                     "params": [
                       "ac_phase_voltage_l1_l2"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "L2-L3",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "P2BFBC118ABCAFE8C"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "sma",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "ac_phase_voltage_l2_l3"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "L3-L1",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "P2BFBC118ABCAFE8C"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "sma",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "C",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "ac_phase_voltage_l3_l1"
                     ],
                     "type": "field"
                   },
@@ -1641,8 +1343,9 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P2BFBC118ABCAFE8C"
+            "uid": "DS_INFLUXDB"
           },
+          "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1724,7 +1427,7 @@ data:
               "alias": "A",
               "datasource": {
                 "type": "influxdb",
-                "uid": "P2BFBC118ABCAFE8C"
+                "uid": "DS_INFLUXDB"
               },
               "groupBy": [
                 {
@@ -1743,6 +1446,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
+              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /dc_power_/ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.replaceAll(v: r._field, t: \"dc_power_\", u: \"\"), _value: r._value }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1765,7 +1469,7 @@ data:
               "alias": "B",
               "datasource": {
                 "type": "influxdb",
-                "uid": "P2BFBC118ABCAFE8C"
+                "uid": "DS_INFLUXDB"
               },
               "groupBy": [
                 {
@@ -1809,8 +1513,9 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P2BFBC118ABCAFE8C"
+            "uid": "DS_INFLUXDB"
           },
+          "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1892,7 +1597,7 @@ data:
               "alias": "A (400Wp)",
               "datasource": {
                 "type": "influxdb",
-                "uid": "P2BFBC118ABCAFE8C"
+                "uid": "DS_INFLUXDB"
               },
               "groupBy": [
                 {
@@ -1911,6 +1616,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
+              "query": "import \"strings\"\n\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field == \"dc_power_a\" and r.location == \"${location}\")\n  |> map(fn: (r) => ({ r with _value: r._value / 6.0, _field: \"A\"}))\n  |> drop(columns: [\"location\"])\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> drop(columns: [\"location\"])\n  |> yield(name: \"A\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1939,7 +1645,7 @@ data:
               "alias": "B (370Wp)",
               "datasource": {
                 "type": "influxdb",
-                "uid": "P2BFBC118ABCAFE8C"
+                "uid": "DS_INFLUXDB"
               },
               "groupBy": [
                 {
@@ -1958,6 +1664,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
+              "query": "from(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field == \"dc_power_b\" and r.location == \"${location}\")\n  |> map(fn: (r) => ({ r with _value: r._value / 8.0, _field: \"B\"}))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> drop(columns: [\"location\"])\n  |> yield(name: \"B\")",
               "refId": "B",
               "resultFormat": "time_series",
               "select": [
@@ -1989,8 +1696,9 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P2BFBC118ABCAFE8C"
+            "uid": "DS_INFLUXDB"
           },
+          "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -2069,6 +1777,10 @@ data:
           "targets": [
             {
               "alias": "A",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "DS_INFLUXDB"
+              },
               "groupBy": [
                 {
                   "params": [
@@ -2086,6 +1798,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
+              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /dc_voltage_/ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.replaceAll(v: r._field, t: \"dc_voltage_\", u: \"\"), _value: r._value }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> drop(columns: [\"location\"])\n  |> yield(name: \"voltage\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -2106,6 +1819,10 @@ data:
             },
             {
               "alias": "B",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "DS_INFLUXDB"
+              },
               "groupBy": [
                 {
                   "params": [
@@ -2148,8 +1865,9 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P2BFBC118ABCAFE8C"
+            "uid": "DS_INFLUXDB"
           },
+          "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -2225,7 +1943,7 @@ data:
               "alias": "A",
               "datasource": {
                 "type": "influxdb",
-                "uid": "P2BFBC118ABCAFE8C"
+                "uid": "DS_INFLUXDB"
               },
               "groupBy": [
                 {
@@ -2244,6 +1962,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
+              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /dc_current_/ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.replaceAll(v: r._field, t: \"dc_current_\", u: \"\"), _value: r._value }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> drop(columns: [\"location\"])\n  |> yield(name: \"voltage\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -2266,7 +1985,7 @@ data:
               "alias": "B",
               "datasource": {
                 "type": "influxdb",
-                "uid": "P2BFBC118ABCAFE8C"
+                "uid": "DS_INFLUXDB"
               },
               "groupBy": [
                 {
@@ -2314,7 +2033,31 @@ data:
       "style": "dark",
       "tags": [],
       "templating": {
-        "list": []
+        "list": [
+          {
+            "current": {
+              "selected": false,
+              "text": "gareelhoek",
+              "value": "gareelhoek"
+            },
+            "datasource": {
+              "type": "influxdb",
+              "uid": "DS_INFLUXDB"
+            },
+            "definition": "from(bucket: \"solar\")\n|> range(start: v.timeRangeStart)\n|> keyValues(keyColumns: [\"location\"])\n|> group()\n|> keep(columns: [\"location\"])\n|> distinct(column: \"location\")",
+            "hide": 0,
+            "includeAll": false,
+            "multi": false,
+            "name": "location",
+            "options": [],
+            "query": "from(bucket: \"solar\")\n|> range(start: v.timeRangeStart)\n|> keyValues(keyColumns: [\"location\"])\n|> group()\n|> keep(columns: [\"location\"])\n|> distinct(column: \"location\")",
+            "refresh": 2,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          }
+        ]
       },
       "time": {
         "from": "now-24h",
@@ -2336,6 +2079,6 @@ data:
       "timezone": "",
       "title": "Solar",
       "uid": "scZPE0ZGk",
-      "version": 3,
+      "version": 1,
       "weekStart": ""
     }
