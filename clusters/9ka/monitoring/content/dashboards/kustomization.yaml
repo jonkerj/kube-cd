@@ -8,7 +8,7 @@ resources:
 - nfsd.yaml
 - pdns-recursor.yaml
 - pve.yaml
-- pynuts.yaml
+- nuts.yaml
 - solar.yaml
 - sysstats.yaml
 - wifi.yaml

@@ -30,13 +30,14 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
+      "iteration": 1643646079661,
       "links": [],
       "liveNow": false,
       "panels": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P9093F2BB8D45A4D7"
+            "uid": "DS_INFLUXDB"
           },
           "description": "",
           "fieldConfig": {
@@ -104,8 +105,8 @@ data:
                 "max",
                 "lastNotNull"
               ],
-              "displayMode": "table",
-              "placement": "right"
+              "displayMode": "list",
+              "placement": "bottom"
             },
             "tooltip": {
               "mode": "single"
@@ -116,7 +117,7 @@ data:
               "alias": "L1",
               "datasource": {
                 "type": "influxdb",
-                "uid": "P9093F2BB8D45A4D7"
+                "uid": "DS_INFLUXDB"
               },
               "groupBy": [
                 {
@@ -135,6 +136,7 @@ data:
               "measurement": "power",
               "orderByTime": "ASC",
               "policy": "default",
+              "query": "import \"strings\"\nfrom(bucket: \"nuts\")\n\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r._field =~ /instantaneous_active_power_.*_positive/ and r[\"location\"] == \"${location}\")\n  |> map(fn: (r) => ({ r with _field: strings.substring(v: r._field, start: 27, end: 29), _value: r._value }))\n  |> drop(columns: [\"location\"])\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> yield(name: \"nuts\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -142,90 +144,6 @@ data:
                   {
                     "params": [
                       "instantaneous_active_power_l1_positive"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "L2",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "P9093F2BB8D45A4D7"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "none"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "power",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "instantaneous_active_power_l2_positive"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "L3",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "P9093F2BB8D45A4D7"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "none"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "power",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "C",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "instantaneous_active_power_l3_positive"
                     ],
                     "type": "field"
                   },
@@ -244,7 +162,7 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P9093F2BB8D45A4D7"
+            "uid": "DS_INFLUXDB"
           },
           "description": "",
           "fieldConfig": {
@@ -312,8 +230,8 @@ data:
                 "max",
                 "lastNotNull"
               ],
-              "displayMode": "table",
-              "placement": "right"
+              "displayMode": "list",
+              "placement": "bottom"
             },
             "tooltip": {
               "mode": "single"
@@ -324,7 +242,7 @@ data:
               "alias": "L1",
               "datasource": {
                 "type": "influxdb",
-                "uid": "P9093F2BB8D45A4D7"
+                "uid": "DS_INFLUXDB"
               },
               "groupBy": [
                 {
@@ -343,6 +261,7 @@ data:
               "measurement": "power",
               "orderByTime": "ASC",
               "policy": "default",
+              "query": "import \"strings\"\nfrom(bucket: \"nuts\")\n\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r._field =~ /instantaneous_active_power_.*_negative/ and r[\"location\"]==\"${location}\")\n  |> map(fn: (r) => ({ r with _field: strings.substring(v: r._field, start: 27, end: 29), _value: r._value }))\n  |> drop(columns: [\"location\"])\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> yield(name: \"nuts\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -350,90 +269,6 @@ data:
                   {
                     "params": [
                       "instantaneous_active_power_l1_negative"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "L2",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "P9093F2BB8D45A4D7"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "none"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "power",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "instantaneous_active_power_l2_negative"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "L3",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "P9093F2BB8D45A4D7"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "none"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "hide": false,
-              "measurement": "power",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "C",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "instantaneous_active_power_l3_negative"
                     ],
                     "type": "field"
                   },
@@ -452,8 +287,9 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P9093F2BB8D45A4D7"
+            "uid": "DS_INFLUXDB"
           },
+          "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -580,8 +416,8 @@ data:
                 "mean",
                 "lastNotNull"
               ],
-              "displayMode": "table",
-              "placement": "right"
+              "displayMode": "list",
+              "placement": "bottom"
             },
             "tooltip": {
               "mode": "single"
@@ -593,7 +429,7 @@ data:
               "alias": "in",
               "datasource": {
                 "type": "influxdb",
-                "uid": "P9093F2BB8D45A4D7"
+                "uid": "DS_INFLUXDB"
               },
               "groupBy": [
                 {
@@ -612,6 +448,7 @@ data:
               "measurement": "heat",
               "orderByTime": "ASC",
               "policy": "default",
+              "query": "import \"strings\"\nfrom(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"heat\" and r[\"_field\"]=~/t_/ and r[\"location\"]==\"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> map(fn: (r) => ({ r with _field: strings.substring(v: r._field, start: 2, end: 6), _value: r._value }))\n  |> drop(columns: [\"location\"])\n  |> yield(name: \"nuts\")",
               "refId": "B",
               "resultFormat": "time_series",
               "select": [
@@ -631,51 +468,10 @@ data:
               "tags": []
             },
             {
-              "alias": "out",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "P9093F2BB8D45A4D7"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "heat",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "C",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "t_out"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
               "alias": "energy",
               "datasource": {
                 "type": "influxdb",
-                "uid": "P9093F2BB8D45A4D7"
+                "uid": "DS_INFLUXDB"
               },
               "groupBy": [
                 {
@@ -693,7 +489,7 @@ data:
               ],
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "SELECT non_negative_derivative(max(\"energy\"), 1s) FROM \"heat\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"heat\" and r[\"_field\"] == \"energy\")\n  |> derivative(unit: 1s, nonNegative: true, columns: [\"_value\"], timeColumn: \"_time\")\n  |> aggregateWindow(every: v.windowPeriod, fn: max, createEmpty: false)\n  |> drop(columns: [\"location\"])\n  |> yield(name: \"max\")\n",
               "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
@@ -721,8 +517,9 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P9093F2BB8D45A4D7"
+            "uid": "DS_INFLUXDB"
           },
+          "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -837,8 +634,8 @@ data:
                 "lastNotNull",
                 "max"
               ],
-              "displayMode": "table",
-              "placement": "right"
+              "displayMode": "list",
+              "placement": "bottom"
             },
             "tooltip": {
               "mode": "single"
@@ -848,6 +645,10 @@ data:
           "targets": [
             {
               "alias": "low",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "DS_INFLUXDB"
+              },
               "groupBy": [
                 {
                   "params": [
@@ -864,47 +665,9 @@ data:
               ],
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "SELECT non_negative_derivative(max(\"electricity_used_tariff_1\"), 1s) FROM \"power\" WHERE $timeFilter GROUP BY time($__interval) fill(linear)",
+              "query": "import \"strings\"\n\nfrom(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] =~ /electricity_used_tariff/ and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: max, createEmpty: false)\n  |> derivative(unit: 1s, nonNegative: true, columns: [\"_value\"], timeColumn: \"_time\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: \"T\" + strings.substring(v: r._field, start: 24, end: 25), _value: r._value }))\n  |> yield(name: \"max\")\n",
               "rawQuery": true,
               "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "high",
-              "groupBy": [
-                {
-                  "params": [
-                    ""
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT non_negative_derivative(max(\"electricity_used_tariff_2\"), 1s) FROM \"power\" WHERE $timeFilter GROUP BY time($__interval) fill(linear)",
-              "rawQuery": true,
-              "refId": "B",
               "resultFormat": "time_series",
               "select": [
                 [
@@ -930,7 +693,7 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P9093F2BB8D45A4D7"
+            "uid": "DS_INFLUXDB"
           },
           "description": "",
           "fieldConfig": {
@@ -1047,8 +810,8 @@ data:
                 "lastNotNull",
                 "max"
               ],
-              "displayMode": "table",
-              "placement": "right"
+              "displayMode": "list",
+              "placement": "bottom"
             },
             "tooltip": {
               "mode": "single"
@@ -1058,6 +821,10 @@ data:
           "targets": [
             {
               "alias": "low",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "DS_INFLUXDB"
+              },
               "groupBy": [
                 {
                   "params": [
@@ -1074,47 +841,9 @@ data:
               ],
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "SELECT non_negative_derivative(max(\"electricity_delivered_tariff_1\"), 1s) FROM \"power\" WHERE $timeFilter GROUP BY time($__interval) fill(linear)",
+              "query": "import \"strings\"\n\nfrom(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] =~ /electricity_delivered_tariff/ and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: max, createEmpty: false)\n  |> derivative(unit: 1s, nonNegative: true, columns: [\"_value\"], timeColumn: \"_time\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: \"T\" + strings.substring(v: r._field, start: 29, end: 31), _value: r._value }))\n  |> yield(name: \"max\")\n",
               "rawQuery": true,
               "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "high",
-              "groupBy": [
-                {
-                  "params": [
-                    ""
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT non_negative_derivative(max(\"electricity_delivered_tariff_2\"), 1s) FROM \"power\" WHERE $timeFilter GROUP BY time($__interval) fill(linear)",
-              "rawQuery": true,
-              "refId": "B",
               "resultFormat": "time_series",
               "select": [
                 [
@@ -1140,8 +869,9 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P9093F2BB8D45A4D7"
+            "uid": "DS_INFLUXDB"
           },
+          "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1152,14 +882,14 @@ data:
                 "axisPlacement": "auto",
                 "barAlignment": 0,
                 "drawStyle": "line",
-                "fillOpacity": 10,
+                "fillOpacity": 76,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
                   "tooltip": false,
                   "viz": false
                 },
-                "lineInterpolation": "linear",
+                "lineInterpolation": "stepBefore",
                 "lineWidth": 1,
                 "pointSize": 5,
                 "scaleDistribution": {
@@ -1184,10 +914,6 @@ data:
                   {
                     "color": "green",
                     "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
                   }
                 ]
               },
@@ -1197,7 +923,7 @@ data:
               {
                 "matcher": {
                   "id": "byName",
-                  "options": "water"
+                  "options": "volume"
                 },
                 "properties": [
                   {
@@ -1218,7 +944,7 @@ data:
             "y": 34
           },
           "id": 3,
-          "interval": "15s",
+          "interval": "5m",
           "links": [],
           "options": {
             "legend": {
@@ -1227,8 +953,8 @@ data:
                 "lastNotNull",
                 "max"
               ],
-              "displayMode": "table",
-              "placement": "right"
+              "displayMode": "list",
+              "placement": "bottom"
             },
             "tooltip": {
               "mode": "single"
@@ -1240,7 +966,7 @@ data:
               "alias": "water",
               "datasource": {
                 "type": "influxdb",
-                "uid": "P9093F2BB8D45A4D7"
+                "uid": "DS_INFLUXDB"
               },
               "groupBy": [
                 {
@@ -1258,7 +984,7 @@ data:
               ],
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "SELECT  60 * non_negative_derivative(mean(\"volume\"), 1s) * COUNT(\"volume\") / COUNT(\"volume\") FROM \"water\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"water\" and r[\"_field\"] == \"volume\" and r[\"location\"]==\"${location}\")\n  |> drop(columns: [\"location\"])\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> fill(usePrevious: true)\n  |> derivative(unit: 60s, nonNegative: true, columns: [\"_value\"], timeColumn: \"_time\")\n  |> yield(name: \"nuts\")\n",
               "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
@@ -1286,7 +1012,7 @@ data:
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P9093F2BB8D45A4D7"
+            "uid": "DS_INFLUXDB"
           },
           "description": "",
           "fieldConfig": {
@@ -1414,19 +1140,25 @@ data:
           "options": {
             "legend": {
               "calcs": [
-                "mean"
+                "mean",
+                "max",
+                "lastNotNull"
               ],
-              "displayMode": "table",
-              "placement": "right"
+              "displayMode": "list",
+              "placement": "bottom"
             },
             "tooltip": {
-              "mode": "single"
+              "mode": "multi"
             }
           },
-          "pluginVersion": "8.3.1",
+          "pluginVersion": "8.3.4",
           "targets": [
             {
               "alias": "low",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "DS_INFLUXDB"
+              },
               "groupBy": [
                 {
                   "params": [
@@ -1438,7 +1170,7 @@ data:
               "measurement": "power",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "SELECT difference(mean(\"electricity_used_tariff_1\"))  / 3600000 FROM \"power\" WHERE $timeFilter GROUP BY time(1d) fill(linear)",
+              "query": "import \"strings\"\nfrom(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] =~ /electricity_used_tariff/ and r[\"location\"] == \"${location}\")\n  |> map(fn: (r) => ({ r with _field: \"T\" + strings.substring(v: r._field, start: 24, end: 25), _value: r._value }))\n  |> window(every: 24h, period: 24h)\n  |> spread(column: \"_value\")\n  |> map(fn: (r) => ({ r with _value: r._value / 3600000.0 }))\n  |> duplicate(column: \"_stop\", as: \"_time\")\n  |> drop(columns: [\"_start\", \"_stop\", \"location\"])\n  |> yield(name: \"nuts\")\n",
               "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
@@ -1468,334 +1200,174 @@ data:
               ],
               "tags": [],
               "tz": "Europe/Amsterdam"
-            },
-            {
-              "alias": "high",
-              "groupBy": [
-                {
-                  "params": [
-                    "1d"
-                  ],
-                  "type": "time"
-                }
-              ],
-              "measurement": "power",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT difference(mean(\"electricity_used_tariff_1\"))  / 3600000 FROM \"power\" WHERE $timeFilter GROUP BY time(1d) fill(linear)",
-              "rawQuery": false,
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "electricity_used_tariff_2"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  },
-                  {
-                    "params": [],
-                    "type": "difference"
-                  },
-                  {
-                    "params": [
-                      " / 3600000"
-                    ],
-                    "type": "math"
-                  }
-                ]
-              ],
-              "tags": [],
-              "tz": "Europe/Amsterdam"
-            },
-            {
-              "alias": "total",
-              "groupBy": [
-                {
-                  "params": [
-                    "1d"
-                  ],
-                  "type": "time"
-                }
-              ],
-              "measurement": "power",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT (difference(mean(\"electricity_used_tariff_1\")) + difference(mean(\"electricity_used_tariff_2\")))  / 3600000 FROM \"power\" WHERE $timeFilter GROUP BY time(1d) tz('Europe/Amsterdam')",
-              "rawQuery": false,
-              "refId": "C",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "electricity_used_tariff_2"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  },
-                  {
-                    "params": [],
-                    "type": "difference"
-                  },
-                  {
-                    "params": [
-                      " / 3600000"
-                    ],
-                    "type": "math"
-                  }
-                ]
-              ],
-              "tags": [],
-              "tz": "Europe/Amsterdam"
             }
           ],
           "title": "Daily electricity consumption",
           "type": "timeseries"
         },
         {
-          "aliasColors": {
-            "used_t1": "light-green",
-            "used_t2": "light-red",
-            "used_total": "dark-purple"
-          },
-          "bars": true,
-          "dashLength": 10,
-          "dashes": false,
           "datasource": {
             "type": "influxdb",
-            "uid": "P9093F2BB8D45A4D7"
+            "uid": "DS_INFLUXDB"
           },
+          "description": "",
           "fieldConfig": {
             "defaults": {
-              "links": []
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "bars",
+                "fillOpacity": 100,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "links": [],
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "kwatth"
             },
-            "overrides": []
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "used_t1"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "light-green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "used_t2"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "light-red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "used_total"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-purple",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "total"
+                },
+                "properties": [
+                  {
+                    "id": "custom.stacking",
+                    "value": {
+                      "group": false,
+                      "mode": "normal"
+                    }
+                  }
+                ]
+              }
+            ]
           },
-          "fill": 1,
-          "fillGradient": 0,
           "gridPos": {
             "h": 6,
             "w": 24,
             "x": 0,
             "y": 47
           },
-          "hiddenSeries": false,
           "id": 7,
           "interval": "",
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": false,
-          "linewidth": 1,
-          "nullPointMode": "null",
           "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "8.3.1",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "$$hashKey": "object:534",
-              "alias": "total",
-              "hiddenSeries": true,
-              "stack": false
+            "legend": {
+              "calcs": [
+                "mean",
+                "max",
+                "lastNotNull"
+              ],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single"
             }
-          ],
-          "spaceLength": 10,
-          "stack": true,
-          "steppedLine": false,
+          },
+          "pluginVersion": "8.3.4",
           "targets": [
             {
-              "alias": "low",
-              "groupBy": [
-                {
-                  "params": [
-                    "1d"
-                  ],
-                  "type": "time"
-                }
-              ],
-              "measurement": "power",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT difference(mean(\"electricity_used_tariff_1\"))  / 3600000 FROM \"power\" WHERE $timeFilter GROUP BY time(1d) fill(linear)",
-              "rawQuery": false,
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "electricity_delivered_tariff_1"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  },
-                  {
-                    "params": [],
-                    "type": "difference"
-                  },
-                  {
-                    "params": [
-                      " / 3600000"
-                    ],
-                    "type": "math"
-                  }
-                ]
-              ],
-              "tags": [],
-              "tz": "Europe/Amsterdam"
-            },
-            {
-              "alias": "high",
-              "groupBy": [
-                {
-                  "params": [
-                    "1d"
-                  ],
-                  "type": "time"
-                }
-              ],
-              "measurement": "power",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT difference(mean(\"electricity_used_tariff_1\"))  / 3600000 FROM \"power\" WHERE $timeFilter GROUP BY time(1d) fill(linear)",
-              "rawQuery": false,
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "electricity_delivered_tariff_2"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  },
-                  {
-                    "params": [],
-                    "type": "difference"
-                  },
-                  {
-                    "params": [
-                      " / 3600000"
-                    ],
-                    "type": "math"
-                  }
-                ]
-              ],
-              "tags": [],
-              "tz": "Europe/Amsterdam"
-            },
-            {
-              "alias": "total",
-              "groupBy": [
-                {
-                  "params": [
-                    "1d"
-                  ],
-                  "type": "time"
-                }
-              ],
-              "measurement": "power",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT (difference(mean(\"electricity_delivered_tariff_1\")) + difference(mean(\"electricity_delivered_tariff_2\")))  / 3600000 FROM \"power\" WHERE $timeFilter GROUP BY time(1d) fill(linear)",
-              "rawQuery": false,
-              "refId": "C",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "electricity_used_tariff_2"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  },
-                  {
-                    "params": [],
-                    "type": "difference"
-                  },
-                  {
-                    "params": [
-                      " / 3600000"
-                    ],
-                    "type": "math"
-                  }
-                ]
-              ],
-              "tags": [],
-              "tz": "Europe/Amsterdam"
+              "datasource": {
+                "type": "influxdb",
+                "uid": "DS_INFLUXDB"
+              },
+              "hide": false,
+              "query": "import \"strings\"\nfrom(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] =~ /electricity_delivered_tariff/ and r[\"location\"] == \"${location}\")\n  |> map(fn: (r) => ({ r with _field: \"T\" + strings.substring(v: r._field, start: 29, end: 30), _value: r._value }))\n  |> window(every: 24h, period: 24h)\n  |> spread(column: \"_value\")\n  |> map(fn: (r) => ({ r with _value: r._value / 3600000.0 }))\n  |> duplicate(column: \"_stop\", as: \"_time\")\n  |> drop(columns: [\"_start\", \"_stop\", \"location\"])\n  |> yield(name: \"nuts\")\n",
+              "refId": "A"
             }
           ],
-          "thresholds": [],
-          "timeRegions": [],
           "title": "Daily electricity delivery",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:543",
-              "format": "kwatth",
-              "logBase": 1,
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:544",
-              "format": "short",
-              "logBase": 1,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
+          "type": "timeseries"
         },
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "P2BFBC118ABCAFE8C"
+            "uid": "DS_INFLUXDB"
           },
+          "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -1921,10 +1493,12 @@ data:
           "options": {
             "legend": {
               "calcs": [
-                "mean"
+                "mean",
+                "max",
+                "lastNotNull"
               ],
-              "displayMode": "table",
-              "placement": "right"
+              "displayMode": "list",
+              "placement": "bottom"
             },
             "tooltip": {
               "mode": "single"
@@ -1934,6 +1508,10 @@ data:
           "targets": [
             {
               "alias": "solar",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "DS_INFLUXDB"
+              },
               "groupBy": [
                 {
                   "params": [
@@ -1945,7 +1523,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "SELECT difference(mean(\"electricity_used_tariff_1\"))  / 3600000 FROM \"power\" WHERE $timeFilter GROUP BY time(1d) fill(linear)",
+              "query": "from(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"sma\" and r[\"_field\"] == \"ac_total_yield\" and r[\"location\"] == \"${location}\")\n  |> map(fn: (r) => ({ r with _field: \"yield\" }))\n  |> window(every: 24h, period: 24h)\n  |> spread(column: \"_value\")\n  |> map(fn: (r) => ({ r with _value: r._value / 3600000.0 }))\n  |> duplicate(column: \"_stop\", as: \"_time\")\n  |> drop(columns: [\"_start\", \"_stop\", \"location\"])\n  |> yield(name: \"nuts\")\n",
               "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
@@ -1982,11 +1560,35 @@ data:
         }
       ],
       "refresh": "1m",
-      "schemaVersion": 33,
+      "schemaVersion": 34,
       "style": "dark",
       "tags": [],
       "templating": {
-        "list": []
+        "list": [
+          {
+            "current": {
+              "selected": false,
+              "text": "gareelhoek",
+              "value": "gareelhoek"
+            },
+            "datasource": {
+              "type": "influxdb",
+              "uid": "DS_INFLUXDB"
+            },
+            "definition": "from(bucket: \"solar\")\n|> range(start: v.timeRangeStart)\n|> keyValues(keyColumns: [\"location\"])\n|> group()\n|> keep(columns: [\"location\"])\n|> distinct(column: \"location\")",
+            "hide": 0,
+            "includeAll": false,
+            "multi": false,
+            "name": "location",
+            "options": [],
+            "query": "from(bucket: \"solar\")\n|> range(start: v.timeRangeStart)\n|> keyValues(keyColumns: [\"location\"])\n|> group()\n|> keep(columns: [\"location\"])\n|> distinct(column: \"location\")",
+            "refresh": 2,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          }
+        ]
       },
       "time": {
         "from": "now-24h",
@@ -2020,6 +1622,6 @@ data:
       "timezone": "browser",
       "title": "PyNuts",
       "uid": "000000001",
-      "version": 2,
+      "version": 1,
       "weekStart": ""
     }
