@@ -16,3 +16,10 @@ spec:
   values:
     persistence:
       enabled: true
+    resources:
+      requests:
+        cpu: 250m
+        memory: 2Gi
+      limits:
+        cpu: 4000m
+        memory: 4Gi
