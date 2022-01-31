@@ -10,15 +10,15 @@
 	},{
 		"op": "add",
 		"path": "/spec/template/spec/containers/0/env/-",
-		"value": {"name": "INFLUXDB_V2_URL", "value": "http://influxdb.influxdb:8086"}
+		"value": {"name": "INFLUXDB_V2_URL", "value": "http://influxdb2.influxdb"}
 	},{
 		"op": "add",
 		"path": "/spec/template/spec/containers/0/env/-",
-		"value": {"name": "INFLUXDB_V2_ORG", "value": "-"}
+		"value": {"name": "INFLUXDB_V2_ORG", "value": "influxdata"}
 	},{
 		"op": "add",
 		"path": "/spec/template/spec/containers/0/env/-",
-		"value": {"name": "INFLUXDB_V2_BUCKET", "value": "nuts/autogen"}
+		"value": {"name": "INFLUXDB_V2_BUCKET", "value": "nuts"}
 	},{
 		"op": "add",
 		"path": "/spec/template/spec/containers/0/env/-",
