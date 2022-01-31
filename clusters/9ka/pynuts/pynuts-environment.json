@@ -22,6 +22,6 @@
 	},{
 		"op": "add",
 		"path": "/spec/template/spec/containers/0/env/-",
-		"value": {"name": "INFLUXDB_V2_TAG_LOCATION", "value": "location=gareelhoek"}
+		"value": {"name": "INFLUXDB_V2_TAG_LOCATION", "value": "gareelhoek"}
 	}
 ]
