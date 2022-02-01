@@ -30,7 +30,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "iteration": 1643309542941,
+      "iteration": 1643707259832,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -888,8 +888,8 @@ data:
             "legend": {
               "calcs": [
                 "mean",
-                "lastNotNull",
-                "max"
+                "max",
+                "lastNotNull"
               ],
               "displayMode": "list",
               "placement": "bottom"
@@ -923,7 +923,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "import \"strings\"\n\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /ac_active_power_l./ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.replaceAll(v: r._field, t: \"ac_active_power_\", u: \"\"), _value: r._value }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> yield(name: \"power\")",
+              "query": "import \"strings\"\n\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /ac_active_power_l./ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: \"L\" + strings.replaceAll(v: r._field, t: \"ac_active_power_l\", u: \"\") }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1015,8 +1015,9 @@ data:
           "options": {
             "legend": {
               "calcs": [
-                "lastNotNull",
-                "max"
+                "mean",
+                "max",
+                "lastNotNull"
               ],
               "displayMode": "list",
               "placement": "bottom"
@@ -1050,7 +1051,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /ac_phase_current_l./ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.replaceAll(v: r._field, t: \"ac_active_power_\", u: \"\"), _value: r._value }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> yield(name: \"power\")",
+              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /ac_phase_current_l./ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: \"L\" + strings.replaceAll(v: r._field, t: \"ac_phase_current_l\", u: \"\")}))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1142,8 +1143,9 @@ data:
           "options": {
             "legend": {
               "calcs": [
-                "lastNotNull",
-                "max"
+                "mean",
+                "max",
+                "lastNotNull"
               ],
               "displayMode": "list",
               "placement": "bottom"
@@ -1177,7 +1179,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /^ac_phase_voltage_l.$/ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.replaceAll(v: r._field, t: \"ac_phase_voltage_\", u: \"\"), _value: r._value }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> yield(name: \"power\")",
+              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /^ac_phase_voltage_l.$/ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: \"L\" + strings.replaceAll(v: r._field, t: \"ac_phase_voltage_l\", u: \"\") }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1269,8 +1271,9 @@ data:
           "options": {
             "legend": {
               "calcs": [
-                "lastNotNull",
-                "max"
+                "mean",
+                "max",
+                "lastNotNull"
               ],
               "displayMode": "list",
               "placement": "bottom"
@@ -1411,8 +1414,8 @@ data:
             "legend": {
               "calcs": [
                 "mean",
-                "lastNotNull",
-                "max"
+                "max",
+                "lastNotNull"
               ],
               "displayMode": "list",
               "placement": "bottom"
@@ -1581,8 +1584,8 @@ data:
             "legend": {
               "calcs": [
                 "mean",
-                "lastNotNull",
-                "max"
+                "max",
+                "lastNotNull"
               ],
               "displayMode": "list",
               "placement": "bottom"
@@ -1763,8 +1766,9 @@ data:
           "options": {
             "legend": {
               "calcs": [
-                "lastNotNull",
-                "max"
+                "mean",
+                "max",
+                "lastNotNull"
               ],
               "displayMode": "list",
               "placement": "bottom"
@@ -1930,7 +1934,11 @@ data:
           "interval": "60s",
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+                "mean",
+                "max",
+                "last"
+              ],
               "displayMode": "list",
               "placement": "bottom"
             },
@@ -2079,6 +2087,6 @@ data:
       "timezone": "",
       "title": "Solar",
       "uid": "scZPE0ZGk",
-      "version": 1,
+      "version": 3,
       "weekStart": ""
     }
