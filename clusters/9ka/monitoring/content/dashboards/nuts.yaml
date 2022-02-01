@@ -30,7 +30,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "iteration": 1643646079699,
+      "iteration": 1643646079885,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -410,7 +410,7 @@ data:
             "y": 13
           },
           "id": 1,
-          "interval": "1h",
+          "interval": "30m",
           "links": [],
           "options": {
             "legend": {
@@ -491,7 +491,7 @@ data:
               ],
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"heat\" and r[\"_field\"] == \"energy\")\n  |> derivative(unit: 1s, nonNegative: true, columns: [\"_value\"], timeColumn: \"_time\")\n  |> aggregateWindow(every: v.windowPeriod, fn: max, createEmpty: false)\n  |> drop(columns: [\"location\"])\n  |> yield(name: \"max\")\n",
+              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"heat\" and r[\"_field\"] == \"energy\")\n  |> aggregateWindow(every: 1h, fn: mean, createEmpty: true)\n  |> derivative(unit: 1s, nonNegative: true, columns: [\"_value\"])\n  |> drop(columns: [\"location\"])\n  |> yield(name: \"nuts\")\n",
               "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
