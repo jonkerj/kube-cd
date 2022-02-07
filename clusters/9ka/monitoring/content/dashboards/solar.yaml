@@ -30,7 +30,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "iteration": 1643707259832,
+      "iteration": 1644221891390,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -127,7 +127,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "from(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field == \"ac_pv_generated_power\" and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _value: r._value /5360.0 }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> yield(name: \"power\")",
+              "query": "from(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field == \"ac_pv_generated_power\" and r.location == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _value: r._value /5360.0 }))\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -237,7 +237,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "from(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field == \"ac_power\" and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> yield(name: \"power\")",
+              "query": "from(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field == \"ac_power\" and r.location == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> drop(columns: [\"location\"])\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -690,6 +690,9 @@ data:
           },
           "id": 33,
           "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
             "orientation": "auto",
             "reduceOptions": {
               "calcs": [
@@ -698,9 +701,7 @@ data:
               "fields": "",
               "values": false
             },
-            "showThresholdLabels": false,
-            "showThresholdMarkers": true,
-            "text": {}
+            "textMode": "auto"
           },
           "pluginVersion": "8.3.4",
           "targets": [
@@ -709,7 +710,7 @@ data:
                 "type": "influxdb",
                 "uid": "DS_INFLUXDB"
               },
-              "query": "from(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field == \"ac_total_yield\" and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> spread()\n  |> map(fn: (r) => ({ r with _value: r._value /3600.0 }))\n  |> yield(name: \"power\")",
+              "query": "from(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field == \"ac_total_yield\" and r.location == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> drop(columns: [\"location\"])\n  |> increase()\n  |> map(fn: (r) => ({ r with _value: r._value /3600.0 }))\n  |> yield(name: \"power\")",
               "queryType": "randomWalk",
               "rawQuery": true,
               "refId": "A",
@@ -717,7 +718,7 @@ data:
             }
           ],
           "title": "Yield",
-          "type": "gauge"
+          "type": "stat"
         },
         {
           "datasource": {
@@ -789,7 +790,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "from(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field == \"ac_daily_yield\" and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _value: r._value /3600.0 }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> yield(name: \"power\")",
+              "query": "from(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field == \"ac_daily_yield\" and r.location == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _value: r._value /3600.0 }))\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -923,7 +924,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "import \"strings\"\n\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /ac_active_power_l./ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: \"L\" + strings.replaceAll(v: r._field, t: \"ac_active_power_l\", u: \"\") }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> yield(name: \"power\")",
+              "query": "import \"strings\"\n\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /ac_active_power_l./ and r.location == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: \"L\" + strings.replaceAll(v: r._field, t: \"ac_active_power_l\", u: \"\") }))\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1051,7 +1052,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /ac_phase_current_l./ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: \"L\" + strings.replaceAll(v: r._field, t: \"ac_phase_current_l\", u: \"\")}))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> yield(name: \"power\")",
+              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /ac_phase_current_l./ and r.location == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: \"L\" + strings.replaceAll(v: r._field, t: \"ac_phase_current_l\", u: \"\")}))\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1179,7 +1180,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /^ac_phase_voltage_l.$/ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: \"L\" + strings.replaceAll(v: r._field, t: \"ac_phase_voltage_l\", u: \"\") }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> yield(name: \"power\")",
+              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /^ac_phase_voltage_l.$/ and r.location == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: \"L\" + strings.replaceAll(v: r._field, t: \"ac_phase_voltage_l\", u: \"\") }))\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1307,7 +1308,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /^ac_phase_voltage_l._l.$/ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.replaceAll(v: r._field, t: \"ac_phase_voltage_\", u: \"\"), _value: r._value }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> yield(name: \"power\")",
+              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /^ac_phase_voltage_l._l.$/ and r.location == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.replaceAll(v: r._field, t: \"ac_phase_voltage_\", u: \"\"), _value: r._value }))\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1449,7 +1450,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /dc_power_/ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.replaceAll(v: r._field, t: \"dc_power_\", u: \"\"), _value: r._value }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> yield(name: \"power\")",
+              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /dc_power_/ and r.location == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.replaceAll(v: r._field, t: \"dc_power_\", u: \"\"), _value: r._value }))\n  |> yield(name: \"power\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1619,7 +1620,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "import \"strings\"\n\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field == \"dc_power_a\" and r.location == \"${location}\")\n  |> map(fn: (r) => ({ r with _value: r._value / 6.0, _field: \"A\"}))\n  |> drop(columns: [\"location\"])\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> drop(columns: [\"location\"])\n  |> yield(name: \"A\")",
+              "query": "import \"strings\"\n\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field == \"dc_power_a\" and r.location == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> map(fn: (r) => ({ r with _value: r._value / 6.0, _field: \"A\"}))\n  |> drop(columns: [\"location\"])\n  |> drop(columns: [\"location\"])\n  |> yield(name: \"A\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1802,7 +1803,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /dc_voltage_/ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.replaceAll(v: r._field, t: \"dc_voltage_\", u: \"\"), _value: r._value }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> drop(columns: [\"location\"])\n  |> yield(name: \"voltage\")",
+              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /dc_voltage_/ and r.location == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.replaceAll(v: r._field, t: \"dc_voltage_\", u: \"\"), _value: r._value }))\n  |> drop(columns: [\"location\"])\n  |> yield(name: \"voltage\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1970,7 +1971,7 @@ data:
               "measurement": "sma",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /dc_current_/ and r.location == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.replaceAll(v: r._field, t: \"dc_current_\", u: \"\"), _value: r._value }))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> drop(columns: [\"location\"])\n  |> yield(name: \"voltage\")",
+              "query": "import \"strings\"\nfrom(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"sma\" and r._field =~ /dc_current_/ and r.location == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.replaceAll(v: r._field, t: \"dc_current_\", u: \"\"), _value: r._value }))\n  |> drop(columns: [\"location\"])\n  |> yield(name: \"voltage\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -2087,6 +2088,6 @@ data:
       "timezone": "",
       "title": "Solar",
       "uid": "scZPE0ZGk",
-      "version": 3,
+      "version": 1,
       "weekStart": ""
     }
