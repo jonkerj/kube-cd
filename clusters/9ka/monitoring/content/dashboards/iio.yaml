@@ -117,13 +117,14 @@ data:
             "legend": {
               "calcs": [
                 "mean",
+                "max",
                 "lastNotNull"
               ],
               "displayMode": "list",
               "placement": "bottom"
             },
             "tooltip": {
-              "mode": "single"
+              "mode": "multi"
             }
           },
           "pluginVersion": "8.3.4",
@@ -280,6 +281,6 @@ data:
       "timezone": "browser",
       "title": "IIO",
       "uid": "000000003",
-      "version": 1,
+      "version": 2,
       "weekStart": ""
     }
