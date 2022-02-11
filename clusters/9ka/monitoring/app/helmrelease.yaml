@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: kube-prometheus-stack
-      version: 31.0.0
+      version: 32.2.0
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
@@ -63,6 +63,9 @@ spec:
         defaultMode: 0440
         mountPath: /etc/secrets/auth_generic_oauth
         readOnly: true
+      serviceMonitor:
+        enabled:
+          false
       grafana.ini:
         server:
           root_url: https://grafana.9ka.nl
