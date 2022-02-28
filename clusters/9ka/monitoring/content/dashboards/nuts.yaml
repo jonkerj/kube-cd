@@ -30,7 +30,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "iteration": 1644222181083,
+      "iteration": 1646043006112,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -627,7 +627,7 @@ data:
             "y": 20
           },
           "id": 2,
-          "interval": "30s",
+          "interval": "15s",
           "links": [],
           "options": {
             "legend": {
@@ -803,7 +803,7 @@ data:
             "y": 27
           },
           "id": 6,
-          "interval": "30s",
+          "interval": "15s",
           "links": [],
           "options": {
             "legend": {
@@ -1625,7 +1625,7 @@ data:
         ]
       },
       "timezone": "browser",
-      "title": "PyNuts",
+      "title": "Nuts",
       "uid": "000000001",
       "version": 1,
       "weekStart": ""
