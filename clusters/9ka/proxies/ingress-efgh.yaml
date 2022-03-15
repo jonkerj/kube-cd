@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: efgh
+  namespace: proxies
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: efgh.nl
+    http:
+      paths:
+      - path: /~jorik
+        pathType: Prefix
+        backend:
+          service:
+            name: argon
+            port:
+              name: http
+  tls:
+  - hosts:
+    - efgh.nl
+    secretName: efgh-tls

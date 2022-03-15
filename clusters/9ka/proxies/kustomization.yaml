@@ -3,6 +3,8 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - service-neon.yaml
+- service-argon.yaml
 - ingress-sabnzbd.yaml
 - ingress-sonarr.yaml
 - ingress-transmission.yaml
+- ingress-efgh.yaml
