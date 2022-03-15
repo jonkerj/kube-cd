@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: neon
+  namespace: proxies
+spec:
+  type: ExternalName
+  externalName: neon.thuis.efgh.nl
+  ports:
+  - port: 8989
+    name: sonarr
+    targetPort: 8989
+  - port: 8080
+    name: sabnzbd
+    targetPort: 8080
+  - port: 9091
+    name: transmission
+    targetPort: 9091

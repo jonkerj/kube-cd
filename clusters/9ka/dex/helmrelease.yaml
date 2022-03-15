@@ -32,6 +32,9 @@ spec:
         redirectURIs:
         - https://prometheus.9ka.nl/oauth2/callback
         - https://alertmanager.9ka.nl/oauth2/callback
+        - https://transmission.9ka.nl/oauth2/callback
+        - https://sonarr.9ka.nl/oauth2/callback
+        - https://sabnzbd.9ka.nl/oauth2/callback
         secretEnv: CLIENT_OAUTH2_PROXY_SECRET
       - idEnv: CLIENT_GRAFANA_ID
         redirectURIs:

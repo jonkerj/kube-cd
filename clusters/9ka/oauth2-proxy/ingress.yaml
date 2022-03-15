@@ -30,3 +30,33 @@ spec:
               number: 80
         path: /oauth2
         pathType: ImplementationSpecific
+  - host: sonarr.9ka.nl
+    http:
+      paths:
+      - backend:
+          service:
+            name: oauth2-proxy
+            port:
+              number: 80
+        path: /oauth2
+        pathType: ImplementationSpecific
+  - host: transmission.9ka.nl
+    http:
+      paths:
+      - backend:
+          service:
+            name: oauth2-proxy
+            port:
+              number: 80
+        path: /oauth2
+        pathType: ImplementationSpecific
+  - host: sabnzbd.9ka.nl
+    http:
+      paths:
+      - backend:
+          service:
+            name: oauth2-proxy
+            port:
+              number: 80
+        path: /oauth2
+        pathType: ImplementationSpecific
