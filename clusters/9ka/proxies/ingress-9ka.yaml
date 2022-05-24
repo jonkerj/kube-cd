@@ -3,12 +3,12 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-  name: efgh
+  name: 9ka
   namespace: proxies
 spec:
   ingressClassName: nginx
   rules:
-  - host: efgh.nl
+  - host: 9ka.nl
     http:
       paths:
       - path: /~jorik
@@ -20,5 +20,5 @@ spec:
               name: http
   tls:
   - hosts:
-    - efgh.nl
-    secretName: efgh-tls
+    - 9ka.nl
+    secretName: 9ka-tls
