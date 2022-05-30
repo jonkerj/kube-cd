@@ -94,7 +94,7 @@ data:
                 "type": "influxdb",
                 "uid": "DS_INFLUXDB"
               },
-              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] == \"electricity_delivered_tariff_1\" and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn:mean)\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _value: r._value / 3600.0 }))\n  |> increase()\n  |> yield(name: \"nuts\")",
+              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] == \"electricity_delivered_tariff_1\" and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn:last)\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _value: r._value / 3600.0 }))\n  |> increase()\n  |> yield(name: \"nuts\")",
               "refId": "A"
             }
           ],
@@ -160,7 +160,7 @@ data:
                 "type": "influxdb",
                 "uid": "DS_INFLUXDB"
               },
-              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] == \"electricity_used_tariff_1\" and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn:mean)\n  |> drop(columns: [\"location\"])\n  |> increase()\n  |> map(fn: (r) => ({ r with _value: r._value / -3600.0 }))\n  |> yield(name: \"nuts\")",
+              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] == \"electricity_used_tariff_1\" and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn:last)\n  |> drop(columns: [\"location\"])\n  |> increase()\n  |> map(fn: (r) => ({ r with _value: r._value / -3600.0 }))\n  |> yield(name: \"nuts\")",
               "refId": "A"
             }
           ],
@@ -226,7 +226,7 @@ data:
                 "type": "influxdb",
                 "uid": "DS_INFLUXDB"
               },
-              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] =~ /electricity_.*_tariff_1/ and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn:mean)\n  |> drop(columns: [\"location\"])\n  |> increase()\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\n  |> map(fn: (r) => ({ r with _value: (r[\"electricity_delivered_tariff_1\"]-r[\"electricity_used_tariff_1\"]) / 3600.0 }))\n  |> keep(columns: [\"_time\", \"_value\"])\n  |> yield(name: \"nuts\")",
+              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] =~ /electricity_.*_tariff_1/ and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn:last)\n  |> drop(columns: [\"location\"])\n  |> increase()\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\n  |> map(fn: (r) => ({ r with _value: (r[\"electricity_delivered_tariff_1\"]-r[\"electricity_used_tariff_1\"]) / 3600.0 }))\n  |> keep(columns: [\"_time\", \"_value\"])\n  |> yield(name: \"nuts\")",
               "refId": "A"
             }
           ],
@@ -292,7 +292,7 @@ data:
                 "type": "influxdb",
                 "uid": "DS_INFLUXDB"
               },
-              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] =~ /electricity_(used|delivered)_tariff_./ and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn:mean)\n  |> drop(columns: [\"location\"])\n  |> increase()\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\n  |> map(fn: (r) => ({ r with _value: (r[\"electricity_delivered_tariff_1\"]+r[\"electricity_delivered_tariff_2\"]-r[\"electricity_used_tariff_1\"]-r[\"electricity_used_tariff_2\"]) / 3600.0 }))\n  |> keep(columns: [\"_time\", \"_value\"])\n  |> yield(name: \"nuts\")",
+              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] =~ /electricity_(used|delivered)_tariff_./ and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn:last)\n  |> drop(columns: [\"location\"])\n  |> increase()\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\n  |> map(fn: (r) => ({ r with _value: (r[\"electricity_delivered_tariff_1\"]+r[\"electricity_delivered_tariff_2\"]-r[\"electricity_used_tariff_1\"]-r[\"electricity_used_tariff_2\"]) / 3600.0 }))\n  |> keep(columns: [\"_time\", \"_value\"])\n  |> yield(name: \"nuts\")",
               "refId": "A"
             }
           ],
@@ -358,7 +358,7 @@ data:
                 "type": "influxdb",
                 "uid": "DS_INFLUXDB"
               },
-              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] == \"electricity_delivered_tariff_2\" and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn:mean)\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _value: r._value / 3600.0 }))\n  |> increase()\n  |> yield(name: \"nuts\")",
+              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] == \"electricity_delivered_tariff_2\" and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn:last)\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _value: r._value / 3600.0 }))\n  |> increase()\n  |> yield(name: \"nuts\")",
               "refId": "A"
             }
           ],
@@ -424,7 +424,7 @@ data:
                 "type": "influxdb",
                 "uid": "DS_INFLUXDB"
               },
-              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] == \"electricity_used_tariff_2\" and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn:mean)\n  |> drop(columns: [\"location\"])\n  |> increase()\n  |> map(fn: (r) => ({ r with _value: r._value / -3600.0 }))\n  |> yield(name: \"nuts\")",
+              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] == \"electricity_used_tariff_2\" and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn:last)\n  |> drop(columns: [\"location\"])\n  |> increase()\n  |> map(fn: (r) => ({ r with _value: r._value / -3600.0 }))\n  |> yield(name: \"nuts\")",
               "refId": "A"
             }
           ],
@@ -490,7 +490,7 @@ data:
                 "type": "influxdb",
                 "uid": "DS_INFLUXDB"
               },
-              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] =~ /electricity_.*_tariff_2/ and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn:mean)\n  |> drop(columns: [\"location\"])\n  |> increase()\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\n  |> map(fn: (r) => ({ r with _value: (r[\"electricity_delivered_tariff_2\"]-r[\"electricity_used_tariff_2\"]) / 3600.0 }))\n  |> keep(columns: [\"_time\", \"_value\"])\n  |> yield(name: \"nuts\")",
+              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] =~ /electricity_.*_tariff_2/ and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn:last)\n  |> drop(columns: [\"location\"])\n  |> increase()\n  |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\n  |> map(fn: (r) => ({ r with _value: (r[\"electricity_delivered_tariff_2\"]-r[\"electricity_used_tariff_2\"]) / 3600.0 }))\n  |> keep(columns: [\"_time\", \"_value\"])\n  |> yield(name: \"nuts\")",
               "refId": "A"
             }
           ],
@@ -556,7 +556,7 @@ data:
                 "type": "influxdb",
                 "uid": "DS_INFLUXDB"
               },
-              "query": "from(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"sma\" and r[\"_field\"] == \"ac_total_yield\" and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn:mean)\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _value: r._value / 3600.0 }))\n  |> increase()\n  |> yield(name: \"nuts\")",
+              "query": "from(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"sma\" and r[\"_field\"] == \"ac_total_yield\" and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn:last)\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _value: r._value / 3600.0 }))\n  |> increase()\n  |> yield(name: \"nuts\")",
               "refId": "A"
             }
           ],
@@ -622,7 +622,7 @@ data:
                 "type": "influxdb",
                 "uid": "DS_INFLUXDB"
               },
-              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"heat\" and r[\"_field\"] == \"energy\" and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn:mean)\n  |> drop(columns: [\"location\"])\n  |> increase()\n  |> yield(name: \"nuts\")",
+              "query": "from(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"heat\" and r[\"_field\"] == \"energy\" and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn:last)\n  |> drop(columns: [\"location\"])\n  |> increase()\n  |> yield(name: \"nuts\")",
               "refId": "A"
             }
           ],
