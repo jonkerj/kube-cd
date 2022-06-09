@@ -76,7 +76,7 @@ subsets:
     port: 9200
     protocol: TCP
 - addresses:
-  - ip: 172.21.46.2
+  - ip: 172.21.46.1
     nodeName: pve
   ports:
   - name: metrics
@@ -90,7 +90,7 @@ subsets:
     port: 9200
     protocol: TCP
 - addresses:
-  - ip: 172.21.46.1
+  - ip: 172.21.46.26
     nodeName: iron
   ports:
   - name: metrics
