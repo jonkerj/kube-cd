@@ -15,3 +15,11 @@ spec:
       annotations:
         summary: "Host high CPU load (instance {{ $labels.node_name }})"
         description: "CPU load is > 80%\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+    - alert: HostHighIOWait
+      expr: avg by (node_name) (rate(node_cpu_seconds_total{mode="iowait"}[5m])) > 0.25
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "CPU iowait is high"
+        description: "CPU iowait > 25%. A high iowait means that you are disk or network bound."
