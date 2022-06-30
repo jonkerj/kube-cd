@@ -220,3 +220,11 @@ spec:
       annotations:
         summary: Kubernetes PersistentVolumeClaim in bad state
         description: PersistentVolumeClaim {{ $labels.namespace }}/{{ $labels.persistentvolumeclaim }} is in bad ({{ $value }}) state
+    - alert: ContainerOOM
+      expr: increase(container_oom_events_total[5m]) > 0
+      for: 1m
+      labels:
+        severity: warning
+      annotations:
+        summary: Pod {{ $labels.namespace }}/{{ $labels.pod }} has a container doing OOM
+        description: Container {{ $labels.container }} of pod {{ $labels.namespace }}/{{ $labels.pod }} is getting OOMd
