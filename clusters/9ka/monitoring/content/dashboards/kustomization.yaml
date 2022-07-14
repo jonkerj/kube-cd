@@ -5,6 +5,7 @@ resources:
 - cilium-operator.yaml
 - container-resources.yaml
 - energiebalans.yaml
+- etcd.yaml
 - iio.yaml
 - nfsd.yaml
 - pdns-recursor.yaml
