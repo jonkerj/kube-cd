@@ -109,6 +109,7 @@ spec:
           - grafana.9ka.nl
       plugins:
       - fetzerch-sunandmoon-datasource
+      - gapit-htmlgraphics-panel
       sidecar:
         datasources:
           searchNamespace: ALL
