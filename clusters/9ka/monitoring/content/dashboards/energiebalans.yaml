@@ -664,7 +664,7 @@ data:
       },
       "time": {
         "from": "now/M",
-        "to": "now/M"
+        "to": "now"
       },
       "timepicker": {},
       "timezone": "",
