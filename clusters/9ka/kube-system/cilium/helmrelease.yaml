@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: cilium
-      version: 1.11.6
+      version: 1.12.2
       sourceRef:
         kind: HelmRepository
         name: cilium
@@ -35,3 +35,43 @@ spec:
         enabled: true
         serviceMonitor:
           enabled: true
+    securityContext:
+      privileged: false
+  postRenderers:
+  - kustomize:
+      patchesStrategicMerge:
+      - apiVersion: apps/v1
+        kind: DaemonSet
+        metadata:
+          name: cilium
+          namespace: kube-system
+        spec:
+          template:
+            spec:
+              containers:
+                - name: cilium-agent
+                  securityContext:
+                    capabilities:
+                      add:
+                      - CHOWN
+                      - KILL
+                      - NET_ADMIN
+                      - NET_RAW
+                      - IPC_LOCK
+                      - SYS_RESOURCE
+                      - PERFMON
+                      - BPF
+                      - DAC_OVERRIDE
+                      - FOWNER
+                      - SETGID
+                      - SETUID
+                      - SYS_ADMIN  # still needed for cgroup mounting :-(
+              initContainers:
+                - name: clean-cilium-state
+                  securityContext:
+                    capabilities:
+                      add:
+                      - NET_ADMIN
+                      - SYS_RESOURCE
+                      - PERFMON
+                      - BPF
