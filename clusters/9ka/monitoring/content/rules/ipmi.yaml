@@ -13,7 +13,7 @@ spec:
         message: IPMI SEL on {{ $labels.node_name }} is running out of space in the next 24 hours
       expr: predict_linear(ipmi_sel_free_space_bytes[6h], 24*60*60) <= 0
       labels:
-        severity: '{{ if eq .Value 2 }}critical{{else}}warning{{end}}'
+        severity: warning
     - alert: IPMISensorAbnormal
       annotations:
         summary: IPMI Sensor {{ $labels.name }} on {{ $labels.node_name }} in abnormal state
@@ -31,4 +31,4 @@ spec:
           ipmi_voltage_state != 0
         )
       labels:
-        severity: '{{ if eq .Value 2 }}critical{{else}}warning{{end}}'
+        severity: critical
