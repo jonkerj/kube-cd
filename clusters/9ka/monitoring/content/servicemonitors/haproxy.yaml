@@ -42,7 +42,7 @@ metadata:
 subsets:
 - addresses:
   - ip: 172.21.46.1
-    nodeName: iron
+    nodeName: pve
   ports:
   - name: metrics
     port: 8404

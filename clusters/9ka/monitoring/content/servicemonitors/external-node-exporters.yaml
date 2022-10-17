@@ -89,10 +89,3 @@ subsets:
   - name: metrics
     port: 9200
     protocol: TCP
-- addresses:
-  - ip: 172.21.46.26
-    nodeName: iron
-  ports:
-  - name: metrics
-    port: 9200
-    protocol: TCP
