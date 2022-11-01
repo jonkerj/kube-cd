@@ -4,6 +4,7 @@ resources:
 - cert-manager.yaml
 - cni.yaml
 - etcd.yaml
+- flux.yaml
 - grpc.yaml
 - ipmi.yaml
 - kubernetes-apps.yaml

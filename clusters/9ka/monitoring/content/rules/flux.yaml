@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: flux
+  namespace: monitoring
+spec:
+  groups:
+  - name: flux
+    rules:
+    - alert: FluxNotReconciling
+      expr: gotk_reconcile_condition{status="True",type="Ready"}==0
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: Flux {{ $labels.kind }} {{ $labels.name }} not reconciling
+        message: Flux {{ $labels.kind }} {{ $labels.name }} in namespace {{ $labels.exported_namespace }} is not reconciling
