@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: vaultwarden
-      version: 0.5.1
+      version: 1.0.0
       sourceRef:
         kind: HelmRepository
         name: gissilabs
@@ -25,7 +25,7 @@ spec:
         fromName: Jorik Jonker
         host: 172.21.46.1
         port: 25
-        ssl: false
+        security: off
     ingress:
       enabled: true
       className: nginx
