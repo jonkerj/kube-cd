@@ -5,6 +5,9 @@ metadata:
   namespace: nextcloud
 spec:
   interval: 5m
+  upgrade:
+    remediation:
+      retries: 10
   chart:
     spec:
       chart: nextcloud
