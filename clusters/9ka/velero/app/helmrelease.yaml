@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: velero
-      version: 3.1.5
+      version: 4.0.1
       sourceRef:
         kind: HelmRepository
         name: vmware-tanzu
@@ -17,9 +17,8 @@ spec:
     deployNodeAgent: false
     snapshotsEnabled: false
     configuration:
-      provider: aws
       backupStorageLocation:
-        provider: aws
+      - provider: aws
         bucket: velero
         config:
           publicUrl: http://neon.thuis.efgh.nl:9000
@@ -37,7 +36,7 @@ spec:
           includeClusterResources: true
     initContainers:
     - name: velero-plugin-for-aws
-      image: velero/velero-plugin-for-aws:v1.4.0
+      image: velero/velero-plugin-for-aws:v1.7.0
       imagePullPolicy: IfNotPresent
       volumeMounts:
       - mountPath: /target
