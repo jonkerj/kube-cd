@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: netbox-kea-config
+    labels:
+        app.kubernetes.io/name: netbox-kea
+    namespace: kea
+data:
+    efgh.toml: ENC[AES256_GCM,data:l757R6ryyvSql9wqEMTkRrflq7Ts5z0eHWKD++hXIeBWK1YP4EauJ2uGktHMWKgZEcTRi9XfSSkqCbOEEY91vZrG0rfaJ+xrI9eqLOz8aMTsHP/R39tr8QrdBSDYJMkNZFRdI0vmzqOpnq2pZNuF3WHYImgiGSflSb1v1Wlliw7oj0y9DZAD+ZPWr+eWXzfxElW91xmCDYHRQl1Y6sujTp1FDF4CHBPkeq0QbpGADbwG0q4lITO+b5OHiRTsaLCFRRYiAzBp92Yl13NnLvDaYar1uMBhJllvz8IhMT/zNKeZ2dssB6kcyAcBNwTKRFYQ2zKhK+E3MCkeLg7V+Xc7Qu/2/auCNxfdEoaAkBOnHLLegSQ3AtsGlKJv6WWRwvQ8c+EbTcco2HJpPIJKZYyAnrHKCceCxneD93iZuqxKIoCegNZbeYv81d+N6LsaejSP/fqh47Ks9h4FCKUTgW6Onj04OR+o5bIzyCGZxgSJU0tZolSP0PIzivbTj/3PStj3FcarnURJhv408W40ltR1TQ/BMYtiKhWWEf0kcNKbmC8vCWg+L18gqjCrHe5uKPfRgXqiH9/VkU5afygbLzMuLMDD0q2MbcBeO3KR4Nvz+Hz4EulcfGhjzpvLy9bHxrKsKbX2ZJy5Jd0HZZcdTdq+xX4eWMAikRFLAqsSpk5/ssgZs9mkMX7sRFOoY+9xtSyvMcsW0TV28kBb86dI9pQtIyVsnsoOJx1DzrPyDfbkwTEDeXvzIH9BWLWVzyWRFTYiJv+brARyJZilY2EWJnviYFjV63Zheq3wv/R73jmMfTtVg8RNJA9r0M7pnD00cWfl7WKxTv+VPBQTB/0Rq+xqIKncHdgeMLXjLn1RKMfilBgoX6JKOhvey0FeQd61F08LpJhXCj5u5Z4UZ0OoIaUls9LVXCHh+riPbBUpne+hEetFEdC1wPp5Fw4nBVNK3wUQkATw+CqJOvs28TSA6DksvFi0cTjGkRCtGr6twMOrj+hNc8HhylhQMuGj+irHRwPf6flgRf6V/ibwL5DyTjGmV4kgy4HwIF6E+ZO8/NGfKa/PkTuQQ8/8iIk3Xt15yX57KkUppZZpz8zd0Az2gt7i1WAzxhhqzEo/PsnB1Lm3X3P78PFeJQwlYVgkkIU63ZFMuQM5HQeesYph6dZyYTlYB3KrLj9PUWqTXmYyl7pN9JG3HVQhXfNbkJREqCL1vCJFsgNzH+LZ3EFSH+zBN+0l5VddrT0y/HmbE5K3+wuEbhsSf5k/aSX7p/n/8zSsKnjqvdpJRSGjkAIVCiy/mvhllIJWyANAp80vscfD2rhbgAJiMXQMlCcrLRQ9hQDRkb/QOeG4ZmtMkco16AeaVQz+htBECv+UHqnyRJpkSEAPWazs6ODABLj1I5tD81MoBRxyrJJ7CkLaZu/mH0O3W3UxuMUjAyl5nft9,iv:T4hHcjW5XZd8dt5oCeiQ/IzQhUg+7wJkepn8NzFxuTQ=,tag:c0wqs7HQ6twn3ah4uA07jg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    lastmodified: '2023-06-20T14:01:26Z'
+    mac: ENC[AES256_GCM,data:c4BrA9X6cY21LixYWBYl8wVjYegSQb1F99KdU7QjcNIl3s07MGNPD+pJzqJQkI6T3xvn1tXjOGhw/cq7NcqS+iEbnhuopQ/AxKSWAx0mXAN7tNFvPbPd5DPovMJcW2JNqKvspH9o23MDKWJjKBddXFS+ONr077m8DTsoCG3oKOg=,iv:K+IK/zIjo5iY/PKZbACDrnfNzeqW9s0tmF2G6sRci5Y=,tag:A5EuzUlhp00Z01lxERpFqA==,type:str]
+    pgp:
+    -   created_at: '2023-06-20T12:18:02Z'
+        enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMA59YQxrIsWI6ARAAjf5jOOjdLSvTTlHqsExProQSuD+GqxlVeXCChrWqjC93
+            MYZVNfWhOToEgZwIJUB9lE/vLNegOniHNqY+L+FWvzvJonCP4PkFmbOpWhW4pRNG
+            nsaiEdVi2MNkgwgG6Og4m0K98pPPGEmJcbo+t349MMYp+vsQ4udReP08GkBcHvAc
+            c589p5W1tTdV19MI2INQoXNjYl2h1Dnj6AL/2KmkfmWLXObSX/hbYUn6Ldfr8Eyg
+            k4ZLJy+GcosZJBzY9DCro3sF+jcskuUWf+C9eiQx2K7wBWMcJNNu4T4ubxyDDYvx
+            CSUiP995OopI7BAAhDcp587XNCQQTS0xPOSrRgUfKJoOJ4yW7o1PSs6qIkuK0se2
+            h+o4NuyHKfF2N/oGt8V75e49DPxvNay4d/nOIqvrrfBClxADrJZVZJwWL5EMLWRb
+            j3HZJa+dhvnrNSod1skug+pIFEsj3UPR8EYehxiy8htdqgaf4UDXoK7wOnfVCPw4
+            OT0qHO7c64fcoce6kxPQqxWVju9fTIndlw+++Sb4Dr7Vi/DID8bayPWk1uOgpYRC
+            mj1RHhoH9HruK2ROKZsGpqB1fzgeqSxU4Cb4tBG6OV0WNOuzy7Qdvp9TOa0sd3iF
+            jreuAEv3PTzucFY630O2GXil+NdQw3W+zBKO8O6kwzJWBVGeeMG9aHMi1hAp8APS
+            XgGT72yVeFZrKHXS/Q1OGAjQcZbtVjdqE0nSQ0JrXlt5OwHHKqNKFJWdwxOjdiT2
+            AlqZGr8LXctwg5oDPxCPHJznHA+02nC+wu9CgIPSqIv0wxe2HW0LiT8x3HsgLSg=
+            =9qTb
+            -----END PGP MESSAGE-----
+        fp: 4D72B62BB844B05E12DEC3A9A3AEC49250A67E2A
+    encrypted_regex: ^(data|stringData)$
+    version: 3.6.1

@@ -4,7 +4,7 @@ metadata:
   name: netbox-kea
   labels:
     app.kubernetes.io/name: netbox-kea
-  namespace: netbox
+  namespace: kea
 spec:
   selector:
     app.kubernetes.io/name: netbox-kea

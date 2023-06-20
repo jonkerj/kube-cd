@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/name: netbox-kea
     app.kubernetes.io/instance: netbox-kea-efgh
     app.kubernetes.io/version: 0.0.1a10
-  namespace: netbox
+  namespace: kea
 spec:
   replicas: 1
   selector:
