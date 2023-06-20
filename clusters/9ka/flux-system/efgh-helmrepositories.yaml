@@ -2,6 +2,15 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
+  name: bootc
+  namespace: flux-system
+spec:
+  url: https://charts.boo.tc
+  interval: 1h
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
   name: cilium
   namespace: flux-system
 spec:
