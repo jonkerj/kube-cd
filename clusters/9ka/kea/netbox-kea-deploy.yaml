@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: netbox-kea
-        image: ghcr.io/jonkerj/netbox-kea-dhcp:v0.0.1-alpha10oci2
+        image: ghcr.io/jonkerj/netbox-kea-dhcp:v0.0.1-alpha10oci6
         args:
         - -c
         - /config/efgh.toml
@@ -30,14 +30,17 @@ spec:
         - name: config
           mountPath: /config
         livenessProbe:
-          tcpSocket:
+          httpGet:
             port: http
+            path: /health/
         readinessProbe:
-          tcpSocket:
+          httpGet:
             port: http
+            path: /health/
         startupProbe:
-          tcpSocket:
+          httpGet:
             port: http
+            path: /health/
           failureThreshold: 120
           periodSeconds: 2
         resources:
