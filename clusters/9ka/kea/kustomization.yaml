@@ -3,5 +3,16 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - netbox-kea-config.yaml
-- netbox-kea-deploy.yaml
-- netbox-kea-service.yaml
+- netbox-kea-hydrogen-deploy.yaml
+- netbox-kea-hydrogen-service.yaml
+- netbox-kea-pve-deploy.yaml
+- netbox-kea-pve-service.yaml
+patches:
+- path: netbox-kea-container.yaml
+  target:
+    kind: Deployment
+    labelSelector: "app.kubernetes.io/name=netbox-kea"
+- path: netbox-kea-service.yaml
+  target:
+    kind: Service
+    labelSelector: "app.kubernetes.io/name=netbox-kea"

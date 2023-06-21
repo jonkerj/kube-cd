@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netbox-kea-pve
+  labels:
+    app.kubernetes.io/name: netbox-kea
+    app.kubernetes.io/instance: netbox-kea-pve
+  namespace: kea
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: netbox-kea
+      app.kubernetes.io/instance: netbox-kea-pve
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: netbox-kea
+        app.kubernetes.io/instance: netbox-kea-pve
+    spec:
+      containers:
+      - name: netbox-kea
+        image: ghcr.io/jonkerj/netbox-kea-dhcp
+        args:
+        - -c
+        - /config/pve.toml

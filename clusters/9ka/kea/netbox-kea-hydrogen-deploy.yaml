@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netbox-kea-hydrogen
+  labels:
+    app.kubernetes.io/name: netbox-kea
+    app.kubernetes.io/instance: netbox-kea-hydrogen
+  namespace: kea
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: netbox-kea
+      app.kubernetes.io/instance: netbox-kea-hydrogen
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: netbox-kea
+        app.kubernetes.io/instance: netbox-kea-hydrogen
+    spec:
+      containers:
+      - name: netbox-kea
+        args:
+        - -c
+        - /config/hydrogen.toml

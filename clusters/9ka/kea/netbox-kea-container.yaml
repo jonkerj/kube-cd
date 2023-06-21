@@ -1,28 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: netbox-kea
-  labels:
-    app.kubernetes.io/name: netbox-kea
-    app.kubernetes.io/instance: netbox-kea-efgh
-    app.kubernetes.io/version: 0.0.1a10
   namespace: kea
+  name: netbox-kea
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: netbox-kea
   template:
-    metadata:
-      labels:
-        app.kubernetes.io/name: netbox-kea
     spec:
       containers:
       - name: netbox-kea
         image: ghcr.io/jonkerj/netbox-kea-dhcp:v0.0.1-alpha10oci6
-        args:
-        - -c
-        - /config/efgh.toml
         ports:
         - containerPort: 8000
           name: http
@@ -54,4 +40,3 @@ spec:
       - name: config
         secret:
           secretName: netbox-kea-config
-
