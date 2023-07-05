@@ -4,26 +4,24 @@ metadata:
   name: pdns-admin
   labels:
     app.kubernetes.io/name: pdns-admin
-    app.kubernetes.io/instance: pdns-admin-efgh
-    app.kubernetes.io/version: 0.2.3
+    app.kubernetes.io/instance: pdns-admin
+    app.kubernetes.io/version: 0.4.1
   namespace: pdns-admin
 spec:
   replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: pdns-admin
-      app.kubernetes.io/instance: pdns-admin-efgh
-      app.kubernetes.io/version: 0.2.3
+      app.kubernetes.io/instance: pdns-admin
   template:
     metadata:
       labels:
         app.kubernetes.io/name: pdns-admin
-        app.kubernetes.io/instance: pdns-admin-efgh
-        app.kubernetes.io/version: 0.2.3
+        app.kubernetes.io/instance: pdns-admin
     spec:
       containers:
       - name: pdns-admin
-        image: ngoduykhanh/powerdns-admin:0.2.3
+        image: powerdnsadmin/pda-legacy:v0.4.1
         ports:
         - containerPort: 80
           name: http
