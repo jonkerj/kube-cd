@@ -14,6 +14,8 @@ spec:
         name: gissilabs
         namespace: flux-system
   values:
+    image:
+      tag: 1.29.0
     vaultwarden:
       domain: https://brs.9ka.nl
       allowSignups: false
