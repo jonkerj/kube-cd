@@ -16,7 +16,7 @@ spec:
   values:
     existingSecret: netbox-secrets
     image:
-      tag: v3.5.4
+      tag: v3.5.6
     ingress:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
