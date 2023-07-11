@@ -110,6 +110,8 @@ spec:
       plugins:
       - fetzerch-sunandmoon-datasource
       - gapit-htmlgraphics-panel
+      - pr0ps-trackmap-panel
+      - natel-plotly-panel
       sidecar:
         datasources:
           searchNamespace: ALL
