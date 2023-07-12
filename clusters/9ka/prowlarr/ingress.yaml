@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prowlarr
+  namespace: prowlarr
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  labels:
+    app.kubernetes.io/name: prowlarr
+spec:
+  tls:
+  - hosts:
+    - prowlarr.9ka.nl
+    secretName: prowlarr-tls
+  ingressClassName: nginx
+  rules:
+  - host: prowlarr.9ka.nl
+    http:
+      paths:
+      - backend:
+          service:
+            name: prowlarr
+            port:
+              name: http
+        path: /
+        pathType: ImplementationSpecific
