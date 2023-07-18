@@ -80,6 +80,8 @@ spec:
           mode: console
         grafana_net:
           url: https://grafana.net
+        auth:
+          oauth_allow_insecure_email_lookup: true
         auth.generic_oauth:
           enabled: true
           name: 9ka
