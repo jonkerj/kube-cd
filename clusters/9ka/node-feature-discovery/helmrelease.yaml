@@ -14,6 +14,7 @@ spec:
         name: node-feature-discovery
         namespace: flux-system
   values:
+    enableNodeFeatureApi: false
     worker:
       config:
         sources:
