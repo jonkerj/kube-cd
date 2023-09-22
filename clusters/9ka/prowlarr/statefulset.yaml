@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: prowlarr
-        image: ghcr.io/hotio/prowlarr:release-1.6.3.3608
+        image: ghcr.io/hotio/prowlarr:release
         env:
         - name: TZ
           value: Europe/Amsterdam
