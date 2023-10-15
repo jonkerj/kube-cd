@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app.kubernetes.io/component: heat
+    app.kubernetes.io/instance: gokmp
+    app.kubernetes.io/name: gokmp
+    app.kubernetes.io/part-of: nuts
+  name: heat-gokmp
+  namespace: nuts
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: heat
+      app.kubernetes.io/instance: gokmp
+      app.kubernetes.io/name: gokmp
+      app.kubernetes.io/part-of: nuts
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: heat
+        app.kubernetes.io/instance: gokmp
+        app.kubernetes.io/name: gokmp
+        app.kubernetes.io/part-of: nuts
+        container.audit.kubernetes.io/nuts.allow-privileged: ""
+    spec:
+      containers:
+      - name: gokmp
+        image: ghcr.io/jonkerj/gokmp:v0.0.1
+        args:
+        - submitter
+        env:
+        - name: GOKMP_SERIAL_SERIAL
+          value: A400gnAW
+        - name: GOKMP_INFLUXDB_BUCKET
+          value: nuts
+        - name: GOKMP_INFLUXDB_URL
+          value: http://influxdb2.influxdb/
+        - name: GOKMP_INFLUXDB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: token
+              name: nuts-gokmp
+        resources:
+          limits:
+            cpu: 500m
+            memory: 128Mi
+          requests:
+            cpu: 75m
+            memory: 32Mi
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /dev
+          name: hostdev
+      nodeSelector:
+        feature.node.kubernetes.io/usb-0403_6001_A400gnAW.present: "true"
+      tolerations:
+      - effect: NoSchedule
+        key: efgh.nl/location
+        value: gangkast
+      volumes:
+      - hostPath:
+          path: /dev
+          type: Directory
+        name: hostdev
