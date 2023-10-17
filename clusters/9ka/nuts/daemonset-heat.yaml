@@ -26,14 +26,16 @@ spec:
     spec:
       containers:
       - name: gokmp
-        image: ghcr.io/jonkerj/gokmp:v0.0.1
+        image: ghcr.io/jonkerj/gokmp:v0.1.0
         args:
-        - submitter
+        - --verbose
         env:
         - name: GOKMP_SERIAL_SERIAL
           value: A400gnAW
         - name: GOKMP_INFLUXDB_BUCKET
           value: nuts
+        - name: GOKMP_INFLUXDB_ORG
+          value: influxdata
         - name: GOKMP_INFLUXDB_URL
           value: http://influxdb2.influxdb/
         - name: GOKMP_INFLUXDB_TOKEN
