@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: gokmp
-        image: ghcr.io/jonkerj/gokmp:v0.1.0
+        image: ghcr.io/jonkerj/gokmp:v0.2.0
         args:
         - --verbose
         env:
