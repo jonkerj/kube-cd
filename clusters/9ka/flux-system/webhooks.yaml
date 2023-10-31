@@ -22,7 +22,7 @@ spec:
     - flux-webhook.9ka.nl
     secretName: flux-webhook-tls
 ---
-apiVersion: notification.toolkit.fluxcd.io/v1beta1
+apiVersion: notification.toolkit.fluxcd.io/v1
 kind: Receiver
 metadata:
   name: github-webhooks

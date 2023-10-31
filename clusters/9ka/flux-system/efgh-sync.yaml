@@ -1,5 +1,5 @@
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: cert-manager
@@ -12,7 +12,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: cilium
@@ -25,7 +25,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: dex
@@ -42,7 +42,7 @@ spec:
     secretRef:
       name: sops-gpg
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: flux-system
@@ -55,7 +55,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: influxdb
@@ -68,7 +68,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: iioflux
@@ -85,7 +85,7 @@ spec:
     secretRef:
       name: sops-gpg
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: ingress
@@ -100,7 +100,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: justnimbus
@@ -117,7 +117,7 @@ spec:
     secretRef:
       name: sops-gpg
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: kea
@@ -134,7 +134,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: kube-system
@@ -151,7 +151,7 @@ spec:
     secretRef:
       name: sops-gpg
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: metrics-server
@@ -164,7 +164,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: monitoring
@@ -177,7 +177,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: nextcloud
@@ -190,7 +190,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: netbox
@@ -207,7 +207,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: node-feature-discovery
@@ -220,7 +220,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: nuts
@@ -237,7 +237,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: oauth2-proxy
@@ -254,7 +254,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: prowlarr
@@ -267,7 +267,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: proxies
@@ -280,7 +280,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: pynuts
@@ -297,7 +297,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: pdns-admin
@@ -310,7 +310,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: smapy
@@ -327,7 +327,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: storage
@@ -340,7 +340,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: vaultwarden
@@ -353,7 +353,7 @@ spec:
     kind: GitRepository
     name: flux-system
 ---
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: velero
