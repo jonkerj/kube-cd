@@ -22,7 +22,7 @@ spec:
             app.kubernetes.io/name: fluxversions
         spec:
           containers:
-          - image: ghcr.io/jonkerj/fluxversions:v0.5.0
+          - image: ghcr.io/jonkerj/fluxversions:v0.5.1
             imagePullPolicy: IfNotPresent
             name: fluxversions
             resources:
