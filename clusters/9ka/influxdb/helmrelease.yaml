@@ -15,7 +15,7 @@ spec:
         namespace: flux-system
   values:
     image:
-      tag: 2.7.1-alpine
+      tag: 2.7.3-alpine
     persistence:
       enabled: true
     resources:
