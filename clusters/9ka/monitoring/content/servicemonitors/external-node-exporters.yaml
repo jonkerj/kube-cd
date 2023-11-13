@@ -70,7 +70,7 @@ subsets:
     protocol: TCP
 - addresses:
   - ip: 172.21.42.15
-    nodeName: potassium
+    nodeName: phosphorus
   ports:
   - name: metrics
     port: 9200
