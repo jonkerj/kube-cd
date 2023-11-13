@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mosquitto
+  namespace: mqtt
+  labels:
+    app.kubernetes.io/name: mosquitto
+    app.kubernetes.io/part-of: mqtt
+    app.kubernetes.io/instance: mosquitto
+spec:
+  type: NodePort
+  ports:
+  - port: 1883
+    nodePort: 31883
+    name: mqtt
+    targetPort: mqtt
+  selector:
+    app.kubernetes.io/name: mosquitto
+    app.kubernetes.io/part-of: mqtt
+    app.kubernetes.io/instance: mosquitto
