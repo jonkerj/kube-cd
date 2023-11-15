@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chargeflux
+  namespace: chargeflux
+  labels:
+    app.kubernetes.io/instance: chargeflux
+    app.kubernetes.io/name: chargeflux
+    app.kubernetes.io/version: v0.0.2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: chargeflux
+      app.kubernetes.io/name: chargeflux
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: chargeflux
+        app.kubernetes.io/name: chargeflux
+    spec:
+      serviceAccountName: chargeflux
+      containers:
+      - name: chargeflux
+        image: ghcr.io/jonkerj/chargeflux:v0.0.2
+        imagePullPolicy: IfNotPresent
+        args:
+        - --verbose
+        - --tag
+        - location=gareelhoek
+        resources:
+          limits:
+            cpu: 250m
+            memory: 256Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+        env:
+        - name: CHARGEFLUX_INFLUXDB_URL
+          value: http://influxdb2.influxdb
+        envFrom:
+        - secretRef:
+            name: chargeflux-env
