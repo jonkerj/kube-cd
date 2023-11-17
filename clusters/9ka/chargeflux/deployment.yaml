@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/instance: chargeflux
     app.kubernetes.io/name: chargeflux
-    app.kubernetes.io/version: v0.0.2
+    app.kubernetes.io/version: v0.0.3
 spec:
   replicas: 1
   selector:
@@ -22,7 +22,7 @@ spec:
       serviceAccountName: chargeflux
       containers:
       - name: chargeflux
-        image: ghcr.io/jonkerj/chargeflux:v0.0.2
+        image: ghcr.io/jonkerj/chargeflux:v0.0.3
         imagePullPolicy: IfNotPresent
         args:
         - --verbose
