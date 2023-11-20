@@ -15,7 +15,7 @@ spec:
         namespace: flux-system
   values:
     image:
-      tag: 1.29.2
+      tag: 1.30.1
     vaultwarden:
       domain: https://brs.9ka.nl
       allowSignups: false
