@@ -42,7 +42,7 @@ spec:
           memory: 24Mi
         limits:
           cpu: 250m
-          memory: 128Mi
+          memory: 196Mi
       prometheus:
         monitor:
           relabelings:
@@ -125,7 +125,7 @@ spec:
             memory: 64Mi
           limits:
             cpu: 100m
-            memory: 96Mi
+            memory: 128Mi
       rbac:
         pspEnabled: false
       resources:
