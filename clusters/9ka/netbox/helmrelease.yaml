@@ -7,19 +7,19 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: netbox
-      version: 4.1.1
+      chart: .
       sourceRef:
-        kind: HelmRepository
+        kind: GitRepository
         name: bootc
         namespace: flux-system
   values:
     existingSecret: netbox-secrets
     image:
-      tag: v3.5.6
+      tag: v3.7.0
     ingress:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
+      className: nginx
       enabled: true
       hosts:
       - host: netbox.9ka.nl
@@ -31,5 +31,10 @@ spec:
         secretName: netbox-tls
     persistence:
       storageClass: null
-    postgres:
+    postgresql:
       enabled: true
+      auth:
+        existingSecret: netbox-postgresql
+        secretKeys:
+          userPasswordKey: postgresql-password
+          adminPasswordKey: postgresql-postgres-password
