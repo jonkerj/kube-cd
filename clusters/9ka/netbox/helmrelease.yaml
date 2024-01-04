@@ -38,3 +38,5 @@ spec:
         secretKeys:
           userPasswordKey: postgresql-password
           adminPasswordKey: postgresql-postgres-password
+    redis:
+      architecture: standalone
