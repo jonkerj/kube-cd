@@ -1,0 +1,30 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: ipsec
+  namespace: monitoring
+spec:
+  groups:
+  - name: ipsec
+    rules:
+    - alert: IPSecSANotOK
+      annotations:
+        summary: IKE SA is not OK on {{ $labels.node_name }}
+        message: IKA SA on {{ $labels.node_name }} to {{ $labels.remote_host }} is not OK
+      expr: ipsec_ike_sa_state < 2 or ipsec_ike_sa_state > 5
+      labels:
+        severity: critical
+    - alert: IPSecChildSANotOK
+      annotations:
+        summary: IKE child SA is not OK on {{ $labels.node_name }}
+        message: IKA child SA on {{ $labels.node_name }} to {{ $labels.remote_host }} is not OK
+      expr: ipsec_child_sa_state < 3 or ipsec_child_sa_state > 7
+      labels:
+        severity: critical
+    - alert: IPSecNotUp
+      annotations:
+        summary: IPSec is not UP
+        message: IPSec is not UP on {{ $labels.node_name }}
+      expr: ipsec_up != 1
+      labels:
+        severity: critical
