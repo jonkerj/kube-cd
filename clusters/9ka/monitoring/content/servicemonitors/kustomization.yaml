@@ -8,3 +8,4 @@ resources:
 - powerdns.yaml
 - prometheus.yaml
 - ipmi.yaml
+- ipsec.yaml

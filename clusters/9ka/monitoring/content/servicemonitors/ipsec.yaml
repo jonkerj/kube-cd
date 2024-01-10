@@ -1,0 +1,56 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: ipsec-exporter
+  namespace: monitoring
+  labels:
+    app: ipsec-exporter
+spec:
+  jobLabel: ipsec-exporter
+  endpoints:
+  - port: metrics
+    interval: 300s
+    relabelings:
+    - sourceLabels:
+      - "__meta_kubernetes_endpoint_node_name"
+      targetLabel: node_name
+  selector:
+    matchLabels:
+      app: ipsec-exporter
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ipsec-exporter
+  namespace: monitoring
+  labels:
+    app: ipsec-exporter
+spec:
+  type: ClusterIP
+  ports:
+  - name: metrics
+    port: 9903
+    targetPort: metrics
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: ipsec-exporter
+  namespace: monitoring
+  labels:
+    app: ipsec-exporter
+subsets:
+- addresses:
+  - ip: 172.21.42.1
+    nodeName: hydrogen
+  ports:
+  - name: metrics
+    port: 9903
+    protocol: TCP
+- addresses:
+  - ip: 172.21.46.1
+    nodeName: pve
+  ports:
+  - name: metrics
+    port: 9903
+    protocol: TCP
