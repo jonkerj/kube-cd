@@ -25,7 +25,7 @@ spec:
         enabled: true
         from: jorik@efgh.nl
         fromName: Jorik Jonker
-        host: 172.21.46.1
+        host: pve.virt.efgh.nl
         port: 25
         security: off
     ingress:

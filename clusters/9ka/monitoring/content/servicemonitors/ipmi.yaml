@@ -41,7 +41,7 @@ metadata:
     app: ipmi
 subsets:
 - addresses:
-  - ip: 172.21.46.2
+  - ip: 172.21.48.1
     nodeName: pve
   ports:
   - name: metrics

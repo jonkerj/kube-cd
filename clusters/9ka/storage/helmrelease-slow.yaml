@@ -16,7 +16,7 @@ spec:
   values:
     nfs:
       path: /rpool/9ka-slow
-      server: 172.21.46.2
+      server: pve.virt.efgh.nl
       mountOptions:
       - noatime
       - async
