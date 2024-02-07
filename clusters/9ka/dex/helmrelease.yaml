@@ -30,12 +30,13 @@ spec:
       - idEnv: CLIENT_OAUTH2_PROXY_ID
         name: OAuth2 Proxy
         redirectURIs:
-        - https://prometheus.9ka.nl/oauth2/callback
         - https://alertmanager.9ka.nl/oauth2/callback
         - https://justnimbus.9ka.nl/oauth2/callback
-        - https://transmission.9ka.nl/oauth2/callback
-        - https://sonarr.9ka.nl/oauth2/callback
+        - https://laadpaal.9ka.nl/oauth2/callback
+        - https://prometheus.9ka.nl/oauth2/callback
         - https://sabnzbd.9ka.nl/oauth2/callback
+        - https://sonarr.9ka.nl/oauth2/callback
+        - https://transmission.9ka.nl/oauth2/callback
         secretEnv: CLIENT_OAUTH2_PROXY_SECRET
       - idEnv: CLIENT_GRAFANA_ID
         redirectURIs:

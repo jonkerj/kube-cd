@@ -3,10 +3,12 @@ kind: Kustomization
 resources:
 - ingress-9ka.yaml
 - ingress-justnimbus.yaml
+- ingress-laadpaal.yaml
 - ingress-sabnzbd.yaml
 - ingress-sonarr.yaml
 - ingress-transmission.yaml
 - service-argon.yaml
-- service-neon.yaml
 - service-justnimbus.yaml
+- service-laadpaal.yaml
+- service-neon.yaml
 - namespace.yaml
