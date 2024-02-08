@@ -12,7 +12,10 @@ data:
         "list": [
           {
             "builtIn": 1,
-            "datasource": "-- Grafana --",
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
             "enable": true,
             "hide": true,
             "iconColor": "rgba(0, 211, 255, 1)",
@@ -30,7 +33,6 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "iteration": 1646043006112,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -46,6 +48,9 @@ data:
                 "mode": "palette-classic"
               },
               "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
@@ -57,6 +62,7 @@ data:
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "smooth",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -89,10 +95,23 @@ data:
               },
               "unit": "watt"
             },
-            "overrides": []
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": "/delivered.*/"
+                },
+                "properties": [
+                  {
+                    "id": "custom.transform",
+                    "value": "negative-Y"
+                  }
+                ]
+              }
+            ]
           },
           "gridPos": {
-            "h": 7,
+            "h": 9,
             "w": 24,
             "x": 0,
             "y": 0
@@ -106,10 +125,12 @@ data:
                 "lastNotNull"
               ],
               "displayMode": "list",
-              "placement": "bottom"
+              "placement": "bottom",
+              "showLegend": true
             },
             "tooltip": {
-              "mode": "multi"
+              "mode": "multi",
+              "sort": "none"
             }
           },
           "targets": [
@@ -136,7 +157,7 @@ data:
               "measurement": "power",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "import \"strings\"\nfrom(bucket: \"nuts\")\n\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r._field =~ /instantaneous_active_power_.*_positive/ and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.substring(v: r._field, start: 27, end: 29), _value: r._value }))\n  |> yield(name: \"nuts\")",
+              "query": "import \"strings\"\nfrom(bucket: \"nuts\")\n\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r._field =~ /instantaneous_active_power_.*_positive/ and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: \"consumed \" + strings.substring(v: r._field, start: 27, end: 29), _value: r._value }))\n  |> yield(name: \"nuts\")",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -154,9 +175,18 @@ data:
                 ]
               ],
               "tags": []
+            },
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "DS_INFLUXDB"
+              },
+              "hide": false,
+              "query": "import \"strings\"\nfrom(bucket: \"nuts\")\n\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r._field =~ /instantaneous_active_power_.*_negative/ and r[\"location\"]==\"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: \"delivered \" + strings.substring(v: r._field, start: 27, end: 29), _value: r._value }))\n  |> yield(name: \"nuts\")",
+              "refId": "B"
             }
           ],
-          "title": "Power consumed",
+          "title": "Instantaneous power",
           "transparent": true,
           "type": "timeseries"
         },
@@ -172,25 +202,29 @@ data:
                 "mode": "palette-classic"
               },
               "custom": {
-                "axisLabel": "",
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "power",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
                 "drawStyle": "line",
-                "fillOpacity": 0,
+                "fillOpacity": 50,
                 "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
                   "tooltip": false,
                   "viz": false
                 },
-                "lineInterpolation": "smooth",
+                "insertNulls": false,
+                "lineInterpolation": "linear",
                 "lineWidth": 1,
                 "pointSize": 5,
                 "scaleDistribution": {
                   "type": "linear"
                 },
-                "showPoints": "auto",
-                "spanNulls": 300000,
+                "showPoints": "never",
+                "spanNulls": true,
                 "stacking": {
                   "group": "A",
                   "mode": "none"
@@ -199,6 +233,7 @@ data:
                   "mode": "off"
                 }
               },
+              "links": [],
               "mappings": [],
               "thresholds": {
                 "mode": "absolute",
@@ -215,32 +250,95 @@ data:
               },
               "unit": "watt"
             },
-            "overrides": []
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "day"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "#BF1B00",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "night"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "#629E51",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "total"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "#2F575E",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": "/delivered.*/"
+                },
+                "properties": [
+                  {
+                    "id": "custom.transform",
+                    "value": "negative-Y"
+                  }
+                ]
+              }
+            ]
           },
           "gridPos": {
-            "h": 6,
+            "h": 10,
             "w": 24,
             "x": 0,
-            "y": 7
+            "y": 9
           },
-          "id": 11,
+          "id": 2,
+          "interval": "15s",
+          "links": [],
           "options": {
             "legend": {
               "calcs": [
                 "mean",
-                "max",
-                "lastNotNull"
+                "lastNotNull",
+                "max"
               ],
               "displayMode": "list",
-              "placement": "bottom"
+              "placement": "bottom",
+              "showLegend": true
             },
             "tooltip": {
-              "mode": "multi"
+              "mode": "multi",
+              "sort": "none"
             }
           },
+          "pluginVersion": "8.3.1",
           "targets": [
             {
-              "alias": "L1",
+              "alias": "low",
               "datasource": {
                 "type": "influxdb",
                 "uid": "DS_INFLUXDB"
@@ -248,28 +346,28 @@ data:
               "groupBy": [
                 {
                   "params": [
-                    "$__interval"
+                    ""
                   ],
                   "type": "time"
                 },
                 {
                   "params": [
-                    "none"
+                    "null"
                   ],
                   "type": "fill"
                 }
               ],
-              "measurement": "power",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "import \"strings\"\nfrom(bucket: \"nuts\")\n\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r._field =~ /instantaneous_active_power_.*_negative/ and r[\"location\"]==\"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> drop(columns: [\"location\"])\n  |> map(fn: (r) => ({ r with _field: strings.substring(v: r._field, start: 27, end: 29), _value: r._value }))\n  |> yield(name: \"nuts\")",
+              "query": "import \"strings\"\n\nfrom(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] =~ /electricity_used_tariff/ and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: max, createEmpty: false)\n  |> drop(columns: [\"location\"])\n  |> derivative(unit: 1s, nonNegative: true, columns: [\"_value\"], timeColumn: \"_time\")\n  |> map(fn: (r) => ({ r with _field: \"consumed T\" + strings.substring(v: r._field, start: 24, end: 25), _value: r._value }))\n  |> yield(name: \"max\")\n",
+              "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
                 [
                   {
                     "params": [
-                      "instantaneous_active_power_l1_negative"
+                      "value"
                     ],
                     "type": "field"
                   },
@@ -280,9 +378,18 @@ data:
                 ]
               ],
               "tags": []
+            },
+            {
+              "datasource": {
+                "type": "influxdb",
+                "uid": "DS_INFLUXDB"
+              },
+              "hide": false,
+              "query": "import \"strings\"\n\nfrom(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] =~ /electricity_delivered_tariff/ and r[\"location\"] == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> aggregateWindow(every: v.windowPeriod, fn: max, createEmpty: false)\n  |> derivative(unit: 1s, nonNegative: true, columns: [\"_value\"], timeColumn: \"_time\")\n  |> map(fn: (r) => ({ r with _field: \"delivered T\" + strings.substring(v: r._field, start: 29, end: 31), _value: r._value }))\n  |> yield(name: \"max\")\n",
+              "refId": "B"
             }
           ],
-          "title": "Power delivered",
+          "title": "Net power",
           "transparent": true,
           "type": "timeseries"
         },
@@ -298,6 +405,9 @@ data:
                 "mode": "palette-classic"
               },
               "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
@@ -309,6 +419,7 @@ data:
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "stepAfter",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -407,7 +518,7 @@ data:
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 13
+            "y": 19
           },
           "id": 1,
           "interval": "30m",
@@ -419,10 +530,12 @@ data:
                 "lastNotNull"
               ],
               "displayMode": "list",
-              "placement": "bottom"
+              "placement": "bottom",
+              "showLegend": true
             },
             "tooltip": {
-              "mode": "multi"
+              "mode": "multi",
+              "sort": "none"
             }
           },
           "pluginVersion": "8.3.1",
@@ -528,358 +641,9 @@ data:
                 "mode": "palette-classic"
               },
               "custom": {
-                "axisLabel": "power",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 50,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": true,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "links": [],
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "watt"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "day"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#BF1B00",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "night"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#629E51",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "total"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#2F575E",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 24,
-            "x": 0,
-            "y": 20
-          },
-          "id": 2,
-          "interval": "15s",
-          "links": [],
-          "options": {
-            "legend": {
-              "calcs": [
-                "mean",
-                "lastNotNull",
-                "max"
-              ],
-              "displayMode": "list",
-              "placement": "bottom"
-            },
-            "tooltip": {
-              "mode": "multi"
-            }
-          },
-          "pluginVersion": "8.3.1",
-          "targets": [
-            {
-              "alias": "low",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "DS_INFLUXDB"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    ""
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "import \"strings\"\n\nfrom(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] =~ /electricity_used_tariff/ and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: max, createEmpty: false)\n  |> drop(columns: [\"location\"])\n  |> derivative(unit: 1s, nonNegative: true, columns: [\"_value\"], timeColumn: \"_time\")\n  |> map(fn: (r) => ({ r with _field: \"T\" + strings.substring(v: r._field, start: 24, end: 25), _value: r._value }))\n  |> yield(name: \"max\")\n",
-              "rawQuery": true,
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            }
-          ],
-          "title": "Electricity consumed",
-          "transparent": true,
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "DS_INFLUXDB"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisLabel": "power",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 50,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": true,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "links": [],
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "watt"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "day"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#BF1B00",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "night"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#629E51",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "total"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#2F575E",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 24,
-            "x": 0,
-            "y": 27
-          },
-          "id": 6,
-          "interval": "15s",
-          "links": [],
-          "options": {
-            "legend": {
-              "calcs": [
-                "mean",
-                "lastNotNull",
-                "max"
-              ],
-              "displayMode": "list",
-              "placement": "bottom"
-            },
-            "tooltip": {
-              "mode": "multi"
-            }
-          },
-          "pluginVersion": "8.3.1",
-          "targets": [
-            {
-              "alias": "low",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "DS_INFLUXDB"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    ""
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "import \"strings\"\n\nfrom(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] =~ /electricity_delivered_tariff/ and r[\"location\"] == \"${location}\")\n  |> drop(columns: [\"location\"])\n  |> aggregateWindow(every: v.windowPeriod, fn: max, createEmpty: false)\n  |> derivative(unit: 1s, nonNegative: true, columns: [\"_value\"], timeColumn: \"_time\")\n  |> map(fn: (r) => ({ r with _field: \"T\" + strings.substring(v: r._field, start: 29, end: 31), _value: r._value }))\n  |> yield(name: \"max\")\n",
-              "rawQuery": true,
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            }
-          ],
-          "title": "Electricity delivered",
-          "transparent": true,
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "DS_INFLUXDB"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
@@ -891,6 +655,7 @@ data:
                   "tooltip": false,
                   "viz": false
                 },
+                "insertNulls": false,
                 "lineInterpolation": "stepBefore",
                 "lineWidth": 1,
                 "pointSize": 5,
@@ -943,7 +708,7 @@ data:
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 34
+            "y": 26
           },
           "id": 3,
           "interval": "5m",
@@ -956,10 +721,12 @@ data:
                 "max"
               ],
               "displayMode": "list",
-              "placement": "bottom"
+              "placement": "bottom",
+              "showLegend": true
             },
             "tooltip": {
-              "mode": "single"
+              "mode": "single",
+              "sort": "none"
             }
           },
           "pluginVersion": "8.3.1",
@@ -1010,563 +777,10 @@ data:
           "title": "Water",
           "transparent": true,
           "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "DS_INFLUXDB"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "bars",
-                "fillOpacity": 100,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": true,
-                "stacking": {
-                  "group": "A",
-                  "mode": "normal"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "links": [],
-              "mappings": [],
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "kwatth"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "used_t1"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "light-green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "used_t2"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "light-red",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "used_total"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "dark-purple",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "total"
-                },
-                "properties": [
-                  {
-                    "id": "custom.stacking",
-                    "value": {
-                      "group": false,
-                      "mode": "normal"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 24,
-            "x": 0,
-            "y": 41
-          },
-          "id": 5,
-          "interval": "",
-          "options": {
-            "legend": {
-              "calcs": [
-                "mean",
-                "max",
-                "lastNotNull"
-              ],
-              "displayMode": "list",
-              "placement": "bottom"
-            },
-            "tooltip": {
-              "mode": "multi"
-            }
-          },
-          "pluginVersion": "8.3.4",
-          "targets": [
-            {
-              "alias": "low",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "DS_INFLUXDB"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "1d"
-                  ],
-                  "type": "time"
-                }
-              ],
-              "measurement": "power",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "import \"strings\"\nfrom(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] =~ /electricity_used_tariff/ and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> map(fn: (r) => ({ r with _field: \"T\" + strings.substring(v: r._field, start: 24, end: 25), _value: r._value }))\n  |> window(every: 24h, period: 24h)\n  |> increase()\n  |> duplicate(column: \"_stop\", as: \"_time\")\n  |> drop(columns: [\"_start\", \"_stop\", \"location\"])\n  |> map(fn: (r) => ({ r with _value: r._value / 3600000.0 }))\n  |> yield(name: \"nuts\")\n",
-              "rawQuery": false,
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "electricity_used_tariff_1"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  },
-                  {
-                    "params": [],
-                    "type": "difference"
-                  },
-                  {
-                    "params": [
-                      " / 3600000"
-                    ],
-                    "type": "math"
-                  }
-                ]
-              ],
-              "tags": [],
-              "tz": "Europe/Amsterdam"
-            }
-          ],
-          "title": "Daily electricity consumption",
-          "transparent": true,
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "DS_INFLUXDB"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "bars",
-                "fillOpacity": 100,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": true,
-                "stacking": {
-                  "group": "A",
-                  "mode": "normal"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "links": [],
-              "mappings": [],
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "kwatth"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "used_t1"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "light-green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "used_t2"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "light-red",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "used_total"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "dark-purple",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "total"
-                },
-                "properties": [
-                  {
-                    "id": "custom.stacking",
-                    "value": {
-                      "group": false,
-                      "mode": "normal"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 24,
-            "x": 0,
-            "y": 47
-          },
-          "id": 7,
-          "interval": "",
-          "options": {
-            "legend": {
-              "calcs": [
-                "mean",
-                "max",
-                "lastNotNull"
-              ],
-              "displayMode": "list",
-              "placement": "bottom"
-            },
-            "tooltip": {
-              "mode": "multi"
-            }
-          },
-          "pluginVersion": "8.3.4",
-          "targets": [
-            {
-              "datasource": {
-                "type": "influxdb",
-                "uid": "DS_INFLUXDB"
-              },
-              "hide": false,
-              "query": "import \"strings\"\nfrom(bucket: \"nuts\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"power\" and r[\"_field\"] =~ /electricity_delivered_tariff/ and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> map(fn: (r) => ({ r with _field: \"T\" + strings.substring(v: r._field, start: 29, end: 30), _value: r._value }))\n  |> window(every: 24h, period: 24h)\n  |> spread()\n  |> duplicate(column: \"_stop\", as: \"_time\")\n  |> drop(columns: [\"_start\", \"_stop\", \"location\"])\n  |> map(fn: (r) => ({ r with _value: r._value / 3600000.0 }))\n  |> yield(name: \"nuts\")\n",
-              "refId": "A"
-            }
-          ],
-          "title": "Daily electricity delivery",
-          "transparent": true,
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "DS_INFLUXDB"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "bars",
-                "fillOpacity": 100,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "never",
-                "spanNulls": true,
-                "stacking": {
-                  "group": "A",
-                  "mode": "normal"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "links": [],
-              "mappings": [],
-              "min": 0,
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "kwatth"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "used_t1"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "light-green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "used_t2"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "light-red",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "used_total"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "dark-purple",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "total"
-                },
-                "properties": [
-                  {
-                    "id": "custom.stacking",
-                    "value": {
-                      "group": false,
-                      "mode": "normal"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 6,
-            "w": 24,
-            "x": 0,
-            "y": 53
-          },
-          "id": 8,
-          "interval": "",
-          "options": {
-            "legend": {
-              "calcs": [
-                "mean",
-                "max",
-                "lastNotNull"
-              ],
-              "displayMode": "list",
-              "placement": "bottom"
-            },
-            "tooltip": {
-              "mode": "single"
-            }
-          },
-          "pluginVersion": "8.3.1",
-          "targets": [
-            {
-              "alias": "solar",
-              "datasource": {
-                "type": "influxdb",
-                "uid": "DS_INFLUXDB"
-              },
-              "groupBy": [
-                {
-                  "params": [
-                    "1d"
-                  ],
-                  "type": "time"
-                }
-              ],
-              "measurement": "sma",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "from(bucket: \"solar\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"sma\" and r[\"_field\"] == \"ac_total_yield\" and r[\"location\"] == \"${location}\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: true)\n  |> map(fn: (r) => ({ r with _field: \"yield\" }))\n  |> window(every: 24h, period: 24h)\n  |> spread()\n  |> duplicate(column: \"_stop\", as: \"_time\")\n  |> drop(columns: [\"_start\", \"_stop\", \"location\"])\n  |> map(fn: (r) => ({ r with _value: r._value / 3600000.0 }))\n  |> yield(name: \"nuts\")\n",
-              "rawQuery": false,
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "ac_total_yield"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  },
-                  {
-                    "params": [],
-                    "type": "difference"
-                  },
-                  {
-                    "params": [
-                      "/3600000"
-                    ],
-                    "type": "math"
-                  }
-                ]
-              ],
-              "tags": [],
-              "tz": "Europe/Amsterdam"
-            }
-          ],
-          "title": "Daily electricity produced",
-          "transparent": true,
-          "type": "timeseries"
         }
       ],
       "refresh": "1m",
-      "schemaVersion": 34,
-      "style": "dark",
+      "schemaVersion": 39,
       "tags": [],
       "templating": {
         "list": [
