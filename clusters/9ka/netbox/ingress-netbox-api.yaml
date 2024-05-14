@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   labels:
     app.kubernetes.io/instance: netbox
-  name: netbox
+  name: netbox-api
   namespace: netbox
 spec:
   ingressClassName: nginx
