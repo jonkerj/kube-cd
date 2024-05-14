@@ -8,3 +8,4 @@ resources:
 - helmrelease-postgresql.yaml
 - helmrelease-redis.yaml
 - helmrelease-netbox.yaml
+- ingress-netbox-api.yaml
