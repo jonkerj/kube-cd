@@ -21,6 +21,7 @@ spec:
         cert-manager.io/cluster-issuer: letsencrypt
         nginx.ingress.kubernetes.io/auth-url: "http://oauth2-proxy.oauth2-proxy.svc.cluster.local/oauth2/auth"
         nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+        nginx.ingress.kubernetes.io/auth-response-headers: "X-Forwarded-User,X-Forwarded-Groups,X-Forwarded-Email"
       className: nginx
       enabled: true
       hosts:
@@ -53,15 +54,17 @@ spec:
       existingSecretKey: redis-password
     remoteAuth:
       enabled: true
-      backend: netbox.authentication.RemoteUserBackend
-      header: HTTP_X_FORWARDED_USER
+      backends:
+      - netbox.authentication.RemoteUserBackend
       autoCreateUser: true
+      header: HTTP_X_FORWARDED_USER
+      userEmail: HTTP_X_FORWARDED_EMAIL
+      groupHeader: HTTP_X_FORWARDED_GROUPS
+      groupSeparator: ','
       defaultGroups: []
       defaultPermissions: {}
-      groupSyncEnabled: false
-      groupHeader: HTTP_X_FORWARDED_GROUPS
+      groupSyncEnabled: true
       superuserGroups: []
       superusers: ['Jorik Jonker']
       staffGroups: []
       staffUsers: ['Jorik Jonker']
-      groupSeparator: ','
