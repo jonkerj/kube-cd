@@ -32,11 +32,20 @@ spec:
     persistence:
       storageClass: null
     postgresql:
-      enabled: true
-      auth:
-        existingSecret: netbox-postgresql
-        secretKeys:
-          userPasswordKey: postgresql-password
-          adminPasswordKey: postgresql-postgres-password
+      enabled: false
+    externalDatabase:
+      existingSecretName: netbox-postgresql
+      existingSecretKey: password
+      host: netbox-postgresql-hl
+      database: netbox
+      username: netbox
     redis:
-      architecture: standalone
+      enabled: false
+    taskRedis:
+      host: netbox-redis-headless
+      existingSecretName: netbox-redis
+      existingSecretKey: redis-password
+    cachingRedis:
+      host: netbox-redis-headless
+      existingSecretName: netbox-redis
+      existingSecretKey: redis-password
