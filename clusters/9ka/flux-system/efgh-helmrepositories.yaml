@@ -16,7 +16,7 @@ metadata:
 spec:
   url: https://github.com/bootc/netbox-chart
   ref:
-    commit: 7c90e0726c4e21831d138614510d2928accb0cfc
+    commit: 10daf39846e5a2a30e3f1aca79f58ad887a63b44
   interval: 1h
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta1
