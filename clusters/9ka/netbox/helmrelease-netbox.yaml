@@ -7,10 +7,10 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: charts/netbox
+      chart: netbox
       sourceRef:
-        kind: GitRepository
-        name: bootc
+        kind: HelmRepository
+        name: netbox
         namespace: flux-system
   values:
     existingSecret: netbox-secrets
