@@ -8,15 +8,13 @@ spec:
   url: https://charts.bitnami.com/bitnami
   interval: 1h
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: GitRepository
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
 metadata:
-  name: bootc
+  name: netbox
   namespace: flux-system
 spec:
-  url: https://github.com/bootc/netbox-chart
-  ref:
-    commit: 7c90e0726c4e21831d138614510d2928accb0cfc
+  url: https://charts.netbox.oss.netboxlabs.com
   interval: 1h
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta1

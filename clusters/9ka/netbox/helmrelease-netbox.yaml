@@ -7,15 +7,15 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: charts/netbox
+      chart: netbox
       sourceRef:
-        kind: GitRepository
-        name: bootc
+        kind: HelmRepository
+        name: netbox
         namespace: flux-system
   values:
     existingSecret: netbox-secrets
     image:
-      tag: v4.0.1
+      tag: v4.0.2
     ingress:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
