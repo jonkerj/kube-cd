@@ -8,6 +8,7 @@ spec:
   chart:
     spec:
       chart: netbox
+      version: 5.0.0-beta13
       sourceRef:
         kind: HelmRepository
         name: netbox
