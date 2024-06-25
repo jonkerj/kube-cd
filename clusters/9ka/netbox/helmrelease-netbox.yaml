@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: netbox
-      version: 5.0.0-beta.35
+      version: 5.0.0-beta.39
       sourceRef:
         kind: HelmRepository
         name: netbox
@@ -16,7 +16,7 @@ spec:
   values:
     existingSecret: netbox-secrets
     image:
-      tag: v4.0.3
+      tag: v4.0.6
     ingress:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
