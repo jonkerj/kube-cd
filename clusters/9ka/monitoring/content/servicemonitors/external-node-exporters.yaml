@@ -89,10 +89,3 @@ subsets:
   - name: metrics
     port: 9200
     protocol: TCP
-- addresses:
-  - ip: 172.21.42.16
-    nodeName: sulphur
-  ports:
-  - name: metrics
-    port: 9200
-    protocol: TCP
