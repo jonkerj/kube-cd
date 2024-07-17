@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: netbox
-      version: 5.0.0-beta.44
+      version: 5.0.0-beta.51
       sourceRef:
         kind: HelmRepository
         name: netbox
@@ -16,7 +16,7 @@ spec:
   values:
     existingSecret: netbox-secrets
     image:
-      tag: v4.0.6
+      tag: v4.0.7
     ingress:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
@@ -53,6 +53,21 @@ spec:
       host: netbox-redis-headless
       existingSecretName: netbox-redis
       existingSecretKey: redis-password
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 1Gi
+      requests:
+        cpu: 500m
+        memory: 768Mi
+    worker:
+      resources:
+        limits:
+          cpu: 1000m
+          memory: 1Gi
+        requests:
+          cpu: 500m
+          memory: 768Mi
     remoteAuth:
       enabled: true
       backends:
