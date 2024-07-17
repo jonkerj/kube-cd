@@ -41,13 +41,6 @@ metadata:
     app: ipsec-exporter
 subsets:
 - addresses:
-  - ip: 172.21.42.1
-    nodeName: hydrogen
-  ports:
-  - name: metrics
-    port: 9903
-    protocol: TCP
-- addresses:
   - ip: 172.21.48.1
     nodeName: pve
   ports:
