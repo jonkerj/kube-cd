@@ -53,6 +53,21 @@ spec:
       host: netbox-redis-headless
       existingSecretName: netbox-redis
       existingSecretKey: redis-password
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 1Gi
+      requests:
+        cpu: 500m
+        memory: 768Mi
+    worker:
+      resources:
+        limits:
+          cpu: 1000m
+          memory: 1Gi
+        requests:
+          cpu: 500m
+          memory: 768Mi
     remoteAuth:
       enabled: true
       backends:
