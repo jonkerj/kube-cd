@@ -43,46 +43,16 @@ subsets:
 - addresses:
   - ip: 172.21.42.1
     nodeName: hydrogen
-  ports:
-  - name: metrics
-    port: 9200
-    protocol: TCP
-- addresses:
   - ip: 172.21.42.3
     nodeName: lithium
-  ports:
-  - name: metrics
-    port: 9200
-    protocol: TCP
-- addresses:
   - ip: 172.21.42.10
     nodeName: neon
-  ports:
-  - name: metrics
-    port: 9200
-    protocol: TCP
-- addresses:
   - ip: 172.21.42.7
     nodeName: nitrogen
-  ports:
-  - name: metrics
-    port: 9200
-    protocol: TCP
-- addresses:
   - ip: 172.21.42.15
     nodeName: phosphorus
-  ports:
-  - name: metrics
-    port: 9200
-    protocol: TCP
-- addresses:
   - ip: 172.21.48.1
     nodeName: pve
-  ports:
-  - name: metrics
-    port: 9200
-    protocol: TCP
-- addresses:
   - ip: 172.21.42.14
     nodeName: silicon
   ports:
