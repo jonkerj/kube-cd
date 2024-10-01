@@ -16,6 +16,10 @@ spec:
   values:
     image:
       tag: 2.7.10-alpine
+    startupProbe:
+      enabled: true
+      periodSeconds: 5
+      failureThreshold: 24
     persistence:
       enabled: true
     resources:
