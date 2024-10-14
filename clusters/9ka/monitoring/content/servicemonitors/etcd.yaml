@@ -43,18 +43,8 @@ subsets:
 - addresses:
   - ip: 172.21.48.51
     nodeName: 9ka-cp-1
-  ports:
-  - name: metrics
-    port: 2381
-    protocol: TCP
-- addresses:
   - ip: 172.21.48.52
     nodeName: 9ka-cp-2
-  ports:
-  - name: metrics
-    port: 2381
-    protocol: TCP
-- addresses:
   - ip: 172.21.48.53
     nodeName: 9ka-cp-3
   ports:
