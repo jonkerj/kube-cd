@@ -43,11 +43,6 @@ subsets:
 - addresses:
   - ip: 172.21.42.1
     nodeName: hydrogen
-  ports:
-  - name: metrics
-    port: 8082
-    protocol: TCP
-- addresses:
   - ip: 172.21.48.1
     nodeName: pve
   ports:
