@@ -55,6 +55,8 @@ subsets:
     nodeName: pve
   - ip: 172.21.42.14
     nodeName: silicon
+  - ip: 172.21.46.2
+    nodeName: helium
   ports:
   - name: metrics
     port: 9200
