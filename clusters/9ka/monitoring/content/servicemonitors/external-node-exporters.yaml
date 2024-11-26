@@ -84,7 +84,7 @@ metadata:
 subsets:
 - addresses:
   - ip: 172.21.46.2
-    nodeName: k8s
+    nodeName: helium
   ports:
   - name: metrics
     port: 30200
