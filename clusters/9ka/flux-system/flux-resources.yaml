@@ -28,11 +28,11 @@ spec:
       - name: manager
         resources:
           limits:
-            cpu: 500m
-            memory: 512Mi
+            cpu: 1000m
+            memory: 640Mi
           requests:
-            cpu: 200m
-            memory: 196Mi
+            cpu: 300m
+            memory: 256Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
