@@ -12,7 +12,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: vmware-tanzu
-        namespace: flux-system
   values:
     deployNodeAgent: false
     snapshotsEnabled: false

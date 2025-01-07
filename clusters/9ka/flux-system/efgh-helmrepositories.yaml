@@ -16,12 +16,3 @@ metadata:
 spec:
   url: https://jonkerj.github.io/charts/
   interval: 1h
----
-apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: HelmRepository
-metadata:
-  name: vmware-tanzu
-  namespace: flux-system
-spec:
-  url: https://vmware-tanzu.github.io/helm-charts
-  interval: 1h
