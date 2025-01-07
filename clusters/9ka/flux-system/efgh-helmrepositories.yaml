@@ -2,24 +2,6 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: bitnami
-  namespace: flux-system
-spec:
-  url: https://charts.bitnami.com/bitnami
-  interval: 1h
----
-apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: HelmRepository
-metadata:
-  name: netbox
-  namespace: flux-system
-spec:
-  url: https://charts.netbox.oss.netboxlabs.com
-  interval: 1h
----
-apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: HelmRepository
-metadata:
   name: cilium
   namespace: flux-system
 spec:
