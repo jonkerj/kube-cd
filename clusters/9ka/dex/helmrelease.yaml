@@ -12,7 +12,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: dex
-        namespace: flux-system
   values:
     config:
       connectors:
