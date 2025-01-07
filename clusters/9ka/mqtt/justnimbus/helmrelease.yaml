@@ -12,7 +12,6 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: influxdata
-        namespace: flux-system
   values:
     env:
     - name: INFLUXDB_TOKEN
