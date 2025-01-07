@@ -20,15 +20,6 @@ spec:
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: influxdata
-  namespace: flux-system
-spec:
-  url: https://helm.influxdata.com/
-  interval: 1h
----
-apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: HelmRepository
-metadata:
   name: ingress-nginx
   namespace: flux-system
 spec:
