@@ -4,4 +4,5 @@ resources:
 - secret-grafana-generic-oauth.yaml
 - secret-grafana-env-vars.yaml
 - secret-grafana-admin-user.yaml
+- helmrepo.yaml
 - helmrelease.yaml
