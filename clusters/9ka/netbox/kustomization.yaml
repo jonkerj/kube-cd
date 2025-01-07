@@ -5,6 +5,9 @@ resources:
 - secret-postgresql.yaml
 - secret-redis.yaml
 - secret-netbox.yaml
+- ocirepo-postgresql.yaml
+- ocirepo-redis.yaml
+- ocirepo-netbox.yaml
 - helmrelease-postgresql.yaml
 - helmrelease-redis.yaml
 - helmrelease-netbox.yaml
