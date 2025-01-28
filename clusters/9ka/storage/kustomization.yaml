@@ -5,3 +5,4 @@ resources:
 - helmrepo.yaml
 - helmrelease-fast.yaml
 - helmrelease-slow.yaml
+- helmrelease-nvme.yaml
