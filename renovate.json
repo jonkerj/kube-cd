@@ -3,6 +3,7 @@
   "flux": {
   	"fileMatch": [
 		"helmrelease.*\\.yaml$",
+		"helmrepo.*\\.yaml$",
 		"ocirepo.*\\.yaml$",
 		"sync-(.+).yaml",
 		"^clusters/[^/]+/flux-system/.*\\.yaml$"
