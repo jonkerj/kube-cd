@@ -4,11 +4,10 @@ resources:
 - namespace.yaml
 - secret.yaml
 - daemonset-power.yaml
-- daemonset-heat.yaml
 - daemonset-water.yaml
 images:
 - name: ghcr.io/jonkerj/pynuts
-  newTag: v0.5.1
+  newTag: v0.6.0
 patches:
 - target:
     group: apps
