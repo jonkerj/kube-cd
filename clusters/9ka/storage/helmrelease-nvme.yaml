@@ -33,10 +33,10 @@ spec:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
-            - key: efgh.nl/location
+            - key: topology.kubernetes.io/region
               operator: In
               values:
-              - thuis
+              - thuis-svc
     resources:
       requests:
         cpu: 50m
