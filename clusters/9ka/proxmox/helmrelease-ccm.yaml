@@ -1,0 +1,22 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: ccm
+  namespace: proxmox
+spec:
+  interval: 5m
+  chartRef:
+    kind: OCIRepository
+    name: ccm
+  values:
+    enabledControllers:
+    - cloud-node
+    - cloud-node-lifecycle
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists
+    existingConfigSecret: proxmox-ccm
