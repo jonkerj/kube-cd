@@ -26,3 +26,8 @@ spec:
       - effect: NoSchedule
         key: efgh.nl/location
         value: gangkast
+        operator: Equal
+      - effect: NoSchedule
+        key: efgh.nl/location
+        value: zolder
+        operator: Equal
