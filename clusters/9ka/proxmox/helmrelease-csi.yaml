@@ -17,6 +17,11 @@ spec:
     tolerations:
     - key: node-role.kubernetes.io/control-plane
       effect: NoSchedule
+      operator: Exists
+    - key: efgh.nl/location
+      value: zolder
+      effect: NoSchedule
+      operator: Equal
     existingConfigSecret: proxmox-csi
     storageClass:
     - name: proxmox-local-zfs
