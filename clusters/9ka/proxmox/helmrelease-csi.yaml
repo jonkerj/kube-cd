@@ -12,16 +12,17 @@ spec:
     node:
       nodeSelector:
         topology.kubernetes.io/region: thuis-svc
+      tolerations:
+      - key: efgh.nl/location
+        value: zolder
+        effect: NoSchedule
+        operator: Equal
     nodeSelector:
       node-role.kubernetes.io/control-plane: ""
     tolerations:
     - key: node-role.kubernetes.io/control-plane
       effect: NoSchedule
       operator: Exists
-    - key: efgh.nl/location
-      value: zolder
-      effect: NoSchedule
-      operator: Equal
     existingConfigSecret: proxmox-csi
     storageClass:
     - name: proxmox-local-zfs
