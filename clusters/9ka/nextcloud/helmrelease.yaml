@@ -35,9 +35,14 @@ spec:
           ?>
       host: nc.9ka.nl
       password: null
+    tolerations:
+    - operator: Equal
+      key: efgh.nl/location
+      value: zolder
+      effect: NoSchedule
     persistence:
       enabled: true
-      size: 25Gi
+      existingClaim: nextcloud
     startupProbe:
       enabled: true
       failureThreshold: 360
