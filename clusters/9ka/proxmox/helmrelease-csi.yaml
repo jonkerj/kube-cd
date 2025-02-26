@@ -25,6 +25,13 @@ spec:
       operator: Exists
     existingConfigSecret: proxmox-csi
     storageClass:
+    - name: proxmox-zfs-nvme
+      storage: local-zfs
+      reclaimPolicy: Delete
+      fstype: xfs
+      ssd: true
+      mountOptions:
+      - discard
     - name: proxmox-local-zfs
       storage: local-zfs
       reclaimPolicy: Delete
