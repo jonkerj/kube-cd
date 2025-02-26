@@ -49,9 +49,15 @@ spec:
             - "__meta_kubernetes_pod_node_name"
             targetLabel: node_name
     grafana:
+      tolerations:
+      - operator: Equal
+        key: efgh.nl/location
+        value: zolder
+        effect: NoSchedule
       persistence:
         enabled: true
         size: 1Gi
+        storageClassName: proxmox-zfs-nvme
       admin:
         existingSecret: grafana-admin-user
       defaultDashboardsEnabled: false
