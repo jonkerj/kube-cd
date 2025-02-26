@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgresql
+  namespace: netbox
+  labels:
+    app.kubernetes.io/name: netbox
+spec:
+  storageClassName: proxmox-zfs-nvme
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
