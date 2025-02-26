@@ -9,6 +9,12 @@ spec:
     kind: OCIRepository
     name: postgresql
   values:
+    primary:
+      tolerations:
+      - operator: Equal
+        key: efgh.nl/location
+        value: zolder
+        effect: NoSchedule
     fullnameOverride: netbox-postgresql
     auth:
       database: netbox

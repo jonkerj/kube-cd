@@ -9,6 +9,11 @@ spec:
     kind: OCIRepository
     name: netbox
   values:
+    tolerations:
+    - operator: Equal
+      key: efgh.nl/location
+      value: zolder
+      effect: NoSchedule
     existingSecret: netbox-secrets
     ingress:
       annotations:
@@ -27,7 +32,7 @@ spec:
         - netbox.9ka.nl
         secretName: netbox-tls
     persistence:
-      storageClass: null
+      existingClaim: netbox
     postgresql:
       enabled: false
     externalDatabase:
