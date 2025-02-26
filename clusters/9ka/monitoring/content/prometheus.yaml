@@ -13,6 +13,11 @@ spec:
   ruleSelector: {}
   serviceAccountName: prometheus
   externalUrl: https://prometheus.9ka.nl
+  tolerations:
+  - operator: Equal
+    key: efgh.nl/location
+    value: zolder
+    effect: NoSchedule
   alerting:
     alertmanagers:
     - namespace: monitoring
@@ -22,10 +27,10 @@ spec:
   storage:
     volumeClaimTemplate:
       spec:
-        storageClassName: nfs-slow
+        storageClassName: proxmox-zfs-nvme
         resources:
           requests:
-            storage: 10Gi
+            storage: 30Gi
   resources:
     requests:
       memory: 1Gi
