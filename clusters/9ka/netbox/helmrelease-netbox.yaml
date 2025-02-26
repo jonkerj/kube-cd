@@ -9,6 +9,8 @@ spec:
     kind: OCIRepository
     name: netbox
   values:
+    nodeSelector:
+      topology.kubernetes.io/region: thuis-svc
     tolerations:
     - operator: Equal
       key: efgh.nl/location
@@ -59,7 +61,17 @@ spec:
       requests:
         cpu: 500m
         memory: 768Mi
+    housekeeping:
+      nodeSelector:
+        topology.kubernetes.io/region: thuis-svc
+      tolerations:
+      - operator: Equal
+        key: efgh.nl/location
+        value: zolder
+        effect: NoSchedule
     worker:
+      nodeSelector:
+        topology.kubernetes.io/region: thuis-svc
       tolerations:
       - operator: Equal
         key: efgh.nl/location
