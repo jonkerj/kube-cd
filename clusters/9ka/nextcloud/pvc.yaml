@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nextcloud
+  name: nextcloud-data
   namespace: nextcloud
   labels:
     app.kubernetes.io/name: nextcloud
 spec:
-  storageClassName: proxmox-local-zfs
+  storageClassName: proxmox-zfs-nvme
   accessModes:
   - ReadWriteOnce
   resources:

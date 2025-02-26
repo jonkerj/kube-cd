@@ -42,7 +42,7 @@ spec:
       effect: NoSchedule
     persistence:
       enabled: true
-      existingClaim: nextcloud
+      existingClaim: nextcloud-data
     startupProbe:
       enabled: true
       failureThreshold: 360
