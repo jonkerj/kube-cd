@@ -8,8 +8,6 @@ resources:
 - ocirepo-postgresql.yaml
 - ocirepo-redis.yaml
 - ocirepo-netbox.yaml
-- pvc-postgresql.yaml
-- pvc-redis.yaml
 - pvc-netbox.yaml
 - helmrelease-postgresql.yaml
 - helmrelease-redis.yaml

@@ -9,13 +9,16 @@ spec:
     kind: OCIRepository
     name: postgresql
   values:
+    fullnameOverride: netbox-postgresql
     primary:
+      persistence:
+        size: 1Gi
+        storageClass: proxmox-zfs-nvme
       tolerations:
       - operator: Equal
         key: efgh.nl/location
         value: zolder
         effect: NoSchedule
-    fullnameOverride: netbox-postgresql
     auth:
       database: netbox
       username: netbox

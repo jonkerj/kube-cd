@@ -9,14 +9,17 @@ spec:
     kind: OCIRepository
     name: redis
   values:
+    fullnameOverride: netbox-redis
+    architecture: standalone
     master:
+      persistence:
+        size: 1Gi
+        storageClass: proxmox-zfs-nvme
       tolerations:
       - operator: Equal
         key: efgh.nl/location
         value: zolder
         effect: NoSchedule
-    fullnameOverride: netbox-redis
-    architecture: standalone
     auth:
       existingSecret: netbox-redis
       existingSecretPasswordKey: redis-password
