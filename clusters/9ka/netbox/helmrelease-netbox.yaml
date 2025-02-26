@@ -32,7 +32,8 @@ spec:
         - netbox.9ka.nl
         secretName: netbox-tls
     persistence:
-      existingClaim: netbox
+      storageClass: nfs-nvme
+      accessMode: ReadWriteMany
     postgresql:
       enabled: false
     externalDatabase:
