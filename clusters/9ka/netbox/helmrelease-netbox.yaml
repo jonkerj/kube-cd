@@ -59,6 +59,11 @@ spec:
         cpu: 500m
         memory: 768Mi
     worker:
+      tolerations:
+      - operator: Equal
+        key: efgh.nl/location
+        value: zolder
+        effect: NoSchedule
       resources:
         limits:
           cpu: 1000m
