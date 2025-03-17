@@ -5,6 +5,7 @@
   	"fileMatch": [
 		"helmrelease.*\\.yaml$",
 		"helmrepo.*\\.yaml$",
+		"kustomization\\.yaml",
 		"ocirepo.*\\.yaml$",
 		"sync-(.+).yaml",
 		"^clusters/[^/]+/flux-system/.*\\.yaml$"
