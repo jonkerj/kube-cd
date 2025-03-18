@@ -43,6 +43,8 @@ subsets:
 - addresses:
   - ip: 172.21.42.1
     nodeName: hydrogen
+  - ip: 172.21.46.2
+    nodeName: helium
   - ip: 172.21.42.3
     nodeName: lithium
   - ip: 172.21.42.10
