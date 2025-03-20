@@ -10,4 +10,4 @@ spec:
     operation: copy
   url: oci://registry-1.docker.io/bitnamicharts/postgresql
   ref:
-    tag: 16.5.2
+    tag: 16.5.3
