@@ -1,15 +1,15 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: redis
+  name: valkey
   namespace: netbox
 spec:
   interval: 5m
   chartRef:
     kind: OCIRepository
-    name: redis
+    name: valkey
   values:
-    fullnameOverride: netbox-redis
+    fullnameOverride: netbox-valkey
     architecture: standalone
     master:
       persistence:
@@ -21,5 +21,5 @@ spec:
         value: zolder
         effect: NoSchedule
     auth:
-      existingSecret: netbox-redis
-      existingSecretPasswordKey: redis-password
+      existingSecret: netbox-valkey
+      existingSecretPasswordKey: valkey-password

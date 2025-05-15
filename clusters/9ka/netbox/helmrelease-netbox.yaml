@@ -44,16 +44,16 @@ spec:
       host: netbox-postgresql-hl
       database: netbox
       username: netbox
-    redis:
+    valkey:
       enabled: false
-    tasksRedis:
-      host: netbox-redis-headless
-      existingSecretName: netbox-redis
-      existingSecretKey: redis-password
-    cachingRedis:
-      host: netbox-redis-headless
-      existingSecretName: netbox-redis
-      existingSecretKey: redis-password
+    tasksDatabase:
+      host: netbox-valkey-headless
+      existingSecretName: netbox-valkey
+      existingSecretKey: valkey-password
+    cachingDatabase:
+      host: netbox-valkey-headless
+      existingSecretName: netbox-valkey
+      existingSecretKey: valkey-password
     resources:
       limits:
         cpu: 1000m

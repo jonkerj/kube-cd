@@ -1,13 +1,13 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: OCIRepository
 metadata:
-  name: redis
+  name: valkey
   namespace: netbox
 spec:
   interval: 1h
   layerSelector:
     mediaType: "application/vnd.cncf.helm.chart.content.v1.tar+gzip"
     operation: copy
-  url: oci://registry-1.docker.io/bitnamicharts/redis
+  url: oci://registry-1.docker.io/bitnamicharts/valkey
   ref:
-    tag: 20.13.4
+    tag: 3.0.4
