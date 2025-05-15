@@ -3,12 +3,12 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - secret-postgresql.yaml
-- secret-redis.yaml
+- secret-valkey.yaml
 - secret-netbox.yaml
 - ocirepo-postgresql.yaml
-- ocirepo-redis.yaml
+- ocirepo-valkey.yaml
 - ocirepo-netbox.yaml
 - helmrelease-postgresql.yaml
-- helmrelease-redis.yaml
+- helmrelease-valkey.yaml
 - helmrelease-netbox.yaml
 - ingress-netbox-api.yaml
