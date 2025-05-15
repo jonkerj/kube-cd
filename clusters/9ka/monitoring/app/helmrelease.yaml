@@ -49,6 +49,8 @@ spec:
             - "__meta_kubernetes_pod_node_name"
             targetLabel: node_name
     grafana:
+      deploymentStrategy:
+        type: Recreate
       tolerations:
       - operator: Equal
         key: efgh.nl/location
