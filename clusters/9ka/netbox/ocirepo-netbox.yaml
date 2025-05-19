@@ -10,4 +10,4 @@ spec:
     operation: copy
   url: oci://ghcr.io/netbox-community/netbox-chart/netbox
   ref:
-    tag: 6.0.12
+    tag: 6.0.15
