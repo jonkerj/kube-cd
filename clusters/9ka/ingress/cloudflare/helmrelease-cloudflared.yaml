@@ -20,8 +20,12 @@ spec:
       tunnelId: "431113a6-4cf3-4a66-9750-17113ae2e689"
       secretName: cloudflare-secrets
       ingress:
+      - hostname: "*.9ka.nl"
+        service: "http://ingress-nginx-cf-controller:80"
+        originRequest:
+          noTLSVerify: true
       - hostname: "*.boeventronie.net"
-        service: "https://ingress-nginx-controller.ingress:443"
+        service: "http://ingress-nginx-cf-controller:80"
         originRequest:
           noTLSVerify: true
     tolerations:
