@@ -10,5 +10,25 @@
 		"sync-(.+).yaml",
 		"^clusters/[^/]+/flux-system/.*\\.yaml$"
 	]
-  }
+  },
+  "customManagers": [
+  	{
+		"customType": "regex",
+		"managerFilePatterns": [
+			"/helmrelease.*\\.yaml$/"
+		],
+		"matchStrings": [
+			"tag: (?<currentValue>\\S+)\\s+# repo=(?<depName>\\S+)"
+		],
+		"versioningTemplate": "loose",
+		"datasourceTemplate": "docker"
+	}
+  ],
+  "packageRules": [
+  	{
+		"matchDatasources": ["docker"],
+		"matchPackageNames": ["docker.io/influxdb", "docker.io/vaultwarden/server" ],
+		"allowedVersions": "/.*-alpine/"
+	}
+  ]
 }

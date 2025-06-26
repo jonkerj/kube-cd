@@ -14,7 +14,7 @@ spec:
         name: influxdata
   values:
     image:
-      tag: 2.7.10-alpine
+      tag: 2.7.10-alpine # repo=docker.io/influxdb
     startupProbe:
       enabled: true
       periodSeconds: 5

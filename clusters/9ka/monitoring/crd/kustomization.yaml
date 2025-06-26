@@ -1,4 +1,3 @@
-# renovate: datasource=github-releases depName=prometheus-operator/prometheus-operator
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
