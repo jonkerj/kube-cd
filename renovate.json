@@ -11,6 +11,12 @@
 		"^clusters/[^/]+/flux-system/.*\\.yaml$"
 	]
   },
+  "kubernetes": {
+	"managerFilePatterns": [
+		"/(deployment|statefulset|daemonset|cronjob)\\.yaml$/",
+		"netbox-kea-container\\.yaml"
+	]
+  },
   "customManagers": [
   	{
 		"customType": "regex",
