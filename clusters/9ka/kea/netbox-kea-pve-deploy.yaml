@@ -20,7 +20,6 @@ spec:
     spec:
       containers:
       - name: netbox-kea
-        image: ghcr.io/jonkerj/netbox-kea-dhcp
         args:
         - -c
         - /config/pve.toml
