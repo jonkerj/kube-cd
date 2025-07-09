@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   annotations:
     nginx.ingress.kubernetes.io/proxy-buffer-size: 64k
+    nginx.ingress.kubernetes.io/proxy-busy-buffers-size: 64k
   labels:
     app: oauth2-proxy
   name: oauth2-proxy
