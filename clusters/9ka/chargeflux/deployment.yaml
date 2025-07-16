@@ -22,7 +22,7 @@ spec:
       serviceAccountName: chargeflux
       containers:
       - name: chargeflux
-        image: ghcr.io/jonkerj/chargeflux:v0.0.4
+        image: ghcr.io/jonkerj/chargeflux:v0.0.12
         imagePullPolicy: IfNotPresent
         args:
         - --verbose
