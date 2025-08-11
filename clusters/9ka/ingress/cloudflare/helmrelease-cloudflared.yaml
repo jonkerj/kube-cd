@@ -21,11 +21,11 @@ spec:
       secretName: cloudflare-secrets
       ingress:
       - hostname: "*.9ka.nl"
-        service: "http://ingress-nginx-cf-controller:80"
+        service: "http://cilium-ingress.cilium:80"
         originRequest:
           noTLSVerify: true
       - hostname: "*.boeventronie.net"
-        service: "http://ingress-nginx-cf-controller:80"
+        service: "http://cilium-ingress.cilium:80"
         originRequest:
           noTLSVerify: true
     tolerations:
