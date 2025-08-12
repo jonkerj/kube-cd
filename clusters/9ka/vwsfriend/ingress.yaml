@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    meta.helm.sh/release-name: vwsfriend
+    meta.helm.sh/release-namespace: vwsfriend
+  labels:
+    app.kubernetes.io/instance: vwsfriend
+    app.kubernetes.io/name: vwsfriend
+  name: vwsfriend
+  namespace: vwsfriend
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: vwsfriend.9ka.nl
+    http:
+      paths:
+      - backend:
+          service:
+            name: vwsfriend
+            port:
+              name: http
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - vwsfriend.9ka.nl
+    secretName: vwsfriend-tls

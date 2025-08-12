@@ -1,0 +1,110 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: vwsfriend
+  namespace: vwsfriend
+  labels:
+    app.kubernetes.io/name: vwsfriend
+    app.kubernetes.io/version: 0.24.7
+spec:
+  serviceName: vwsfriend
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: vwsfriend
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: vwsfriend
+    spec:
+      containers:
+      - name: vwsfriend
+        image: ghcr.io/tillsteinbach/vwsfriend:0.24.7
+        env:
+        - name: VWSFRIEND_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: vwsfriend_username
+              name: vwsfriend
+        - name: VWSFRIEND_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: vwsfriend_password
+              name: vwsfriend
+        - name: VWSFRIEND_PORT
+          value: "4000"
+        - name: WECONNECT_USER
+          valueFrom:
+            secretKeyRef:
+              key: weconnect_username
+              name: vwsfriend
+        - name: WECONNECT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: weconnect_password
+              name: vwsfriend
+        - name: WECONNECT_INTERVAL
+          value: "180"
+        - name: DATABASE_NAME
+          value: vwsfriend  # as defined in helmrelease-postgresql
+        - name: DATABASE_USERNAME
+          value: vwsfriend  # as defined in helmrelease-postgresql
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: vwsfriend-postgresql
+        - name: DATABASE_URL
+          value: postgresql://$(DATABASE_USERNAME):$(DATABASE_PASSWORD)@vwsfriend-postgresql:5432/$(DATABASE_NAME)
+        - name: ADDITIONAL_PARAMETERS
+          value: --with-database --with-abrp -vvv
+        ports:
+        - containerPort: 4000
+          name: http
+        startupProbe:
+          httpGet:
+            port: http
+            path: /healthcheck
+          failureThreshold: 120
+          periodSeconds: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          httpGet:
+            port: http
+            path: /healthcheck
+          failureThreshold: 3
+          periodSeconds: 10
+          timeoutSeconds: 1
+        livenessProbe:
+          httpGet:
+            port: http
+            path: /healthcheck
+          failureThreshold: 3
+          periodSeconds: 10
+          timeoutSeconds: 1
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: topology.kubernetes.io/region
+                operator: In
+                values:
+                - thuis-svc
+      tolerations:
+      - operator: Equal
+        key: efgh.nl/location
+        value: zolder
+        effect: NoSchedule
+  volumeClaimTemplates:
+  - metadata:
+      name: config
+    spec:
+      accessModes: [ ReadWriteOnce ]
+      storageClassName: proxmox-zfs-nvme
+      resources:
+        requests:
+          storage: 128Mi
