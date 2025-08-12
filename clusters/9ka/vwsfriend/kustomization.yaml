@@ -9,3 +9,4 @@ resources:
 - statefulset.yaml
 - secret-vwsfriend.yaml
 - ingress.yaml
+- configmap-for-grafana.yaml
