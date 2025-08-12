@@ -49,11 +49,26 @@ spec:
           httpGet:
             port: http
           failureThreshold: 3
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: topology.kubernetes.io/region
+                operator: In
+                values:
+                - thuis-svc
+      tolerations:
+      - operator: Equal
+        key: efgh.nl/location
+        value: zolder
+        effect: NoSchedule
   volumeClaimTemplates:
   - metadata:
       name: config
     spec:
       accessModes: [ ReadWriteOnce ]
+      storageClassName: proxmox-zfs-nvme
       resources:
         requests:
           storage: 1Gi
