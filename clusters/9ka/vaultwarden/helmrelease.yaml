@@ -39,6 +39,8 @@ spec:
         - brs.9ka.nl
     persistence:
       enabled: true
+      storageClass: nfs-nvme
+      size: 256Mi
     resources:
       requests:
         cpu: 50m
@@ -46,3 +48,17 @@ spec:
       limits:
         cpu: 250m
         memory: 128Mi
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: topology.kubernetes.io/region
+              operator: In
+              values:
+              - thuis-svc
+    tolerations:
+    - operator: Equal
+      key: efgh.nl/location
+      value: zolder
+      effect: NoSchedule
