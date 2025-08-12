@@ -21,6 +21,7 @@ spec:
       failureThreshold: 24
     persistence:
       enabled: true
+      storageClass: proxmox-zfs-nvme
     resources:
       requests:
         cpu: 250m
@@ -36,3 +37,17 @@ spec:
       tls: true
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: topology.kubernetes.io/region
+              operator: In
+              values:
+              - thuis-svc
+    tolerations:
+    - operator: Equal
+      key: efgh.nl/location
+      value: zolder
+      effect: NoSchedule
