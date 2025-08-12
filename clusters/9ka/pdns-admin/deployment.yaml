@@ -48,6 +48,20 @@ spec:
           requests:
             cpu: 50m
             memory: 256Mi
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: topology.kubernetes.io/region
+                operator: In
+                values:
+                - thuis-svc
+      tolerations:
+      - operator: Equal
+        key: efgh.nl/location
+        value: zolder
+        effect: NoSchedule
       volumes:
       - name: pda-data
         persistentVolumeClaim:
