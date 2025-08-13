@@ -42,6 +42,20 @@ spec:
         limits:
           cpu: 250m
           memory: 196Mi
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: topology.kubernetes.io/region
+                operator: In
+                values:
+                - thuis-svc
+      tolerations:
+      - operator: Equal
+        key: efgh.nl/location
+        value: zolder
+        effect: NoSchedule
       prometheus:
         monitor:
           relabelings:
@@ -56,6 +70,15 @@ spec:
         key: efgh.nl/location
         value: zolder
         effect: NoSchedule
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: topology.kubernetes.io/region
+                operator: In
+                values:
+                - thuis-svc
       persistence:
         enabled: true
         size: 1Gi
@@ -152,6 +175,20 @@ spec:
         requests:
           cpu: 100m
           memory: 128Mi
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: topology.kubernetes.io/region
+                operator: In
+                values:
+                - thuis-svc
+      tolerations:
+      - operator: Equal
+        key: efgh.nl/location
+        value: zolder
+        effect: NoSchedule
     prometheus-node-exporter:
       hostNetwork: false
       extraArgs:
