@@ -17,6 +17,20 @@ spec:
     hubble:
       relay:
         enabled: true
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: topology.kubernetes.io/region
+                  operator: In
+                  values:
+                  - thuis-svc
+        tolerations:
+        - operator: Equal
+          key: efgh.nl/location
+          value: zolder
+          effect: NoSchedule
       metrics:
         enabled:
         - drop
@@ -40,5 +54,19 @@ spec:
         enabled: true
         serviceMonitor:
           enabled: true
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: topology.kubernetes.io/region
+                operator: In
+                values:
+                - thuis-svc
+      tolerations:
+      - operator: Equal
+        key: efgh.nl/location
+        value: zolder
+        effect: NoSchedule
     securityContext:
       privileged: true
