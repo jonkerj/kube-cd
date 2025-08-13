@@ -33,6 +33,20 @@ spec:
         limits:
           cpu: 250m
           memory: 250Mi
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: topology.kubernetes.io/region
+                operator: In
+                values:
+                - thuis-svc
+      tolerations:
+      - operator: Equal
+        key: efgh.nl/location
+        value: zolder
+        effect: NoSchedule
     webhook:
       resources:
         requests:
@@ -41,3 +55,31 @@ spec:
         limits:
           cpu: 250m
           memory: 100Mi
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: topology.kubernetes.io/region
+                operator: In
+                values:
+                - thuis-svc
+      tolerations:
+      - operator: Equal
+        key: efgh.nl/location
+        value: zolder
+        effect: NoSchedule
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: topology.kubernetes.io/region
+              operator: In
+              values:
+              - thuis-svc
+    tolerations:
+    - operator: Equal
+      key: efgh.nl/location
+      value: zolder
+      effect: NoSchedule
