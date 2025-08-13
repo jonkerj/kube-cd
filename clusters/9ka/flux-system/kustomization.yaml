@@ -8,3 +8,4 @@ resources:
 - webhooks.yaml
 patchesStrategicMerge:
 - flux-resources.yaml
+- flux-thuis-svc.yaml
