@@ -29,7 +29,7 @@ spec:
         security: off
     ingress:
       enabled: true
-      className: cilium
+      className: nginx
       host: brs.9ka.nl
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt

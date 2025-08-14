@@ -6,7 +6,6 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
-  ingressClassName: cilium
   rules:
   - host: flux-webhook.9ka.nl
     http:

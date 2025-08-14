@@ -58,7 +58,7 @@ spec:
       enabled: true
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
-      className: cilium
+      className: nginx
       hosts:
       - host: dex.9ka.nl
         paths:

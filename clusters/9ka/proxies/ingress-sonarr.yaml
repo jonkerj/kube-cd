@@ -8,7 +8,7 @@ metadata:
   name: sonarr
   namespace: proxies
 spec:
-  ingressClassName: cilium
+  ingressClassName: nginx
   rules:
   - host: sonarr.9ka.nl
     http:

@@ -31,7 +31,7 @@ spec:
         memory: 4Gi
     ingress:
       enabled: true
-      ingressClassName: cilium
+      ingressClassName: nginx
       hostname: influx.9ka.nl
       secretName: influxdb2-tls
       tls: true

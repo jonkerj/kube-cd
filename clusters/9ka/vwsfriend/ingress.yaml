@@ -11,7 +11,7 @@ metadata:
   name: vwsfriend
   namespace: vwsfriend
 spec:
-  ingressClassName: cilium
+  ingressClassName: nginx
   rules:
   - host: vwsfriend.9ka.nl
     http:

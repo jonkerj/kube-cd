@@ -13,7 +13,7 @@ spec:
   - hosts:
     - pda.9ka.nl
     secretName: pdns-admin
-  ingressClassName: cilium
+  ingressClassName: nginx
   rules:
   - host: pda.9ka.nl
     http:

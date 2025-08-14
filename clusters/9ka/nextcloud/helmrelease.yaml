@@ -20,7 +20,6 @@ spec:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
         nginx.ingress.kubernetes.io/proxy-body-size: 32m
-      className: cilium
       enabled: true
       tls:
       - secretName: nextcloud-tls
