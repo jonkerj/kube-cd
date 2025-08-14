@@ -8,7 +8,7 @@ metadata:
   name: laadpaal
   namespace: proxies
 spec:
-  ingressClassName: nginx
+  ingressClassName: cilium
   rules:
   - host: laadpaal.9ka.nl
     http:

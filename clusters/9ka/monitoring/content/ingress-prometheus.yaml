@@ -8,7 +8,7 @@ metadata:
   name: prometheus
   namespace: monitoring
 spec:
-  ingressClassName: nginx
+  ingressClassName: cilium
   rules:
   - host: prometheus.9ka.nl
     http:

@@ -8,7 +8,7 @@ metadata:
   name: sabnzbd
   namespace: proxies
 spec:
-  ingressClassName: nginx
+  ingressClassName: cilium
   rules:
   - host: sabnzbd.9ka.nl
     http:

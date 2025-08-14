@@ -9,7 +9,7 @@ metadata:
   name: transmission
   namespace: proxies
 spec:
-  ingressClassName: nginx
+  ingressClassName: cilium
   rules:
   - host: transmission.9ka.nl
     http:

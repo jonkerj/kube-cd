@@ -8,7 +8,7 @@ metadata:
   name: justnimbus
   namespace: proxies
 spec:
-  ingressClassName: nginx
+  ingressClassName: cilium
   rules:
   - host: justnimbus.9ka.nl
     http:

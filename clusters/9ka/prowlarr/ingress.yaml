@@ -12,7 +12,7 @@ spec:
   - hosts:
     - prowlarr.9ka.nl
     secretName: prowlarr-tls
-  ingressClassName: nginx
+  ingressClassName: cilium
   rules:
   - host: prowlarr.9ka.nl
     http:
