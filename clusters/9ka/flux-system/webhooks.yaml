@@ -4,8 +4,11 @@ metadata:
   name: webhook-receiver
   namespace: flux-system
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+    external-dns.alpha.kubernetes.io/hostname: flux-webhook.9ka.nl
+    external-dns.alpha.kubernetes.io/target: 431113a6-4cf3-4a66-9750-17113ae2e689.cfargotunnel.com
 spec:
+  ingressClassName: cilium
   rules:
   - host: flux-webhook.9ka.nl
     http:
@@ -17,10 +20,6 @@ spec:
             name: webhook-receiver
             port:
               name: http
-  tls:
-  - hosts:
-    - flux-webhook.9ka.nl
-    secretName: flux-webhook-tls
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1
 kind: Receiver

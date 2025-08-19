@@ -18,13 +18,12 @@ spec:
   values:
     ingress:
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+        external-dns.alpha.kubernetes.io/hostname: nextcloud.9ka.nl
+        external-dns.alpha.kubernetes.io/target: 431113a6-4cf3-4a66-9750-17113ae2e689.cfargotunnel.com
         nginx.ingress.kubernetes.io/proxy-body-size: 32m
+      className: cilium
       enabled: true
-      tls:
-      - secretName: nextcloud-tls
-        hosts:
-        - nc.9ka.nl
     nextcloud:
       configs:
         extra.config.php: |-

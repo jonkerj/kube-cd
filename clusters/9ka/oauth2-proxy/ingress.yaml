@@ -9,7 +9,7 @@ metadata:
   name: oauth2-proxy
   namespace: oauth2-proxy
 spec:
-  ingressClassName: nginx
+  ingressClassName: cilium
   rules:
   - host: prometheus.9ka.nl
     http:

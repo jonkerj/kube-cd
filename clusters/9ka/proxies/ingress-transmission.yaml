@@ -2,14 +2,16 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+    external-dns.alpha.kubernetes.io/hostname: transmission.9ka.nl
+    external-dns.alpha.kubernetes.io/target: 431113a6-4cf3-4a66-9750-17113ae2e689.cfargotunnel.com
     nginx.ingress.kubernetes.io/auth-url: "http://oauth2-proxy.oauth2-proxy.svc.cluster.local/oauth2/auth"
     nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
     nginx.ingress.kubernetes.io/app-root: /transmission/web/
   name: transmission
   namespace: proxies
 spec:
-  ingressClassName: nginx
+  ingressClassName: cilium
   rules:
   - host: transmission.9ka.nl
     http:
@@ -21,7 +23,3 @@ spec:
             name: neon
             port:
               name: transmission
-  tls:
-  - hosts:
-    - transmission.9ka.nl
-    secretName: transmission-tls

@@ -3,17 +3,15 @@ kind: Ingress
 metadata:
   name: pdns-admin
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+    external-dns.alpha.kubernetes.io/hostname: pda.9ka.nl
+    external-dns.alpha.kubernetes.io/target: 431113a6-4cf3-4a66-9750-17113ae2e689.cfargotunnel.com
   labels:
     app.kubernetes.io/name: pdns-admin
     app.kubernetes.io/instance: pdns-admin-efgh
   namespace: pdns-admin
 spec:
-  tls:
-  - hosts:
-    - pda.9ka.nl
-    secretName: pdns-admin
-  ingressClassName: nginx
+  ingressClassName: cilium
   rules:
   - host: pda.9ka.nl
     http:

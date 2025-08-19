@@ -2,16 +2,16 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
-    meta.helm.sh/release-name: vwsfriend
-    meta.helm.sh/release-namespace: vwsfriend
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+    external-dns.alpha.kubernetes.io/hostname: vwsfriend.9ka.nl
+    external-dns.alpha.kubernetes.io/target: 431113a6-4cf3-4a66-9750-17113ae2e689.cfargotunnel.com
   labels:
     app.kubernetes.io/instance: vwsfriend
     app.kubernetes.io/name: vwsfriend
   name: vwsfriend
   namespace: vwsfriend
 spec:
-  ingressClassName: nginx
+  ingressClassName: cilium
   rules:
   - host: vwsfriend.9ka.nl
     http:
@@ -23,7 +23,3 @@ spec:
               name: http
         path: /
         pathType: Prefix
-  tls:
-  - hosts:
-    - vwsfriend.9ka.nl
-    secretName: vwsfriend-tls

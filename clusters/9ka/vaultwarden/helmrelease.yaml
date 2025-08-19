@@ -29,14 +29,12 @@ spec:
         security: off
     ingress:
       enabled: true
-      className: nginx
+      className: cilium
       host: brs.9ka.nl
       annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
-      tls:
-      - secretName: vaultwarden-tls
-        hosts:
-        - brs.9ka.nl
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+        external-dns.alpha.kubernetes.io/hostname: brs.9ka.nl
+        external-dns.alpha.kubernetes.io/target: 431113a6-4cf3-4a66-9750-17113ae2e689.cfargotunnel.com
     persistence:
       enabled: true
       storageClass: nfs-nvme

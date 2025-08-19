@@ -130,15 +130,13 @@ spec:
           allow_embedding: true
       ingress:
         annotations:
-          cert-manager.io/cluster-issuer: letsencrypt
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/hostname: grafana.9ka.nl
+          external-dns.alpha.kubernetes.io/target: 431113a6-4cf3-4a66-9750-17113ae2e689.cfargotunnel.com
         enabled: true
-        ingressClassName: nginx
+        ingressClassName: cilium
         hosts:
         - grafana.9ka.nl
-        tls:
-        - secretName: grafana-tls
-          hosts:
-          - grafana.9ka.nl
       plugins:
       - fetzerch-sunandmoon-datasource
       - gapit-htmlgraphics-panel
