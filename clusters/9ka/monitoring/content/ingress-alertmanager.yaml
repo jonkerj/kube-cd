@@ -19,4 +19,4 @@ spec:
             port:
               name: web
         path: /
-        pathType: ImplementationSpecific
+        pathType: Prefix
