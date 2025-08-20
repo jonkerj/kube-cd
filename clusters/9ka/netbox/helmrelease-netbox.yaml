@@ -57,6 +57,9 @@ spec:
         requests:
           cpu: 500m
           memory: 768Mi
+    csrf:
+      trustedOrigins:
+      - https://netbox.9ka.nl
     remoteAuth:
       enabled: true
       backends:
