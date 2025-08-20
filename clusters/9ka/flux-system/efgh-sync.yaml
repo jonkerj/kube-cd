@@ -5,7 +5,7 @@ metadata:
   name: chargeflux
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/chargeflux
   prune: true
   sourceRef:
@@ -22,7 +22,7 @@ metadata:
   name: cilium
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/cilium
   prune: true
   sourceRef:
@@ -35,7 +35,7 @@ metadata:
   name: flux-system
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/flux-system
   prune: true
   sourceRef:
@@ -48,7 +48,7 @@ metadata:
   name: influxdb
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/influxdb
   prune: true
   sourceRef:
@@ -61,7 +61,7 @@ metadata:
   name: iioflux
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/iioflux
   prune: true
   sourceRef:
@@ -78,7 +78,7 @@ metadata:
   name: ingress
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/ingress
   prune: true
   dependsOn:
@@ -97,7 +97,7 @@ metadata:
   name: kea
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/kea
   prune: true
   decryption:
@@ -114,7 +114,7 @@ metadata:
   name: kube-system
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/kube-system
   prune: true
   sourceRef:
@@ -131,7 +131,7 @@ metadata:
   name: metrics-server
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/metrics-server
   prune: true
   sourceRef:
@@ -144,7 +144,7 @@ metadata:
   name: monitoring
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/monitoring
   prune: true
   sourceRef:
@@ -157,7 +157,7 @@ metadata:
   name: mqtt
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/mqtt
   prune: true
   sourceRef:
@@ -174,7 +174,7 @@ metadata:
   name: nextcloud
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/nextcloud
   prune: true
   sourceRef:
@@ -187,7 +187,7 @@ metadata:
   name: netbox
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/netbox
   prune: true
   decryption:
@@ -204,7 +204,7 @@ metadata:
   name: node-feature-discovery
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/node-feature-discovery
   prune: true
   sourceRef:
@@ -217,7 +217,7 @@ metadata:
   name: nuts
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/nuts
   prune: true
   decryption:
@@ -234,7 +234,7 @@ metadata:
   name: prowlarr
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/prowlarr
   prune: true
   sourceRef:
@@ -247,7 +247,7 @@ metadata:
   name: proxies
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/proxies
   prune: true
   sourceRef:
@@ -260,7 +260,7 @@ metadata:
   name: proxmox
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/proxmox
   prune: true
   decryption:
@@ -277,7 +277,7 @@ metadata:
   name: pynuts
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/pynuts
   prune: true
   decryption:
@@ -294,7 +294,7 @@ metadata:
   name: pdns-admin
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/pdns-admin
   prune: true
   sourceRef:
@@ -307,7 +307,7 @@ metadata:
   name: smapy
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/smapy
   prune: true
   decryption:
@@ -324,7 +324,7 @@ metadata:
   name: storage
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/storage
   prune: true
   sourceRef:
@@ -337,7 +337,7 @@ metadata:
   name: vaultwarden
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/vaultwarden
   prune: true
   sourceRef:
@@ -350,7 +350,7 @@ metadata:
   name: vwsfriend
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/vwsfriend
   prune: true
   decryption:
@@ -367,7 +367,7 @@ metadata:
   name: velero
   namespace: flux-system
 spec:
-  interval: 10m0s
+  interval: 2h
   path: ./clusters/9ka/velero
   prune: true
   sourceRef:
