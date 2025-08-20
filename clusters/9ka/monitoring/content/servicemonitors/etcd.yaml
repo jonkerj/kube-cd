@@ -41,12 +41,8 @@ metadata:
     app.kubernetes.io/name: etcd
 subsets:
 - addresses:
-  - ip: 172.21.48.51
-    nodeName: 9ka-cp-1
-  - ip: 172.21.48.52
-    nodeName: 9ka-cp-2
-  - ip: 172.21.48.53
-    nodeName: 9ka-cp-3
+  - ip: 172.21.46.17
+    nodeName: 9ka-cp-0
   ports:
   - name: metrics
     port: 2381
