@@ -41,8 +41,8 @@ metadata:
     app: haproxy
 subsets:
 - addresses:
-  - ip: 172.21.48.1
-    nodeName: pve
+  - ip: 172.21.46.2
+    nodeName: helium
   ports:
   - name: metrics
     port: 8404
