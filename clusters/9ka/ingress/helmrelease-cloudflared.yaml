@@ -28,20 +28,6 @@ spec:
         service: "http://cilium-ingress.cilium:80"
         originRequest:
           noTLSVerify: true
-    tolerations:
-    - key: efgh.nl/location
-      operator: Equal
-      value: zolder
-      effect: NoSchedule
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: topology.kubernetes.io/region
-              operator: In
-              values:
-              - thuis-svc
     resources:
       requests:
         cpu: 100m

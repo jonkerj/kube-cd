@@ -15,11 +15,6 @@ spec:
       persistence:
         size: 1Gi
         storageClass: proxmox-zfs-nvme
-      tolerations:
-      - operator: Equal
-        key: efgh.nl/location
-        value: zolder
-        effect: NoSchedule
     auth:
       existingSecret: netbox-valkey
       existingSecretPasswordKey: valkey-password

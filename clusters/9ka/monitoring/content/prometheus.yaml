@@ -13,11 +13,6 @@ spec:
   ruleSelector: {}
   serviceAccountName: prometheus
   externalUrl: https://prometheus.9ka.nl
-  tolerations:
-  - operator: Equal
-    key: efgh.nl/location
-    value: zolder
-    effect: NoSchedule
   alerting:
     alertmanagers:
     - namespace: monitoring

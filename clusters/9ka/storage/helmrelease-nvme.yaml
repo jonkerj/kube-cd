@@ -23,11 +23,6 @@ spec:
       archiveOnDelete: false
       defaultClass: false
       name: nfs-nvme
-    tolerations:
-    - key: efgh.nl/location
-      operator: Equal
-      value: zolder
-      effect: NoSchedule
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:

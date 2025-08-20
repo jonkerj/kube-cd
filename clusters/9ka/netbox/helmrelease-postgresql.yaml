@@ -14,11 +14,6 @@ spec:
       persistence:
         size: 1Gi
         storageClass: proxmox-zfs-nvme
-      tolerations:
-      - operator: Equal
-        key: efgh.nl/location
-        value: zolder
-        effect: NoSchedule
     auth:
       database: netbox
       username: netbox

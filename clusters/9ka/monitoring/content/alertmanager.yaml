@@ -8,11 +8,6 @@ spec:
   configSecret: alertmanager-config
   configMaps:
   - alertmanager-templates
-  tolerations:
-  - operator: Equal
-    key: efgh.nl/location
-    value: zolder
-    effect: NoSchedule
   storage:
     volumeClaimTemplate:
       spec:
