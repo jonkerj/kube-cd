@@ -74,6 +74,17 @@ spec:
           url: https://grafana.net
         security:
           allow_embedding: true
+        auth.jwt:
+          enabled: true
+          header_name: cf-access-jwt-assertion
+          username_claim: email
+          email_claim: email
+          auto_sign_up: true
+          jwk_set_url: https://efgh.cloudflareaccess.com/cdn-cgi/access/certs
+          expect_claims: '{"iss": "https://efgh.cloudflareaccess.com"}'
+        users:
+          auto_assign_org: true
+          auto_assign_org_role: Admin
       ingress:
         annotations:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
