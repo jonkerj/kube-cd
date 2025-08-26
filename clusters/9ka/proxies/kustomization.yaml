@@ -5,7 +5,6 @@ resources:
 - ingress-laadpaal.yaml
 - ingress-sabnzbd.yaml
 - ingress-sonarr.yaml
-- ingress-transmission.yaml
 - service-justnimbus.yaml
 - service-laadpaal.yaml
 - service-neon.yaml
