@@ -65,14 +65,14 @@ spec:
       backends:
       - netbox.authentication.RemoteUserBackend
       autoCreateUser: true
-      header: HTTP_X_FORWARDED_USER
-      userEmail: HTTP_X_FORWARDED_EMAIL
-      groupHeader: HTTP_X_FORWARDED_GROUPS
+      header: cf-access-authenticated-user-email
+      userEmail: cf-access-authenticated-user-email
+      #groupHeader: HTTP_X_FORWARDED_GROUPS
       groupSeparator: ','
       defaultGroups: []
       defaultPermissions: {}
       groupSyncEnabled: true
       superuserGroups: []
-      superusers: ['Jorik Jonker']
+      superusers: ['Jorik Jonker', 'jorik@kippendief.biz']
       staffGroups: []
-      staffUsers: ['Jorik Jonker']
+      staffUsers: ['Jorik Jonker', 'jorik@kippendief.biz']
