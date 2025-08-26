@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
 - ingress-justnimbus.yaml
 - ingress-laadpaal.yaml
-- ingress-sabnzbd.yaml
 - ingress-sonarr.yaml
 - service-justnimbus.yaml
 - service-laadpaal.yaml
