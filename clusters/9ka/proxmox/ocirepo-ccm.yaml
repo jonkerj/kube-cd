@@ -10,4 +10,4 @@ spec:
     operation: copy
   url: oci://ghcr.io/sergelogvinov/charts/proxmox-cloud-controller-manager
   ref:
-    tag: 0.2.15
+    tag: 0.2.16
