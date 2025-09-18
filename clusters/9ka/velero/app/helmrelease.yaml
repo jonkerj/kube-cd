@@ -45,3 +45,6 @@ spec:
       scrapeInterval: 1m
       serviceMonitor:
         enabled: true
+    kubectl:
+      image:
+        tag: 1.33.4
