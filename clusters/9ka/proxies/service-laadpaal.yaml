@@ -4,9 +4,25 @@ metadata:
   name: laadpaal
   namespace: proxies
 spec:
-  type: ExternalName
-  externalName: laadpaal.iot.efgh.nl
+  type: ClusterIP
   ports:
   - port: 80
     name: http
     targetPort: 80
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: laadpaal-1
+  namespace: proxies
+  labels:
+    kubernetes.io/service-name: laadpaal
+addressType: IPv4
+ports:
+  - name: http
+    appProtocol: http
+    protocol: TCP
+    port: 80
+endpoints:
+  - addresses:
+      - "172.21.45.14"

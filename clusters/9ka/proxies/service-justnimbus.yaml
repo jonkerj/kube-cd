@@ -10,3 +10,20 @@ spec:
   - port: 1880
     name: nodered
     targetPort: 1880
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: justnimbus-1
+  namespace: proxies
+  labels:
+    kubernetes.io/service-name: justnimbus
+addressType: IPv4
+ports:
+  - name: nodered
+    appProtocol: http
+    protocol: TCP
+    port: 1880
+endpoints:
+  - addresses:
+      - "172.21.45.11"
