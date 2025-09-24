@@ -24,6 +24,7 @@ spec:
         flush_interval: 1m
         interval: 1m
         omit_hostname: true
+        debug: true
       inputs:
       - mqtt_consumer:
           data_format: value
