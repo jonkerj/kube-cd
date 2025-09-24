@@ -5,5 +5,4 @@ resources:
 - ingress-laadpaal.yaml
 - service-justnimbus.yaml
 - service-laadpaal.yaml
-- service-neon.yaml
 - namespace.yaml
