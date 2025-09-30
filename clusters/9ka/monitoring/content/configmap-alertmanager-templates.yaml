@@ -2,7 +2,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: alertmanager-templates
-  namespace: monitoring
 data:
   custom.tmpl: |
     {{ define "pushover.custom.title" }}[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ range .Alerts }}{{ .Annotations.summary }}{{ end }}{{ end }}

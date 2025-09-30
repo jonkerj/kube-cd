@@ -4,7 +4,6 @@ metadata:
   labels:
     grafana_dashboard: '1'
   name: sysstat-dashboard
-  namespace: monitoring
 data:
   sysstat.json: |
     {

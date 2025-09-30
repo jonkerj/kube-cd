@@ -4,7 +4,6 @@ metadata:
   labels:
     grafana_dashboard: '1'
   name: pdns-recursor-dashboard
-  namespace: monitoring
 data:
   pdns-recursor.json: |
     {

@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: chargeflux
-  namespace: chargeflux
   labels:
     app.kubernetes.io/instance: chargeflux
     app.kubernetes.io/name: chargeflux

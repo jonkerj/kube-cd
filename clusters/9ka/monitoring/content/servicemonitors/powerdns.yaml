@@ -2,7 +2,6 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: powerdns-recursor
-  namespace: monitoring
   labels:
     app: powerdns-recursor
 spec:
@@ -22,7 +21,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: powerdns-recursor
-  namespace: monitoring
   labels:
     app: powerdns-recursor
 spec:
@@ -36,7 +34,6 @@ apiVersion: v1
 kind: Endpoints
 metadata:
   name: powerdns-recursor
-  namespace: monitoring
   labels:
     app: powerdns-recursor
 subsets:

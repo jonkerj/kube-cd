@@ -6,7 +6,6 @@ metadata:
     external-dns.alpha.kubernetes.io/hostname: justnimbus.9ka.nl
     external-dns.alpha.kubernetes.io/target: 431113a6-4cf3-4a66-9750-17113ae2e689.cfargotunnel.com
   name: justnimbus
-  namespace: proxies
 spec:
   ingressClassName: cilium
   rules:

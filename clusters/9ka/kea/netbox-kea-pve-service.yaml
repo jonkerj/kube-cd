@@ -5,7 +5,6 @@ metadata:
   labels:
     app.kubernetes.io/name: netbox-kea
     app.kubernetes.io/instance: netbox-kea-pve
-  namespace: kea
 spec:
   selector:
     app.kubernetes.io/name: netbox-kea

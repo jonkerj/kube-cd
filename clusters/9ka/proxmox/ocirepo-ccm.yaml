@@ -2,7 +2,6 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: OCIRepository
 metadata:
   name: ccm
-  namespace: proxmox
 spec:
   interval: 1h
   layerSelector:

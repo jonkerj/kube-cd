@@ -4,7 +4,6 @@ metadata:
   labels:
     grafana_dashboard: '1'
   name: energiebalans-dashboard
-  namespace: monitoring
 data:
   energiebalans.json: |
     {

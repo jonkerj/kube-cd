@@ -2,7 +2,6 @@ apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
   name: influxdata
-  namespace: mqtt
 spec:
   url: https://helm.influxdata.com/
   interval: 1h

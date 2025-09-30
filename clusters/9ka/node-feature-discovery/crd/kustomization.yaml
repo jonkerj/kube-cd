@@ -1,4 +1,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: node-feature-discovery
 resources:
 - https://github.com/kubernetes-sigs/node-feature-discovery/raw/v0.16.0/deployment/helm/node-feature-discovery/crds/nfd-api-crds.yaml

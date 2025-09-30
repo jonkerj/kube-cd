@@ -7,7 +7,6 @@ metadata:
     app.kubernetes.io/name: gokmp
     app.kubernetes.io/part-of: nuts
   name: heat-gokmp
-  namespace: nuts
 spec:
   selector:
     matchLabels:

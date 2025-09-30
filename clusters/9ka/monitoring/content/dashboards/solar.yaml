@@ -4,7 +4,6 @@ metadata:
   labels:
     grafana_dashboard: '1'
   name: solar-dashboard
-  namespace: monitoring
 data:
   solar.json: |
     {

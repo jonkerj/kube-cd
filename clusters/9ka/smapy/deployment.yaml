@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: smapy
-  namespace: smapy
   labels:
     app.kubernetes.io/instance: smapy
     app.kubernetes.io/managed-by: Helm

@@ -9,7 +9,6 @@ metadata:
     app.kubernetes.io/instance: vwsfriend
     app.kubernetes.io/name: vwsfriend
   name: vwsfriend
-  namespace: vwsfriend
 spec:
   ingressClassName: cilium
   rules:

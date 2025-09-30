@@ -6,7 +6,6 @@ metadata:
     app.kubernetes.io/name: pdns-admin
     app.kubernetes.io/instance: pdns-admin
     app.kubernetes.io/version: 0.4.2
-  namespace: pdns-admin
 spec:
   replicas: 1
   selector:

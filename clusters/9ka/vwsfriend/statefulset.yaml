@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: vwsfriend
-  namespace: vwsfriend
   labels:
     app.kubernetes.io/name: vwsfriend
     app.kubernetes.io/version: 0.24.7

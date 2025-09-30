@@ -6,7 +6,6 @@ metadata:
     app.kubernetes.io/instance: pynuts-power
     app.kubernetes.io/name: pynuts
   name: pynuts-power
-  namespace: pynuts
 spec:
   selector:
     matchLabels:

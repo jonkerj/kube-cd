@@ -4,7 +4,6 @@ metadata:
   labels:
     grafana_datasource: "1"
   name: datasource-vwsfriend
-  namespace: monitoring
 data:
   influxdb2.yaml: |-
     deleteDatasources:

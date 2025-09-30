@@ -9,7 +9,6 @@ metadata:
   labels:
     app.kubernetes.io/name: pdns-admin
     app.kubernetes.io/instance: pdns-admin-efgh
-  namespace: pdns-admin
 spec:
   ingressClassName: cilium
   rules:
