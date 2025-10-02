@@ -1,0 +1,85 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: zot
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: zot
+      version: 0.1.83
+      sourceRef:
+        kind: HelmRepository
+        name: zotregistry
+  values:
+    service:
+      type: ClusterIP
+    ingress:
+      enabled: true
+      className: cilium
+      pathtype: Prefix
+      annotations:
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+        external-dns.alpha.kubernetes.io/hostname: zot.9ka.nl
+        external-dns.alpha.kubernetes.io/target: 431113a6-4cf3-4a66-9750-17113ae2e689.cfargotunnel.com
+      hosts:
+        - host: zot.9ka.nl
+          paths:
+            - path: /
+    persistence: true
+    pvc:
+      create: true
+      storage: 8Gi
+      storageClassName: proxmox-zfs-nvme
+    mountConfig: true
+    configFiles:
+      config.json: |-
+        {
+          "storage": {
+            "rootDirectory": "/var/lib/registry"
+          },
+          "http": {
+            "address": "0.0.0.0",
+            "port": "5000",
+            "auth": {
+              "htpasswd": {
+                "path": "/secrets/htpasswd"
+              }
+            },
+            "accessControl": {
+              "repositories": {
+                "**": {
+                  "defaultPolicy": ["create", "read", "update", "delete"]
+                }
+              },
+              "adminPolicy": {
+                "users": ["jorik"],
+                "actions": ["read", "create", "update", "delete"]
+              }
+            }
+          },
+          "log": {
+            "level": "debug"
+          },
+          "extensions": {
+            "search": {
+              "enable": true,
+              "cve": {
+                "updateInterval": 7200000000000,
+                "trivy": {
+                  "dbrepository": "ghcr.io/aquasecurity/trivy-db",
+                  "javadbrepository": "ghcr.io/aquasecurity/trivy-java-db"
+                }
+              }
+            },
+            "ui": {
+              "enable": true
+            },
+            "mgmt": {
+              "enable": true
+            }
+          }
+        }
+    externalSecrets:
+      - secretName: zot
+        mountPath: /secrets

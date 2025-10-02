@@ -1,0 +1,80 @@
+{
+  "distSpecVersion": "1.1.1",
+  "GoVersion": "go1.24.6",
+  "Commit": "v2.1.8-b740a6f03772c00759795f1a9d5883bf165041d8",
+  "ReleaseTag": "v2.1.8",
+  "BinaryType": "-events-imagetrust-lint-metrics-mgmt-profile-scrub-search-sync-ui-userprefs",
+  "Storage": {
+    "RootDirectory": "/var/lib/registry",
+    "Dedupe": true,
+    "RemoteCache": false,
+    "GC": true,
+    "Commit": false,
+    "GCDelay": 3600000000000,
+    "GCInterval": 3600000000000,
+    "Retention": {
+      "DryRun": false,
+      "Delay": 0,
+      "Policies": null
+    },
+    "StorageDriver": null,
+    "CacheDriver": null,
+    "SubPaths": null
+  },
+  "HTTP": {
+    "Address": "0.0.0.0",
+    "ExternalURL": "",
+    "Port": "5000",
+    "AllowOrigin": "",
+    "TLS": null,
+    "Auth": {
+      "FailDelay": 0,
+      "HTPasswd": {
+        "Path": ""
+      },
+      "LDAP": null,
+      "Bearer": null,
+      "OpenID": null,
+      "APIKey": false,
+      "SessionKeysFile": ""
+    },
+    "AccessControl": null,
+    "Realm": "",
+    "Ratelimit": null,
+    "Compat": [
+      "docker2s2"
+    ]
+  },
+  "Log": {
+    "Level": "debug",
+    "Output": "",
+    "Audit": ""
+  },
+  "Extensions": {
+    "Search": {
+      "Enable": true,
+      "CVE": {
+        "UpdateInterval": 7200000000000,
+        "Trivy": {
+          "DBRepository": "ghcr.io/aquasecurity/trivy-db",
+          "JavaDBRepository": "ghcr.io/aquasecurity/trivy-java-db"
+        }
+      }
+    },
+    "Sync": null,
+    "Metrics": null,
+    "Scrub": null,
+    "Lint": null,
+    "UI": {
+      "Enable": true
+    },
+    "Mgmt": {
+      "Enable": true
+    },
+    "APIKey": null,
+    "Trust": null,
+    "Events": null
+  },
+  "scheduler": null,
+  "cluster": null
+}
