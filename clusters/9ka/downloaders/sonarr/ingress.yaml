@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+    external-dns.alpha.kubernetes.io/hostname: sonarr.9ka.nl
+    external-dns.alpha.kubernetes.io/target: 431113a6-4cf3-4a66-9750-17113ae2e689.cfargotunnel.com
+  labels:
+    app.kubernetes.io/name: sonarr
+    app.kubernetes.io/component: tv
+    app.kubernetes.io/part-of: downloaders
+  name: sonarr
+spec:
+  ingressClassName: cilium
+  rules:
+  - host: sonarr.9ka.nl
+    http:
+      paths:
+      - backend:
+          service:
+            name: sonarr
+            port:
+              name: http
+        path: /
+        pathType: Prefix

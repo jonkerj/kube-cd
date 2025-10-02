@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: prowlarr
+  labels:
+    app.kubernetes.io/name: prowlarr
+    app.kubernetes.io/component: indexer
+    app.kubernetes.io/part-of: downloaders
+spec:
+  serviceName: prowlarr
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: prowlarr
+      app.kubernetes.io/component: indexer
+      app.kubernetes.io/part-of: downloaders
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: prowlarr
+        app.kubernetes.io/component: indexer
+        app.kubernetes.io/part-of: downloaders
+    spec:
+      securityContext:
+        # runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: prowlarr
+        image: ghcr.io/linuxserver/prowlarr:2.0.5
+        env:
+        - name: S6_READ_ONLY_ROOT
+          value: "1"
+        - name: S6_YES_I_WANT_A_WORLD_WRITABLE_RUN_BECAUSE_KUBERNETES
+          value: "1"
+        - name: PUID
+          value: "1000"
+        - name: USER_ID
+          value: "1000"
+        - name: UID
+          value: "1000"
+        - name: GROUP_ID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: GID
+          value: "1000"
+        - name: TZ
+          value: Europe/Amsterdam
+        ports:
+        - containerPort: 9696
+          name: http
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        startupProbe:
+          httpGet:
+            port: http
+          timeoutSeconds: 5
+          failureThreshold: 120
+        readinessProbe:
+          httpGet:
+            port: http
+          timeoutSeconds: 5
+          failureThreshold: 10
+        livenessProbe:
+          httpGet:
+            port: http
+          failureThreshold: 3
+        resources:
+          limits:
+            cpu: "1"
+            memory: 768Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          privileged: false
+          capabilities:
+            drop:
+            - ALL
+            add:
+            - CHOWN
+            - SETUID
+            - SETGID
+            - FOWNER
+            - DAC_OVERRIDE
+            - NET_BIND_SERVICE
+          # readOnlyRootFilesystem: true
+          # runAsUser: 1000
+          # runAsGroup: 1000
+          # runAsNonRoot: true
+  volumeClaimTemplates:
+  - metadata:
+      name: config
+    spec:
+      accessModes: [ ReadWriteOnce ]
+      storageClassName: proxmox-zfs-nvme
+      resources:
+        requests:
+          storage: 1Gi
