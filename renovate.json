@@ -35,6 +35,11 @@
 		"matchDatasources": ["docker"],
 		"matchPackageNames": ["docker.io/influxdb", "docker.io/vaultwarden/server" ],
 		"allowedVersions": "/.*-alpine/"
+	},
+  	{
+		"matchDatasources": ["docker"],
+		"matchPackageNames": ["ghcr.io/linuxserver/transmission"],
+		"allowedVersions": "!/^20\\d\\d/"
 	}
   ]
 }
