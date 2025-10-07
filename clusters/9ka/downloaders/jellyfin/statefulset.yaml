@@ -89,7 +89,7 @@ spec:
       - name: movies
         nfs:
           server: helium.svc.efgh.nl
-          path: /data/movies
+          path: /rusty/data/movies
       - name: tv
         nfs:
           server: helium.svc.efgh.nl
