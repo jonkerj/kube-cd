@@ -88,12 +88,12 @@ spec:
       volumes:
       - name: movies
         nfs:
-          server: neon.thuis.efgh.nl
+          server: helium.svc.efgh.nl
           path: /data/movies
       - name: tv
         nfs:
-          server: neon.thuis.efgh.nl
-          path: /data/series
+          server: helium.svc.efgh.nl
+          path: /rusty/data/series
       # - name: run
       #   emptyDir:
       #     sizeLimit: 1Gi

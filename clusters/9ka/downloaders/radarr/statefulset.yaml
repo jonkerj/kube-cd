@@ -109,8 +109,8 @@ spec:
           path: /rusty/data/downloads/complete
       - name: movies
         nfs:
-          server: neon.thuis.efgh.nl
-          path: /data/movies
+          server: helium.svc.efgh.nl
+          path: /rusty/data/movies
       # - name: run
       #   emptyDir:
       #     sizeLimit: 1Gi
