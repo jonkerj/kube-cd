@@ -381,19 +381,6 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: velero
-  namespace: flux-system
-spec:
-  interval: 2h
-  path: ./clusters/9ka/velero
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
   name: zot
   namespace: flux-system
 spec:
