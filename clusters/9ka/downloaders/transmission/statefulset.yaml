@@ -80,8 +80,10 @@ spec:
           periodSeconds: 5
           failureThreshold: 3
         volumeMounts:
-        - mountPath: /downloads
-          name: downloads
+        - mountPath: /downloads/complete
+          name: complete
+        - mountPath: /downloads/incomplete
+          name: incomplete
         - mountPath: /config
           name: config
         # - mountPath: /run
@@ -111,10 +113,14 @@ spec:
           # runAsGroup: 1000
           # runAsNonRoot: true
       volumes:
-      - name: downloads
+      - name: complete
         nfs:
           server: helium.svc.efgh.nl
-          path: /rusty/data/downloads
+          path: /rusty/data/downloads/complete
+      - name: incomplete
+        nfs:
+          server: helium.svc.efgh.nl
+          path: /rusty/data/downloads/incomplete
       # - name: run
       #   emptyDir:
       #     sizeLimit: 1Gi
