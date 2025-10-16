@@ -13,7 +13,7 @@ spec:
         name: cloudflare
   values:
     image:
-      tag: 2025.9.1 # repo=docker.io/cloudflare/cloudflared
+      tag: 2025.10.0 # repo=docker.io/cloudflare/cloudflared
     cloudflare:
       tunnelName: "thuis-svc"
       tunnelId: "431113a6-4cf3-4a66-9750-17113ae2e689"
