@@ -15,7 +15,7 @@ spec:
     upgradeCompatibility: "1.12"
     hubble:
       relay:
-        enabled: false
+        enabled: true
       metrics:
         enabled:
         - drop
