@@ -12,3 +12,4 @@ resources:
 - helmrelease-postgresql.yaml
 - helmrelease-valkey.yaml
 - helmrelease-netbox.yaml
+- postgresql.yaml

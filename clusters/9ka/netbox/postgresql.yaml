@@ -1,0 +1,35 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: netbox-psql
+spec:
+  instances: 1
+  storage:
+    size: 1Gi
+    storageClass: proxmox-zfs-nvme
+  resources:
+    limits:
+      cpu: 150m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  bootstrap:
+    initdb:
+      database: netbox
+      owner: netbox
+      import:
+        type: microservice
+        databases:
+          - netbox
+        source:
+          externalCluster: netbox-postgresql
+  externalClusters:
+    - name: netbox-postgresql
+      connectionParameters:
+        host: netbox-postgresql
+        user: postgres
+        dbname: postgres
+      password:
+        name: netbox-postgresql
+        key: postgres-password

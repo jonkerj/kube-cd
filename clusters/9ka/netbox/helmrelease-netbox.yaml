@@ -26,9 +26,9 @@ spec:
     postgresql:
       enabled: false
     externalDatabase:
-      existingSecretName: netbox-postgresql
+      existingSecretName: netbox-psql-app
       existingSecretKey: password
-      host: netbox-postgresql-hl
+      host: netbox-psql-rw
       database: netbox
       username: netbox
     valkey:
