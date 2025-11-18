@@ -44,17 +44,11 @@ spec:
               name: vwsfriend
         - name: WECONNECT_INTERVAL
           value: "180"
-        - name: DATABASE_NAME
-          value: vwsfriend  # as defined in helmrelease-postgresql
-        - name: DATABASE_USERNAME
-          value: vwsfriend  # as defined in helmrelease-postgresql
-        - name: DATABASE_PASSWORD
+        - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
-              key: password
-              name: vwsfriend-postgresql
-        - name: DATABASE_URL
-          value: postgresql://$(DATABASE_USERNAME):$(DATABASE_PASSWORD)@vwsfriend-postgresql:5432/$(DATABASE_NAME)
+              key: uri
+              name: vwsfriend-psql-app
         - name: ADDITIONAL_PARAMETERS
           value: --with-database --with-abrp -vvv
         ports:

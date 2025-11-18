@@ -11,3 +11,4 @@ resources:
 - secret-vwsfriend.yaml
 - ingress.yaml
 - configmap-for-grafana.yaml
+- postgresql.yaml

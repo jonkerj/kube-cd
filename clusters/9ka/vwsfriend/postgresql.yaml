@@ -1,0 +1,35 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: vwsfriend-psql
+spec:
+  instances: 1
+  storage:
+    size: 1Gi
+    storageClass: proxmox-zfs-nvme
+  resources:
+    limits:
+      cpu: 150m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  bootstrap:
+    initdb:
+      database: vwsfriend
+      owner: vwsfriend
+      import:
+        type: microservice
+        databases:
+          - vwsfriend
+        source:
+          externalCluster: vwsfriend-postgresql
+  externalClusters:
+    - name: vwsfriend-postgresql
+      connectionParameters:
+        host: vwsfriend-postgresql
+        user: postgres
+        dbname: postgres
+      password:
+        name: vwsfriend-postgresql
+        key: postgres-password
