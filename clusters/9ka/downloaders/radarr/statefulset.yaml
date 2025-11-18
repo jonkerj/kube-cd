@@ -27,7 +27,7 @@ spec:
           type: RuntimeDefault
       containers:
       - name: radarr
-        image: ghcr.io/linuxserver/radarr:5.28.0
+        image: ghcr.io/linuxserver/radarr:6.0.4
         env:
         - name: S6_READ_ONLY_ROOT
           value: "1"
