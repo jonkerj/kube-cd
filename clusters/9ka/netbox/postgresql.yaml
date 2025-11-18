@@ -18,18 +18,3 @@ spec:
     initdb:
       database: netbox
       owner: netbox
-      import:
-        type: microservice
-        databases:
-          - netbox
-        source:
-          externalCluster: netbox-postgresql
-  externalClusters:
-    - name: netbox-postgresql
-      connectionParameters:
-        host: netbox-postgresql
-        user: postgres
-        dbname: postgres
-      password:
-        name: netbox-postgresql
-        key: postgres-password

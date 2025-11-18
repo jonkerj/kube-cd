@@ -3,13 +3,10 @@ kind: Kustomization
 namespace: netbox
 resources:
 - namespace.yaml
-- secret-postgresql.yaml
 - secret-valkey.yaml
 - secret-netbox.yaml
-- ocirepo-postgresql.yaml
 - ocirepo-valkey.yaml
 - ocirepo-netbox.yaml
-- helmrelease-postgresql.yaml
 - helmrelease-valkey.yaml
 - helmrelease-netbox.yaml
 - postgresql.yaml
