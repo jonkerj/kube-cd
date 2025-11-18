@@ -3,9 +3,6 @@ kind: Kustomization
 namespace: vwsfriend
 resources:
 - namespace.yaml
-- ocirepo-postgresql.yaml
-- helmrelease-postgresql.yaml
-- secret-postgresql.yaml
 - service.yaml
 - statefulset.yaml
 - secret-vwsfriend.yaml
