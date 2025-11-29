@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: vwsfriend
-        image: ghcr.io/tillsteinbach/vwsfriend:0.24.7
+        image: ghcr.io/tillsteinbach/vwsfriend:0.24.9
         env:
         - name: VWSFRIEND_USERNAME
           valueFrom:
