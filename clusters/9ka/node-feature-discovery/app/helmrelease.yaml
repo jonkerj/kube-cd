@@ -15,6 +15,9 @@ spec:
     enableNodeFeatureApi: false
     worker:
       config:
+        core:
+          labelSources:
+          - usb
         sources:
           usb:
             deviceLabelFields:
