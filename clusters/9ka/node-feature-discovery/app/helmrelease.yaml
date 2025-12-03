@@ -22,9 +22,3 @@ spec:
         core:
           labelSources:
           - usb
-        sources:
-          usb:
-            deviceLabelFields:
-            - "vendor"
-            - "device"
-            - "serial"

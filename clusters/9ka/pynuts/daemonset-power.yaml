@@ -57,7 +57,7 @@ spec:
         - mountPath: /dev
           name: hostdev
       nodeSelector:
-        feature.node.kubernetes.io/usb-0403_6001_AB6C51Q3.present: "true"
+        feature.node.kubernetes.io/usb-ff_0403_6001.present: "true"
       tolerations:
       - effect: NoSchedule
         key: efgh.nl/location
