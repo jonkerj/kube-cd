@@ -108,8 +108,8 @@ spec:
             cpu: 50m
             memory: 64Mi
           limits:
-            cpu: 100m
-            memory: 256Mi
+            cpu: 200m
+            memory: 368Mi
       rbac:
         pspEnabled: false
       resources:
