@@ -22,3 +22,12 @@ spec:
         core:
           labelSources:
           - usb
+        sources:
+          usb:
+            deviceClassWhitelist:
+            - "00" # use interface class <- this one is not default
+            - "01" # audio <- this one is not default
+            - "0e" # video
+            - "ef" # misc
+            - "fe" # application specific
+            - "ff" # vendor specific
