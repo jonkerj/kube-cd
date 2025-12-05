@@ -141,6 +141,19 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: librespot
+  namespace: flux-system
+spec:
+  interval: 2h
+  path: ./clusters/9ka/librespot
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: metrics-server
   namespace: flux-system
 spec:

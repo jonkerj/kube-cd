@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app.kubernetes.io/component: librespot
+    app.kubernetes.io/instance: librespot
+    app.kubernetes.io/name: librespot
+    app.kubernetes.io/part-of: librespot
+  name: librespot
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: librespot
+      app.kubernetes.io/instance: librespot
+      app.kubernetes.io/name: librespot
+      app.kubernetes.io/part-of: librespot
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: librespot
+        app.kubernetes.io/instance: librespot
+        app.kubernetes.io/name: librespot
+        app.kubernetes.io/part-of: librespot
+    spec:
+      hostNetwork: true
+      containers:
+      - name: librespot
+        image: giof71/librespot:bookworm-2025-11-10
+        env:
+        - name: BACKEND
+          value: alsa
+        - name: INITIAL_VOLUME
+          value: "90"
+        - name: DEVICE_NAME
+          value: Woonkamer
+        - name: BITRATE
+          value: "320"
+        - name: DEVICE
+#          value: front:CARD=DAC,DEV=0
+          value: front:CARD=ICUSBAUDIO7D,DEV=0
+        - name: ENABLE_CACHE
+          value: y
+        - name: ENABLE_SYSTEM_CACHE
+          value: y
+        - name: ZEROCONF_PORT
+          value: "34319"
+        resources:
+          limits:
+            cpu: 500m
+            memory: 128Mi
+          requests:
+            cpu: 75m
+            memory: 128Mi
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /dev
+          name: hostdev
+        - mountPath: /data
+          name: cache
+      nodeSelector:
+#        feature.node.kubernetes.io/usb-01_08bb_2704.present: "true"
+        feature.node.kubernetes.io/usb-01_0d8c_0102.present: "true"
+      tolerations:
+      - effect: NoSchedule
+        key: efgh.nl/location
+        value: gangkast
+      volumes:
+      - hostPath:
+          path: /dev
+          type: Directory
+        name: hostdev
+      - emptyDir:
+          sizeLimit: 500Mi
+        name: cache
