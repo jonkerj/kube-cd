@@ -5,7 +5,7 @@ metadata:
 spec:
   instances: 1
   storage:
-    size: 1Gi
+    size: 2Gi
     storageClass: proxmox-zfs-nvme
   resources:
     limits:
