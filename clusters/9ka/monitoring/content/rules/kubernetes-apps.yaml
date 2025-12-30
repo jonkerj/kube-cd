@@ -238,3 +238,24 @@ spec:
       annotations:
         summary: PVC {{ $labels.namespace }}/{{ $labels.persistentvolumeclaim }} is over 90% full
         description: PVC {{ $labels.namespace }}/{{ $labels.persistentvolumeclaim }} is {{ $value }}% full
+    - alert: ContainerHighReads
+      expr: sum by (namespace, pod, container, device) (rate(container_fs_reads_total{container!=""}[5m])) > 1000
+      for: 15m
+      labels:
+        severity: warning
+      annotations:
+        summary: Container {{ $labels.container }} is doing a lot of reads
+        description: |
+          Container {{ $labels.container }} of pod {{ $labels.pod }} in namespace {{ $labels.namespace }}
+          is doing a lot ({{ $value }}/s)) reads
+    - alert: ContainerHighWrites
+      expr: sum by (namespace, pod, container, device) (rate(container_fs_writes_total{container!=""}[5m])) > 1000
+      for: 15m
+      labels:
+        severity: warning
+      annotations:
+        summary: Container {{ $labels.container }} is doing a lot of wrties
+        description: |
+          Container {{ $labels.container }} of pod {{ $labels.pod }} in namespace {{ $labels.namespace }}
+          is doing a lot ({{ $value }}/s)) writes
+
