@@ -13,7 +13,7 @@ spec:
         name: gissilabs
   values:
     image:
-      tag: 1.35.0-alpine # repo=docker.io/vaultwarden/server
+      tag: 1.35.1-alpine # repo=docker.io/vaultwarden/server
     vaultwarden:
       domain: https://brs.9ka.nl
       allowSignups: false
