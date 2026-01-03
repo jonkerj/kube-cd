@@ -1,0 +1,48 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: zrepl
+  labels:
+    app: zrepl
+spec:
+  jobLabel: zrepl
+  endpoints:
+  - port: metrics
+    interval: 300s
+    relabelings:
+    - sourceLabels:
+      - "__meta_kubernetes_endpoint_node_name"
+      targetLabel: node_name
+  selector:
+    matchLabels:
+      app: zrepl
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zrepl
+  labels:
+    app: zrepl
+spec:
+  type: ClusterIP
+  ports:
+  - name: metrics
+    port: 7294
+    targetPort: metrics
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: zrepl
+  labels:
+    app: zrepl
+subsets:
+- addresses:
+  - ip: 172.21.46.2
+    nodeName: helium
+  - ip: 172.21.48.1
+    nodeName: pve
+  ports:
+  - name: metrics
+    port: 7294
+    protocol: TCP

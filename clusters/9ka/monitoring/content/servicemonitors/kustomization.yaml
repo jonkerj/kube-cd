@@ -9,3 +9,4 @@ resources:
 - prometheus.yaml
 - ipmi.yaml
 - ipsec.yaml
+- zrepl.yaml
