@@ -17,14 +17,15 @@ spec:
     vaultwarden:
       domain: https://brs.9ka.nl
       allowSignups: false
-      signupDomains: kippendief.biz
+      signupDomains:
+      - kippendief.biz
       allowInvitation: true
       smtp:
         enabled: true
         from: jorik@efgh.nl
         fromName: Jorik Jonker
         host: pve.virt.efgh.nl
-        port: 25
+        port: "25"
         security: off
     ingress:
       enabled: true
