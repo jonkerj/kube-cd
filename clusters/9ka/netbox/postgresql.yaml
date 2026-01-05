@@ -18,3 +18,14 @@ spec:
     initdb:
       database: netbox
       owner: netbox
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: netbox-psql
+spec:
+  selector:
+    matchLabels:
+      cnpg.io/cluster: netbox-psql
+  podMetricsEndpoints:
+  - port: metrics
