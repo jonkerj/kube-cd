@@ -12,6 +12,7 @@ spec:
         kind: HelmRepository
         name: influxdata
   values:
+    tplVersion: 2
     env:
     - name: INFLUXDB_TOKEN
       valueFrom:
@@ -20,23 +21,77 @@ spec:
           key: token
     config:
       agent:
-        flush_interval: 1m
-        interval: 1m
+        flush_interval: 10s
+        interval: 10s
         omit_hostname: true
-        debug: true
+        skip_processors_after_aggregators: false
       inputs:
       - mqtt_consumer:
           data_format: value
           data_type: float
+          qos: 0
+          tagexclude:
+            - host
+            - topic
           servers:
-          - tcp://justnimbus.iot.efgh.nl:1883
+            - tcp://justnimbus.iot.efgh.nl:1883
           topics:
-          - justnimbus/sensor/#
-          - justnimbus/stats/#
+            - justnimbus/sensor/+/+
+            - justnimbus/sensor/overflow
+            - justnimbus/stats/+/+/total
+            - justnimbus/stats/pump/totalminutes
+            - justnimbus/system/error
+          topic_parsing:
+            - topic: justnimbus/sensor/+/+
+              measurement: _/measurement/_/_
+              tags: _/_/_/field
+            - topic: justnimbus/sensor/overflow
+              measurement: _/measurement/_
+              tags: _/_/field
+            - topic: justnimbus/stats/+/+/total
+              measurement: _/measurement/_/_/_
+              tags: _/_/_/field/_
+            - topic: justnimbus/stats/pump/totalminutes
+              measurement: _/measurement/_/_
+              tags: _/_/_/field
+            - topic: justnimbus/system/error
+              measurement: _/measurement/_
+              tags: _/_/field
+      - mqtt_consumer:
+          data_format: value
+          data_type: string
+          qos: 0
+          servers:
+            - tcp://justnimbus.iot.efgh.nl:1883
+          topics:
+            - justnimbus/system/mode
+          topic_parsing:
+            - topic: justnimbus/system/+
+              measurement: _/measurement/_
+              tags: _/_/field
+      processors:
+      - pivot:
+          order: 1
+          tag_key: field
+          value_key: value
+      - enum:
+          order: 2
+          namepass:
+            - system
+          mapping:
+            - fields:
+                - mode
+              value_mappings:
+                AUTO: 1
+                MANUAL: 2
+      aggregators:
+      - merge:
+          period: 2s
+          round_timestamp_to: 1s
+          drop_original: true
       outputs:
       - influxdb_v2:
           bucket: justnimbus
-          bucket_tag: gareelhoek
           organization: influxdata
           token: '${INFLUXDB_TOKEN}'
           urls:
