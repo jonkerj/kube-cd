@@ -1,0 +1,61 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: mqtt-sensors
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: telegraf
+      version: 1.8.65
+      sourceRef:
+        kind: HelmRepository
+        name: influxdata
+  values:
+    tplVersion: 2
+    env:
+    - name: INFLUXDB_TOKEN
+      valueFrom:
+        secretKeyRef:
+          name: mqtt-sensors-telegraf
+          key: token
+    config:
+      agent:
+        flush_interval: 10s
+        interval: 10s
+        omit_hostname: true
+        skip_processors_after_aggregators: false
+      inputs:
+      - mqtt_consumer:
+          data_format: json
+          precision: "500ms"
+          name_override: "zigbee"
+          topic_tag: "dev"
+          qos: 0
+          tagdrop:
+            dev:
+              - "zigbee2mqtt/bridge/*"
+          servers:
+            - tcp://mosquitto:1883
+          topics:
+            - zigbee2mqtt/#
+      processors:
+      - regex:
+          namepass:
+          - zigbee
+          tags:
+          - key: "dev"
+            pattern: "^zigbee2mqtt/(?P<device>.+)$"
+            replacement: "${device}"
+      outputs:
+      - influxdb_v2:
+          bucket: mqtt_sensors
+          organization: influxdata
+          token: '${INFLUXDB_TOKEN}'
+          urls:
+          - http://influxdb2.influxdb
+    metrics:
+      internal:
+        enabled: false
+    service:
+      enabled: false
