@@ -4,3 +4,4 @@ namespace: mqtt
 resources:
 - namespace.yaml
 - justnimbus
+- mosquitto
