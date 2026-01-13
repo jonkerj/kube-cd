@@ -19,3 +19,10 @@ spec:
             - key: node-role.kubernetes.io/control-plane
               operator: Exists
     existingConfigSecret: proxmox-ccm
+    resources:
+      requests:
+        memory: 90Mi
+        cpu: 10m
+      limits:
+        memory: 250Mi
+        cpu: 250m

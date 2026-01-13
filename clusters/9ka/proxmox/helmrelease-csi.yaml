@@ -11,6 +11,47 @@ spec:
     node:
       nodeSelector:
         topology.kubernetes.io/region: thuis-svc
+      plugin:
+        resources:
+          requests:
+            memory: 125Mi
+            cpu: 1m
+          limits:
+            memory: 250Mi
+            cpu: 250m
+    controller:
+      plugin:
+        resources:
+          requests:
+            memory: 50Mi
+            cpu: 2m
+          limits:
+            memory: 200Mi
+            cpu: 250m
+      attacher:
+        resources:
+          requests:
+            memory: 80Mi
+            cpu: 2m
+          limits:
+            memory: 200Mi
+            cpu: 250m
+      provisioner:
+        resources:
+          requests:
+            memory: 80Mi
+            cpu: 2m
+          limits:
+            memory: 200Mi
+            cpu: 250m
+      resizer:
+        resources:
+          requests:
+            memory: 70Mi
+            cpu: 2m
+          limits:
+            memory: 200Mi
+            cpu: 250m
     nodeSelector:
       node-role.kubernetes.io/control-plane: ""
     tolerations:
