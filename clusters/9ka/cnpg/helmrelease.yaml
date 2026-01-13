@@ -11,3 +11,11 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: cnpg
+  values:
+    resources:
+      requests:
+        memory: 50Mi
+        cpu: 5m
+      limits:
+        memory: 200Mi
+        cpu: 250m
