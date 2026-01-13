@@ -16,6 +16,13 @@ spec:
     hubble:
       relay:
         enabled: true
+        resources:
+          requests:
+            memory: 40Mi
+            cpu: 5m
+          limits:
+            memory: 200Mi
+            cpu: 250m
       metrics:
         enabled:
         - drop
@@ -39,5 +46,13 @@ spec:
         enabled: true
         serviceMonitor:
           enabled: true
+      resources:
+        requests:
+          memory: 200Mi
+          cpu: 10m
     securityContext:
       privileged: true
+    resources:
+      requests:
+        memory: 550Mi
+        cpu: 700m
