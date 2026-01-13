@@ -96,6 +96,13 @@ spec:
           token: '${INFLUXDB_TOKEN}'
           urls:
           - http://influxdb2.influxdb
+    resources:
+      requests:
+        memory: 300Mi
+        cpu: 5m
+      limits:
+        memory: 500Mi
+        cpu: 500m
     metrics:
       internal:
         enabled: false
