@@ -46,6 +46,13 @@ spec:
           tcpSocket:
             port: mqtt
           failureThreshold: 3
+        resources:
+          requests:
+            memory: 32Mi
+            cpu: 5m
+          limits:
+            memory: 256Mi
+            cpu: 500m
       volumes:
       - name: config
         configMap:
