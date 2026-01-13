@@ -46,7 +46,7 @@ spec:
             memory: 512Mi
           requests:
             cpu: 50m
-            memory: 256Mi
+            memory: 400Mi
       volumes:
       - name: pda-data
         persistentVolumeClaim:
