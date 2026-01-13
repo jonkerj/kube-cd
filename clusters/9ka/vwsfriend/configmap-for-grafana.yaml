@@ -17,7 +17,7 @@ data:
       name: VWsFriend
       type: postgres
       access: proxy
-      url: vwsfriend-postgresql.vwsfriend:5432
+      url: vwsfriend-psql-r.vwsfriend:5432
       user: vwsfriend
       basicAuth: false
       isDefault: false
