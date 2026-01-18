@@ -45,9 +45,6 @@ spec:
         - name: ZEROCONF_PORT
           value: "34319"
         resources:
-          limits:
-            cpu: 500m
-            memory: 128Mi
           requests:
             cpu: 75m
             memory: 128Mi
