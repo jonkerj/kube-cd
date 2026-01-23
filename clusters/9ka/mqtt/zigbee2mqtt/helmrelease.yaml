@@ -31,7 +31,7 @@ spec:
         enabled: true
         storageClassName: nfs-nvme
       nodeSelector:
-        feature.node.kubernetes.io/usb-ff_10c4_ea60.present: "true"
+        feature.node.kubernetes.io/usb-ff_0403_6001.present: "true"
       tolerations:
       - effect: NoSchedule
         key: efgh.nl/location
@@ -57,5 +57,5 @@ spec:
       mqtt:
         server: mqtt://mosquitto:1883"
       serial:
-        port: /dev/serial/by-id/usb-Itead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_V2_f21add5d2091f011a7447c6236f0e4ad-if00-port0
-        adapter: ember
+        port: /dev/serial/by-id/usb-Texas_Instruments_TI_CC2531_USB_CDC___0X00124B001CD4ECE2-if00
+        adapter: zstack
