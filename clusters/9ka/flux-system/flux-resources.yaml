@@ -32,7 +32,7 @@ spec:
             memory: 640Mi
           requests:
             cpu: 300m
-            memory: 256Mi
+            memory: 130Mi
 ---
 apiVersion: apps/v1
 kind: Deployment

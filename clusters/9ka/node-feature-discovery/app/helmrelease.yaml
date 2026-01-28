@@ -13,7 +13,30 @@ spec:
         name: node-feature-discovery
   values:
     enableNodeFeatureApi: false
+    gc:
+      resources:
+        requests:
+          cpu: 60m
+          memory: 12Mi
+        limits:
+          cpu: 500m
+          memory: 128Mi
+    master:
+      resources:
+        requests:
+          cpu: 60m
+          memory: 16Mi
+        limits:
+          cpu: 500m
+          memory: 128Mi
     worker:
+      resources:
+        requests:
+          cpu: 25m
+          memory: 24Mi
+        limits:
+          cpu: 500m
+          memory: 128Mi
       tolerations:
       - effect: NoSchedule
         key: efgh.nl/location
