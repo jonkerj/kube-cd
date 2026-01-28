@@ -7,6 +7,6 @@ spec:
   layerSelector:
     mediaType: "application/vnd.cncf.helm.chart.content.v1.tar+gzip"
     operation: copy
-  url: oci://registry-1.docker.io/bitnamicharts/valkey
+  url: oci://ghcr.io/valkey-io/valkey-helm/valkey
   ref:
-    tag: 3.0.31
+    tag: 0.9.2

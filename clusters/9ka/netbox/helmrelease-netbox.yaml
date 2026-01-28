@@ -34,13 +34,13 @@ spec:
     valkey:
       enabled: false
     tasksDatabase:
-      host: netbox-valkey-headless
-      existingSecretName: netbox-valkey
-      existingSecretKey: valkey-password
+      host: netbox-valkey
+      existingSecretName: netbox-valkey-users
+      existingSecretKey: default
     cachingDatabase:
-      host: netbox-valkey-headless
-      existingSecretName: netbox-valkey
-      existingSecretKey: valkey-password
+      host: netbox-valkey
+      existingSecretName: netbox-valkey-users
+      existingSecretKey: default
     resources:
       limits:
         cpu: 1000m
