@@ -9,11 +9,11 @@ spec:
     storageClass: proxmox-zfs-nvme
   resources:
     limits:
-      cpu: 150m
+      cpu: 300m
       memory: 512Mi
     requests:
       cpu: 100m
-      memory: 128Mi
+      memory: 200Mi
   bootstrap:
     initdb:
       database: vwsfriend

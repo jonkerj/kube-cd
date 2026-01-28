@@ -33,7 +33,7 @@ spec:
       resources:
         requests:
           cpu: 50m
-          memory: 24Mi
+          memory: 32Mi
         limits:
           cpu: 250m
           memory: 196Mi
@@ -106,16 +106,16 @@ spec:
         resources:
           requests:
             cpu: 50m
-            memory: 64Mi
+            memory: 80Mi
           limits:
-            cpu: 200m
+            cpu: 300m
             memory: 368Mi
       rbac:
         pspEnabled: false
       resources:
         requests: 
           cpu: 150m
-          memory: 100Mi
+          memory: 150Mi
         limits:
           cpu: 1
           memory: 200Mi

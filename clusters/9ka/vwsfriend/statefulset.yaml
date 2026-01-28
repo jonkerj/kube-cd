@@ -84,7 +84,7 @@ spec:
             memory: 300Mi
           requests:
             cpu: 10m
-            memory: 140Mi
+            memory: 192Mi
   volumeClaimTemplates:
   - metadata:
       name: config

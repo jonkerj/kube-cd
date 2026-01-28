@@ -33,7 +33,7 @@ spec:
             memory: 256Mi
           requests:
             cpu: 50m
-            memory: 128Mi
+            memory: 8Mi
         env:
         - name: CHARGEFLUX_INFLUXDB_URL
           value: http://influxdb2.influxdb

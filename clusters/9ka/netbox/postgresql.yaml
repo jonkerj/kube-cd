@@ -9,7 +9,7 @@ spec:
     storageClass: proxmox-zfs-nvme
   resources:
     limits:
-      cpu: 150m
+      cpu: 350m
       memory: 512Mi
     requests:
       cpu: 100m
