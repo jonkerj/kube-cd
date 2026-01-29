@@ -49,7 +49,7 @@ spec:
             cpu: 1
             memory: 128Mi
           requests:
-            cpu: 400m
+            cpu: 530m
             memory: 44Mi
         securityContext:
           privileged: true
