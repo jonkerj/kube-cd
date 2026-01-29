@@ -46,7 +46,7 @@ spec:
         name: pynuts
         resources:
           limits:
-            cpu: 500m
+            cpu: 1
             memory: 128Mi
           requests:
             cpu: 400m
