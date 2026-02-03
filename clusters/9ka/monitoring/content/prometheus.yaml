@@ -6,6 +6,7 @@ spec:
   retention: 8w
   serviceMonitorSelector: {}
   serviceMonitorNamespaceSelector: {}
+  serviceDiscoveryRole: EndpointSlice
   podMonitorSelector: {}
   podMonitorNamespaceSelector: {}
   ruleNamespaceSelector: {}
