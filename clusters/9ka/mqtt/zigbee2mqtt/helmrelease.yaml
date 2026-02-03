@@ -12,6 +12,8 @@ spec:
         kind: HelmRepository
         name: zigbee2mqtt
   values:
+    image:
+      repository: ghcr.io/koenkk/zigbee2mqtt
     ingress:
       enabled: true
       ingressClassName: cilium
