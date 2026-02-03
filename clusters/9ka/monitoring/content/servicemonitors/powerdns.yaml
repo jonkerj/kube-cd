@@ -30,19 +30,27 @@ spec:
     port: 9000
     targetPort: metrics
 ---
-apiVersion: v1
-kind: Endpoints
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
 metadata:
   name: powerdns-recursor
   labels:
     app: powerdns-recursor
-subsets:
+addressType: IPv4
+ports:
+- name: metrics
+  port: 8082
+  protocol: TCP
+endpoints:
 - addresses:
-  - ip: 172.21.42.1
-    nodeName: hydrogen
-  - ip: 172.21.48.1
-    nodeName: pve
-  ports:
-  - name: metrics
-    port: 8082
-    protocol: TCP
+  - 172.21.42.1
+  conditions:
+    ready: true
+  nodeName: hydrogen
+  hostname: hydrogen
+- addresses:
+  - 172.21.48.1
+  conditions:
+    ready: true
+  nodeName: pve
+  hostname: pve

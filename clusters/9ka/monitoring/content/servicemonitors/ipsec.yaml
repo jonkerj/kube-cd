@@ -30,17 +30,21 @@ spec:
     port: 9903
     targetPort: metrics
 ---
-apiVersion: v1
-kind: Endpoints
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
 metadata:
   name: ipsec-exporter
   labels:
     app: ipsec-exporter
-subsets:
+addressType: IPv4
+ports:
+- name: metrics
+  port: 9903
+  protocol: TCP
+endpoints:
 - addresses:
-  - ip: 172.21.48.1
-    nodeName: pve
-  ports:
-  - name: metrics
-    port: 9903
-    protocol: TCP
+  - 172.21.48.1
+  conditions:
+    ready: true
+  nodeName: pve
+  hostname: pve
