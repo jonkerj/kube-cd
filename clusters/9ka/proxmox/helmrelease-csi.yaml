@@ -11,6 +11,14 @@ spec:
     node:
       nodeSelector:
         topology.kubernetes.io/region: thuis-svc
+      driverRegistrar:
+        resources:
+          requests:
+            memory: 28Mi
+            cpu: 1m
+          limits:
+            memory: 128Mi
+            cpu: 250m
       plugin:
         resources:
           requests:
