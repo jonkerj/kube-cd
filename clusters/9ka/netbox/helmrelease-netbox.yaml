@@ -9,6 +9,8 @@ spec:
     name: netbox
   values:
     existingSecret: netbox-secrets
+    livenessProbe:
+      enabled: false
     ingress:
       annotations:
         external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
