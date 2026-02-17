@@ -13,7 +13,7 @@ spec:
       memory: 512Mi
     requests:
       cpu: 100m
-      memory: 128Mi
+      memory: 150Mi
   bootstrap:
     initdb:
       database: netbox

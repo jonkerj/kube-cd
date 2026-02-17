@@ -31,7 +31,7 @@ spec:
       plugin:
         resources:
           requests:
-            memory: 50Mi
+            memory: 62Mi
             cpu: 2m
           limits:
             memory: 200Mi

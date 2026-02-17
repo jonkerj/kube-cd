@@ -34,7 +34,7 @@ spec:
             memory: 128Mi
           requests:
             cpu: 50m
-            memory: 32Mi
+            memory: 40Mi
       volumes:
       - name: config
         secret:
