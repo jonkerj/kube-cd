@@ -40,7 +40,6 @@ spec:
       tolerations:
       - effect: NoSchedule
         key: efgh.nl/location
-        value: gangkast
       config:
         core:
           labelSources:
