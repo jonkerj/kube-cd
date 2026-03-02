@@ -27,7 +27,7 @@ spec:
           type: RuntimeDefault
       containers:
       - name: transmission
-        image: ghcr.io/linuxserver/transmission:4.1.0
+        image: ghcr.io/linuxserver/transmission:4.1.1
         env:
         - name: S6_READ_ONLY_ROOT
           value: "1"
