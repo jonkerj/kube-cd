@@ -115,10 +115,10 @@ spec:
       resources:
         requests: 
           cpu: 150m
-          memory: 150Mi
+          memory: 200Mi
         limits:
           cpu: 1
-          memory: 200Mi
+          memory: 350Mi
     prometheus:
       enabled: false
     prometheusOperator:
