@@ -4,6 +4,7 @@ metadata:
   name: vwsfriend-psql
 spec:
   instances: 1
+  enablePDB: false
   storage:
     size: 2Gi
     storageClass: proxmox-zfs-nvme

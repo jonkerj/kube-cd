@@ -4,6 +4,7 @@ metadata:
   name: netbox-psql
 spec:
   instances: 1
+  enablePDB: false
   storage:
     size: 1Gi
     storageClass: proxmox-zfs-nvme

@@ -66,3 +66,5 @@ spec:
         enabled: false
     service:
       enabled: false
+    pdb:
+      create: false
