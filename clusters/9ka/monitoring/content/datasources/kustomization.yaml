@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
 - influxdb.yaml
 - prometheus.yaml
-- sunmoon.yaml

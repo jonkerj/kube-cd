@@ -94,7 +94,6 @@ spec:
         hosts:
         - grafana.9ka.nl
       plugins:
-      - fetzerch-sunandmoon-datasource
       - gapit-htmlgraphics-panel
       - pr0ps-trackmap-panel
       - natel-plotly-panel
