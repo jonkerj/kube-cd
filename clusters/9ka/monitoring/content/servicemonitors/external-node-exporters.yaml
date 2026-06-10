@@ -1,7 +1,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: node-exporter
+  name: external-node-exporter
   labels:
     app: external-node-exporters
 spec:
@@ -36,6 +36,7 @@ metadata:
   name: external-node-exporter
   labels:
     app: external-node-exporters
+    kubernetes.io/service-name: external-node-exporter
 addressType: IPv4
 ports:
 - name: metrics

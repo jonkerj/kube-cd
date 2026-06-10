@@ -36,6 +36,7 @@ metadata:
   name: zrepl
   labels:
     app: zrepl
+    kubernetes.io/service-name: zrepl
 addressType: IPv4
 ports:
 - name: metrics
