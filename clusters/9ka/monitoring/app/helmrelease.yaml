@@ -120,6 +120,7 @@ spec:
     prometheus:
       enabled: false
     prometheusOperator:
+      kubeletEndpointSliceEnabled: true
       resources:
         limits:
           cpu: 500m
