@@ -36,6 +36,7 @@ metadata:
   name: powerdns-recursor
   labels:
     app: powerdns-recursor
+    kubernetes.io/service-name: powerdns-recursor
 addressType: IPv4
 ports:
 - name: metrics

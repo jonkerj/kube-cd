@@ -36,6 +36,7 @@ metadata:
   name: ipmi
   labels:
     app: ipmi
+    kubernetes.io/service-name: ipmi
 addressType: IPv4
 ports:
 - name: metrics

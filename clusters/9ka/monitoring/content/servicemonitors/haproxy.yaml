@@ -4,6 +4,7 @@ metadata:
   name: haproxy
   labels:
     app: haproxy
+    kubernetes.io/service-name: haproxy
 spec:
   jobLabel: haproxy
   endpoints:
@@ -36,6 +37,7 @@ metadata:
   name: haproxy
   labels:
     app: haproxy
+
 addressType: IPv4
 ports:
 - name: metrics
