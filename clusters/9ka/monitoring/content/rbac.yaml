@@ -22,6 +22,7 @@ rules:
   - nodes/proxy
   - services
   - endpoints
+  - endpointslices
   - pods
   verbs: ["get", "list", "watch"]
 - apiGroups:
