@@ -41,7 +41,7 @@ ports:
 - name: metrics
   port: 7294
   protocol: TCP
-subsets:
+endpoints:
 - addresses:
   - 172.21.46.2
   conditions:
