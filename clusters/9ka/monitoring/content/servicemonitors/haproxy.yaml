@@ -12,7 +12,7 @@ spec:
     interval: 300s
     relabelings:
     - sourceLabels:
-      - "__meta_kubernetes_endpoint_node_name"
+      - "__meta_kubernetes_endpointslice_endpoint_node_name"
       targetLabel: node_name
   selector:
     matchLabels:
