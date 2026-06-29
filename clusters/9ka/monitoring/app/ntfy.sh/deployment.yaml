@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alertmanager-ntfy
+  labels:
+    app.kubernetes.io/instance: alertmanager-ntfy
+    app.kubernetes.io/name: alertmanager-ntfy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: alertmanager-ntfy
+      app.kubernetes.io/name: alertmanager-ntfy
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: alertmanager-ntfy
+        app.kubernetes.io/name: alertmanager-ntfy
+    spec:
+      serviceAccountName: alertmanager-ntfy
+      containers:
+      - name: alertmanager-ntfy
+        image: ghcr.io/alexbakker/alertmanager-ntfy:1.2.1
+        imagePullPolicy: IfNotPresent
+        args:
+        - --configs
+        - /config/config.yml,/secret/auth.yml
+        ports:
+          - name: http
+            containerPort: 8000
+        startupProbe:
+          httpGet:
+            path: /health
+            port: http
+          periodSeconds: 1
+          failureThreshold: 120
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: http
+          periodSeconds: 10
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+          periodSeconds: 10
+          failureThreshold: 3
+        resources:
+          limits:
+            cpu: 250m
+            memory: 256Mi
+          requests:
+            cpu: 50m
+            memory: 8Mi
+        volumeMounts:
+          - name: config
+            mountPath: /config
+          - name: secret
+            mountPath: /secret
+      volumes:
+        - name: config
+          configMap:
+            name: alertmanager-ntfy
+        - name: secret
+          secret:
+            secretName: alertmanager-ntfy

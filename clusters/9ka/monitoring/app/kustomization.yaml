@@ -2,7 +2,5 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: monitoring
 resources:
-- secret-grafana-env-vars.yaml
-- secret-grafana-admin-user.yaml
-- ocirepo.yaml
-- helmrelease.yaml
+- kube-prometheus-stack
+- ntfy.sh

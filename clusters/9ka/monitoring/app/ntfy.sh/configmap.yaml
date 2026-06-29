@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alertmanager-ntfy
+  labels:
+    app.kubernetes.io/instance: alertmanager-ntfy
+    app.kubernetes.io/name: alertmanager-ntfy
+data:
+  config.yml: |-
+    http:
+      addr: :8000
+    ntfy:
+      baseurl: https://ntfy.sh
+      notification:
+        # The topic can either be a hardcoded string or a gval expression that evaluates to a string
+        topic: alertmanager
+        # Priority reference: https://docs.ntfy.sh/publish/#message-priority
+        # Can either be a hardcoded string or a gval expression that evaluates to a string
+        priority: |
+          status == "firing" && severity == "critical" ? "urgent" : "default"
+        tags:
+          # Tags with no condition are always included
+          # Emoji shortcode reference: https://docs.ntfy.sh/emojis/
+          - tag: "+1"
+            condition: status == "resolved"
+          - tag: rotating_light
+            condition: status == "firing"
+          - tag: fire_engine
+            condition: severity == "critical"
+          - tag: snail
+            condition: severity == "warning"
+        templates:
+          title: |
+            {{ if eq .Status "resolved" }}Resolved: {{ end }}{{ index .Annotations "summary" }}
+          description: |
+            {{ index .Annotations "description" }}
+          headers:
+            X-Click: |
+              {{ .GeneratorURL }}
+      # Whether to forward alerts asynchronously. When enabled, a 202 status code is
+      # returned immediately. When disabled, forwarding errors result in a 5xx status
+      # code.
+      async: false  
+        

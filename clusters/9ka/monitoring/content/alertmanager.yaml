@@ -5,8 +5,6 @@ metadata:
 spec:
   externalUrl: https://alertmanager.9ka.nl/
   configSecret: alertmanager-config
-  configMaps:
-  - alertmanager-templates
   storage:
     volumeClaimTemplate:
       spec:
