@@ -17,7 +17,7 @@ data:
         # Priority reference: https://docs.ntfy.sh/publish/#message-priority
         # Can either be a hardcoded string or a gval expression that evaluates to a string
         priority: |
-          status == "firing" && severity == "critical" ? "urgent" : "default"
+          status == "firing" && labels.severity == "critical" ? "urgent" : "default"
         tags:
           # Tags with no condition are always included
           # Emoji shortcode reference: https://docs.ntfy.sh/emojis/
@@ -26,9 +26,9 @@ data:
           - tag: rotating_light
             condition: status == "firing"
           - tag: fire_engine
-            condition: severity == "critical"
+            condition: labels.severity == "critical"
           - tag: snail
-            condition: severity == "warning"
+            condition: labels.severity == "warning"
         templates:
           title: |
             {{ if eq .Status "resolved" }}Resolved: {{ end }}{{ index .Annotations "summary" }}
