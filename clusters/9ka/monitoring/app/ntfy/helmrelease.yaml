@@ -1,0 +1,38 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: ntfy
+spec:
+  interval: 5m
+  chartRef:
+    kind: OCIRepository
+    name: ntfy
+  values:
+    ntfy:
+      baseUrl: 'https://ntfy.9ka.nl'
+      behindProxy: true
+      authDefaultAccess: deny-all
+      extraConfig: |
+        upstream-base-url: "https://ntfy.sh"
+        enable-login: true
+        require-login: true
+        auth-users:
+          - "jorik:$2b$10$ohal/m2rb..mhkrKc..PjeYYO/gB05I9TJn0CXJ1sW/OtLiYTrYGe:admin"
+    persistence:
+      enabled: true
+      size: 4Gi
+      storageClass: proxmox-zfs-nvme
+    serviceAccount:
+      create: true
+    ingress:
+      enabled: true
+      ingressClassName: cilium
+      annotations:
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+        external-dns.alpha.kubernetes.io/hostname: ntfy.9ka.nl
+        external-dns.alpha.kubernetes.io/target: 431113a6-4cf3-4a66-9750-17113ae2e689.cfargotunnel.com
+      hosts:
+        - host: ntfy.9ka.nl
+          paths:
+            - path: /
+              pathType: Prefix
