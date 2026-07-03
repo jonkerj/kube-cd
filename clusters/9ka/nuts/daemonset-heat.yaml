@@ -29,8 +29,8 @@ spec:
         args:
         - --verbose
         env:
-        - name: GOKMP_SERIAL_SERIAL
-          value: A400gnAW
+        - name: GOKMP_PORT
+          value: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A400gnAW-if00-port0
         - name: GOKMP_INFLUXDB_BUCKET
           value: nuts
         - name: GOKMP_INFLUXDB_ORG
