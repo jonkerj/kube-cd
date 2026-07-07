@@ -7,10 +7,10 @@ spec:
   - name: flux
     rules:
     - alert: FluxNotReconciling
-      expr: gotk_reconcile_condition{status="True",type="Ready"}==0
-      for: 10m
+      expr: gotk_resource_info{ready!="True"}>0
+      for: 5m
       labels:
         severity: warning
       annotations:
-        summary: Flux {{ $labels.kind }} {{ $labels.name }} not reconciling
-        message: Flux {{ $labels.kind }} {{ $labels.name }} in namespace {{ $labels.exported_namespace }} is not reconciling
+        summary: Flux resource {{ $labels.customresource_kind }} {{ $labels.name }} not reconciling
+        description: Flux {{ $labels.customresource_kind }} {{ $labels.name }} in namespace {{ $labels.namespace }} exporting to namespace {{ $labels.exported_namespace }} is not reconciling
