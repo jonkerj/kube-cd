@@ -8,7 +8,7 @@ spec:
     rules:
     - alert: FluxNotReconciling
       expr: gotk_resource_info{ready!="True"}>0
-      for: 5m
+      for: 10m
       labels:
         severity: warning
       annotations:
