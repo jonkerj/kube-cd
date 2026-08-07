@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: pdns-admin
-        image: powerdnsadmin/pda-legacy:0.5.1
+        image: powerdnsadmin/pda-legacy:v0.6.1
         ports:
         - containerPort: 80
           name: http
