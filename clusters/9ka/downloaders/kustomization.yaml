@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: downloaders
 resources:
 - namespace.yaml
+- bazarr
 - jellyfin
 - prowlarr
 - radarr
