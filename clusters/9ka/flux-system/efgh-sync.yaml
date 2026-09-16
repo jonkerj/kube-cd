@@ -62,6 +62,19 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: evcc
+  namespace: flux-system
+spec:
+  interval: 2h
+  path: ./clusters/9ka/evcc
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: flux-system
   namespace: flux-system
 spec:

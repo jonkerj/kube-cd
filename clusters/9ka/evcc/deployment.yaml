@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: evcc
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: evcc
+  replicas: 1
+  template:
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+        - name: evcc
+          image: evcc/evcc:0.315.0
+          env:
+          - name: HOME
+            value: /data
+          ports:
+          - name: http
+            containerPort: 7070
+          volumeMounts:
+            - name: config
+              mountPath: /etc/evcc.yaml
+              subPath: evcc.yaml
+            - name: db
+              mountPath: /data
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            capabilities:
+              drop:
+                - ALL
+              add:
+                - NET_BIND_SERVICE
+      volumes:
+        - name: db
+          persistentVolumeClaim:
+            claimName: evcc-db
+        - name: config
+          persistentVolumeClaim:
+            claimName: evcc-config
