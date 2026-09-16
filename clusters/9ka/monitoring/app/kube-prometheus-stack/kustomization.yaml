@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
 - secret-grafana-env-vars.yaml
 - secret-grafana-admin-user.yaml
+- secret-alertmanager-config.yaml
 - ocirepo.yaml
 - helmrelease.yaml
