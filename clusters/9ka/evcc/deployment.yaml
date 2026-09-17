@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: evcc
-  replicas: 1
+  replicas: 0
   template:
     spec:
       securityContext:
