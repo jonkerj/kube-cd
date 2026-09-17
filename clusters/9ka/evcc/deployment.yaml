@@ -14,7 +14,7 @@ spec:
         runAsGroup: 1000
       containers:
         - name: evcc
-          image: evcc/evcc:0.315.0
+          image: evcc/evcc:0.315.2
           env:
           - name: HOME
             value: /data
