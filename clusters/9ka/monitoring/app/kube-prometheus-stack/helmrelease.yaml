@@ -59,6 +59,7 @@ spec:
     kubeProxy:
       enabled: false
     kube-state-metrics:
+      fullnameOverride: kube-state-metrics
       resources:
         requests:
           cpu: 50m
@@ -344,6 +345,7 @@ spec:
                       suspended: [ spec, suspend ]
                       source_name: [ spec, sourceRef, name ]
     grafana:
+      fullnameOverride: grafana
       deploymentStrategy:
         type: Recreate
       persistence:
@@ -459,6 +461,7 @@ spec:
           cpu: 100m
           memory: 128Mi
     prometheus-node-exporter:
+      fullnameOverride: node-exporter
       hostNetwork: false
       extraArgs:
       - --collector.filesystem.ignored-mount-points=^/(dev|proc|sys|var/lib/docker/.+|/run/containerd/.+)($|/)
