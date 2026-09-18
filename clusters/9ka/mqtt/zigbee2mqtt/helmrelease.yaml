@@ -48,7 +48,7 @@ spec:
           type: Directory
       resources:
         requests:
-          memory: 90Mi
+          memory: 150Mi
           cpu: 10m
         limits:
           memory: 300Mi
