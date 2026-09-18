@@ -8,14 +8,19 @@ configMapGenerator:
   files:
   - cilium-agent.json
   - cilium-operator.json
+  - container-resource-issues.json
   - container-resources.json
   - energiebalans.json
   - etcd.json
   - iio.json
   - nfsd.json
-  - pdns-recursor.json
-  - pve.json
   - nuts.json
+  - pdns-recursor.json
+  - pv-ev-cali.json
+  - pve.json
+  - regenwatersysteem.json
+  - smartevse.json
   - solar.json
   - sysstats.json
   - wifi.json
+  - zigbee.json
