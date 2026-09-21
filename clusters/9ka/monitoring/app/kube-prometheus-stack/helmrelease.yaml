@@ -48,6 +48,14 @@ spec:
       enabled: false
     kubelet:
       enabled: true
+      serviceMonitor:
+        metricRelabelings:
+        - action: drop
+          sourceLabels: [__name__, le]
+          regex: (csi_operations|storage_operation_duration)_seconds_bucket;(0.25|2.5|15|25|120|600)(\.0)?
+        - action: drop
+          sourceLabels: [__name__]
+          regex: (kubelet_runtime_operations_duration_seconds_bucket|kubernetes_feature_enabled)
     kubeControllerManager:
       enabled: false
     kubeDns:
