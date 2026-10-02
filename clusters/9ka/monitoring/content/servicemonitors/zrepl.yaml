@@ -4,6 +4,7 @@ metadata:
   name: zrepl
   labels:
     app: zrepl
+    release: kube-prometheus-stack
 spec:
   jobLabel: zrepl
   endpoints:

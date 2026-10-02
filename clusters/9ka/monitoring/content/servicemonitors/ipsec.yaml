@@ -4,6 +4,7 @@ metadata:
   name: ipsec-exporter
   labels:
     app: ipsec-exporter
+    release: kube-prometheus-stack
 spec:
   jobLabel: ipsec-exporter
   endpoints:

@@ -4,6 +4,7 @@ metadata:
   name: powerdns-recursor
   labels:
     app: powerdns-recursor
+    release: kube-prometheus-stack
 spec:
   jobLabel: powerdns-recursor
   endpoints:

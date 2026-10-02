@@ -5,6 +5,7 @@ metadata:
   labels:
     app: haproxy
     kubernetes.io/service-name: haproxy
+    release: kube-prometheus-stack
 spec:
   jobLabel: haproxy
   endpoints:

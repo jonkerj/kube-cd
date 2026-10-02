@@ -4,6 +4,7 @@ metadata:
   name: ipmi
   labels:
     app: ipmi
+    release: kube-prometheus-stack
 spec:
   jobLabel: ipmi
   endpoints:

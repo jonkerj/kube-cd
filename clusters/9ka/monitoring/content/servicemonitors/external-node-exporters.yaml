@@ -4,6 +4,7 @@ metadata:
   name: external-node-exporter
   labels:
     app: external-node-exporters
+    release: kube-prometheus-stack
 spec:
   jobLabel: node-exporter
   endpoints:
