@@ -22,6 +22,7 @@ resources:
 - node-physical.yaml
 - node-processes.yaml
 - node-smart.yaml
+- nvme.yaml
 - prometheus-generic.yaml
 - velero.yaml
 - zfs.yaml

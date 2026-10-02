@@ -1,0 +1,22 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: nvme
+spec:
+  groups:
+  - name: nvme
+    rules:
+    - alert: NVMECritical
+      annotations:
+        summary: NVMe device {{ $labels.device }} on {{ $labels.node_name }} is critical
+        message: NVMe device {{ $labels.device }} on {{ $labels.node_name }} is critical
+      expr: nvme_critical_warning!=0
+      labels:
+        severity: critical
+    - alert: NVMEUsedHigh
+      annotations:
+        summary: NVMe device {{ $labels.device }} on {{ $labels.node_name }} is above 90% usage
+        message: NVMe device {{ $labels.device }} on {{ $labels.node_name }} is above 90% usage
+      expr: nvme_percentage_used_ratio > 0.9
+      labels:
+        severity: warning
