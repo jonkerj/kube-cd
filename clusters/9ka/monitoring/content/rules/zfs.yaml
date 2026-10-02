@@ -6,10 +6,10 @@ spec:
   groups:
   - name: zfs
     rules:
-    - alert: ZFSPoolNotOnline
+    - alert: ZFSNotOnline
       annotations:
         summary: ZFS Pool {{ $labels.pool }} on {{ $labels.node_name }} is not online
         message: ZFS Pool {{ $labels.pool }} on {{ $labels.node_name }} is not online
-      expr: node_zfsstatus > 0
+      expr: zfs_zpool{health!="ONLINE"}==1
       labels:
         severity: critical
