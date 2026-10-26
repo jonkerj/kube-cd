@@ -61,7 +61,8 @@ spec:
     kubeDns:
       enabled: false
     kubeEtcd:
-      enabled: false
+      endpoints:
+      - 172.21.46.17
     kubeScheduler:
       enabled: false
     kubeProxy:
