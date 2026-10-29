@@ -35,8 +35,10 @@ spec:
       enabled: true
       loadbalancerMode: shared
       service:
-        type: ClusterIP
-        externalTrafficPolicy: ~
+        type: NodePort
+        insecureNodePort: 30080
+        secureNodePort: 30443
+        externalTrafficPolicy: Cluster
     prometheus:
       enabled: true
       serviceMonitor:
