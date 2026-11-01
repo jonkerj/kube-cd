@@ -13,6 +13,16 @@ metadata:
 spec:
   ingressClassName: cilium
   rules:
+  - host: jellyfin.svc.efgh.nl
+    http:
+      paths:
+      - backend:
+          service:
+            name: jellyfin
+            port:
+              name: http
+        path: /
+        pathType: Prefix
   - host: jellyfin.9ka.nl
     http:
       paths:
