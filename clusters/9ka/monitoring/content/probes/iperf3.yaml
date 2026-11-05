@@ -1,0 +1,49 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: iperf3-pve-udp
+spec:
+  interval: 15m
+  scrapeTimeout: 15s
+  prober:
+    url: iperf3-exporter
+  params:
+    - name: udp_mode
+      value: 'true'
+    - name: bitrate
+      value: '200M'
+  targets:
+    staticConfig:
+      targets:
+      - "2001:1540:801:2::2"
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: iperf3-pve-tcp
+spec:
+  interval: 15m
+  scrapeTimeout: 15s
+  prober:
+    url: iperf3-exporter
+  targets:
+    staticConfig:
+      targets:
+      - "2001:1540:801:2::2"
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: iperf3-scaleway-tcp
+spec:
+  interval: 15m
+  scrapeTimeout: 15s
+  prober:
+    url: iperf3-exporter
+  params:
+    - name: port
+      value: '5208'
+  targets:
+    staticConfig:
+      targets:
+      - ping6.online.net

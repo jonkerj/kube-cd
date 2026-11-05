@@ -4,4 +4,5 @@ namespace: monitoring
 resources:
 - kube-prometheus-stack
 - alertmanager-ntfy
+- iperf3_exporter
 - ntfy
