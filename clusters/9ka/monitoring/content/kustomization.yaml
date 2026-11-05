@@ -6,3 +6,4 @@ resources:
 - datasources
 - dashboards
 - servicemonitors
+- probes

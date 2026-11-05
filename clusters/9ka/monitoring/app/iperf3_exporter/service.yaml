@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: iperf3-exporter
+  labels:
+    app.kubernetes.io/instance: iperf3-exporter
+    app.kubernetes.io/name: iperf3-exporter
+spec:
+  selector:
+    app.kubernetes.io/instance: iperf3-exporter
+    app.kubernetes.io/name: iperf3-exporter
+  ports:
+    - name: metrics
+      protocol: TCP
+      port: 80
+      targetPort: metrics

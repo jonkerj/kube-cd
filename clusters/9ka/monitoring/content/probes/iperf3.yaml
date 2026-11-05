@@ -1,0 +1,58 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: iperf3-pve-udp
+  labels:
+    release: kube-prometheus-stack
+spec:
+  interval: 15m
+  scrapeTimeout: 15s
+  prober:
+    url: iperf3-exporter
+  params:
+    - name: udp_mode
+      values:
+        - 'true'
+    - name: bitrate
+      values:
+        - '200M'
+  targets:
+    staticConfig:
+      static:
+      - "2001:1540:801:2::2"
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: iperf3-pve-tcp
+  labels:
+    release: kube-prometheus-stack
+spec:
+  interval: 15m
+  scrapeTimeout: 15s
+  prober:
+    url: iperf3-exporter
+  targets:
+    staticConfig:
+      static:
+      - "2001:1540:801:2::2"
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: iperf3-scaleway-tcp
+  labels:
+    release: kube-prometheus-stack
+spec:
+  interval: 15m
+  scrapeTimeout: 15s
+  prober:
+    url: iperf3-exporter
+  params:
+    - name: port
+      values:
+        - '5208'
+  targets:
+    staticConfig:
+      static:
+      - ping6.online.net
