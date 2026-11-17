@@ -12,7 +12,7 @@ spec:
       imageRegistry: ghcr.io
     image:
       repository: valkey-io/valkey
-    dataStorage:
+    persistence:
       enabled: true
       size: 1Gi
       className: proxmox-zfs-nvme
