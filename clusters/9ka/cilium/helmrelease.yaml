@@ -15,7 +15,7 @@ spec:
     upgradeCompatibility: "1.12"
     hubble:
       relay:
-        enabled: false
+        enabled: true
         resources:
           requests:
             memory: 40Mi
@@ -23,6 +23,12 @@ spec:
           limits:
             memory: 200Mi
             cpu: 250m
+      tls:
+        auto:
+          enabled: true
+          method: cronJob
+          certValidityDuration: 7
+          schedule: 51 13 * * *
       metrics:
         enabled:
         - drop
